@@ -1688,13 +1688,14 @@ function pDesc(p){ return (curLang!=='en' && P_TRANS[curLang] && P_TRANS[curLang
 const VID_LANG_LABELS = {
   en: {badge:'EN', note:'Playing: English version'},
   te: {badge:'తె', note:'పప్లే అవుతుంది: తెలుగు వెర్షన్'},
-  kn: {badge:'EN', note:'Playing: English version'}
+  kn: {badge:'ಕ',  note:'ಪ್ಲೇ ಆಗುತ್ತಿದೆ: ಕನ್ನಡ ಆವೃತ್ತಿ'}
 };
 
 // YouTube video URLs — hardcoded
 let VID_URLS = {
   en: 'https://youtu.be/KQIt5MjBsMs',
-  te: 'https://youtu.be/rSlqYByciWw'
+  te: 'https://youtu.be/rSlqYByciWw',
+  kn: 'https://youtu.be/wnnUXYbG8No'
 };
 // Also check localStorage for any admin overrides
 try {
@@ -1714,7 +1715,7 @@ function ytEmbedURL(url){
 }
 
 function openVidModal(){
-  const lang = (curLang === 'te') ? 'te' : 'en';
+  const lang = curLang === 'te' ? 'te' : curLang === 'kn' ? 'kn' : 'en';
   loadVid(lang);
   document.getElementById('vidModal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -1755,6 +1756,7 @@ function loadVid(lang){
   document.getElementById('vidLangNote').textContent  = url ? meta.note : 'Add YouTube link via ?admin=1';
   document.getElementById('vswEN').classList.toggle('active', lang==='en');
   document.getElementById('vswTE').classList.toggle('active', lang==='te');
+  document.getElementById('vswKN').classList.toggle('active', lang==='kn');
 }
 
 function switchVidLang(lang){
@@ -2286,6 +2288,7 @@ if(window.location.search.includes('admin=1')){
         <span style="opacity:.6">Switch:</span>
         <button class="vid-sw-btn active" id="vswEN" onclick="switchVidLang('en')">🇬🇧 EN</button>
         <button class="vid-sw-btn" id="vswTE" onclick="switchVidLang('te')">తె Telugu</button>
+        <button class="vid-sw-btn" id="vswKN" onclick="switchVidLang('kn')">ಕ Kannada</button>
       </div>
     </div>
   </div>
