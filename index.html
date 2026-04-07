@@ -378,6 +378,104 @@ footer strong{color:var(--saffron)}
 /* ── SVG ART CARDS ── */
 .pcard img { display:block; }
 .pcard .card-img { overflow:hidden; }
+
+/* ── FLOATING WHATSAPP ── */
+.wa-float-wrap{
+  position:fixed;bottom:1.6rem;right:1.6rem;z-index:500;
+  display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;
+}
+.wa-float-main{
+  width:58px;height:58px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.5);
+  cursor:pointer;border:none;
+  transition:transform .2s,box-shadow .2s;
+  animation:waPulse 2.5s infinite;
+}
+.wa-float-main:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.6);animation:none}
+@keyframes waPulse{
+  0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}
+  50%{box-shadow:0 4px 32px rgba(37,211,102,.8),0 0 0 8px rgba(37,211,102,.15)}
+}
+.wa-float-menu{
+  display:none;flex-direction:column;gap:.4rem;align-items:flex-end;
+}
+.wa-float-wrap:hover .wa-float-menu,
+.wa-float-wrap.open .wa-float-menu{display:flex}
+.wa-num-btn{
+  display:flex;align-items:center;gap:.6rem;
+  background:#fff;border:none;border-radius:30px;
+  padding:.45rem .9rem .45rem .55rem;
+  box-shadow:0 2px 14px rgba(0,0,0,.15);
+  cursor:pointer;font-family:"DM Sans",sans-serif;
+  transition:transform .15s,box-shadow .15s;
+  text-decoration:none;
+}
+.wa-num-btn:hover{transform:translateX(-4px);box-shadow:0 4px 18px rgba(0,0,0,.2)}
+.wa-num-icon{
+  width:32px;height:32px;border-radius:50%;
+  background:#25D366;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.wa-num-info{text-align:left}
+.wa-num-label{font-size:.62rem;color:#9E9E9E;display:block;line-height:1}
+.wa-num-phone{font-size:.8rem;font-weight:700;color:#1C1810;display:block;line-height:1.4}
+.wa-float-tooltip{
+  position:absolute;right:68px;bottom:14px;
+  background:#1C1810;color:#fff;
+  font-size:.72rem;padding:.3rem .65rem;border-radius:20px;
+  white-space:nowrap;pointer-events:none;
+  opacity:0;transition:opacity .2s;
+}
+.wa-float-main:hover + .wa-float-tooltip{opacity:1}
+
+/* ── GOOGLE MAPS SECTION ── */
+.map-section{
+  max-width:calc(var(--sw) + 1080px);
+  margin:0 auto 0;
+  padding:1.5rem 1.5rem 0;
+}
+.map-section h3{
+  font-family:"Playfair Display",serif;
+  font-size:1.15rem;color:var(--text);
+  margin-bottom:1rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.map-wrap{
+  border-radius:14px;overflow:hidden;
+  border:1.5px solid var(--border);
+  box-shadow:0 2px 16px rgba(0,0,0,.08);
+  position:relative;
+}
+.map-wrap iframe{width:100%;height:320px;border:0;display:block}
+.map-overlay-card{
+  position:absolute;top:12px;left:12px;
+  background:#fff;border-radius:12px;
+  padding:.75rem 1rem;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  max-width:220px;
+}
+.map-overlay-card h4{
+  font-family:"Playfair Display",serif;
+  font-size:.85rem;color:#1C1810;margin:0 0 .2rem;
+}
+.map-overlay-card p{font-size:.72rem;color:#7A7060;margin:0 0 .6rem;line-height:1.4}
+.map-dir-btn{
+  display:flex;align-items:center;gap:.4rem;
+  background:#25D366;color:#fff;
+  border:none;border-radius:8px;
+  padding:.35rem .8rem;
+  font-size:.75rem;font-weight:600;
+  cursor:pointer;font-family:"DM Sans",sans-serif;
+  text-decoration:none;width:100%;justify-content:center;
+  transition:background .2s;
+}
+.map-dir-btn:hover{background:#1ebe57}
+@media(max-width:600px){
+  .map-wrap iframe{height:240px}
+  .map-overlay-card{max-width:170px}
+}
 </style>
 </head>
 <body>
@@ -388,7 +486,7 @@ footer strong{color:var(--saffron)}
       <div class="logo-gem">✒️</div>
       <div>
         <h1>Sri Vara Lakshmi Balaji</h1>
-        <p>Enterprises · KR Puram, Bengaluru</p>
+        <p>KR Puram, Bengaluru &nbsp;·&nbsp; <a href="https://wa.me/919945411489" style="color:var(--gold);text-decoration:none">📲 99454 11489</a></p>
       </div>
     </div>
     <div class="hdr-r">
@@ -441,7 +539,33 @@ footer strong{color:var(--saffron)}
   </main>
 </div>
 
-<footer><p data-i18n="footer">📍 KR Puram, Bengaluru &nbsp;|&nbsp; ☎️ Call us for bulk orders &nbsp;|&nbsp; <strong>Sri Vara Lakshmi Balaji Enterprises</strong> — Your one-stop shop</p></footer>
+
+<!-- ── GOOGLE MAPS SECTION ── -->
+<div class="map-section">
+  <h3>📍 Find Our Shop</h3>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0!2d77.6984!3d13.0149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSri+Vara+Lakshmi+Balaji+Enterprises+KR+Puram+Bengaluru!5e0!3m2!1sen!2sin!4v1234567890"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Sri Vara Lakshmi Balaji Enterprises location"
+      allowfullscreen>
+    </iframe>
+    <div class="map-overlay-card">
+      <h4>🏪 Sri Vara Lakshmi Balaji Enterprises</h4>
+      <p>KR Puram, Bengaluru, Karnataka</p>
+      <a class="map-dir-btn"
+        href="https://www.google.com/maps/search/Sri+Vara+Lakshmi+Balaji+Enterprises+KR+Puram+Bengaluru"
+        target="_blank" rel="noopener">
+        🗺️ Get Directions
+      </a>
+    </div>
+  </div>
+</div>
+<footer><p data-i18n="footer">📍 KR Puram, Bengaluru &nbsp;|&nbsp;
+  <a href="https://wa.me/919945411489" target="_blank" style="color:var(--saffron);text-decoration:none;font-weight:600">📲 +91 99454 11489</a> &nbsp;|&nbsp;
+  <a href="https://wa.me/918073815650" target="_blank" style="color:var(--saffron);text-decoration:none;font-weight:600">📲 +91 80738 15650</a> &nbsp;|&nbsp;
+  <strong>Sri Vara Lakshmi Balaji Enterprises</strong></p></footer>
 
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
 <div class="drawer" id="drawer">
@@ -892,7 +1016,7 @@ function renderWellness(p){
 function bookWellness(name,wcat){
   const cats={weight:'Weight Management',women:'Women Health',men:'Men Health',senior:'Senior Health',children:'Children Health',joint:'Joint Health',immunity:'Immunity Support'};
   const msg=`🌿 *Wellness Coaching Enquiry*\n\nHello! I am interested in:\n*${name}*\nCategory: ${cats[wcat]||'Wellness'}\n\nPlease share more details & how to get started.\n\nThank you! 🙏`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/919945411489?text='+encodeURIComponent(msg),'_blank');
 }
 function renderBirthday(p){
   const isKit=p.name.toLowerCase().includes('kit');
@@ -940,7 +1064,7 @@ function renderProject(p){
 
 function bookProject(name,price,unit){
   const msg=`🎓 *Project Work Enquiry*\n\nHello! I need help with:\n*${name}*\nCharge: ₹${price} / ${unit}\n\nPlease confirm availability. Details:\n• Student Name:\n• College:\n• Course (Inter / Degree / PG):\n• Subject / Department:\n• Submission Date:\n\nThank you! 🙏`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/919945411489?text='+encodeURIComponent(msg),'_blank');
 }
 function renderAgreement(p){
   const sn=p.name.replace(/'/g,"\\'");
@@ -961,7 +1085,7 @@ function renderAgreement(p){
 
 function bookAgreement(name,price,unit){
   const msg=`📝 *Agreement Service Enquiry*\n\nHello! I need:\n*${name}*\nCharge: ₹${price} / ${unit}\n\nPlease confirm availability & any additional details needed. Thank you! 🙏`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/919945411489?text='+encodeURIComponent(msg),'_blank');
 }
 function renderIns(p){
   const ic=INS[p.insurer]||{bg:'#F9F9F9',ac:'#999',lbl:p.insurer};
@@ -1033,11 +1157,11 @@ function orderWA(){
   let msg='🛒 *Order – Sri Vara Lakshmi Balaji Enterprises*\n\n',tot=0;
   keys.forEach(id=>{const p=P.find(x=>x.id==id),q=cart[id];tot+=p.price*q;msg+=`• ${pName(p)} × ${q} = ₹${p.price*q}\n`;});
   msg+=`\n*Total: ₹${tot}*\n\nPlease confirm. Thank you! 🙏`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/919945411489?text='+encodeURIComponent(msg),'_blank');
 }
 function enquire(name,ins){
   const msg=`🛡️ *Insurance Enquiry*\n\nHello! I am interested in:\n*${name}* (${ins})\n\nPlease share premium details & how to apply. Thank you! 🙏`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/919945411489?text='+encodeURIComponent(msg),'_blank');
 }
 let _tt;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
@@ -2352,6 +2476,33 @@ if(window.location.search.includes('admin=1')){
       Access this page anytime: <strong style="color:rgba(255,255,255,.4)">yoursite.vercel.app?admin=1</strong>
     </p>
   </div>
+</div>
+
+<!-- ── FLOATING WHATSAPP BUTTON ── -->
+<div class="wa-float-wrap" id="waFloat">
+  <div class="wa-float-menu">
+    <a class="wa-num-btn" href="https://wa.me/919945411489" target="_blank" rel="noopener" title="Call or WhatsApp">
+      <div class="wa-num-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div class="wa-num-info">
+        <span class="wa-num-label">Primary Number</span>
+        <span class="wa-num-phone">+91 99454 11489</span>
+      </div>
+    </a>
+    <a class="wa-num-btn" href="https://wa.me/918073815650" target="_blank" rel="noopener" title="Call or WhatsApp">
+      <div class="wa-num-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div class="wa-num-info">
+        <span class="wa-num-label">Alternate Number</span>
+        <span class="wa-num-phone">+91 80738 15650</span>
+      </div>
+    </a>
+  </div>
+  <button class="wa-float-main" onclick="document.getElementById('waFloat').classList.toggle('open')" aria-label="WhatsApp us">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
 </div>
 </body>
 </html>
