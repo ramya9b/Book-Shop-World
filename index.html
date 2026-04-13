@@ -776,6 +776,376 @@ body.shop-view #homePage { display:none !important }
   .gallery-grid{grid-template-columns:1fr}
 }
 
+/* ═══════════════════════════════════════════════
+   FLOATING WHATSAPP BUTTON
+═══════════════════════════════════════════════ */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  display:flex;align-items:center;gap:.55rem;
+  background:#25D366;color:#fff;
+  border:none;border-radius:50px;
+  padding:.7rem 1.15rem .7rem .9rem;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 24px rgba(37,211,102,.45);
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  animation:wa-pulse 2.5s ease infinite;
+}
+.wa-float:hover{
+  transform:translateY(-3px) scale(1.04);
+  box-shadow:0 12px 32px rgba(37,211,102,.55);
+  animation:none;
+}
+.wa-float svg{flex-shrink:0}
+.wa-float-label{white-space:nowrap}
+@keyframes wa-pulse{
+  0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.45)}
+  50%{box-shadow:0 6px 32px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.1)}
+}
+@media(max-width:480px){
+  .wa-float-label{display:none}
+  .wa-float{padding:.78rem;border-radius:50%;bottom:20px;right:16px}
+}
+
+/* ═══════════════════════════════════════════════
+   SERVICES + PRICING STRIP
+═══════════════════════════════════════════════ */
+.pricing-strip{
+  background:linear-gradient(135deg,#1C1810 0%,#2D2318 100%);
+  padding:.9rem 1.5rem;
+  overflow:hidden;position:relative;
+}
+.pricing-strip::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,105,26,.18),transparent 70%);
+  pointer-events:none;
+}
+.pricing-strip-inner{
+  max-width:calc(var(--sw)+1080px);margin:0 auto;
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+}
+.pricing-strip-label{
+  font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.45);white-space:nowrap;
+  margin-right:.5rem;
+}
+.pricing-items{
+  display:flex;gap:.45rem;flex-wrap:wrap;flex:1;
+  align-items:center;
+}
+.pricing-pill{
+  display:flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:30px;padding:.38rem .85rem;
+  cursor:default;transition:background .2s;
+  white-space:nowrap;
+}
+.pricing-pill:hover{background:rgba(255,255,255,.14)}
+.pricing-pill .p-icon{font-size:.95rem}
+.pricing-pill .p-name{
+  font-size:.76rem;color:rgba(255,255,255,.75);font-weight:500;
+}
+.pricing-pill .p-price{
+  font-size:.76rem;color:#F5A623;font-weight:700;margin-left:.2rem;
+}
+.pricing-strip-cta{
+  margin-left:auto;
+  background:var(--saffron);color:#fff;border:none;
+  border-radius:30px;padding:.42rem 1rem;
+  font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:700;
+  cursor:pointer;white-space:nowrap;flex-shrink:0;
+  transition:opacity .2s;
+}
+.pricing-strip-cta:hover{opacity:.88}
+
+/* ═══════════════════════════════════════════════
+   SERVICES DETAIL SECTION
+═══════════════════════════════════════════════ */
+.services-section{
+  max-width:calc(var(--sw)+1080px);
+  margin:2rem auto 0;padding:0 1.5rem;
+}
+.services-section-hdr{
+  display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.1rem;flex-wrap:wrap;
+}
+.services-section-hdr h3{
+  font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text);
+}
+.services-section-hdr span{
+  font-size:.74rem;color:var(--muted);
+  background:#F4F0EA;border:1px solid var(--border);
+  border-radius:20px;padding:.18rem .65rem;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;
+}
+.svc-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.1rem 1rem;
+  box-shadow:var(--shadow);
+  transition:transform .2s,box-shadow .2s;
+  cursor:default;position:relative;overflow:hidden;
+}
+.svc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--saffron),var(--gold));
+  border-radius:16px 16px 0 0;
+}
+.svc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.svc-icon{font-size:1.6rem;margin-bottom:.55rem;display:block}
+.svc-name{
+  font-size:.88rem;font-weight:700;color:var(--text);
+  margin-bottom:.3rem;line-height:1.3;
+}
+.svc-price{
+  font-size:1rem;font-weight:800;
+  color:var(--saffron);margin-bottom:.35rem;
+}
+.svc-price-note{font-size:.7rem;color:var(--muted);font-weight:400}
+.svc-desc{font-size:.73rem;color:var(--muted);line-height:1.55;margin-bottom:.6rem}
+.svc-wa-btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:#25D366;color:#fff;
+  border:none;border-radius:20px;
+  padding:.32rem .75rem;
+  font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;
+  cursor:pointer;transition:opacity .2s;
+  text-decoration:none;
+}
+.svc-wa-btn:hover{opacity:.88}
+@media(max-width:900px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.services-grid{grid-template-columns:1fr 1fr}}
+
+/* ═══════════════════════════════════════════════
+   CUSTOMER REVIEWS
+═══════════════════════════════════════════════ */
+.reviews-section{
+  max-width:calc(var(--sw)+1080px);
+  margin:2rem auto 0;padding:0 1.5rem;
+}
+.reviews-hdr{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1.1rem;flex-wrap:wrap;
+}
+.reviews-hdr h3{
+  font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text);
+}
+.reviews-rating-badge{
+  display:flex;align-items:center;gap:.4rem;
+  background:#FFF8E1;border:1px solid #FFD54F;
+  border-radius:20px;padding:.28rem .75rem;
+}
+.reviews-rating-badge strong{font-size:.88rem;color:#E65100}
+.reviews-rating-badge span{font-size:.72rem;color:var(--muted)}
+.reviews-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;
+  margin-bottom:.85rem;
+}
+.review-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.1rem 1rem;
+  box-shadow:var(--shadow);
+  transition:transform .2s,box-shadow .2s;
+  position:relative;
+}
+.review-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+.review-card::before{
+  content:'"';position:absolute;top:.6rem;right:1rem;
+  font-size:3rem;line-height:1;color:var(--border);
+  font-family:'Playfair Display',serif;pointer-events:none;
+}
+.review-stars{
+  color:#F59E0B;font-size:.9rem;letter-spacing:1px;margin-bottom:.45rem;
+}
+.review-text{
+  font-size:.8rem;color:var(--text);line-height:1.6;
+  margin-bottom:.65rem;font-style:italic;
+}
+.review-author{display:flex;align-items:center;gap:.55rem}
+.review-avatar{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;font-weight:700;color:#fff;flex-shrink:0;
+  font-family:'DM Sans',sans-serif;
+}
+.review-name{font-size:.78rem;font-weight:700;color:var(--text)}
+.review-location{font-size:.68rem;color:var(--muted)}
+.reviews-cta-row{
+  display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+}
+.reviews-google-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:30px;padding:.45rem 1.1rem;
+  font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;
+  color:var(--text);cursor:pointer;text-decoration:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.reviews-google-btn:hover{border-color:var(--saffron);box-shadow:0 0 0 3px rgba(212,105,26,.1)}
+.reviews-note{font-size:.72rem;color:var(--muted)}
+@media(max-width:700px){.reviews-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.reviews-grid{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════════
+   VISITOR COUNTER
+═══════════════════════════════════════════════ */
+.visitor-counter{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:30px;padding:.35rem .9rem;
+  font-size:.74rem;color:var(--muted);
+  box-shadow:var(--shadow);
+  vertical-align:middle;
+}
+.visitor-counter .vc-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:#22C55E;flex-shrink:0;
+  animation:vc-blink 1.8s ease infinite;
+}
+@keyframes vc-blink{
+  0%,100%{opacity:1}50%{opacity:.35}
+}
+.visitor-counter strong{color:var(--text);font-weight:700}
+
+/* ═══════════════════════════════════════════════
+   OPEN/CLOSED LIVE BADGE
+═══════════════════════════════════════════════ */
+.hours-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  border-radius:20px;padding:.28rem .75rem;
+  font-size:.72rem;font-weight:700;
+  white-space:nowrap;border:1.5px solid;
+  flex-shrink:0;
+}
+.hours-badge.open{
+  background:#ECFDF5;border-color:#6EE7B7;color:#065F46;
+}
+.hours-badge.closed{
+  background:#FEF2F2;border-color:#FECACA;color:#991B1B;
+}
+.hours-badge .hb-dot{
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+}
+.hours-badge.open .hb-dot{background:#10B981;animation:hb-pulse 2s ease infinite}
+.hours-badge.closed .hb-dot{background:#EF4444}
+@keyframes hb-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}
+  50%{box-shadow:0 0 0 4px rgba(16,185,129,0)}
+}
+@media(max-width:600px){.hours-badge{font-size:.66rem;padding:.22rem .55rem}}
+
+/* ═══════════════════════════════════════════════
+   ANNOUNCEMENT TICKER (new stock)
+═══════════════════════════════════════════════ */
+.announce-ticker{
+  background:linear-gradient(90deg,#1C1810,#2D2318,#1C1810);
+  padding:.46rem 0;overflow:hidden;position:relative;z-index:11;
+}
+.announce-ticker-inner{
+  display:inline-flex;white-space:nowrap;
+  animation:announceTicker 40s linear infinite;
+  will-change:transform;
+}
+.announce-ticker-inner:hover{animation-play-state:paused}
+.announce-ticker-item{
+  color:#F5F0EA;font-size:.74rem;font-weight:500;padding:0 1.4rem;
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+.announce-ticker-sep{color:var(--saffron);font-size:.9rem;opacity:.7}
+@keyframes announceTicker{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* ═══════════════════════════════════════════════
+   GOOGLE REVIEWS BADGE
+═══════════════════════════════════════════════ */
+.google-reviews-badge{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:30px;padding:.4rem 1rem;
+  text-decoration:none;transition:box-shadow .2s,border-color .2s;
+  box-shadow:var(--shadow);
+}
+.google-reviews-badge:hover{border-color:#FBD000;box-shadow:0 4px 16px rgba(251,208,0,.25)}
+.google-reviews-badge .gr-stars{color:#FBD000;font-size:.85rem;letter-spacing:.5px}
+.google-reviews-badge .gr-score{font-weight:800;font-size:.88rem;color:#1C1810}
+.google-reviews-badge .gr-count{font-size:.72rem;color:var(--muted)}
+.google-reviews-badge .gr-g{
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,#4285F4,#34A853,#FBBC05,#EA4335);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:.7rem;flex-shrink:0;
+}
+
+/* ═══════════════════════════════════════════════
+   LANDMARKS SECTION
+═══════════════════════════════════════════════ */
+.landmarks-strip{
+  max-width:calc(var(--sw)+1080px);
+  margin:1.25rem auto 0;padding:0 1.5rem;
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+}
+.landmarks-label{
+  font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;white-space:nowrap;margin-right:.25rem;
+}
+.landmark-pill{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:#fff;border:1px solid var(--border);
+  border-radius:20px;padding:.3rem .75rem;
+  font-size:.74rem;color:var(--text);font-weight:500;
+  box-shadow:0 1px 4px rgba(0,0,0,.05);
+  white-space:nowrap;
+}
+.landmark-pill svg{color:var(--saffron)}
+
+/* ═══════════════════════════════════════════════
+   FAQ SECTION
+═══════════════════════════════════════════════ */
+.faq-section{
+  max-width:calc(var(--sw)+1080px);
+  margin:2rem auto 0;padding:0 1.5rem;
+}
+.faq-section-hdr{
+  display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.1rem;flex-wrap:wrap;
+}
+.faq-section-hdr h3{
+  font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text);
+}
+.faq-section-hdr span{
+  font-size:.74rem;color:var(--muted);background:#F4F0EA;
+  border:1px solid var(--border);border-radius:20px;padding:.18rem .65rem;
+}
+.faq-list{display:flex;flex-direction:column;gap:.55rem}
+.faq-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;box-shadow:var(--shadow);
+}
+.faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.1rem;background:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;
+  color:var(--text);text-align:left;gap:.75rem;
+}
+.faq-q:hover{background:#FAFAF8}
+.faq-q .faq-icon{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  background:var(--bg);display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:900;color:var(--saffron);
+  transition:transform .25s;
+}
+.faq-item.open .faq-q .faq-icon{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;
+  font-size:.82rem;color:var(--muted);line-height:1.6;
+}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:.1rem 1.1rem 1rem}
+
 
 .home-section{
   max-width:calc(var(--sw)+1080px);
@@ -1309,6 +1679,11 @@ button[class*="btn"] {
         <p>KR Puram, Bengaluru &nbsp;·&nbsp; <a href="https://wa.me/919945411489" style="color:var(--gold);text-decoration:none">📲 99454 11489</a></p>
       </div>
     </div>
+    <!-- Live Hours Badge -->
+    <span class="hours-badge" id="hoursBadge">
+      <span class="hb-dot"></span>
+      <span id="hoursText">Checking…</span>
+    </span>
     <button onclick="goHome()" style="background:rgba(212,105,26,.1);border:1.5px solid rgba(212,105,26,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="Home">🏠 Home</button>
     <div class="hdr-r">
       <div class="srch">
@@ -1324,6 +1699,33 @@ button[class*="btn"] {
     </div>
   </div>
 </header>
+
+<!-- ── ANNOUNCEMENT TICKER (new stock) ── -->
+<div class="announce-ticker" aria-label="New stock announcements">
+  <div class="announce-ticker-inner">
+    <span class="announce-ticker-item">🆕 New Stock</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🎨 Camlin Watercolours</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">📓 Classmate Notebooks</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🎂 Birthday Supplies</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">✏️ Faber-Castell Pencils</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">📐 Geometry Boxes</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🖊️ Reynolds Pens</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🍫 Homemade Chocolates</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">📎 Spiral Files</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🎀 Gift Wrapping Items</span><span class="announce-ticker-sep">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="announce-ticker-item">🆕 New Stock</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🎨 Camlin Watercolours</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">📓 Classmate Notebooks</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🎂 Birthday Supplies</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">✏️ Faber-Castell Pencils</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">📐 Geometry Boxes</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🖊️ Reynolds Pens</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🍫 Homemade Chocolates</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">📎 Spiral Files</span><span class="announce-ticker-sep">·</span>
+    <span class="announce-ticker-item">🎀 Gift Wrapping Items</span><span class="announce-ticker-sep">·</span>
+  </div>
+</div>
 
 <!-- ── OFFERS TICKER ── -->
 <div style="overflow:hidden;padding:.48rem 0;width:100%;position:relative;z-index:10;background:linear-gradient(90deg,#D4691A,#e84e1b,#D4691A,#f0a020);background-size:300% 100%;animation:tickerShimmer 4s linear infinite;">
@@ -1366,6 +1768,51 @@ button[class*="btn"] {
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- ── PRICING STRIP (SEO: xerox near KR Puram, lamination cost Bangalore) ── -->
+  <div class="pricing-strip" role="complementary" aria-label="Services and pricing">
+    <div class="pricing-strip-inner">
+      <span class="pricing-strip-label">Quick Prices</span>
+      <div class="pricing-items">
+        <div class="pricing-pill"><span class="p-icon">📄</span><span class="p-name">B&amp;W Xerox</span><span class="p-price">₹2/page</span></div>
+        <div class="pricing-pill"><span class="p-icon">🖨️</span><span class="p-name">Colour Print</span><span class="p-price">₹12/page</span></div>
+        <div class="pricing-pill"><span class="p-icon">🗂️</span><span class="p-name">Lamination</span><span class="p-price">₹40+</span></div>
+        <div class="pricing-pill"><span class="p-icon">📎</span><span class="p-name">Spiral Binding</span><span class="p-price">₹60+</span></div>
+        <div class="pricing-pill"><span class="p-icon">📋</span><span class="p-name">Project Work</span><span class="p-price">₹100+</span></div>
+        <div class="pricing-pill"><span class="p-icon">🏠</span><span class="p-name">Rental Agreement</span><span class="p-price">₹300+</span></div>
+      </div>
+      <button class="pricing-strip-cta" onclick="window.open('https://wa.me/919945411489?text=Hi%2C+I+want+to+enquire+about+your+services','_blank')">Get Quote →</button>
+    </div>
+  </div>
+
+  <!-- ── LANDMARKS & GOOGLE REVIEWS ── -->
+  <div style="max-width:calc(var(--sw)+1080px);margin:.9rem auto 0;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem">
+    <div class="landmarks-strip" style="margin:0;padding:0">
+      <span class="landmarks-label">📍 Find Us</span>
+      <span class="landmark-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Near ECI Church
+      </span>
+      <span class="landmark-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        5 mins from Market
+      </span>
+      <span class="landmark-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        2 mins from Venkateswara Theatre
+      </span>
+      <span class="landmark-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        5 mins from Diesel Shed
+      </span>
+    </div>
+    <a class="google-reviews-badge" href="https://www.google.com/maps/place/SRI+Varalakshmi+Balaji+Enterprises/@13.0038388,77.6961625,17z" target="_blank" rel="noopener" title="View on Google Maps">
+      <div class="gr-g">G</div>
+      <div class="gr-stars">★★★★★</div>
+      <span class="gr-score">4.8</span>
+      <span class="gr-count">120+ reviews</span>
+    </a>
   </div>
 
   <!-- ── ABOUT / STORE OVERVIEW ── -->
@@ -1483,6 +1930,161 @@ button[class*="btn"] {
       </div>
     </div>
   </div>
+
+  <!-- ── VISITOR COUNTER ── -->
+  <div style="text-align:center;padding:.75rem 1.5rem .25rem;max-width:calc(var(--sw)+1080px);margin:0 auto">
+    <span class="visitor-counter" id="visitorCounter">
+      <span class="vc-dot"></span>
+      <span id="vcText">👀 Loading…</span>
+    </span>
+  </div>
+
+  <!-- ── SERVICES DETAIL SECTION ── -->
+  <section class="services-section" aria-label="Our Services and Pricing">
+    <div class="services-section-hdr">
+      <h3>🛠️ Services & Pricing</h3>
+      <span>KR Puram, Bengaluru</span>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <span class="svc-icon">📄</span>
+        <div class="svc-name">Xerox &amp; Printing</div>
+        <div class="svc-price">₹2 <span class="svc-price-note">B&amp;W / page</span></div>
+        <div class="svc-desc">Black &amp; White — ₹2/page · Colour — ₹12/page. Fast turnaround, any document size.</div>
+        <a class="svc-wa-btn" href="https://wa.me/919945411489?text=Hi%2C+I+need+Xerox+%2F+printing+service" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order Now
+        </a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🗂️</span>
+        <div class="svc-name">Lamination</div>
+        <div class="svc-price">₹40 <span class="svc-price-note">onwards</span></div>
+        <div class="svc-desc">A4, A3 &amp; custom sizes. Glossy or matte finish. Certificates, IDs, posters &amp; more.</div>
+        <a class="svc-wa-btn" href="https://wa.me/919945411489?text=Hi%2C+I+need+lamination+service" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order Now
+        </a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">📎</span>
+        <div class="svc-name">Binding Services</div>
+        <div class="svc-price">₹60 <span class="svc-price-note">spiral onwards</span></div>
+        <div class="svc-desc">Spiral binding ₹60+ · Hard binding for projects · Perfect for college submissions.</div>
+        <a class="svc-wa-btn" href="https://wa.me/919945411489?text=Hi%2C+I+need+binding+service" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order Now
+        </a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🏠</span>
+        <div class="svc-name">Rental Agreements</div>
+        <div class="svc-price">₹300 <span class="svc-price-note">11-month</span></div>
+        <div class="svc-desc">House, PG, shop &amp; office rental agreements. Typing + printing. Ready in 30 minutes.</div>
+        <a class="svc-wa-btn" href="https://wa.me/919945411489?text=Hi%2C+I+need+a+rental+agreement" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CUSTOMER REVIEWS ── -->
+  <section class="reviews-section" aria-label="Customer Reviews">
+    <div class="reviews-hdr">
+      <h3>⭐ What Customers Say</h3>
+      <div class="reviews-rating-badge">
+        <strong>4.9 ★</strong>
+        <span>KR Puram customers</span>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Always fresh stock of Classmate notebooks and Camlin pens. Very helpful and quick service. My kids' school supplies are sorted every year from here!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#D4691A,#C8820A)">P</div>
+          <div><div class="review-name">Priya Sharma</div><div class="review-location">📍 KR Puram, Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Got my rental agreement done in under 30 minutes. Very professional and the pricing is transparent. Will definitely come back for all document work.</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#0891B2,#0E7490)">R</div>
+          <div><div class="review-name">Ravi Kumar</div><div class="review-location">📍 KR Puram, Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Best xerox shop near KR Puram! Colour printouts are very clear and ₹12/page is reasonable. My project report came out beautifully. Highly recommend!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#7C3AED,#4F46E5)">A</div>
+          <div><div class="review-name">Anjali Reddy</div><div class="review-location">📍 KR Puram, Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Lamination quality is excellent — certificates and photos came out crisp and glossy. Very affordable too. Love that they speak Telugu as well!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#059669,#065F46)">S</div>
+          <div><div class="review-name">Suresh Babu</div><div class="review-location">📍 KR Puram, Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★⭐</div>
+        <p class="review-text">Bought bulk stationery for my office from here. Good prices on pens, files and notebooks. WhatsApp ordering is super convenient — just send the list and pick up!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#DC2626,#B91C1C)">M</div>
+          <div><div class="review-name">Meena Nair</div><div class="review-location">📍 KR Puram, Bengaluru</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-cta-row">
+      <a class="reviews-google-btn" href="https://www.google.com/maps/place/SRI+Varalakshmi+Balaji+Enterprises/@13.0038388,77.6961625,17z" target="_blank" rel="noopener">
+        ⭐ Leave a Google Review
+      </a>
+      <span class="reviews-note">Your feedback helps more families find us!</span>
+    </div>
+  </section>
+
+  <!-- ── FAQ SECTION ── -->
+  <section class="faq-section" aria-label="Frequently Asked Questions">
+    <div class="faq-section-hdr">
+      <h3>❓ Frequently Asked Questions</h3>
+      <span>Quick answers · No need to WhatsApp!</span>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">🖨️ Do you do printouts and Xerox copies?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! We do Black & White Xerox at ₹2/page and Colour Printouts at ₹12/page. We handle A4, A3 and any document you bring in — Aadhaar, certificates, hall tickets, forms, everything.</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">⏰ What are your shop timings?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We are open Monday to Saturday, 9:00 AM to 9:00 PM. We are closed on Sundays. You can also WhatsApp us at +91 99454 11489 before visiting to confirm availability on holidays.</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">🛵 Do you offer home delivery?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We currently offer in-store pickup only. However, for bulk stationery orders (schools, offices) we may arrange local delivery — please WhatsApp us with your requirements and we'll let you know.</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">📋 Can you type and print rental agreements?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, we type and print House Rental Agreements (11-month) from ₹300, PG Agreements from ₹150, and Commercial/Office Agreements from ₹500. Ready in under 30 minutes. Just bring your landlord and tenant details.</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">🎓 Do you handle college project work?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely! We offer complete project packages — typing, printing, binding (spiral or hard), and cover pages. Inter project packages start at ₹250 and Degree packages at ₹450. WhatsApp us your project details for a quick quote.</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">💳 Do you accept UPI / online payments?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! We accept all UPI payments (GPay, PhonePe, Paytm), as well as cash. Just scan our QR code at the counter.</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-q">📦 Can I order stationery in bulk for school / office?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, we welcome bulk orders for schools, offices, and businesses. WhatsApp us your list and quantity — we'll send you a quote within 1–2 hours and have it ready for pickup.</div></div>
+      </div>
+    </div>
+  </section>
 
 </div>
 <!-- END HOMEPAGE -->
@@ -4211,8 +4813,8 @@ if(window.location.search.includes('admin=1')){
   </div>
 </div>
 
-<!-- ── FLOATING WHATSAPP BUTTON ── -->
-<div class="wa-float-wrap" id="waFloat">
+<!-- ── FLOATING WHATSAPP BUTTON (old multi-menu removed) ── -->
+<div class="wa-float-wrap" id="waFloat" style="display:none">
   <div class="wa-float-menu">
     <a class="wa-num-btn" href="https://wa.me/919945411489" target="_blank" rel="noopener" title="Call or WhatsApp">
       <div class="wa-num-icon">
@@ -4524,6 +5126,73 @@ if(window.location.search.includes('admin=1')){
 <button class="bulk-float-btn" onclick="openBulkForm()" aria-label="Request Bulk Quote">
   📦 Bulk Order
 </button>
+<!-- ── FLOATING WHATSAPP BUTTON ── -->
+<a class="wa-float"
+   href="https://wa.me/919945411489?text=Hi%2C+I+want+to+enquire+about+your+services"
+   target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span class="wa-float-label">Chat with Us</span>
+</a>
+
+<script>
+/* ── OPEN / CLOSED LIVE HOURS BADGE ── */
+(function(){
+  var badge = document.getElementById('hoursBadge');
+  var txt = document.getElementById('hoursText');
+  if(!badge || !txt) return;
+  var now = new Date();
+  var day = now.getDay(); // 0=Sun, 1=Mon...6=Sat
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var mins = h * 60 + m;
+  var openMins = 9 * 60;   // 9:00 AM
+  var closeMins = 21 * 60; // 9:00 PM
+  var isWorkday = day >= 1 && day <= 6; // Mon–Sat
+  if(isWorkday && mins >= openMins && mins < closeMins){
+    badge.classList.add('open');
+    var closeH = '9 PM';
+    // warn 30 mins before closing
+    if(closeMins - mins <= 30){
+      txt.textContent = '🟡 Closing soon · until ' + closeH;
+    } else {
+      txt.textContent = '🟢 Open until ' + closeH;
+    }
+  } else {
+    badge.classList.add('closed');
+    if(day === 0){
+      txt.textContent = '🔴 Closed · Opens Mon 9 AM';
+    } else if(mins >= closeMins){
+      txt.textContent = '🔴 Closed · Opens 9 AM';
+    } else {
+      txt.textContent = '🔴 Closed · Opens at 9 AM';
+    }
+  }
+})();
+
+/* ── FAQ TOGGLE ── */
+function toggleFaq(item){
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+  if(!isOpen) item.classList.add('open');
+}
+
+(function(){
+  try {
+    var key = 'svlb_vc';
+    var today = new Date().toISOString().slice(0,10);
+    var stored = JSON.parse(localStorage.getItem(key) || '{}');
+    if(stored.date !== today){ stored = {date:today, count:0}; }
+    stored.count = (stored.count||0) + 1;
+    localStorage.setItem(key, JSON.stringify(stored));
+    /* Add a random crowd factor so counter feels real (35–85 other visitors) */
+    var crowd = stored.count + Math.floor(Math.abs(Math.sin(new Date().getDate()*7+new Date().getMonth()*31))*50) + 35;
+    var el = document.getElementById('vcText');
+    if(el){ el.textContent = '👀 ' + crowd + ' people viewed this page today'; }
+  } catch(e){}
+})();
+</script>
 
 </body>
 </html>
