@@ -12,6 +12,14 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#D4691A">
 <link rel="canonical" href="https://svlb-shop.vercel.app/">
+<!-- ── HREFLANG — Multilingual SEO ── -->
+<link rel="alternate" hreflang="en" href="https://svlb-shop.vercel.app/" />
+<link rel="alternate" hreflang="te" href="https://svlb-shop.vercel.app/?lang=te" />
+<link rel="alternate" hreflang="kn" href="https://svlb-shop.vercel.app/?lang=kn" />
+<link rel="alternate" hreflang="x-default" href="https://svlb-shop.vercel.app/" />
+<!-- ── MULTILINGUAL META KEYWORDS ── -->
+<meta name="keywords" lang="te" content="స్టేషనరీ షాప్ కె.ఆర్. పురం, రబ్బర్లు షార్పెనర్లు, జెరాక్స్ కె.ఆర్. పురం, లామినేషన్ బెంగళూరు, నోట్‌బుక్‌లు పెన్నులు, ప్రాజెక్టు బైండింగ్, అద్దె ఒప్పందం, LIC బీమా కె.ఆర్. పురం">
+<meta name="keywords" lang="kn" content="ಸ್ಟೇಷನರಿ ಅಂಗಡಿ ಕೆ.ಆರ್. ಪುರಂ, ರಬ್ಬರ್ ಶಾರ್ಪ್‌ನರ್, ಝೆರಾಕ್ಸ್ ಕೆ.ಆರ್. ಪುರಂ, ಲ್ಯಾಮಿನೇಶನ್ ಬೆಂಗಳೂರು, ನೋಟ್‌ಬುಕ್ ಪೆನ್ನು, ಬಾಡಿಗೆ ಒಪ್ಪಂದ, LIC ವಿಮೆ ಕೆ.ಆರ್. ಪುರಂ">
 
 <!-- ── OPEN GRAPH (WhatsApp / Facebook preview) ── -->
 <meta property="og:type" content="website">
@@ -3008,7 +3016,7 @@ const i18n = {
     wt_all:'🌿 అన్నీ', wt_weight:'⚖️ బరువు', wt_women:'🌸 మహిళలు', wt_men:'💪 పురుషులు',
     wt_senior:'🧓 వృద్ధులు', wt_children:'🧒 పిల్లలు', wt_joint:'🦵 కీళ్లు', wt_immunity:'🛡️ రోగనిరోధకత',
     cat_all:'అన్ని ఉత్పత్తులు', cat_pens:'పెన్నులు', cat_penpencils:'పెన్ పెన్సిళ్లు & ఇంక్ పెన్నులు',
-    cat_pencils:'పెన్సిళ్లు', cat_erasers:'అరిపేరు & పదుమాను', cat_notebooks:'నోట్‌బుక్‌లు',
+    cat_pencils:'పెన్సిళ్లు', cat_erasers:'రబ్బర్లు & షార్పెనర్లు', cat_notebooks:'నోట్‌బుక్‌లు',
     cat_colpencils:'రంగు పెన్సిళ్లు', cat_sketchpens:'స్కెచ్ పెన్నులు', cat_crayons:'క్రేయాన్లు',
     cat_clay:'మట్టి', cat_adhesives:'జిగురు & ఫెవికాల్', cat_slates:'స్లేట్లు',
     cat_chalk:'సుద్దలు & స్లేట్ పెన్సిళ్లు', cat_geometry:'జ్యామెట్రీ బాక్సులు',
@@ -3050,7 +3058,7 @@ const i18n = {
     desc_pens:'అన్ని ధరలలో నీలం, నలుపు, ఎరుపు & ఆకుపచ్చ పెన్నులు',
     desc_penpencils:'మెకానికల్ పెన్ పెన్సిళ్లు మరియు నీలం ఫౌంటెన్ పెన్నులు',
     desc_pencils:'₹5 నుండి ₹7 వరకు నాణ్యమైన పెన్సిళ్లు',
-    desc_erasers:'₹3 నుండి అరిపేరు మరియు పదుమాను',
+    desc_erasers:'₹3 నుండి రబ్బర్లు మరియు షార్పెనర్లు',
     desc_notebooks:'చిన్న, కింగ్ సైజ్ మరియు లాంగ్ బుక్లు — 100 & 200 పేజీలు',
     desc_colpencils:'6 రంగుల నుండి 48 రంగుల వరకు కలర్ పెన్సిల్ సెట్లు',
     desc_sketchpens:'6 రంగుల నుండి 72 రంగుల వరకు స్కెచ్ పెన్ సెట్లు',
@@ -3184,13 +3192,21 @@ const i18n = {
 let curLang = (function(){
   try{
     var saved = localStorage.getItem('svlb_lang');
-    // Whitelist validation — Amazon standard: never trust raw storage value
+    // ── LANGUAGE PRIORITY (Senior Architect Rule) ──────────────────────────
+    // Priority 1: Explicit user choice saved in localStorage — always honour
+    // Priority 2: Default to English — NEVER auto-detect navigator.language
+    //
+    // WHY removed browser-language detection:
+    //   • Indian Android phones report navigator.language = 'te-IN' / 'kn-IN'
+    //     even when the user has never visited this site or chosen a language.
+    //   • This silently forced Telugu/Kannada on first-time visitors,
+    //     making the site appear broken (mixed-language rendering).
+    //   • Language preference is a USER CHOICE, not a device setting.
+    //   • Flipkart / Amazon India pattern: default = English, user opts in.
+    // ──────────────────────────────────────────────────────────────────────
     var allowed = ['en','te','kn'];
     if(saved && allowed.indexOf(saved) !== -1) return saved;
-    // Browser language hint as secondary signal
-    var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-    if(browserLang.startsWith('te')) return 'te';
-    if(browserLang.startsWith('kn')) return 'kn';
+    // No saved preference → always default to English
     return 'en';
   }catch(e){ return 'en'; }
 })();
@@ -3208,6 +3224,9 @@ function t(key){
 function setLang(lang){
   if(!lang || ['en','te','kn'].indexOf(lang) === -1) return;
   curLang = lang;
+  // ── Persist ONLY explicit user choices — never auto-set from browser ──
+  // The 'svlb_lang' key is written ONLY when the user clicks a language button.
+  // On next visit, this explicit choice is honoured (Priority 1 in curLang init).
   try{ localStorage.setItem('svlb_lang', lang); }catch(e){}
   // Amazon standard: update html lang attr for screen readers + CSS :lang() selectors
   document.documentElement.lang = lang;
@@ -3280,12 +3299,12 @@ const P_TRANS = {
     19: {n:'పెన్సిల్ – ₹5', d:'స్టాండర్డ్ HB పెన్సిల్'},
     20: {n:'పెన్సిల్ – ₹6', d:'మంచి నాణ్యత HB పెన్సిల్'},
     21: {n:'పెన్సిల్ – ₹7', d:'ప్రీమియం పెన్సిల్, స్మూత్ రైటింగ్'},
-    22: {n:'అరిపేరు – ₹3', d:'చిన్న అరిపేరు, శుభ్రంగా చెరుపుతుంది'},
-    23: {n:'అరిపేరు – ₹5', d:'స్టాండర్డ్ అరిపేరు, స్మడ్జ్-ఫ్రీ'},
-    24: {n:'అరిపేరు – ₹10', d:'పెద్ద ప్రీమియం అరిపేరు, డస్ట్-ఫ్రీ'},
-    25: {n:'పదుమాను – ₹3', d:'మినీ సింగిల్-హోల్ పదుమాను'},
-    26: {n:'పదుమాను – ₹5', d:'కవర్‌తో స్టాండర్డ్ పదుమాను'},
-    27: {n:'పదుమాను – ₹10', d:'కంటెయినర్‌తో ప్రీమియం 2-హోల్ పదుమాను'},
+    22: {n:'రబ్బరు – ₹3', d:'చిన్న రబ్బరు, శుభ్రంగా చెరుపుతుంది'},
+    23: {n:'రబ్బరు – ₹5', d:'స్టాండర్డ్ రబ్బరు, స్మడ్జ్-ఫ్రీ'},
+    24: {n:'రబ్బరు – ₹10', d:'పెద్ద ప్రీమియం రబ్బరు, డస్ట్-ఫ్రీ'},
+    25: {n:'షార్పెనర్ – ₹3', d:'మినీ సింగిల్-హోల్ షార్పెనర్'},
+    26: {n:'షార్పెనర్ – ₹5', d:'కవర్‌తో స్టాండర్డ్ షార్పెనర్'},
+    27: {n:'షార్పెనర్ – ₹10', d:'కంటెయినర్‌తో ప్రీమియం 2-హోల్ షార్పెనర్'},
     28: {n:'చిన్న నోట్‌బుక్ – 100 పేజీలు', d:'చిన్న సైజు, సింగిల్ రూల్డ్, 100 పేజీలు'},
     29: {n:'చిన్న నోట్‌బుక్ – 200 పేజీలు', d:'చిన్న సైజు, సింగిల్ రూల్డ్, 200 పేజీలు'},
     30: {n:'కింగ్ సైజ్ – 100 పేజీలు', d:'కింగ్ సైజ్ రూల్డ్ నోట్‌బుక్, 100 పేజీలు'},
@@ -4665,6 +4684,35 @@ document.documentElement.setAttribute('dir','ltr');
 buildTicker();
 document.body.classList.add("home-view");
 buildHomePage();
+
+// ── LANGUAGE STATE SYNC ────────────────────────────────────────────────────
+// Runs after all dynamic rendering is done.
+// Fixes: button active state mismatch, data-i18n elements staying English
+// when curLang is 'te'/'kn' (loaded from localStorage).
+// This is a lightweight sync — does NOT re-render products or homepage.
+(function applyLangState(){
+  var lang = curLang;
+  // 1. Correct button active state (HTML has EN hardcoded as active)
+  var btns = ['lbEN','lbTE','lbKN'];
+  var codes = ['en','te','kn'];
+  btns.forEach(function(id, i){
+    var el = document.getElementById(id);
+    if(el) el.classList.toggle('active', codes[i] === lang);
+  });
+  // 2. Apply translations to all static data-i18n elements
+  if(lang !== 'en'){
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var val = t(key);
+      if(!val || val === key) return;
+      if(key === 'footer') el.innerHTML = val;
+      else el.textContent = val;
+    });
+    // 3. Sync search placeholder
+    var srch = document.getElementById('srchInput');
+    if(srch) srch.placeholder = t('search_ph');
+  }
+})();
 
 // ── Translation parity validator (runs only in localhost/dev) ──
 (function validateTranslations(){
