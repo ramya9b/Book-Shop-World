@@ -460,7 +460,9 @@ footer strong{color:var(--saffron)}
   transition:opacity .25s,transform .25s;
   box-shadow:0 4px 20px rgba(0,0,0,.5);
 }
-.vid-play-overlay:hover .vid-play-btn{opacity:1;transform:scale(1)}
+/* Show play btn on overlay hover OR on whole card hover */
+.vid-play-overlay:hover .vid-play-btn,
+.pcard:hover .vid-play-btn{opacity:1;transform:scale(1)}
 .vid-play-btn svg{margin-left:4px}
 
 @media(max-width:600px){
@@ -550,9 +552,9 @@ footer strong{color:var(--saffron)}
 }
 .map-overlay-card h4{
   font-family:"Playfair Display",serif;
-  font-size:.85rem;color:#1C1810;margin:0 0 .2rem;
+  font-size:.85rem;color:#0C1E14;margin:0 0 .2rem;
 }
-.map-overlay-card p{font-size:.72rem;color:#7A7060;margin:0 0 .6rem;line-height:1.4}
+.map-overlay-card p{font-size:.72rem;color:#4A7260;margin:0 0 .6rem;line-height:1.4}
 .map-dir-btn{
   display:flex;align-items:center;gap:.4rem;
   background:#25D366;color:#fff;
@@ -568,6 +570,90 @@ footer strong{color:var(--saffron)}
   .map-wrap iframe{height:240px}
   .map-overlay-card{max-width:170px}
 }
+
+/* ── NEARBY LANDMARKS ── */
+.landmarks-section{
+  max-width:calc(var(--sw) + 1080px);
+  margin:1.5rem auto 0;
+  padding:0 1.5rem;
+}
+.landmarks-hdr{
+  display:flex;align-items:center;gap:.6rem;
+  margin-bottom:.85rem;
+}
+.landmarks-hdr h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;color:var(--text);margin:0;
+}
+.landmarks-hdr span{
+  font-size:.72rem;color:var(--muted);
+  background:rgba(10,122,78,.08);
+  border:1px solid rgba(10,122,78,.2);
+  border-radius:20px;padding:.18rem .65rem;
+}
+.landmarks-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.85rem;
+}
+.landmark-card{
+  background:linear-gradient(155deg,#FFFFFF 0%,#F2FBF7 100%);
+  border:1px solid rgba(255,255,255,0.92);
+  border-radius:16px;
+  padding:1rem .95rem;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.07),inset 0 1.5px 0 rgba(255,255,255,1);
+  transition:transform .22s,box-shadow .22s;
+  text-decoration:none;
+  display:block;
+  cursor:pointer;
+}
+.landmark-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:16px 16px 0 0;
+}
+.landmark-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 40px rgba(0,0,0,.12),inset 0 1.5px 0 rgba(255,255,255,1);
+}
+.landmark-icon{
+  font-size:1.8rem;margin-bottom:.5rem;display:block;
+  filter:drop-shadow(0 3px 8px rgba(0,0,0,.15));
+}
+.landmark-name{
+  font-family:'Playfair Display',serif;
+  font-size:.88rem;font-weight:600;
+  color:var(--text);margin-bottom:.25rem;line-height:1.3;
+}
+.landmark-time{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.7rem;font-weight:700;
+  border-radius:20px;padding:.18rem .55rem;
+  margin-bottom:.35rem;
+}
+.landmark-hint{
+  font-size:.68rem;color:var(--muted);line-height:1.4;
+}
+.landmark-maps-link{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.68rem;font-weight:600;color:var(--saffron);
+  text-decoration:none;margin-top:.4rem;
+  opacity:.85;transition:opacity .2s;
+}
+.landmark-maps-link:hover{opacity:1;}
+/* accent bar colours per card */
+.lm-green::before{background:linear-gradient(90deg,#0A7A4E,#14C478);}
+.lm-blue::before{background:linear-gradient(90deg,#1D4ED8,#3B82F6);}
+.lm-amber::before{background:linear-gradient(90deg,#B45309,#C8920A);}
+.lm-rose::before{background:linear-gradient(90deg,#BE123C,#F43F5E);}
+.landmark-time.lm-green{background:rgba(10,122,78,.1);color:#065230;}
+.landmark-time.lm-blue{background:rgba(29,78,216,.1);color:#1D4ED8;}
+.landmark-time.lm-amber{background:rgba(180,83,9,.1);color:#B45309;}
+.landmark-time.lm-rose{background:rgba(190,18,60,.1);color:#BE123C;}
+@media(max-width:900px){.landmarks-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.landmarks-grid{grid-template-columns:1fr 1fr;}}
 
 /* ══════════════════════════════════════
    HOMEPAGE SECTIONS
@@ -2011,14 +2097,6 @@ footer {
 }
 footer strong { color: var(--saffron) !important; }
 
-/* ── MAP OVERLAY ── */
-.map-overlay-card {
-  background: rgba(242,251,246,0.94) !important;
-  backdrop-filter: blur(18px) !important;
-  border: 1px solid rgba(255,255,255,0.78) !important;
-  box-shadow: 0 10px 36px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-
 /* ── NB BANNER ── */
 .nb-banner {
   background: linear-gradient(135deg,#0C1F14 0%,#12301E 60%,#0A4828 100%) !important;
@@ -2153,26 +2231,7 @@ footer strong { color: var(--saffron) !important; }
   </div>
 
   <!-- ── LANDMARKS & GOOGLE REVIEWS ── -->
-  <div style="max-width:calc(var(--sw)+1080px);margin:.9rem auto 0;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem">
-    <div class="landmarks-strip" style="margin:0;padding:0">
-      <span class="landmarks-label">📍 Find Us</span>
-      <span class="landmark-pill">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-        Near KR Puram Bus Stand
-      </span>
-      <span class="landmark-pill">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-        2 min from KR Puram Bridge
-      </span>
-      <span class="landmark-pill">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        Opp. KR Puram Govt School
-      </span>
-      <span class="landmark-pill">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        Near Axis Bank ATM
-      </span>
-    </div>
+  <div style="max-width:calc(var(--sw)+1080px);margin:.9rem auto 0;padding:0 1.5rem;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:.6rem">
     <a class="google-reviews-badge" href="https://www.google.com/maps/place/SRI+Varalakshmi+Balaji+Enterprises/@13.0038388,77.6961625,17z" target="_blank" rel="noopener" title="View on Google Maps">
       <div class="gr-g">G</div>
       <div class="gr-stars">★★★★★</div>
@@ -2511,6 +2570,74 @@ footer strong { color: var(--saffron) !important; }
     </div>
   </div>
 </div>
+
+<!-- ── NEARBY LANDMARKS ── -->
+<div class="landmarks-section">
+  <div class="landmarks-hdr">
+    <h3>🗺️ Nearby Landmarks</h3>
+    <span>Easy to find us</span>
+  </div>
+  <div class="landmarks-grid">
+
+    <!-- KR Puram Market -->
+    <a class="landmark-card lm-green"
+       href="https://www.google.com/maps/search/KR+Puram+Market,+Bengaluru/@13.0038388,77.6961625,16z"
+       target="_blank" rel="noopener" title="KR Puram Market on Google Maps">
+      <span class="landmark-icon">🛒</span>
+      <div class="landmark-name">KR Puram Market</div>
+      <span class="landmark-time lm-green">🚶 5 min walk</span>
+      <div class="landmark-hint">Main vegetable &amp; daily market of KR Puram</div>
+      <span class="landmark-maps-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View on Maps
+      </span>
+    </a>
+
+    <!-- Venkateshwara Theatre -->
+    <a class="landmark-card lm-blue"
+       href="https://www.google.com/maps/search/Venkateshwara+Theatre+KR+Puram+Bengaluru/@13.0038388,77.6961625,16z"
+       target="_blank" rel="noopener" title="Venkateshwara Theatre on Google Maps">
+      <span class="landmark-icon">🎬</span>
+      <div class="landmark-name">Venkateshwara Theatre</div>
+      <span class="landmark-time lm-blue">🚶 2 min walk</span>
+      <div class="landmark-hint">Popular local cinema, landmark for directions</div>
+      <span class="landmark-maps-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View on Maps
+      </span>
+    </a>
+
+    <!-- Diesel Loco Shed -->
+    <a class="landmark-card lm-amber"
+       href="https://www.google.com/maps/search/Diesel+Loco+Shed+KR+Puram+Bengaluru/@13.0038388,77.6961625,16z"
+       target="_blank" rel="noopener" title="Diesel Loco Shed on Google Maps">
+      <span class="landmark-icon">🚂</span>
+      <div class="landmark-name">Diesel Loco Shed</div>
+      <span class="landmark-time lm-amber">🚶 5 min walk</span>
+      <div class="landmark-hint">Railway loco shed, major KR Puram landmark</div>
+      <span class="landmark-maps-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View on Maps
+      </span>
+    </a>
+
+    <!-- ECI Church -->
+    <a class="landmark-card lm-rose"
+       href="https://www.google.com/maps/search/ECI+Church+KR+Puram+Bengaluru/@13.0038388,77.6961625,16z"
+       target="_blank" rel="noopener" title="ECI Church on Google Maps">
+      <span class="landmark-icon">⛪</span>
+      <div class="landmark-name">ECI Church</div>
+      <span class="landmark-time lm-rose">📍 Right nearby</span>
+      <div class="landmark-hint">Evangelical Church of India, KR Puram</div>
+      <span class="landmark-maps-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View on Maps
+      </span>
+    </a>
+
+  </div>
+</div>
+
 <footer><p data-i18n="footer">📍 KR Puram, Bengaluru &nbsp;|&nbsp;
   <a href="https://wa.me/919945411489" target="_blank" style="color:var(--saffron);text-decoration:none;font-weight:600">📲 +91 99454 11489</a> &nbsp;|&nbsp;
   <a href="https://wa.me/918073815650" target="_blank" style="color:var(--saffron);text-decoration:none;font-weight:600">📲 +91 80738 15650</a> &nbsp;|&nbsp;
@@ -3236,7 +3363,7 @@ function renderIns(p){
     return `<div class="pcard lic-img-card" style="border-top:3px solid ${ic.ac}">
       <div style="position:relative">
         ${bh}
-        <div class="lic-img-wrap" onclick="hasNB&&p.img==='index_plus_10k'?openVidModal():showLicModal('${safeImg}','${safeName}')">
+        <div class="lic-img-wrap" onclick="${hasNB ? 'openVidModal()' : `showLicModal('${safeImg}','${safeName}')`}">
           ${hasNB ? `<div class="vid-play-overlay" title="Click to play video" role="button" tabindex="0" aria-label="Play LIC Index Plus video" onclick="event.stopPropagation();openVidModal()"><div class="vid-play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#1565C0"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>` : ''}
           <img src="${LIC_IMGS[p.img]}" alt="${p.name}" loading="lazy"/>
           <div class="lic-img-overlay"><span>${t('view_det')}</span></div>
@@ -4152,6 +4279,8 @@ function openVidModal(){
   loadVid(lang);
   document.getElementById('vidModal').classList.add('open');
   document.body.style.overflow='hidden';
+  // Focus the close button for keyboard accessibility
+  setTimeout(()=>{ const cb=document.querySelector('#vidModal .vid-close-btn'); if(cb) cb.focus(); }, 150);
 }
 
 function loadVid(lang){
