@@ -537,38 +537,47 @@ footer strong{color:var(--saffron)}
   display:flex;align-items:center;gap:.5rem;
 }
 .map-wrap{
-  border-radius:14px;overflow:hidden;
+  border-radius:14px 14px 0 0;overflow:hidden;
   border:1.5px solid var(--border);
-  box-shadow:0 2px 16px rgba(0,0,0,.08);
+  border-bottom:none;
+  box-shadow:none;
   position:relative;
 }
 .map-wrap iframe{width:100%;height:320px;border:0;display:block}
-.map-overlay-card{
-  position:absolute;top:12px;left:12px;
-  background:#fff;border-radius:12px;
+.map-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:rgba(242,251,246,0.96);
+  border:1.5px solid var(--border);
+  border-top:none;
+  border-radius:0 0 14px 14px;
   padding:.75rem 1rem;
-  box-shadow:0 4px 20px rgba(0,0,0,.15);
-  max-width:220px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  flex-wrap:wrap;
 }
-.map-overlay-card h4{
+.map-footer-info{}
+.map-footer-info h4{
   font-family:"Playfair Display",serif;
-  font-size:.85rem;color:#0C1E14;margin:0 0 .2rem;
+  font-size:.88rem;color:var(--text);margin:0 0 .15rem;
 }
-.map-overlay-card p{font-size:.72rem;color:#4A7260;margin:0 0 .6rem;line-height:1.4}
+.map-footer-info p{font-size:.72rem;color:var(--muted);margin:0}
 .map-dir-btn{
-  display:flex;align-items:center;gap:.4rem;
-  background:#25D366;color:#fff;
-  border:none;border-radius:8px;
-  padding:.35rem .8rem;
-  font-size:.75rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:linear-gradient(135deg,#25D366,#1aab54);
+  color:#fff;border:none;border-radius:10px;
+  padding:.48rem 1.1rem;
+  font-size:.8rem;font-weight:700;
   cursor:pointer;font-family:"DM Sans",sans-serif;
-  text-decoration:none;width:100%;justify-content:center;
-  transition:background .2s;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:0 4px 14px rgba(37,211,102,0.35),inset 0 1px 0 rgba(255,255,255,0.3);
+  transition:all .2s;flex-shrink:0;
 }
-.map-dir-btn:hover{background:#1ebe57}
+.map-dir-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(37,211,102,0.45),inset 0 1px 0 rgba(255,255,255,0.3);
+}
 @media(max-width:600px){
   .map-wrap iframe{height:240px}
-  .map-overlay-card{max-width:170px}
+  .map-footer{gap:.6rem}
 }
 
 /* ── NEARBY LANDMARKS ── */
@@ -2559,15 +2568,18 @@ footer strong { color: var(--saffron) !important; }
       title="Sri Vara Lakshmi Balaji Enterprises location"
       allowfullscreen>
     </iframe>
-    <div class="map-overlay-card">
+  </div>
+  <div class="map-footer">
+    <div class="map-footer-info">
       <h4>🏪 Sri Vara Lakshmi Balaji Enterprises</h4>
-      <p>KR Puram, Bengaluru, Karnataka</p>
-      <a class="map-dir-btn"
-        href="https://share.google/nYgPnR9u8URlaMYna"
-        target="_blank" rel="noopener">
-        🗺️ Get Directions
-      </a>
+      <p>📍 KR Puram, Bengaluru, Karnataka · Mon–Sat 7–11 AM &amp; 2–9 PM</p>
     </div>
+    <a class="map-dir-btn"
+       href="https://share.google/nYgPnR9u8URlaMYna"
+       target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+      Get Directions
+    </a>
   </div>
 </div>
 
