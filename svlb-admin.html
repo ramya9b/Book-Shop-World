@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVLB Shop Admin · Stationery Ledger</title>
+<style>
+  :root{
+    --ink:#16335c; --ink-deep:#0f2647; --ink-soft:#3a567f;
+    --paper:#f3ecda; --card:#fffdf6; --line:#d8cfb6;
+    --margin:#c75c4b; --rule:#dfe7f2;
+    --ok:#1c6b43; --ok-bg:#e3f1e8; --err:#a32219; --err-bg:#f7e6e4;
+    --muted:#736a52; --shadow:0 1px 3px rgba(15,38,71,.12);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+    color:var(--ink-deep); line-height:1.5;
+    background:var(--paper);
+    background-image:linear-gradient(rgba(22,51,92,.035) 1px,transparent 1px);
+    background-size:100% 1.6rem;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:1.25rem 1rem 4rem}
+  h1{font-family:Georgia,"Times New Roman",serif; font-size:1.5rem; margin:.2rem 0; color:var(--ink-deep)}
+  h2{font-family:Georgia,serif; font-size:1.1rem; margin:0 0 .25rem; color:var(--ink-deep)}
+  .sub{color:var(--muted); font-size:.85rem; margin:0 0 1rem}
+  .masthead{border-bottom:3px double var(--ink); padding-bottom:.6rem; margin-bottom:1.25rem}
+
+  .panel{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:1rem 1.1rem; margin-bottom:1.25rem; box-shadow:var(--shadow);
+  }
+
+  label{display:block; font-size:.78rem; font-weight:600; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:.04em; margin:.55rem 0 .25rem}
+  input[type=text],input[type=url],input[type=password],input[type=number],textarea{
+    width:100%; font:inherit; color:var(--ink-deep);
+    padding:.5rem .6rem; border:1px solid var(--line); border-radius:7px;
+    background:#fffef9;
+  }
+  textarea{resize:vertical; min-height:2.6rem}
+  input::placeholder,textarea::placeholder{color:#a89f87}
+
+  :focus-visible{outline:3px solid var(--ink); outline-offset:2px; border-radius:4px}
+
+  button{font:inherit; cursor:pointer; border-radius:7px; border:1px solid transparent; font-weight:600}
+  .btn{background:var(--ink); color:#fff; padding:.55rem 1rem; transition:background .15s}
+  .btn:hover{background:var(--ink-deep)}
+  .btn:disabled{opacity:.6; cursor:default}
+  .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--ink); padding:.5rem .9rem}
+  .btn-ghost:hover{background:rgba(22,51,92,.06)}
+  .btn-danger{background:transparent; color:var(--err); border:1px solid var(--err); padding:.35rem .7rem; font-size:.82rem}
+  .btn-danger:hover{background:var(--err-bg)}
+  .row{display:flex; gap:.6rem; flex-wrap:wrap; align-items:flex-end}
+  .row .grow{flex:1 1 12rem}
+
+  /* feedback banner */
+  .msg{display:none; padding:.6rem .8rem; border-radius:7px; font-size:.9rem; font-weight:600; margin:.5rem 0}
+  .msg.show{display:block}
+  .msg.ok{background:var(--ok-bg); color:var(--ok); border:1px solid var(--ok)}
+  .msg.err{background:var(--err-bg); color:var(--err); border:1px solid var(--err)}
+
+  /* shop sign */
+  .sign-area{display:flex; gap:1rem; align-items:center; flex-wrap:wrap}
+  .sign{
+    min-width:9rem; text-align:center; padding:.7rem 1.2rem; border-radius:10px;
+    font-family:Georgia,serif; font-weight:700; font-size:1.25rem; letter-spacing:.06em;
+    border:3px solid; transition:background .2s,color .2s,border-color .2s;
+  }
+  .sign.open{background:var(--ok-bg); color:var(--ok); border-color:var(--ok)}
+  .sign.closed{background:#efe9dc; color:#6b6452; border-color:#9b9b86}
+
+  /* toggle switch */
+  .toggle{position:relative; display:inline-flex; align-items:center; gap:.5rem; cursor:pointer; user-select:none}
+  .toggle input{position:absolute; opacity:0; width:0; height:0}
+  .track{width:46px; height:26px; border-radius:14px; background:#bcb39a; position:relative; transition:background .18s; flex:0 0 auto}
+  .track::after{content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:transform .18s; box-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .toggle input:checked + .track{background:var(--ok)}
+  .toggle input:checked + .track::after{transform:translateX(20px)}
+  .toggle input:focus-visible + .track{outline:3px solid var(--ink); outline-offset:2px}
+
+  /* catalog item card — notebook margin look */
+  .count{font-size:.85rem; color:var(--muted); font-weight:600}
+  .item-card{
+    position:relative; background:var(--card); border:1px solid var(--line);
+    border-radius:9px; padding:.9rem 1rem .9rem 2.4rem; margin:.8rem 0; box-shadow:var(--shadow);
+  }
+  .item-card::before{content:""; position:absolute; left:1.5rem; top:0; bottom:0; width:2px; background:var(--margin); opacity:.55}
+  .fields{display:grid; grid-template-columns:1fr 1fr; gap:.4rem .8rem}
+  .f-full{grid-column:1 / -1}
+  .item-head{display:flex; justify-content:space-between; align-items:center; gap:.5rem; margin-bottom:.3rem}
+  .item-head .tag{font-size:.72rem; color:var(--muted); font-family:"Consolas",monospace}
+  .hint{font-size:.72rem; color:var(--muted); margin-top:.15rem}
+  .price-wrap{position:relative}
+  .price-wrap .rupee{position:absolute; left:.55rem; top:50%; transform:translateY(-50%); color:var(--muted)}
+  .price-wrap input{padding-left:1.4rem}
+
+  .toolbar{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-top:1rem}
+  .empty{padding:1.5rem; text-align:center; color:var(--muted); border:1px dashed var(--line); border-radius:9px; background:#fffef9}
+  .gated{opacity:.45; pointer-events:none}
+
+  @media (max-width:560px){ .fields{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important; scroll-behavior:auto !important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>SVLB Shop Admin</h1>
+    <p class="sub">Sri Vara Lakshmi Balaji Enterprises &middot; stationery ledger &amp; shop sign</p>
+  </header>
+
+  <!-- CONNECT -->
+  <section class="panel" aria-labelledby="connect-h">
+    <h2 id="connect-h">Connect</h2>
+    <p class="sub">Enter your Worker address and admin token, then load. The token stays in this tab's memory only.</p>
+    <div class="row">
+      <div class="grow">
+        <label for="base">Worker base URL</label>
+        <input id="base" type="url" inputmode="url" placeholder="https://your-worker.workers.dev" autocomplete="off">
+      </div>
+      <div class="grow">
+        <label for="token">Admin token</label>
+        <input id="token" type="password" placeholder="paste admin token" autocomplete="off">
+      </div>
+      <div><button class="btn" id="loadBtn" type="button">Load</button></div>
+    </div>
+    <div id="connectMsg" class="msg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- SHOP SIGN -->
+  <section class="panel gated" id="statusPanel" aria-labelledby="status-h">
+    <h2 id="status-h">Shop sign</h2>
+    <div class="sign-area">
+      <div class="sign closed" id="sign">CLOSED</div>
+      <label class="toggle">
+        <input type="checkbox" id="openToggle">
+        <span class="track"></span>
+        <span id="openLabel">Shop is closed</span>
+      </label>
+    </div>
+    <label for="hours">Hours</label>
+    <input id="hours" type="text" placeholder="Mon&ndash;Sat, 9:30 AM &ndash; 9:00 PM">
+    <label for="location">Location</label>
+    <input id="location" type="text" placeholder="KR Puram, Bengaluru">
+    <div class="toolbar">
+      <button class="btn" id="saveStatusBtn" type="button">Save shop sign</button>
+    </div>
+    <div id="statusMsg" class="msg" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="panel gated" id="catalogPanel" aria-labelledby="catalog-h">
+    <div class="item-head">
+      <h2 id="catalog-h">Catalog</h2>
+      <span class="count" id="count">0 items</span>
+    </div>
+    <div id="catalogMsg" class="msg" role="status" aria-live="polite"></div>
+    <div id="items"></div>
+    <div class="toolbar">
+      <button class="btn-ghost" id="addBtn" type="button">+ Add item</button>
+      <button class="btn" id="saveCatalogBtn" type="button">Save catalog</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ── in-memory state (no localStorage / sessionStorage) ──
+  var token = "";
+  var base = "";
+
+  var els = {
+    base: document.getElementById("base"),
+    token: document.getElementById("token"),
+    loadBtn: document.getElementById("loadBtn"),
+    connectMsg: document.getElementById("connectMsg"),
+    statusPanel: document.getElementById("statusPanel"),
+    catalogPanel: document.getElementById("catalogPanel"),
+    sign: document.getElementById("sign"),
+    openToggle: document.getElementById("openToggle"),
+    openLabel: document.getElementById("openLabel"),
+    hours: document.getElementById("hours"),
+    location: document.getElementById("location"),
+    saveStatusBtn: document.getElementById("saveStatusBtn"),
+    statusMsg: document.getElementById("statusMsg"),
+    items: document.getElementById("items"),
+    count: document.getElementById("count"),
+    addBtn: document.getElementById("addBtn"),
+    saveCatalogBtn: document.getElementById("saveCatalogBtn"),
+    catalogMsg: document.getElementById("catalogMsg")
+  };
+
+  function msg(el, kind, text){
+    el.textContent = text;
+    el.className = "msg show " + kind;
+  }
+  function clearMsg(el){ el.textContent = ""; el.className = "msg"; }
+
+  function normBase(v){ return (v || "").trim().replace(/\/+$/, ""); }
+
+  // ── API helpers ──
+  function apiGet(path){
+    return fetch(base + path, { headers: { "x-admin-token": token } }).then(handle);
+  }
+  function apiPut(path, body){
+    return fetch(base + path, {
+      method: "PUT",
+      headers: { "x-admin-token": token, "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }).then(handle);
+  }
+  function handle(res){
+    if (res.status === 401){
+      var e = new Error("Wrong or missing token — check the admin token and load again.");
+      e.code = 401; throw e;
+    }
+    if (!res.ok){
+      var e2 = new Error("The Worker returned " + res.status + " " + res.statusText + ".");
+      e2.code = res.status; throw e2;
+    }
+    return res.json();
+  }
+  function netError(){ return "Could not reach the Worker — check the base URL and your connection."; }
+
+  // ── shop sign ──
+  function paintSign(open){
+    els.sign.textContent = open ? "OPEN" : "CLOSED";
+    els.sign.className = "sign " + (open ? "open" : "closed");
+    els.openLabel.textContent = open ? "Shop is open" : "Shop is closed";
+  }
+  els.openToggle.addEventListener("change", function(){ paintSign(els.openToggle.checked); });
+
+  function fillStatus(s){
+    s = s || {};
+    els.openToggle.checked = !!s.open_now;
+    paintSign(!!s.open_now);
+    els.hours.value = s.hours || "";
+    els.location.value = s.location || "";
+  }
+
+  els.saveStatusBtn.addEventListener("click", function(){
+    clearMsg(els.statusMsg);
+    var payload = {
+      open_now: els.openToggle.checked,
+      hours: els.hours.value.trim(),
+      location: els.location.value.trim()
+    };
+    els.saveStatusBtn.disabled = true;
+    apiPut("/admin/status", payload)
+      .then(function(){ msg(els.statusMsg, "ok", "Shop sign saved."); })
+      .catch(function(err){ msg(els.statusMsg, "err", err.code ? err.message : netError()); })
+      .then(function(){ els.saveStatusBtn.disabled = false; });
+  });
+
+  // ── catalog cards ──
+  function makeField(labelText, type, value, opts){
+    opts = opts || {};
+    var wrap = document.createElement("div");
+    if (opts.full) wrap.className = "f-full";
+    var lbl = document.createElement("label");
+    lbl.textContent = labelText;
+    var input;
+    if (type === "textarea"){ input = document.createElement("textarea"); }
+    else { input = document.createElement("input"); input.type = type; }
+    input.value = (value == null ? "" : String(value));   // .value is injection-safe
+    if (opts.placeholder) input.placeholder = opts.placeholder;
+    if (opts.inputmode) input.setAttribute("inputmode", opts.inputmode);
+    var id = "f_" + labelText.toLowerCase().replace(/[^a-z]+/g, "_") + "_" + (makeField._n++);
+    input.id = id; lbl.setAttribute("for", id);
+    wrap.appendChild(lbl);
+    if (opts.priceWrap){
+      var pw = document.createElement("div"); pw.className = "price-wrap";
+      var r = document.createElement("span"); r.className = "rupee"; r.textContent = "₹";
+      pw.appendChild(r); pw.appendChild(input); wrap.appendChild(pw);
+    } else {
+      wrap.appendChild(input);
+    }
+    if (opts.hint){
+      var h = document.createElement("p"); h.className = "hint"; h.textContent = opts.hint;
+      wrap.appendChild(h);
+    }
+    wrap._input = input;
+    return wrap;
+  }
+  makeField._n = 0;
+
+  function addCard(item){
+    item = item || {};
+    var card = document.createElement("div");
+    card.className = "item-card";
+
+    var head = document.createElement("div"); head.className = "item-head";
+    var tag = document.createElement("span"); tag.className = "tag";
+    tag.textContent = item.id ? ("#" + item.id) : "new item";
+    var rm = document.createElement("button"); rm.type = "button"; rm.className = "btn-danger";
+    rm.textContent = "Remove";
+    rm.addEventListener("click", function(){ card.remove(); refreshCount(); });
+    head.appendChild(tag); head.appendChild(rm);
+    card.appendChild(head);
+
+    var fields = document.createElement("div"); fields.className = "fields";
+
+    var fName = makeField("Name", "text", item.name, { full:true, placeholder:"A4 Paper Ream" });
+    var fPrice = makeField("Price", "number", (item.price_inr != null ? item.price_inr : ""), { priceWrap:true, inputmode:"decimal", placeholder:"0" });
+    var fCat = makeField("Category", "text", item.category, { placeholder:"paper / pens / books / office / school / adhesives" });
+    var fUnit = makeField("Unit", "text", item.unit, { placeholder:"piece / ream / box / set / sheet" });
+    var fId = makeField("ID", "text", item.id, { placeholder:"a4_paper" });
+    var fAliases = makeField("Aliases", "textarea", (item.aliases || []).join(", "),
+      { full:true, hint:"Comma-separated. Put Telugu, Kannada, Hindi & Tinglish names and common misspellings here." });
+
+    // in-stock toggle
+    var stockWrap = document.createElement("div");
+    var stockLbl = document.createElement("label"); stockLbl.textContent = "In stock";
+    var tgl = document.createElement("label"); tgl.className = "toggle";
+    var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = item.in_stock !== false;
+    var track = document.createElement("span"); track.className = "track";
+    var state = document.createElement("span");
+    state.textContent = cb.checked ? "In stock" : "Out of stock";
+    cb.addEventListener("change", function(){ state.textContent = cb.checked ? "In stock" : "Out of stock"; });
+    tgl.appendChild(cb); tgl.appendChild(track); tgl.appendChild(state);
+    stockWrap.appendChild(stockLbl); stockWrap.appendChild(tgl);
+
+    fields.appendChild(fName);
+    fields.appendChild(fPrice);
+    fields.appendChild(fCat);
+    fields.appendChild(fUnit);
+    fields.appendChild(fId);
+    fields.appendChild(stockWrap);
+    fields.appendChild(fAliases);
+    card.appendChild(fields);
+
+    // refs for reading on save
+    card._read = function(){
+      var aliases = fAliases._input.value.split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+      var priceRaw = fPrice._input.value.trim();
+      return {
+        id: fId._input.value.trim(),
+        name: fName._input.value.trim(),
+        aliases: aliases,
+        price_inr: priceRaw === "" ? "" : Number(priceRaw),
+        priceRaw: priceRaw,
+        in_stock: cb.checked,
+        category: fCat._input.value.trim(),
+        unit: fUnit._input.value.trim()
+      };
+    };
+
+    els.items.appendChild(card);
+    return card;
+  }
+
+  function refreshCount(){
+    var n = els.items.querySelectorAll(".item-card").length;
+    els.count.textContent = n + (n === 1 ? " item" : " items");
+    var empty = els.items.querySelector(".empty");
+    if (n === 0 && !empty){
+      var e = document.createElement("div"); e.className = "empty";
+      e.textContent = "No items yet. Choose Add item to start your catalog.";
+      els.items.appendChild(e);
+    } else if (n > 0 && empty){
+      empty.remove();
+    }
+  }
+
+  function renderCatalog(list){
+    els.items.innerHTML = "";
+    (list || []).forEach(function(it){ addCard(it); });
+    refreshCount();
+  }
+
+  els.addBtn.addEventListener("click", function(){
+    var empty = els.items.querySelector(".empty"); if (empty) empty.remove();
+    var card = addCard({});
+    refreshCount();
+    card.scrollIntoView({ block:"nearest" });
+  });
+
+  els.saveCatalogBtn.addEventListener("click", function(){
+    clearMsg(els.catalogMsg);
+    var cards = Array.prototype.slice.call(els.items.querySelectorAll(".item-card"));
+    var rows = cards.map(function(c){ return c._read(); });
+
+    // ── validate ──
+    var seen = {};
+    for (var i = 0; i < rows.length; i++){
+      var r = rows[i], where = "Item " + (i + 1);
+      if (!r.id) return msg(els.catalogMsg, "err", where + " needs an id.");
+      if (!r.name) return msg(els.catalogMsg, "err", where + " needs a name.");
+      if (r.priceRaw === "" || isNaN(r.price_inr)) return msg(els.catalogMsg, "err", where + " (" + r.id + ") needs a numeric price.");
+      if (seen[r.id]) return msg(els.catalogMsg, "err", "Two items share the id “" + r.id + "” — ids must be unique.");
+      seen[r.id] = true;
+    }
+
+    var payload = rows.map(function(r){
+      return { id:r.id, name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit };
+    });
+
+    els.saveCatalogBtn.disabled = true;
+    apiPut("/admin/catalog", payload)
+      .then(function(){ msg(els.catalogMsg, "ok", "Catalog saved — " + payload.length + (payload.length === 1 ? " item." : " items.")); })
+      .catch(function(err){ msg(els.catalogMsg, "err", err.code ? err.message : netError()); })
+      .then(function(){ els.saveCatalogBtn.disabled = false; });
+  });
+
+  // ── load ──
+  els.loadBtn.addEventListener("click", function(){
+    base = normBase(els.base.value);
+    token = els.token.value.trim();
+    clearMsg(els.connectMsg);
+    if (!base) return msg(els.connectMsg, "err", "Enter the Worker base URL.");
+    if (!token) return msg(els.connectMsg, "err", "Enter the admin token.");
+
+    els.loadBtn.disabled = true;
+    msg(els.connectMsg, "ok", "Loading…");
+
+    Promise.all([ apiGet("/admin/catalog"), apiGet("/admin/status") ])
+      .then(function(res){
+        renderCatalog(Array.isArray(res[0]) ? res[0] : []);
+        fillStatus(res[1] || {});
+        els.statusPanel.classList.remove("gated");
+        els.catalogPanel.classList.remove("gated");
+        msg(els.connectMsg, "ok", "Loaded. Make changes, then save each panel.");
+      })
+      .catch(function(err){
+        msg(els.connectMsg, "err", err.code ? err.message : netError());
+        els.statusPanel.classList.add("gated");
+        els.catalogPanel.classList.add("gated");
+      })
+      .then(function(){ els.loadBtn.disabled = false; });
+  });
+
+})();
+</script>
+</body>
+</html>

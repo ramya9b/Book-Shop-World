@@ -1,0 +1,164 @@
+[
+  {
+    "id": "a4_paper",
+    "name": "A4 Paper Ream",
+    "aliases": ["a4 sheets", "a4 paper", "xerox paper", "photocopy paper", "white paper", "print paper", "ఎ4 పేపర్", "ఎ4 కాగితం", "ಎ4 ಪೇಪರ್", "ಎ4 ಕಾಗದ", "a4 kagaz", "a4 peper", "a4 riim", "rim paper"],
+    "price_inr": 320,
+    "in_stock": true,
+    "category": "paper",
+    "unit": "ream"
+  },
+  {
+    "id": "chart_paper",
+    "name": "Chart Paper",
+    "aliases": ["chart sheet", "chart", "project paper", "drawing chart", "చార్ట్ పేపర్", "చార్ట్", "ಚಾರ್ಟ್ ಪೇಪರ್", "ಚಾರ್ಟ್", "chart kagaz", "chart peper", "chartparer"],
+    "price_inr": 10,
+    "in_stock": true,
+    "category": "paper",
+    "unit": "sheet"
+  },
+  {
+    "id": "blue_pen",
+    "name": "Blue Pen",
+    "aliases": ["blue ball pen", "blue ballpoint", "neeli pen", "neela pen", "నీలం పెన్", "నీలి పెన్", "ನೀಲಿ ಪೆನ್", "neeli kalam", "blu pen", "blue pn", "ball pen blue"],
+    "price_inr": 10,
+    "in_stock": true,
+    "category": "pens",
+    "unit": "piece"
+  },
+  {
+    "id": "black_pen",
+    "name": "Black Pen",
+    "aliases": ["black ball pen", "black ballpoint", "nalla pen", "kala pen", "నలుపు పెన్", "నల్ల పెన్", "ಕಪ್ಪು ಪೆನ್", "kaala kalam", "blk pen", "blak pen", "ball pen black"],
+    "price_inr": 10,
+    "in_stock": true,
+    "category": "pens",
+    "unit": "piece"
+  },
+  {
+    "id": "gel_pen",
+    "name": "Gel Pen",
+    "aliases": ["gel ink pen", "smooth pen", "జెల్ పెన్", "ಜೆಲ್ ಪೆನ್", "jel pen", "gell pen", "gel pn", "gelpen"],
+    "price_inr": 25,
+    "in_stock": true,
+    "category": "pens",
+    "unit": "piece"
+  },
+  {
+    "id": "marker_pen",
+    "name": "Marker Pen",
+    "aliases": ["marker", "permanent marker", "whiteboard marker", "మార్కర్", "మార్కర్ పెన్", "ಮಾರ್ಕರ್", "marker kalam", "marcker", "markar"],
+    "price_inr": 30,
+    "in_stock": true,
+    "category": "pens",
+    "unit": "piece"
+  },
+  {
+    "id": "highlighter",
+    "name": "Highlighter",
+    "aliases": ["highlight pen", "marker highlight", "హైలైటర్", "ಹೈಲೈಟರ್", "hilighter", "highliter", "hilighter pen"],
+    "price_inr": 25,
+    "in_stock": true,
+    "category": "pens",
+    "unit": "piece"
+  },
+  {
+    "id": "ruled_notebook",
+    "name": "Ruled Notebook 200 Pages",
+    "aliases": ["ruled note", "notebook", "long book", "note book", "lined notebook", "పుస్తకం", "నోట్ బుక్", "ಪುಸ್ತಕ", "ನೋಟ್ ಬುಕ್", "copy", "kaapi", "notbook", "note buk"],
+    "price_inr": 60,
+    "in_stock": true,
+    "category": "books",
+    "unit": "piece"
+  },
+  {
+    "id": "spiral_notebook",
+    "name": "Spiral Notebook",
+    "aliases": ["spiral note", "spiral book", "spring notebook", "స్పైరల్ నోట్", "ಸ್ಪೈರಲ್ ನೋಟ್", "spiral copy", "spairal notebook", "spiral notbook"],
+    "price_inr": 75,
+    "in_stock": true,
+    "category": "books",
+    "unit": "piece"
+  },
+  {
+    "id": "stapler",
+    "name": "Stapler",
+    "aliases": ["pin machine", "stapler machine", "pin gun", "స్టేప్లర్", "పిన్ మిషన్", "ಸ್ಟೇಪ್ಲರ್", "ಪಿನ್ ಮೆಷಿನ್", "staplar", "stapaler", "stapller"],
+    "price_inr": 110,
+    "in_stock": true,
+    "category": "office",
+    "unit": "piece"
+  },
+  {
+    "id": "stapler_pins",
+    "name": "Stapler Pins Box",
+    "aliases": ["staple pins", "pins", "pin box", "stapler pin", "స్టేప్లర్ పిన్స్", "పిన్స్", "ಸ್ಟೇಪ್ಲರ್ ಪಿನ್ಸ್", "ಪಿನ್ಸ್", "staple pin box", "stapler pinns"],
+    "price_inr": 15,
+    "in_stock": true,
+    "category": "office",
+    "unit": "box"
+  },
+  {
+    "id": "file_folder",
+    "name": "File Folder",
+    "aliases": ["file", "folder", "document file", "plastic file", "ఫైల్", "ఫైలు", "ಫೈಲ್", "ಕಡತ", "fyle", "file foldar"],
+    "price_inr": 25,
+    "in_stock": true,
+    "category": "office",
+    "unit": "piece"
+  },
+  {
+    "id": "sticky_notes",
+    "name": "Sticky Notes Set",
+    "aliases": ["post it", "post-it", "memo pad", "sticky note", "స్టిక్కీ నోట్స్", "పోస్ట్ ఇట్", "ಸ್ಟಿಕ್ಕಿ ನೋಟ್ಸ್", "stiky notes", "sticki notes"],
+    "price_inr": 45,
+    "in_stock": true,
+    "category": "office",
+    "unit": "set"
+  },
+  {
+    "id": "pencil_hb",
+    "name": "HB Pencil",
+    "aliases": ["pencil", "lead pencil", "hb pencil", "పెన్సిల్", "ಪೆನ್ಸಿಲ್", "pensil", "pencle", "pencil hb"],
+    "price_inr": 5,
+    "in_stock": true,
+    "category": "school",
+    "unit": "piece"
+  },
+  {
+    "id": "eraser",
+    "name": "Eraser",
+    "aliases": ["rubber", "rubber eraser", "చెరిపేది", "రబ్బర్", "ಅಳಿಸುವ ರಬ್ಬರ್", "ರಬ್ಬರ್", "rabber", "erazer", "ereaser"],
+    "price_inr": 5,
+    "in_stock": true,
+    "category": "school",
+    "unit": "piece"
+  },
+  {
+    "id": "geometry_box",
+    "name": "Geometry Box",
+    "aliases": ["geometry set", "instrument box", "compass box", "జామెట్రీ బాక్స్", "జామెట్రీ సెట్", "ಜ್ಯಾಮಿತಿ ಬಾಕ್ಸ್", "geometery box", "jyamitri box", "math box"],
+    "price_inr": 90,
+    "in_stock": true,
+    "category": "school",
+    "unit": "set"
+  },
+  {
+    "id": "glue_stick",
+    "name": "Glue Stick",
+    "aliases": ["gum stick", "fevistick", "fevi stick", "adhesive stick", "జిగురు", "గమ్ స్టిక్", "ಅಂಟು", "ಗಮ್ ಸ್ಟಿಕ್", "gond", "glu stick", "gluestick"],
+    "price_inr": 35,
+    "in_stock": false,
+    "category": "adhesives",
+    "unit": "piece"
+  },
+  {
+    "id": "cello_tape",
+    "name": "Cello Tape",
+    "aliases": ["sticky tape", "tape", "cellotape", "transparent tape", "సెల్లో టేప్", "టేప్", "ಸೆಲ್ಲೋ ಟೇಪ್", "ಟೇಪ್", "selo tape", "cello tep"],
+    "price_inr": 20,
+    "in_stock": true,
+    "category": "adhesives",
+    "unit": "piece"
+  }
+]
