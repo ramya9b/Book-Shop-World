@@ -2327,6 +2327,15 @@ footer strong { color: var(--saffron) !important; }
     <div class="featured-grid" id="homeFeaturedGrid"></div>
   </div>
 
+  <!-- IN STOCK NOW (live from the Firebase catalog; hidden until items load) -->
+  <div class="home-section" id="liveStockSection" style="margin-top:1.5rem;display:none">
+    <div class="home-section-hdr">
+      <h3>📦 In Stock Now</h3>
+      <span class="svlbk-live-tag">live</span>
+    </div>
+    <div class="featured-grid" id="liveStockGrid"></div>
+  </div>
+
   <!-- TRUST SECTION -->
   <div class="trust-row">
     <!-- Quick Tools Row -->
@@ -5926,8 +5935,19 @@ if(window.location.search.includes('admin=1')){
    2. Realtime Database → Create → Start in test mode
    3. Copy databaseURL → paste into FIREBASE_DB_URL below
 ═══════════════════════════════════════════════════════ */
-const FIREBASE_DB_URL = '';      // ← paste Firebase databaseURL here
-const SHOP_ADMIN_PIN = '9945';   // ← change to your 4-digit PIN
+/* Firebase web config — public by design, safe to commit. */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBlgXLsJO9a8RGwV-DeqaGsYJngJsrGCOI",
+  authDomain: "svlb-shop.firebaseapp.com",
+  databaseURL: "https://svlb-shop-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "svlb-shop",
+  storageBucket: "svlb-shop.firebasestorage.app",
+  messagingSenderId: "341785387286",
+  appId: "1:341785387286:web:b83f82b03a370dfc893037"
+};
+const OWNER_EMAIL = 'srrgkenterprises@gmail.com';   // only this account may write
+const FIREBASE_DB_URL = FIREBASE_CONFIG.databaseURL; // kept so existing guards still pass
+const SHOP_ADMIN_PIN = '9945';   // retired (kept to avoid touching legacy pin code; never opened)
 const SHOP_LAT = 13.0038388;
 const SHOP_LNG = 77.6961625;
 const SHOP_RADIUS_M = 300;       // metres — marks Open if within this radius
@@ -5937,32 +5957,45 @@ var liveStatusData = null;       // {isOpen, note, updated} from Firebase/localS
 var gpsWatchId = null;
 var pinBuffer = '';
 var fbDatabase = null;
+var fbAuth = null;
+window.SVLB_CATALOG = [];         // public catalog cache (array), kept in sync from RTDB
 
 /* ═════════════════ FIREBASE INIT ═════════════════ */
 function loadFirebase(cb){
-  if(window.firebase && window.firebase.database){ cb(); return; }
-  var s1 = document.createElement('script');
-  s1.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';
-  s1.onload = function(){
-    var s2 = document.createElement('script');
-    s2.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js';
-    s2.onload = cb;
-    document.head.appendChild(s2);
-  };
-  document.head.appendChild(s1);
+  if(window.firebase && window.firebase.database && window.firebase.auth){ cb(); return; }
+  function add(src, next){ var s = document.createElement('script'); s.src = src; s.onload = next; document.head.appendChild(s); }
+  add('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js', function(){
+    add('https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js', function(){
+      add('https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js', cb);
+    });
+  });
 }
 
 function initFirebaseLive(){
   if(!FIREBASE_DB_URL) return;
+  if(fbDatabase) return;                 // already initialised — don't re-attach listeners
   loadFirebase(function(){
     try{
-      if(!firebase.apps.length){
-        firebase.initializeApp({ databaseURL: FIREBASE_DB_URL });
-      }
+      if(!firebase.apps.length){ firebase.initializeApp(FIREBASE_CONFIG); }
       fbDatabase = firebase.database();
+      fbAuth = firebase.auth();
+
+      /* Live shop status — every visitor's badge updates in real time */
       fbDatabase.ref('shopStatus').on('value', function(snap){
         var d = snap.val();
         if(d){ liveStatusData = d; applyLiveStatus(d); }
+      });
+
+      /* Live catalog — drives the public "In stock now" section (read is public per rules) */
+      fbDatabase.ref('catalog').on('value', function(snap){
+        var v = snap.val() || {};
+        window.SVLB_CATALOG = Object.keys(v).map(function(id){ var it = v[id] || {}; it.id = id; return it; });
+        if(typeof renderPublicStock === 'function') renderPublicStock();
+      }, function(err){ console.warn('Catalog read blocked — set the Firebase rules:', err && err.code); });
+
+      /* Owner login state drives the admin view */
+      fbAuth.onAuthStateChanged(function(user){
+        if(typeof svlbkOnAuth === 'function') svlbkOnAuth(user);
       });
     }catch(e){ console.warn('Firebase init error:', e); }
   });
@@ -6073,18 +6106,8 @@ function toggleGPS(){
 
 /* ═════════════════ ADMIN PANEL UI ═════════════════ */
 function openShopAdmin(){
-  var ov = document.getElementById('shopStatusOv');
-  ov.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  pinBuffer = '';
-  updatePinDots();
-  document.getElementById('pinError').style.display = 'none';
-  /* Hide Firebase setup instructions if configured */
-  var setup = document.getElementById('setupInstructions');
-  if(setup) setup.style.display = FIREBASE_DB_URL ? 'none' : 'block';
-  /* Hide control panel, show PIN screen */
-  document.getElementById('shopPinScreen').style.display = 'block';
-  document.getElementById('shopControlPanel').style.display = 'none';
+  /* PIN retired — shop status is now managed in the owner admin behind Firebase login. */
+  if(typeof openStockAdmin === 'function') openStockAdmin();
 }
 
 function closeShopAdmin(){
@@ -6407,6 +6430,346 @@ window.addEventListener('DOMContentLoaded', function(){
   const si = document.getElementById('srchInput');
   if(si && si.value){ doSearch(false); }
 });
+</script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     OWNER ADMIN  ·  stock + shop-status, behind Firebase login
+     Opens at ?admin=stock (or long-press the hours badge). Not in public nav.
+     ══════════════════════════════════════════════════════════════ -->
+<style>
+#svlbkAdmin{position:fixed;inset:0;z-index:3000;background:rgba(12,30,20,.55);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding:1.2rem 1rem;overflow-y:auto;font-family:'DM Sans',sans-serif}
+#svlbkAdmin .svlbk-sheet{position:relative;width:100%;max-width:640px;background:var(--card,#fff);border:1px solid var(--border,#BDD9CC);border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.25);padding:1.25rem 1.25rem 1.6rem;color:var(--text,#0C1E14)}
+.svlbk-x{position:absolute;top:.7rem;right:.7rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--muted,#4A7260);line-height:1;padding:.3rem}
+.svlbk-h{font-family:'Playfair Display',serif;font-size:1.4rem;margin:.1rem 2rem .2rem 0;color:var(--text)}
+.svlbk-sub{color:var(--muted);font-size:.88rem;margin:.2rem 0 1rem}
+#svlbkAdmin label{display:block;font-size:.74rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--saffron,#0A7A4E);margin:.7rem 0 .25rem}
+#svlbkAdmin input[type=text],#svlbkAdmin input[type=email],#svlbkAdmin input[type=password],#svlbkAdmin input[type=number],#svlbkAdmin textarea{width:100%;font:inherit;color:var(--text);padding:.55rem .65rem;border:1px solid var(--border,#BDD9CC);border-radius:9px;background:#fff;box-sizing:border-box}
+#svlbkAdmin textarea{min-height:2.6rem;resize:vertical}
+#svlbkAdmin :focus-visible{outline:3px solid var(--gold,#C8920A);outline-offset:2px}
+.svlbk-btn{font:inherit;font-weight:700;cursor:pointer;background:var(--saffron,#0A7A4E);color:#fff;border:none;border-radius:10px;padding:.6rem 1.1rem;margin-top:.8rem}
+.svlbk-btn:disabled{opacity:.6;cursor:default}
+.svlbk-btn-ghost{font:inherit;font-weight:700;cursor:pointer;background:transparent;color:var(--saffron,#0A7A4E);border:1px solid var(--saffron,#0A7A4E);border-radius:10px;padding:.5rem .95rem}
+.svlbk-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:.9rem}
+.svlbk-whoami{font-size:.85rem;color:var(--muted)}
+.svlbk-block{border-top:1px solid var(--border,#BDD9CC);margin-top:1.1rem;padding-top:.5rem}
+.svlbk-block h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin:.4rem 0}
+.svlbk-count{font-size:.85rem;color:var(--muted);font-weight:600}
+.svlbk-msg{display:none;margin:.55rem 0 0;padding:.55rem .75rem;border-radius:9px;font-size:.86rem;font-weight:600}
+.svlbk-msg.show{display:block}
+.svlbk-msg.ok{background:#E4F6EE;color:#065F46;border:1px solid #6EE7B7}
+.svlbk-msg.err{background:#FEF2F2;color:#991B1B;border:1px solid #FECACA}
+.svlbk-sign-area{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-top:.4rem}
+.svlbk-sign{min-width:8rem;text-align:center;padding:.55rem 1rem;border-radius:10px;font-family:'Playfair Display',serif;font-weight:800;letter-spacing:.05em;border:3px solid;transition:all .2s}
+.svlbk-sign.open{background:#E4F6EE;color:#065F46;border-color:#6EE7B7}
+.svlbk-sign.closed{background:#FEF2F2;color:#991B1B;border-color:#FECACA}
+.svlbk-toggle{display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;user-select:none;font-size:.9rem;color:var(--muted);margin:0}
+.svlbk-toggle input{position:absolute;opacity:0;width:0;height:0}
+.svlbk-track{width:46px;height:26px;border-radius:14px;background:#c9d6cf;position:relative;transition:background .18s;flex:0 0 auto}
+.svlbk-track::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .18s;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.svlbk-toggle input:checked + .svlbk-track{background:var(--saffron,#0A7A4E)}
+.svlbk-toggle input:checked + .svlbk-track::after{transform:translateX(20px)}
+.svlbk-toggle input:focus-visible + .svlbk-track{outline:3px solid var(--gold,#C8920A);outline-offset:2px}
+.svlbk-item{position:relative;border:1px solid var(--border,#BDD9CC);border-radius:11px;background:#fff;padding:.85rem .95rem .85rem 1.6rem;margin:.7rem 0;box-shadow:var(--shadow,0 2px 16px rgba(0,0,0,.08))}
+.svlbk-item::before{content:"";position:absolute;left:.85rem;top:.6rem;bottom:.6rem;width:3px;border-radius:3px;background:var(--gold,#C8920A);opacity:.7}
+.svlbk-item-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.svlbk-tag{font-size:.72rem;color:var(--muted);font-family:monospace}
+.svlbk-del{background:transparent;border:1px solid #FECACA;color:#991B1B;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;padding:.3rem .65rem}
+.svlbk-fields{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .7rem;margin-top:.2rem}
+.svlbk-full{grid-column:1/-1}
+.svlbk-hint{font-size:.72rem;color:var(--muted);margin:.15rem 0 0}
+.svlbk-stk-card .cbody{padding:.7rem .8rem}
+.svlbk-live-tag{font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--saffron,#0A7A4E);padding:.15rem .5rem;border-radius:20px;align-self:center}
+@media (max-width:560px){ .svlbk-fields{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ #svlbkAdmin *{transition:none !important;animation:none !important} }
+</style>
+
+<div id="svlbkAdmin" role="dialog" aria-modal="true" aria-label="Shop owner admin">
+  <div class="svlbk-sheet">
+    <button class="svlbk-x" type="button" onclick="closeStockAdmin()" aria-label="Close admin">✕</button>
+    <h2 class="svlbk-h">SVLB Owner Admin</h2>
+
+    <!-- LOGIN -->
+    <div id="svlbkLogin">
+      <p class="svlbk-sub">Sign in with the owner account to manage stock and the shop sign.</p>
+      <label for="svlbkEmail">Email</label>
+      <input id="svlbkEmail" type="email" autocomplete="username" placeholder="owner@email">
+      <label for="svlbkPass">Password</label>
+      <input id="svlbkPass" type="password" autocomplete="current-password" placeholder="password">
+      <div><button class="svlbk-btn" type="button" id="svlbkLoginBtn" onclick="svlbkLogin()">Sign in</button></div>
+      <div id="svlbkLoginMsg" class="svlbk-msg" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- PANEL (after login) -->
+    <div id="svlbkPanel" style="display:none">
+      <div class="svlbk-row svlbk-whoami">
+        <span id="svlbkWho"></span>
+        <button class="svlbk-btn-ghost" type="button" onclick="svlbkLogout()">Sign out</button>
+      </div>
+
+      <!-- shop sign -->
+      <section class="svlbk-block">
+        <h3>Shop sign</h3>
+        <div class="svlbk-sign-area">
+          <div class="svlbk-sign closed" id="svlbkSign">CLOSED</div>
+          <label class="svlbk-toggle"><input type="checkbox" id="svlbkOpen"><span class="svlbk-track"></span><span id="svlbkOpenLbl">Shop is closed</span></label>
+        </div>
+        <label for="svlbkNote">Note (optional)</label>
+        <input id="svlbkNote" type="text" placeholder="e.g. Back in 30 mins / Holiday today">
+        <div><button class="svlbk-btn" type="button" id="svlbkSaveStatusBtn" onclick="svlbkSaveStatus()">Save shop sign</button></div>
+        <div id="svlbkStatusMsg" class="svlbk-msg" role="status" aria-live="polite"></div>
+      </section>
+
+      <!-- catalog -->
+      <section class="svlbk-block">
+        <div class="svlbk-row"><h3>Catalog</h3><span class="svlbk-count" id="svlbkCount">0 items</span></div>
+        <div id="svlbkCatMsg" class="svlbk-msg" role="status" aria-live="polite"></div>
+        <div id="svlbkItems"></div>
+        <div class="svlbk-row">
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkAddItem()">+ Add item</button>
+          <button class="svlbk-btn" type="button" id="svlbkSaveCatBtn" onclick="svlbkSaveCatalog()" style="margin-top:0">Save catalog</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════ OWNER ADMIN + PUBLIC STOCK (Firebase RTDB) ═══════════ */
+function svlbkMsg(el,kind,txt){ if(!el)return; el.textContent=txt; el.className='svlbk-msg show '+kind; }
+function svlbkClear(el){ if(!el)return; el.textContent=''; el.className='svlbk-msg'; }
+function svlbkEl(id){ return document.getElementById(id); }
+
+/* ── Public "In stock now" section (read-only, no login) ── */
+function renderPublicStock(){
+  var grid = svlbkEl('liveStockGrid'), sec = svlbkEl('liveStockSection');
+  if(!grid || !sec) return;
+  var inStock = (window.SVLB_CATALOG || []).filter(function(it){ return it && it.in_stock; });
+  grid.innerHTML = '';
+  if(!inStock.length){ sec.style.display = 'none'; return; }
+  inStock.forEach(function(it){
+    var card = document.createElement('div'); card.className = 'pcard svlbk-stk-card';
+    var body = document.createElement('div'); body.className = 'cbody';
+    var nm = document.createElement('div'); nm.className = 'cname'; nm.textContent = it.name || it.id;
+    var ft = document.createElement('div'); ft.className = 'cfooter';
+    var pr = document.createElement('div');
+    var ps = document.createElement('span'); ps.className = 'cprice';
+    ps.textContent = (typeof it.price_inr === 'number') ? ('₹' + it.price_inr) : '';
+    pr.appendChild(ps);
+    if(it.unit){ pr.appendChild(document.createElement('br')); var u = document.createElement('small'); u.textContent = '/ ' + it.unit; pr.appendChild(u); }
+    var ask = document.createElement('button'); ask.className = 'add-btn'; ask.type = 'button'; ask.textContent = (typeof t==='function' ? (t('add')||'Ask') : 'Ask');
+    ask.addEventListener('click', function(){
+      var msg = 'Hi, is ' + (it.name || it.id) + ' available?';
+      window.open('https://wa.me/919945411489?text=' + encodeURIComponent(msg), '_blank');
+    });
+    ft.appendChild(pr); ft.appendChild(ask);
+    body.appendChild(nm); body.appendChild(ft); card.appendChild(body); grid.appendChild(card);
+  });
+  sec.style.display = '';
+}
+
+/* ── Open / close the admin overlay ── */
+function openStockAdmin(){
+  initFirebaseLive();
+  var ov = svlbkEl('svlbkAdmin');
+  if(!ov) return;
+  ov.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  if(fbAuth && fbAuth.currentUser){ svlbkShowPanel(fbAuth.currentUser); }
+  else { svlbkEl('svlbkLogin').style.display = ''; svlbkEl('svlbkPanel').style.display = 'none'; svlbkEl('svlbkEmail').focus(); }
+}
+function closeStockAdmin(){
+  var ov = svlbkEl('svlbkAdmin'); if(ov) ov.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+/* ── Auth ── */
+function svlbkLogin(){
+  var email = (svlbkEl('svlbkEmail').value || '').trim();
+  var pass  = svlbkEl('svlbkPass').value || '';
+  var m = svlbkEl('svlbkLoginMsg'); svlbkClear(m);
+  if(!email || !pass){ return svlbkMsg(m,'err','Enter your email and password.'); }
+  if(!fbAuth){ return svlbkMsg(m,'err','Still connecting to Firebase — wait a moment and try again.'); }
+  var btn = svlbkEl('svlbkLoginBtn'); btn.disabled = true;
+  svlbkMsg(m,'ok','Signing in…');
+  fbAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(function(){ return fbAuth.signInWithEmailAndPassword(email, pass); })
+    .then(function(){ svlbkClear(m); svlbkEl('svlbkPass').value = ''; })
+    .catch(function(err){
+      var c = (err && err.code) || '';
+      var txt = 'Could not sign in. Check your email and password.';
+      if(c === 'auth/invalid-email') txt = 'That email address is not valid.';
+      else if(c === 'auth/user-not-found' || c === 'auth/wrong-password' || c === 'auth/invalid-credential') txt = 'Wrong email or password.';
+      else if(c === 'auth/too-many-requests') txt = 'Too many attempts. Wait a minute, then try again.';
+      else if(c === 'auth/network-request-failed') txt = 'Network problem — check your connection.';
+      svlbkMsg(m,'err',txt);
+    })
+    .then(function(){ btn.disabled = false; });
+}
+function svlbkLogout(){ if(fbAuth) fbAuth.signOut(); }
+
+/* Called from onAuthStateChanged in initFirebaseLive */
+function svlbkOnAuth(user){
+  var ov = svlbkEl('svlbkAdmin'); if(!ov) return;
+  if(user && user.email === OWNER_EMAIL){
+    if(ov.style.display !== 'none') svlbkShowPanel(user);
+  } else if(user && user.email !== OWNER_EMAIL){
+    svlbkMsg(svlbkEl('svlbkLoginMsg'),'err','This account can’t manage the shop. Use the owner account.');
+    fbAuth.signOut();
+  } else {
+    svlbkEl('svlbkLogin').style.display = '';
+    svlbkEl('svlbkPanel').style.display = 'none';
+  }
+}
+function svlbkShowPanel(user){
+  svlbkEl('svlbkLogin').style.display = 'none';
+  svlbkEl('svlbkPanel').style.display = '';
+  svlbkEl('svlbkWho').textContent = 'Signed in as ' + user.email;
+  svlbkFillStatus(liveStatusData || {});
+  svlbkLoadCatalog();
+}
+
+/* ── Shop sign ── */
+function svlbkPaintSign(open){
+  var s = svlbkEl('svlbkSign'); if(!s) return;
+  s.textContent = open ? 'OPEN' : 'CLOSED';
+  s.className = 'svlbk-sign ' + (open ? 'open' : 'closed');
+  svlbkEl('svlbkOpenLbl').textContent = open ? 'Shop is open' : 'Shop is closed';
+}
+function svlbkFillStatus(d){
+  d = d || {};
+  svlbkEl('svlbkOpen').checked = !!d.isOpen;
+  svlbkPaintSign(!!d.isOpen);
+  svlbkEl('svlbkNote').value = d.note || '';
+}
+function svlbkSaveStatus(){
+  var m = svlbkEl('svlbkStatusMsg'); svlbkClear(m);
+  if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
+  var data = {
+    isOpen: svlbkEl('svlbkOpen').checked,
+    note: (svlbkEl('svlbkNote').value || '').trim(),
+    updated: new Date().toISOString(),
+    updatedBy: 'owner'
+  };
+  var btn = svlbkEl('svlbkSaveStatusBtn'); btn.disabled = true;
+  fbDatabase.ref('shopStatus').set(data)
+    .then(function(){ svlbkMsg(m,'ok', data.isOpen ? 'Saved — shop is Open.' : 'Saved — shop is Closed.'); })
+    .catch(function(err){ svlbkMsg(m,'err', svlbkWriteErr(err)); })
+    .then(function(){ btn.disabled = false; });
+}
+
+/* ── Catalog ── */
+document.getElementById('svlbkOpen') && document.getElementById('svlbkOpen').addEventListener('change', function(){ svlbkPaintSign(this.checked); });
+
+function svlbkField(labelText, type, value, opts){
+  opts = opts || {};
+  var w = document.createElement('div'); if(opts.full) w.className = 'svlbk-full';
+  var l = document.createElement('label'); l.textContent = labelText;
+  var inp = (type === 'textarea') ? document.createElement('textarea') : document.createElement('input');
+  if(type !== 'textarea') inp.type = type;
+  inp.value = (value == null ? '' : String(value));      // .value is injection-safe
+  if(opts.ph) inp.placeholder = opts.ph;
+  if(opts.inputmode) inp.setAttribute('inputmode', opts.inputmode);
+  w.appendChild(l); w.appendChild(inp);
+  if(opts.hint){ var h = document.createElement('p'); h.className = 'svlbk-hint'; h.textContent = opts.hint; w.appendChild(h); }
+  w._input = inp; return w;
+}
+function svlbkAddCard(item){
+  item = item || {};
+  var card = document.createElement('div'); card.className = 'svlbk-item';
+  var head = document.createElement('div'); head.className = 'svlbk-item-head';
+  var tag = document.createElement('span'); tag.className = 'svlbk-tag'; tag.textContent = item.id ? ('#' + item.id) : 'new item';
+  var del = document.createElement('button'); del.type = 'button'; del.className = 'svlbk-del'; del.textContent = 'Remove';
+  del.addEventListener('click', function(){ card.remove(); svlbkRefreshCount(); });
+  head.appendChild(tag); head.appendChild(del); card.appendChild(head);
+
+  var f = document.createElement('div'); f.className = 'svlbk-fields';
+  var fName = svlbkField('Name','text',item.name,{full:true,ph:'A4 Paper Ream'});
+  var fPrice = svlbkField('Price (₹)','number',(item.price_inr != null ? item.price_inr : ''),{inputmode:'decimal',ph:'0'});
+  var fCat = svlbkField('Category','text',item.category,{ph:'paper / pens / books …'});
+  var fUnit = svlbkField('Unit','text',item.unit,{ph:'piece / ream / box …'});
+  var fId = svlbkField('ID','text',item.id,{ph:'a4_paper'});
+  var sw = document.createElement('div');
+  var sl = document.createElement('label'); sl.textContent = 'In stock';
+  var tg = document.createElement('label'); tg.className = 'svlbk-toggle';
+  var cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = item.in_stock !== false;
+  var tk = document.createElement('span'); tk.className = 'svlbk-track';
+  var stt = document.createElement('span'); stt.textContent = cb.checked ? 'In stock' : 'Out of stock';
+  cb.addEventListener('change', function(){ stt.textContent = cb.checked ? 'In stock' : 'Out of stock'; });
+  tg.appendChild(cb); tg.appendChild(tk); tg.appendChild(stt);
+  sw.appendChild(sl); sw.appendChild(tg);
+  var fAli = svlbkField('Aliases','textarea',(item.aliases || []).join(', '),
+    {full:true,hint:'Comma-separated. Add Telugu, Kannada, Hindi & Tinglish names and common misspellings — this drives the assistant’s matching.'});
+
+  f.appendChild(fName); f.appendChild(fPrice); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(fAli);
+  card.appendChild(f);
+
+  card._read = function(){
+    var pr = fPrice._input.value.trim();
+    return {
+      id: fId._input.value.trim().toLowerCase(),
+      name: fName._input.value.trim(),
+      aliases: fAli._input.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean),
+      price_inr: pr === '' ? '' : Number(pr), priceRaw: pr,
+      in_stock: cb.checked, category: fCat._input.value.trim(), unit: fUnit._input.value.trim()
+    };
+  };
+  svlbkEl('svlbkItems').appendChild(card);
+  return card;
+}
+function svlbkAddItem(){ var c = svlbkAddCard({}); svlbkRefreshCount(); c.scrollIntoView({block:'nearest'}); }
+function svlbkRefreshCount(){
+  var n = document.querySelectorAll('#svlbkItems .svlbk-item').length;
+  var el = svlbkEl('svlbkCount'); if(el) el.textContent = n + (n === 1 ? ' item' : ' items');
+}
+function svlbkLoadCatalog(){
+  var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
+  if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
+  fbDatabase.ref('catalog').once('value').then(function(snap){
+    var v = snap.val() || {};
+    var arr = Object.keys(v).map(function(id){ var it = v[id] || {}; it.id = id; return it; });
+    arr.sort(function(a,b){ return (a.category||'').localeCompare(b.category||'') || (a.name||'').localeCompare(b.name||''); });
+    var box = svlbkEl('svlbkItems'); box.innerHTML = '';
+    arr.forEach(function(it){ svlbkAddCard(it); });
+    svlbkRefreshCount();
+    if(!arr.length) svlbkMsg(m,'ok','No items yet. Choose “+ Add item” to start.');
+  }).catch(function(err){ svlbkMsg(m,'err','Could not load catalog: ' + ((err&&err.code)||'error')); });
+}
+function svlbkWriteErr(err){
+  var c = (err && err.code) || '';
+  if(c === 'PERMISSION_DENIED') return 'Permission denied — sign in as the owner, and make sure the Firebase rules are set.';
+  return 'Could not save — ' + (c || 'try again') + '.';
+}
+function svlbkSaveCatalog(){
+  var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
+  if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
+  var cards = [].slice.call(document.querySelectorAll('#svlbkItems .svlbk-item'));
+  var rows = cards.map(function(c){ return c._read(); });
+  var seen = {};
+  for(var i = 0; i < rows.length; i++){
+    var r = rows[i], where = 'Item ' + (i + 1);
+    if(!r.id) return svlbkMsg(m,'err', where + ' needs an id.');
+    if(!/^[a-z0-9_]+$/.test(r.id)) return svlbkMsg(m,'err', 'The id “' + r.id + '” can use only lowercase letters, numbers and underscores.');
+    if(!r.name) return svlbkMsg(m,'err', where + ' (' + r.id + ') needs a name.');
+    if(r.priceRaw === '' || isNaN(r.price_inr)) return svlbkMsg(m,'err', where + ' (' + r.id + ') needs a numeric price.');
+    if(seen[r.id]) return svlbkMsg(m,'err', 'Two items share the id “' + r.id + '” — ids must be unique.');
+    seen[r.id] = true;
+  }
+  var stamp = new Date().toISOString();
+  var obj = {};
+  rows.forEach(function(r){
+    obj[r.id] = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:stamp };
+  });
+  var btn = svlbkEl('svlbkSaveCatBtn'); btn.disabled = true;
+  fbDatabase.ref('catalog').set(obj)
+    .then(function(){ svlbkMsg(m,'ok','Catalog saved — ' + rows.length + (rows.length === 1 ? ' item.' : ' items.')); })
+    .catch(function(err){ svlbkMsg(m,'err', svlbkWriteErr(err)); })
+    .then(function(){ btn.disabled = false; });
+}
+
+/* Open the admin when the URL says so */
+if(window.location.search.indexOf('admin=stock') !== -1){
+  window.addEventListener('load', function(){ setTimeout(openStockAdmin, 300); });
+}
 </script>
 
 </body>

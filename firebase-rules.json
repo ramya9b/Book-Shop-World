@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "catalog": {
+      ".read": true,
+      ".write": "auth !== null && auth.token.email === 'srrgkenterprises@gmail.com'"
+    },
+    "shopStatus": {
+      ".read": true,
+      ".write": "auth !== null && auth.token.email === 'srrgkenterprises@gmail.com'"
+    }
+  }
+}
