@@ -1,0 +1,5 @@
+# Dev/test files — kept in git, excluded from the public deploy.
+e2e
+qa-verify.js
+QA-VERIFICATION-PROMPT.md
+verify-owner-write.js
