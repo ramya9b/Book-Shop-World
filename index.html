@@ -6683,6 +6683,8 @@ function svlbkField(labelText, type, value, opts){
   var l = document.createElement('label'); l.textContent = labelText;
   var inp = (type === 'textarea') ? document.createElement('textarea') : document.createElement('input');
   if(type !== 'textarea') inp.type = type;
+  var fid = 'svlbkf_' + (svlbkField._n = (svlbkField._n || 0) + 1);  // associate label+input for a11y
+  inp.id = fid; l.setAttribute('for', fid);
   inp.value = (value == null ? '' : String(value));      // .value is injection-safe
   if(opts.ph) inp.placeholder = opts.ph;
   if(opts.inputmode) inp.setAttribute('inputmode', opts.inputmode);
