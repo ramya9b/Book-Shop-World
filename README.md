@@ -1,41 +1,43 @@
 # Sri Vara Lakshmi Balaji Enterprises
 
-## 📁 File Structure (IMPORTANT — keep this exact layout)
+Single-file HTML PWA for a stationery + services shop in KR Puram, Bengaluru.
+Stationery, Xerox, lamination, project work, rental agreements, LIC insurance,
+wellness coaching, WhatsApp ordering, a live shop-status badge, and an
+owner-managed stock catalog.
+
+**Live:** https://varalaxmibalajienterprises.vercel.app/
+
+## 📁 File structure (keep at repo ROOT)
 ```
-your-github-repo/
-├── index.html      ← Website (must be at ROOT, not inside any folder)
-├── vercel.json     ← Vercel config
+Book-Shop-World/
+├── index.html          ← the entire website (HTML + CSS + JS in one file)
+├── manifest.json       ← PWA manifest
+├── sw.js               ← service worker (offline caching)
+├── vercel.json         ← Vercel headers (sw.js no-cache, manifest content-type)
+├── sitemap.xml         ← SEO sitemap
+├── robots.txt          ← SEO
+├── apple-touch.png / favicon-32.png / shop-collage.png / shop-collage.jpg
+├── img/                ← shop photos & card images (extracted from the HTML)
+├── firebase-rules.json ← Realtime Database security rules (paste into console)
+├── svlb-catalog.json   ← reference catalog (schema + multilingual aliases)
+├── svlb-admin.html     ← standalone admin reference (Cloudflare Worker API)
+├── svlb-rtdb-seed.json ← import-ready seed for the Firebase Realtime Database
 └── .gitignore
 ```
 
----
+## 🚀 Deploy
+The GitHub repo is connected to Vercel — **pushing to `main` auto-deploys to production.**
+No build step (Framework Preset: Other, empty build/output).
 
-## 🚀 Deploy via GitHub → Vercel
+## 🗂️ Stock catalog & shop status (Firebase Realtime Database)
+- Project: `svlb-shop` (region `asia-southeast1`). Catalog node: `catalog` (keyed by id).
+  Shop status node: `shopStatus`.
+- **Owner admin:** open `/?admin=stock` and sign in with the owner account
+  (`srrgkenterprises@gmail.com`, Firebase Auth email/password). Add/edit/delete
+  items, toggle in-stock, set the shop sign.
+- **Security rules:** `firebase-rules.json` — catalog + status are public-read,
+  owner-write only. Paste into Firebase Console → Realtime Database → Rules → Publish.
+- In-stock items render live on the home page under "📦 In Stock Now".
 
-### Step 1 — Upload to GitHub
-1. Go to **https://github.com** → Sign in
-2. Click **"New repository"** → Name it (e.g. `svlb-shop`) → Create
-3. Click **"uploading an existing file"**
-4. Drag ALL files (`index.html`, `vercel.json`, `.gitignore`) into the upload area
-5. Click **"Commit changes"**
-
-### Step 2 — Connect to Vercel
-1. Go to **https://vercel.com** → Sign in with Google
-2. Click **"Add New Project"**
-3. Click **"Import Git Repository"**
-4. Select your GitHub repo → Click **"Import"**
-5. On the Configure page:
-   - Framework Preset: **Other**
-   - Root Directory: **`.`** (leave as default — dot means root)
-   - Build Command: *(leave empty)*
-   - Output Directory: *(leave empty)*
-6. Click **"Deploy"** ✅
-
-Your site will be live at: `https://svlb-shop.vercel.app`
-
----
-
-## 🎬 Add Videos After Deployment
-Visit: `https://your-site.vercel.app?admin=1`
-→ Admin panel appears at bottom-right
-→ Paste your YouTube links → Save
+## 🎬 Add promo videos
+Visit `https://varalaxmibalajienterprises.vercel.app/?admin=1` → paste YouTube links → Save.

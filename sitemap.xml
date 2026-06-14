@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- ── HOMEPAGE ── -->
+  <!-- Single-page app: language is in-page state, so one canonical URL. -->
   <url>
     <loc>https://varalaxmibalajienterprises.vercel.app/</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://varalaxmibalajienterprises.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="te" href="https://varalaxmibalajienterprises.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="kn" href="https://varalaxmibalajienterprises.vercel.app/"/>
   </url>
 
 </urlset>

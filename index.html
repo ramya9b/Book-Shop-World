@@ -2126,6 +2126,17 @@ footer strong { color: var(--saffron) !important; }
 
 /* ── GOLD ACCENT — selection highlight ── */
 ::selection { background: rgba(10,122,78,0.18); color: #0C1E14; }
+
+/* ── Accessibility enhancements ── */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible,[role="button"]:focus-visible{
+  outline:3px solid var(--gold,#C8920A);outline-offset:2px;border-radius:4px
+}
+/* Larger touch targets (~44px) for small controls */
+.lang-btn{min-height:44px;min-width:44px}
+.qbtn{min-width:44px;min-height:44px;width:auto;height:auto}
 </style>
 </head>
 <body>
@@ -2155,10 +2166,10 @@ footer strong { color: var(--saffron) !important; }
         <input type="text" id="srchInput" placeholder="Search products…" data-i18n-ph="search_ph" oninput="doSearch()" onkeydown="handleSearchKey(event)" autocomplete="off" spellcheck="false">
         <button id="srchClear" onclick="clearSearch()" aria-label="Clear search" style="display:none;align-items:center;justify-content:center;width:18px;height:18px;background:rgba(120,110,100,0.15);border:none;border-radius:50%;cursor:pointer;color:var(--muted);font-size:.7rem;flex-shrink:0;transition:background .2s;">✕</button>
       </div>
-      <div class="lang-sw">
-      <button class="lang-btn active" id="lbEN" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" id="lbTE" onclick="setLang('te')">తె</button>
-      <button class="lang-btn" id="lbKN" onclick="setLang('kn')">ಕ</button>
+      <div class="lang-sw" role="group" aria-label="Choose language">
+      <button class="lang-btn active" id="lbEN" onclick="setLang('en')" aria-label="English" aria-pressed="true" lang="en">EN</button>
+      <button class="lang-btn" id="lbTE" onclick="setLang('te')" aria-label="Telugu — తెలుగు" aria-pressed="false" lang="te">తె</button>
+      <button class="lang-btn" id="lbKN" onclick="setLang('kn')" aria-label="Kannada — ಕನ್ನಡ" aria-pressed="false" lang="kn">ಕ</button>
     </div>
     <button class="cart-btn" onclick="openCart()"><span data-i18n="cart_btn">🛒 Cart</span> <span class="cbadge2" id="cartCount">0</span></button>
     </div>
@@ -2227,7 +2238,7 @@ footer strong { color: var(--saffron) !important; }
         </div>
       </div>
       <div class="hero-shop-img-wrap">
-        <img src="img/p8438d98e64.jpg" alt="Sri Vara Lakshmi Balaji Enterprises Shop Interior" loading="lazy" class="hero-shop-img">
+        <img src="img/p8438d98e64.jpg" width="750" height="500" alt="Sri Vara Lakshmi Balaji Enterprises Shop Interior" loading="lazy" class="hero-shop-img">
         <div class="hero-shop-img-overlay">
           <span>All Stationery &amp; Daily Needs in One Place</span>
         </div>
@@ -2265,7 +2276,7 @@ footer strong { color: var(--saffron) !important; }
   <section class="about-section" aria-label="About the Store">
     <div class="about-inner">
       <div class="about-img-col">
-        <img src="img/p0a9033aafa.jpg" alt="Inside Sri Vara Lakshmi Balaji Enterprises – billing counter and lamination services" loading="lazy">
+        <img src="img/p0a9033aafa.jpg" width="333" height="500" alt="Inside Sri Vara Lakshmi Balaji Enterprises – billing counter and lamination services" loading="lazy">
       </div>
       <div class="about-text-col">
         <h3>Your Neighbourhood Stationery Hub 🏪</h3>
@@ -2283,15 +2294,15 @@ footer strong { color: var(--saffron) !important; }
     </div>
     <div class="gallery-grid">
       <div class="gallery-card" onclick="goShop('all')">
-        <img src="img/p78feca1165.jpg" alt="Stationery shelves stocked with notebooks, pens, and school supplies" loading="lazy">
+        <img src="img/p78feca1165.jpg" width="700" height="467" alt="Stationery shelves stocked with notebooks, pens, and school supplies" loading="lazy">
         <div class="gallery-card-label">📚 Stationery Shelves</div>
       </div>
       <div class="gallery-card" onclick="goShop('all')">
-        <img src="img/p78feca1165.jpg" alt="Craft materials, colour rolls, and art supplies" loading="lazy">
+        <img src="img/p78feca1165.jpg" width="700" height="467" alt="Craft materials, colour rolls, and art supplies" loading="lazy">
         <div class="gallery-card-label">🎨 Craft &amp; Art Supplies</div>
       </div>
       <div class="gallery-card" onclick="goShop('all')">
-        <img src="img/pbc2a0c8ba3.jpg" alt="Deep storage shelves with bulk stationery inventory" loading="lazy">
+        <img src="img/pbc2a0c8ba3.jpg" width="333" height="500" alt="Deep storage shelves with bulk stationery inventory" loading="lazy">
         <div class="gallery-card-label">📦 Wide Product Range</div>
       </div>
     </div>
@@ -2300,14 +2311,14 @@ footer strong { color: var(--saffron) !important; }
   <!-- ── BILLING + BULK STORAGE ── -->
   <div class="img-feature-row">
     <div class="img-feature-card">
-      <img src="img/p8438d98e64.jpg" alt="Shop overview – entrance and interior of Sri Vara Lakshmi Balaji Enterprises" loading="lazy">
+      <img src="img/p8438d98e64.jpg" width="750" height="500" alt="Shop overview – entrance and interior of Sri Vara Lakshmi Balaji Enterprises" loading="lazy">
       <div class="img-feature-caption">
         <span>🖨️</span>
         <div><strong>Fast Billing &amp; Digital Payment Available</strong><br>UPI, cash, and WhatsApp ordering supported</div>
       </div>
     </div>
     <div class="img-feature-card">
-      <img src="img/pda9f7a7ef6.jpg" alt="Large stock of stationery and supplies for bulk orders" loading="lazy">
+      <img src="img/pda9f7a7ef6.jpg" width="333" height="500" alt="Large stock of stationery and supplies for bulk orders" loading="lazy">
       <div class="img-feature-caption">
         <span>📦</span>
         <div><strong>Bulk Orders Available</strong><br>Schools, offices &amp; businesses welcome — contact us for quotes</div>
@@ -3867,7 +3878,7 @@ function setLang(lang){
   ['EN','TE','KN'].forEach((l,i)=>{
     const id = ['lbEN','lbTE','lbKN'][i];
     const el = document.getElementById(id);
-    if(el) el.classList.toggle('active', ['en','te','kn'][i]===lang);
+    if(el){ var _on=['en','te','kn'][i]===lang; el.classList.toggle('active', _on); el.setAttribute('aria-pressed', _on?'true':'false'); }
   });
   // Update static data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el=>{
@@ -3899,7 +3910,7 @@ function setLang(lang){
   // Re-apply lang button states
   ['lbEN','lbTE','lbKN'].forEach(function(id,i){
     var el=document.getElementById(id);
-    if(el) el.classList.toggle('active',['en','te','kn'][i]===lang);
+    if(el){ var _on2=['en','te','kn'][i]===lang; el.classList.toggle('active', _on2); el.setAttribute('aria-pressed', _on2?'true':'false'); }
   });
 }
 
