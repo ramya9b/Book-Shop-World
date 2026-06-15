@@ -120,7 +120,7 @@
 
 <nav>
   <div class="wrap nav">
-    <div class="brand">CareWell<small>Clinic &amp; Pharmacy</small></div>
+    <div class="brand" data-cz="brand"><span data-cz="name">CareWell</span><small>Clinic &amp; Pharmacy</small></div>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#why">Why Us</a>
@@ -130,10 +130,10 @@
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" id="czHero">
   <span class="tagpill">✚ Family Care · Open 7 Days</span>
   <h1>Quality care, close to <em>home</em></h1>
-  <p>Trusted doctors, an in-house pharmacy, and quick lab reports — all under one roof. Walk in or book your appointment on WhatsApp in seconds.</p>
+  <p data-cz="tagline">Trusted doctors, an in-house pharmacy, and quick lab reports — all under one roof. Walk in or book your appointment on WhatsApp in seconds.</p>
   <div class="hero-cta">
     <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+clinic+website+like+the+CareWell+demo" target="_blank" rel="noopener">📅 Book Appointment</a>
     <a class="btn btn-o" href="#services">Our Services</a>
@@ -238,7 +238,7 @@
 </section>
 
 <footer>
-  <div class="brand">CareWell Clinic &amp; Pharmacy</div>
+  <div class="brand" data-cz="name">CareWell Clinic &amp; Pharmacy</div>
   <div class="small">123 Main Road, Your City · Open 8am–9pm, 7 days · A demo website</div>
   <div class="small">© CareWell Clinic &amp; Pharmacy (sample). Not a real business.</div>
 </footer>
@@ -247,6 +247,103 @@
   <span>✨</span>
   <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
 </a>
+
+<!-- ════════ "MAKE IT YOURS" LIVE CUSTOMIZER (client-side preview, nothing uploaded) ════════ -->
+<style>
+  #czToggle{position:fixed;left:1rem;bottom:1rem;z-index:85;border:none;cursor:pointer;background:#111827;color:#fff;border-radius:40px;padding:.7rem 1.1rem;font-weight:700;font-size:.86rem;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+  #czToggle:hover{transform:translateY(-2px)}
+  .cz-panel{position:fixed;left:1rem;bottom:1rem;z-index:90;width:320px;max-width:calc(100vw - 2rem);max-height:85vh;overflow-y:auto;background:#fff;border:1px solid #E5E7EB;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:1.1rem 1.2rem 1.3rem;display:none;font-family:'Inter',sans-serif}
+  .cz-panel.open{display:block}
+  .cz-head{display:flex;align-items:center;justify-content:space-between}
+  .cz-head strong{font-size:1.05rem}
+  .cz-x{border:none;background:none;cursor:pointer;font-size:1.1rem;color:#6B7280;line-height:1}
+  .cz-hint{font-size:.76rem;color:#6B7280;margin:.3rem 0 .8rem}
+  .cz-lbl{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#374151;margin:.8rem 0 .3rem}
+  .cz-in,.cz-file{width:100%;font:inherit;font-size:.9rem;padding:.5rem .6rem;border:1px solid #D1D5DB;border-radius:9px;background:#fff}
+  .cz-swatches{display:flex;gap:.5rem;flex-wrap:wrap}
+  .cz-sw{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px #D1D5DB}
+  .cz-sw:hover{transform:scale(1.1)}
+  .cz-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem;font-size:.82rem;color:#6B7280}
+  .cz-row input[type=color]{width:38px;height:30px;border:1px solid #D1D5DB;border-radius:7px;background:#fff;cursor:pointer;padding:2px}
+  .cz-actions{display:flex;gap:.6rem;margin-top:1rem}
+  .cz-btn{display:block;text-align:center;background:#0A7A4E;color:#fff;font-weight:700;border-radius:10px;padding:.65rem;font-size:.88rem;border:none;cursor:pointer}
+  .cz-btn-ghost{flex:1;text-align:center;background:transparent;border:1px solid #D1D5DB;color:#374151;font-weight:700;border-radius:10px;padding:.55rem;cursor:pointer;font-size:.82rem}
+  #czToggle:focus-visible,.cz-panel :focus-visible{outline:3px solid var(--gold,#C8920A);outline-offset:2px}
+  /* when a cover photo is set, make hero text readable over it */
+  .has-photo::before{display:none}
+  .has-photo h1,.has-photo p,.has-photo .hero-strip,.has-photo .hero-strip b{color:#fff !important}
+  .has-photo .tagpill{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35);color:#fff}
+  @media(prefers-reduced-motion:reduce){#czToggle,.cz-sw{transition:none}}
+</style>
+
+<button id="czToggle" type="button" onclick="czOpen()">✏️ Make it yours</button>
+<div id="czPanel" class="cz-panel" role="dialog" aria-label="Customize this website demo">
+  <div class="cz-head"><strong>✨ Make it yours</strong><button class="cz-x" type="button" onclick="czClose()" aria-label="Close">✕</button></div>
+  <p class="cz-hint">Type your details to preview your own site. Nothing is uploaded — this stays private on your device.</p>
+
+  <label class="cz-lbl" for="czName">Business name</label>
+  <input id="czName" class="cz-in" type="text" placeholder="e.g. Anna's Kitchen" oninput="czSetText('name',this.value,'Spice Garden')">
+
+  <label class="cz-lbl" for="czTag">Tagline</label>
+  <input id="czTag" class="cz-in" type="text" placeholder="Your short tagline" oninput="czSetText('tagline',this.value,CZ_DEF.tag)">
+
+  <label class="cz-lbl">Colour theme</label>
+  <div class="cz-swatches" id="czSwatches"></div>
+  <div class="cz-row"><input id="czColor" type="color" value="#0A7A4E" oninput="czColorPick(this.value)"><span>or pick your own colour</span></div>
+
+  <label class="cz-lbl" for="czLogoIn">Logo (optional)</label>
+  <input id="czLogoIn" class="cz-file" type="file" accept="image/*" onchange="czLogo(event)">
+
+  <label class="cz-lbl" for="czPhoto">Cover photo (optional)</label>
+  <input id="czPhoto" class="cz-file" type="file" accept="image/*" onchange="czPhoto(event)">
+
+  <div class="cz-actions">
+    <button class="cz-btn-ghost" type="button" onclick="czReset()">Reset</button>
+    <button class="cz-btn-ghost" type="button" id="czCopy" onclick="czCopyLink()">🔗 Copy link</button>
+  </div>
+  <a class="cz-btn" id="czWA" href="#" target="_blank" rel="noopener" style="margin-top:.6rem">📲 Get my website</a>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, cs=getComputedStyle(root);
+  function gv(n){ return (cs.getPropertyValue(n)||'').trim(); }
+  var nameEl=document.querySelector('[data-cz="name"]'), tagEl=document.querySelector('[data-cz="tagline"]');
+  window.CZ_DEF = {
+    name: nameEl ? nameEl.textContent : 'Your Business',
+    tag:  tagEl ? tagEl.textContent : '',
+    primary: gv('--primary') || '#0A7A4E',
+    gold: gv('--gold') || gv('--accent') || '#C8920A'
+  };
+  var PRESETS = [['#C2410C','#CA8A04'],['#BE185D','#B45309'],['#0E7490','#0891B2'],['#4F46E5','#F59E0B'],['#0F766E','#F59E0B'],['#9D174D','#C99A2E'],['#1F2937','#F97316'],['#2563EB','#FACC15']];
+  var sw=document.getElementById('czSwatches');
+  PRESETS.forEach(function(p){
+    var b=document.createElement('button');
+    b.type='button'; b.className='cz-sw'; b.style.background=p[0]; b.setAttribute('aria-label','Theme colour');
+    b.onclick=function(){ czApplyColor(p[0],p[1]); if(/^#[0-9a-f]{6}$/i.test(p[0])) document.getElementById('czColor').value=p[0]; };
+    sw.appendChild(b);
+  });
+  if(/^#[0-9a-f]{6}$/i.test(CZ_DEF.primary)) document.getElementById('czColor').value=CZ_DEF.primary;
+  var q=new URLSearchParams(location.search), nm=q.get('name'), tg=q.get('tag'), c=q.get('c');
+  if(nm){ document.getElementById('czName').value=nm; czSetText('name',nm,CZ_DEF.name); }
+  if(tg){ document.getElementById('czTag').value=tg; czSetText('tagline',tg,CZ_DEF.tag); }
+  if(c && /^[0-9a-fA-F]{6}$/.test(c)){ czApplyColor('#'+c); document.getElementById('czColor').value='#'+c; }
+  czUpdateWA(nm||'');
+})();
+
+function czOpen(){ document.getElementById('czPanel').classList.add('open'); document.getElementById('czToggle').style.display='none'; document.getElementById('czName').focus(); }
+function czClose(){ document.getElementById('czPanel').classList.remove('open'); document.getElementById('czToggle').style.display=''; }
+function czSetText(key, val, fallback){ var t=(val||'').trim() || fallback; document.querySelectorAll('[data-cz="'+key+'"]').forEach(function(el){ el.textContent=t; }); if(key==='name') czUpdateWA((val||'').trim()); }
+function darken(hex,f){ hex=hex.replace('#',''); if(hex.length!==6) return '#'+hex; var n=parseInt(hex,16),r=Math.round(((n>>16)&255)*f),g=Math.round(((n>>8)&255)*f),b=Math.round((n&255)*f); return '#'+[r,g,b].map(function(x){return ('0'+x.toString(16)).slice(-2);}).join(''); }
+function czApplyColor(primary, gold){ var r=document.documentElement; r.style.setProperty('--primary',primary); r.style.setProperty('--primary-d',darken(primary,.8)); if(gold){ r.style.setProperty('--gold',gold); r.style.setProperty('--accent',gold); } }
+function czColorPick(v){ czApplyColor(v); }
+function czHeroEl(){ return document.getElementById('czHero') || document.querySelector('[data-cz-hero]') || document.querySelector('header'); }
+function czPhoto(e){ var f=e.target.files&&e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(ev){ var h=czHeroEl(); if(!h) return; h.style.backgroundImage='linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('+ev.target.result+')'; h.style.backgroundSize='cover'; h.style.backgroundPosition='center'; h.classList.add('has-photo'); }; rd.readAsDataURL(f); }
+function czLogo(e){ var f=e.target.files&&e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(ev){ var brand=document.querySelector('[data-cz="brand"]'); if(!brand) return; var img=document.getElementById('czLogoImg'); if(!img){ img=document.createElement('img'); img.id='czLogoImg'; img.alt='logo'; img.style.cssText='height:30px;width:auto;border-radius:6px;flex:0 0 auto'; brand.insertBefore(img,brand.firstChild); brand.style.display='flex'; brand.style.alignItems='center'; brand.style.gap='.5rem'; } img.src=ev.target.result; }; rd.readAsDataURL(f); }
+function czUpdateWA(name){ var msg='Hi, I want a website for my business'+(name?' "'+name+'"':'')+' — I tried it on your demo and love it!'; document.getElementById('czWA').href='https://wa.me/919945411489?text='+encodeURIComponent(msg); }
+function czCopyLink(){ var n=document.getElementById('czName').value.trim(), t=document.getElementById('czTag').value.trim(), c=(document.getElementById('czColor').value||'').replace('#',''); var p=new URLSearchParams(); if(n)p.set('name',n); if(t)p.set('tag',t); if(c)p.set('c',c); var url=location.origin+location.pathname+(p.toString()?'?'+p.toString():''); var btn=document.getElementById('czCopy'); function done(){ var o=btn.textContent; btn.textContent='✓ Copied!'; setTimeout(function(){btn.textContent=o;},1500); } if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(done,function(){window.prompt('Copy this link:',url);}); } else { window.prompt('Copy this link:',url); } }
+function czReset(){ czSetText('name','',CZ_DEF.name); czSetText('tagline','',CZ_DEF.tag); czApplyColor(CZ_DEF.primary,CZ_DEF.gold); document.getElementById('czName').value=''; document.getElementById('czTag').value=''; if(/^#[0-9a-f]{6}$/i.test(CZ_DEF.primary)) document.getElementById('czColor').value=CZ_DEF.primary; document.getElementById('czPhoto').value=''; document.getElementById('czLogoIn').value=''; var h=czHeroEl(); if(h){ h.style.backgroundImage=''; h.classList.remove('has-photo'); } var lg=document.getElementById('czLogoImg'); if(lg) lg.remove(); czUpdateWA(''); }
+</script>
 
 </body>
 </html>
