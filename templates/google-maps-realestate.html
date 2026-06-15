@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Maps Promotion for Real Estate Agents · Rank Higher on Maps — Demo</title>
+<meta name="description" content="Demo showing how your real estate agency can rank at the top of Google Maps for nearby searches like 'real estate agent near me'. Google Maps promotion by SVLB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1F3F4; --card:#FFFFFF; --ink:#202124; --muted:#5F6368;
+    --blue:#1A73E8; --blue-d:#1664C9; --gold:#FBBC04; --green:#188038;
+    --line:#E0E3E6; --shadow:0 4px 18px rgba(60,64,67,.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter','Roboto',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3{font-family:'Roboto','Inter',sans-serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.85rem 1.6rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(26,115,232,.32)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-wa{background:#25D366;color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:4rem 1.2rem 3.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(26,115,232,.12),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(24,128,56,.10),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--blue);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.1;margin:1.1rem 0 .6rem;font-weight:700}
+  .hero h1 em{color:var(--blue);font-style:normal}
+  .hero p{max-width:580px;margin:0 auto 1.6rem;color:var(--muted);font-size:1.05rem}
+
+  section{padding:3.5rem 0}
+  .sec-head{text-align:center;max-width:660px;margin:0 auto 2.4rem}
+  .sec-head .eyebrow{color:var(--blue);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.6rem,4vw,2.4rem);margin:.4rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* ===== CENTREPIECE: maps mockup ===== */
+  .maps{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .maps-mock{display:grid;grid-template-columns:1fr 1.2fr;gap:1.4rem;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  @media(max-width:820px){.maps-mock{grid-template-columns:1fr}}
+
+  /* LEFT results panel */
+  .results{padding:1rem 1rem 1.2rem;display:flex;flex-direction:column;gap:.75rem;min-width:0}
+  .searchbar{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:30px;padding:.6rem 1rem;box-shadow:0 1px 4px rgba(60,64,67,.12)}
+  .searchbar .mag{color:var(--blue);font-weight:700}
+  .searchbar input{flex:1;border:none;outline:none;font:inherit;font-size:.95rem;color:var(--ink);background:transparent;min-width:0}
+  .searchbar .mic{color:var(--muted)}
+
+  .rcard{border:1px solid var(--line);border-radius:14px;padding:.85rem 1rem;background:#fff}
+  .rcard .rtop{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem}
+  .rname{font-weight:700;font-size:1.02rem;font-family:'Roboto',sans-serif}
+  .topbadge{flex:0 0 auto;background:#E6F4EA;color:var(--green);font-weight:700;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;padding:.22rem .6rem;border-radius:20px;border:1px solid #B7E1C2}
+  .rmeta{font-size:.86rem;color:var(--muted);margin-top:.15rem}
+  .rmeta .stars{color:var(--gold);letter-spacing:1px;font-weight:700}
+  .rmeta .rating{color:var(--ink);font-weight:700}
+  .ropen{color:var(--green);font-weight:600}
+  .raddr{font-size:.82rem;color:var(--muted);margin-top:.3rem;display:flex;align-items:center;gap:.35rem}
+  .racts{display:flex;gap:.6rem;margin-top:.7rem}
+  .ract{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--blue);color:var(--blue);font-weight:700;font-size:.8rem;border-radius:30px;padding:.35rem .9rem;background:#fff}
+  .ract:hover{background:#E8F0FE}
+
+  .rcard.featured{border:2px solid var(--blue);box-shadow:0 6px 20px rgba(26,115,232,.18);background:linear-gradient(#fff,#F7FAFF)}
+  .rcard.dim{opacity:.62}
+  .rcard.dim .rname{font-weight:600}
+
+  /* RIGHT stylized CSS map */
+  .map{position:relative;min-height:420px;background:linear-gradient(135deg,#EAF0F8,#E8EEE6);overflow:hidden}
+  @media(max-width:820px){.map{min-height:300px}}
+  .road{position:absolute;background:#fff;box-shadow:0 0 0 1px #D8DCE0}
+  .road.h{height:14px;left:-5%;width:110%}
+  .road.v{width:14px;top:-5%;height:110%}
+  .road.diag{height:12px;width:150%;left:-25%;top:55%;transform:rotate(-24deg);transform-origin:center}
+  .road.minor{background:#F4F6F8;box-shadow:0 0 0 1px #E2E6EA}
+  .park{position:absolute;background:radial-gradient(circle at 40% 35%,#A7D6A0,#8FC98A);border-radius:46% 54% 60% 40%/50% 42% 58% 50%;filter:saturate(1.05)}
+  .water{position:absolute;background:linear-gradient(135deg,#9CC4F0,#7FB1EC);border-radius:50% 40% 55% 45%/45% 55% 45% 55%}
+  .pin{position:absolute;transform:translate(-50%,-100%);text-align:center;z-index:3}
+  .pin .label{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:.12rem .5rem;font-size:.74rem;font-weight:700;color:var(--ink);box-shadow:0 2px 6px rgba(60,64,67,.22);white-space:nowrap;margin-bottom:1px}
+  .pin .dot{font-size:1.9rem;line-height:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+  .pin.big .dot{font-size:2.6rem}
+  .pin.small .dot{font-size:1.3rem;opacity:.7}
+  .youhere{position:absolute;z-index:4;transform:translate(-50%,-50%)}
+  .youhere .you-dot{width:16px;height:16px;border-radius:50%;background:#1A73E8;border:3px solid #fff;box-shadow:0 0 0 6px rgba(26,115,232,.25),0 2px 6px rgba(0,0,0,.3)}
+  .youhere .you-lbl{position:absolute;left:22px;top:-2px;background:#1A73E8;color:#fff;font-size:.66rem;font-weight:700;padding:.1rem .45rem;border-radius:6px;white-space:nowrap}
+  .map-cred{position:absolute;left:8px;bottom:6px;font-size:.62rem;color:#5F6368;background:rgba(255,255,255,.7);padding:.1rem .4rem;border-radius:5px;z-index:5}
+
+  /* features */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  @media(max-width:820px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.feat-grid{grid-template-columns:1fr}}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.4rem;box-shadow:var(--shadow)}
+  .feat .ic{font-size:2rem}
+  .feat h3{font-size:1.08rem;margin:.5rem 0 .3rem}
+  .feat p{color:var(--muted);font-size:.92rem}
+
+  /* CTA */
+  .cta{background:linear-gradient(135deg,#1A73E8,#1664C9);color:#fff;text-align:center}
+  .cta h2{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:.6rem}
+  .cta p{color:rgba(255,255,255,.9);max-width:520px;margin:0 auto 1.6rem}
+
+  footer{background:var(--ink);color:#C9CCD1;text-align:center;padding:2.6rem 1.2rem 2rem}
+  footer .small{color:#9AA0A6;font-size:.82rem;margin-top:.5rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">📍 This is a sample showing how your real estate agency can rank on Google Maps for nearby searches.</div>
+
+<header class="hero">
+  <span class="tagpill">📍 Google Maps Promotion</span>
+  <h1>Rank higher on Google Maps — <em>get found by nearby buyers</em></h1>
+  <p>When people nearby search "real estate agent near me", your agency shows up at the top — with photos, ratings, calls and directions. Here's exactly how it looks.</p>
+  <a class="btn btn-p" href="#mock">See the demo ↓</a>
+</header>
+
+<section class="maps" id="mock">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Live-style preview</div>
+      <h2>Your agency, ranked #1 on the map</h2>
+      <p>A mockup of a Google Maps search for "real estate agent near me" — your listing on top, competitors below.</p>
+    </div>
+
+    <div class="maps-mock">
+      <!-- LEFT: results panel -->
+      <div class="results">
+        <div class="searchbar">
+          <span class="mag">🔍</span>
+          <input type="text" value="real estate agent near me" aria-label="Search Google Maps" readonly>
+          <span class="mic">🎙️</span>
+        </div>
+
+        <!-- featured / sample agency -->
+        <div class="rcard featured">
+          <div class="rtop">
+            <div>
+              <div class="rname">Prime Nest Properties</div>
+              <div class="rmeta"><span class="rating">4.6</span> <span class="stars">★★★★★</span> (175) · Real estate agency</div>
+              <div class="rmeta"><span class="ropen">Open</span> ⋅ Closes 7 PM</div>
+            </div>
+            <span class="topbadge">★ Top result</span>
+          </div>
+          <div class="raddr">📍 12 Crown Plaza, near City Centre · 500 m</div>
+          <div class="racts">
+            <a class="ract" href="#mock">📞 Call</a>
+            <a class="ract" href="#mock">🧭 Directions</a>
+          </div>
+        </div>
+
+        <!-- competitors (dimmer) -->
+        <div class="rcard dim">
+          <div class="rtop">
+            <div>
+              <div class="rname">Skyline Realty &amp; Estates</div>
+              <div class="rmeta"><span class="rating">4.0</span> <span class="stars">★★★★☆</span> (92) · Real estate agency</div>
+              <div class="rmeta"><span class="ropen">Open</span> ⋅ Closes 6:30 PM</div>
+            </div>
+          </div>
+          <div class="raddr">📍 Station Road · 1.4 km</div>
+        </div>
+
+        <div class="rcard dim">
+          <div class="rtop">
+            <div>
+              <div class="rname">Greenfield Property Consultants</div>
+              <div class="rmeta"><span class="rating">3.8</span> <span class="stars">★★★★☆</span> (57) · Real estate agency</div>
+              <div class="rmeta"><span class="ropen">Open</span> ⋅ Closes 7 PM</div>
+            </div>
+          </div>
+          <div class="raddr">📍 Lake View Layout · 2.0 km</div>
+        </div>
+
+        <div class="rcard dim">
+          <div class="rtop">
+            <div>
+              <div class="rname">Metro Homes &amp; Plots</div>
+              <div class="rmeta"><span class="rating">3.5</span> <span class="stars">★★★☆☆</span> (40) · Real estate agency</div>
+              <div class="rmeta"><span class="ropen">Open</span> ⋅ Closes 6 PM</div>
+            </div>
+          </div>
+          <div class="raddr">📍 MG Road · 2.7 km</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: stylized CSS map -->
+      <div class="map" role="img" aria-label="Stylized map showing Prime Nest Properties pinned prominently among nearby competitors">
+        <!-- roads -->
+        <div class="road h" style="top:30%"></div>
+        <div class="road h minor" style="top:70%"></div>
+        <div class="road v" style="left:38%"></div>
+        <div class="road v minor" style="left:74%"></div>
+        <div class="road diag"></div>
+        <!-- park -->
+        <div class="park" style="left:46%;top:8%;width:140px;height:120px"></div>
+        <!-- water -->
+        <div class="water" style="left:4%;bottom:6%;width:150px;height:110px"></div>
+
+        <!-- you are here -->
+        <div class="youhere" style="left:30%;top:62%">
+          <div class="you-dot"></div>
+          <span class="you-lbl">You are here</span>
+        </div>
+
+        <!-- competitor pins -->
+        <div class="pin small" style="left:80%;top:26%"><span class="dot">📍</span></div>
+        <div class="pin small" style="left:18%;top:30%"><span class="dot">📍</span></div>
+        <div class="pin small" style="left:66%;top:80%"><span class="dot">📍</span></div>
+
+        <!-- featured agency pin -->
+        <div class="pin big" style="left:52%;top:50%">
+          <span class="label">Prime Nest</span><br>
+          <span class="dot">📍</span>
+        </div>
+
+        <span class="map-cred">Sample map · illustration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head">
+    <div class="eyebrow">What you get</div>
+    <h2>Everything that pushes your agency to the top</h2>
+    <p>A complete Google Maps presence, optimised so nearby buyers and sellers find your agency first.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat"><div class="ic">📍</div><h3>Rank for 'real estate agent near me'</h3><p>Show up when nearby buyers and sellers search for an agent.</p></div>
+    <div class="feat"><div class="ic">🏠</div><h3>More leads &amp; enquiries</h3><p>One-tap Call and Directions bring clients straight to your office.</p></div>
+    <div class="feat"><div class="ic">⭐</div><h3>More reviews = higher rank</h3><p>We help you collect genuine client reviews that lift your position.</p></div>
+    <div class="feat"><div class="ic">🗺️</div><h3>Optimised agency listing</h3><p>Photos, services, hours and category done right and complete.</p></div>
+    <div class="feat"><div class="ic">🧭</div><h3>Accurate directions</h3><p>Correct pin and address so clients never get lost.</p></div>
+    <div class="feat"><div class="ic">📈</div><h3>Track performance</h3><p>See searches, calls and direction requests every month.</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Get more clients from Google Maps</h2>
+    <p>Let's put your real estate agency at the top of the map for searches near you. Tap below and we'll get started.</p>
+    <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+Google+Maps+promotion+for+my+business" target="_blank" rel="noopener">📲 Get Google Maps Promotion</a>
+  </div>
+</section>
+
+<footer>
+  <div class="small">📍 Google Maps Promotion — a sample by SVLB (Sri Vara Lakshmi Balaji Enterprises)</div>
+  <div class="small">"Prime Nest Properties" and all ratings shown are illustrative. Not a real listing.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>
