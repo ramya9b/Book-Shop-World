@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant & Food Offer Posters — Sample Designs by SVLB</title>
+<meta name="description" content="Sample restaurant and food offer poster designs by Sri Vara Lakshmi Balaji Enterprises — Combo Meals, Weekend B1G1, Family Packs, Happy Hours, Free Delivery and New Dish alerts. Custom posters for WhatsApp, Instagram & Facebook with your restaurant name, colours and offer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F8FC; --card:#FFFFFF; --ink:#1B2030; --muted:#6B7280;
+    --primary:#0A7A4E; --gold:#CA8A04; --line:#E7E9F2;
+    --shadow:0 14px 40px rgba(20,24,45,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.9rem 1.7rem;cursor:pointer;border:none;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn-wa{background:#0A7A4E;color:#fff;box-shadow:0 10px 26px rgba(10,122,78,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* demo note */
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:4rem 1.2rem 2.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(202,138,4,.14),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(10,122,78,.12),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:1.1rem 0 .7rem;font-weight:900}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.08rem}
+
+  /* poster grid */
+  .posters{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:1rem 0 1.5rem}
+  @media(max-width:900px){.posters{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.posters{grid-template-columns:1fr}}
+
+  .poster{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.5rem 1.3rem;color:#fff;text-align:center;font-family:'Poppins',sans-serif}
+  .poster::after{content:"";position:absolute;inset:0;pointer-events:none}
+  .poster *{position:relative;z-index:2}
+  .p-top{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;opacity:.92}
+  .p-mid{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .p-emoji{font-size:2.6rem;line-height:1}
+  .p-title{font-family:'Playfair Display',serif;font-weight:900;line-height:1.05;font-size:clamp(1.4rem,3vw,1.8rem);text-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .p-sub{font-size:.9rem;font-weight:600;opacity:.95}
+  .p-badge{display:inline-block;font-weight:800;font-size:.85rem;padding:.45rem 1rem;border-radius:30px;letter-spacing:.5px}
+  .p-foot{font-size:.66rem;font-weight:600;letter-spacing:1px;opacity:.9;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.3);padding-top:.6rem}
+  .p-biz{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px}
+  .p-big{font-family:'Poppins',sans-serif;font-weight:900;line-height:.9;color:#fff;text-shadow:0 4px 16px rgba(0,0,0,.35)}
+
+  /* 1 Combo Meal — warm spicy red & saffron */
+  .p-combo{background:linear-gradient(160deg,#7A1F0F 0%,#C2410C 42%,#EA580C 78%,#F59E0B 100%)}
+  .p-combo::after{background:radial-gradient(circle at 20% 18%,rgba(255,224,130,.4),transparent 24%),radial-gradient(circle at 82% 26%,rgba(255,255,255,.28),transparent 20%),radial-gradient(circle at 50% 86%,rgba(252,211,77,.35),transparent 30%)}
+  .p-combo .p-big{font-size:clamp(2.4rem,7vw,3.4rem);color:#FFE9B8}
+  .p-combo .p-title{color:#FFF7ED}
+  .p-combo .p-badge{background:linear-gradient(135deg,#FCD34D,#CA8A04);color:#5A1607}
+  .p-combo .p-biz{color:#FFE9B8}
+  /* 2 Weekend Special B1G1 — vibrant cheesy tomato & teal */
+  .p-weekend{background:linear-gradient(150deg,#9D174D 0%,#DB2777 40%,#F97316 76%,#FBBF24 100%)}
+  .p-weekend::after{background:radial-gradient(circle at 18% 22%,rgba(255,255,255,.4),transparent 22%),radial-gradient(circle at 84% 28%,rgba(255,255,150,.4),transparent 20%),radial-gradient(circle at 32% 84%,rgba(120,255,220,.36),transparent 22%)}
+  .p-weekend .p-big{font-size:clamp(2.6rem,8vw,3.8rem);color:#fff}
+  .p-weekend .p-badge{background:#fff;color:#9D174D;text-transform:uppercase}
+  /* 3 Family Pack — cosy green & gold */
+  .p-family{background:linear-gradient(160deg,#14532D 0%,#166534 42%,#15803D 76%,#CA8A04 100%)}
+  .p-family::after{background:radial-gradient(circle at 78% 20%,rgba(250,204,21,.36),transparent 26%),radial-gradient(circle at 20% 80%,rgba(212,175,55,.3),transparent 30%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.06),transparent 60%)}
+  .p-family .p-title{color:#FCE9A8}
+  .p-family .p-badge{background:linear-gradient(135deg,#F5D78A,#CA8A04);color:#14532D}
+  .p-family .p-biz{color:#FCE9A8}
+  /* 4 Happy Hours — coffee brown & cream */
+  .p-happy{background:linear-gradient(160deg,#3B2415 0%,#6B4423 44%,#92400E 78%,#C2811C 100%)}
+  .p-happy::after{background:radial-gradient(circle at 24% 22%,rgba(255,237,213,.32),transparent 26%),radial-gradient(circle at 80% 78%,rgba(252,211,77,.3),transparent 30%)}
+  .p-happy .p-title{color:#FFEDD5}
+  .p-happy .p-badge{background:#FFEDD5;color:#5A3315}
+  .p-happy .p-biz{color:#FFEDD5}
+  /* 5 Free Delivery — fresh blue & lime */
+  .p-delivery{background:linear-gradient(160deg,#0C4A6E 0%,#0369A1 44%,#0891B2 76%,#65A30D 100%)}
+  .p-delivery::after{background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.3),transparent 22%),radial-gradient(circle at 82% 70%,rgba(190,242,100,.4),transparent 28%)}
+  .p-delivery .p-title{color:#ECFEFF}
+  .p-delivery .p-badge{background:#BEF264;color:#1A2E05;text-transform:uppercase}
+  .p-delivery .p-biz{color:#ECFEFF}
+  /* 6 New Dish — rich purple & saffron */
+  .p-newdish{background:linear-gradient(155deg,#4C1D95 0%,#6D28D9 40%,#9333EA 72%,#F59E0B 100%)}
+  .p-newdish::after{background:radial-gradient(circle at 16% 18%,rgba(252,211,77,.4),transparent 22%),radial-gradient(circle at 84% 24%,rgba(255,255,255,.34),transparent 18%),radial-gradient(circle at 50% 86%,rgba(236,72,153,.34),transparent 28%)}
+  .p-newdish .p-title{color:#FDE68A}
+  .p-newdish .p-badge{background:linear-gradient(135deg,#FCD34D,#F59E0B);color:#3B0764}
+  .p-newdish .p-biz{color:#FDE68A}
+
+  /* customise line + cta */
+  .cust-line{text-align:center;color:var(--muted);font-size:1rem;font-weight:600;max-width:640px;margin:.5rem auto 0}
+  .cta{text-align:center;padding:3.5rem 1.2rem 5rem}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.6rem}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 1.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">These are sample poster designs. We create custom posters with your restaurant's name, offer and brand.</div>
+
+<header class="hero">
+  <span class="tagpill">★ Restaurant & Food Offer Posters</span>
+  <h1>Mouth-watering offer posters — ready for <em>WhatsApp, Instagram &amp; Facebook</em></h1>
+  <p>Share-ready food posters for combo meals, weekend specials, family packs, happy hours, free delivery and new dishes — designed to make your restaurant the talk of the feed.</p>
+</header>
+
+<section class="wrap">
+  <div class="posters">
+
+    <!-- 1. COMBO MEAL -->
+    <article class="poster p-combo">
+      <div class="p-top">🍛 Today's Best Value 🍛</div>
+      <div class="p-mid">
+        <div class="p-emoji">🍛 🥘 🍚</div>
+        <div class="p-title">Combo Meal</div>
+        <div class="p-big">₹149</div>
+        <div class="p-sub">Rice, curry, roti &amp; more</div>
+        <span class="p-badge">Full Meal · Just ₹149</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 2. WEEKEND SPECIAL — BUY 1 GET 1 -->
+    <article class="poster p-weekend">
+      <div class="p-top">🍕 This Weekend Only 🍕</div>
+      <div class="p-mid">
+        <div class="p-emoji">🍕 🧀 🍕</div>
+        <div class="p-big">B1G1</div>
+        <div class="p-sub">Weekend Special · Buy 1 Get 1</div>
+        <span class="p-badge">Buy 1 Get 1 Free</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 3. FAMILY PACK -->
+    <article class="poster p-family">
+      <div class="p-top">👨‍👩‍👧 Feast Together 👨‍👩‍👧</div>
+      <div class="p-mid">
+        <div class="p-emoji">👨‍👩‍👧 🍽️ 😋</div>
+        <div class="p-title">Family Pack</div>
+        <div class="p-sub">Feeds 4 · loaded with flavour</div>
+        <span class="p-badge">Feeds 4 @ ₹499</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 4. HAPPY HOURS -->
+    <article class="poster p-happy">
+      <div class="p-top">☕ 3 PM – 6 PM Daily ☕</div>
+      <div class="p-mid">
+        <div class="p-emoji">☕ ⏰ 🍩</div>
+        <div class="p-title">Happy Hours</div>
+        <div class="p-big">20% OFF</div>
+        <div class="p-sub">Every day, 3 – 6 PM</div>
+        <span class="p-badge">20% Off · 3–6 PM</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 5. FREE HOME DELIVERY -->
+    <article class="poster p-delivery">
+      <div class="p-top">🛵 Hot &amp; Fresh, At Your Door 🛵</div>
+      <div class="p-mid">
+        <div class="p-emoji">🛵 📦 🏠</div>
+        <div class="p-title">Free Home Delivery</div>
+        <div class="p-sub">On all orders above ₹299</div>
+        <span class="p-badge">Free Delivery · Above ₹299</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 6. NEW DISH ALERT -->
+    <article class="poster p-newdish">
+      <div class="p-top">🆕 Fresh On The Menu 🆕</div>
+      <div class="p-mid">
+        <div class="p-emoji">🆕 🍲 ✨</div>
+        <div class="p-title">New Dish Alert!</div>
+        <div class="p-sub">Try our signature Special Thali</div>
+        <span class="p-badge">Taste It First</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+  </div>
+
+  <p class="cust-line">Every poster is customised with your restaurant name, colours and offer.</p>
+</section>
+
+<section class="cta">
+  <h2>Get custom posters for your restaurant</h2>
+  <p>Tell us your dish, offer and restaurant name — we'll design ready-to-post graphics for WhatsApp, Instagram and Facebook.</p>
+  <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">📲 Get custom posters on WhatsApp</a>
+</section>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

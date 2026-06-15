@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salon & Beauty Offer Posters — Sample Designs by SVLB</title>
+<meta name="description" content="Sample salon & beauty offer poster designs by Sri Vara Lakshmi Balaji Enterprises — Bridal Package, Facial Offer, Haircut + Spa Combo, Festive Glow, Membership and Refer & Earn. Custom posters for WhatsApp, Instagram & Facebook with your salon name, colours and offer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF7FB; --card:#FFFFFF; --ink:#1B2030; --muted:#6B7280;
+    --primary:#A21CAF; --gold:#CA8A04; --line:#F0E5F2;
+    --shadow:0 14px 40px rgba(45,20,45,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.9rem 1.7rem;cursor:pointer;border:none;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn-wa{background:#0A7A4E;color:#fff;box-shadow:0 10px 26px rgba(10,122,78,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* demo note */
+  .demo-note{background:#FCE7F3;color:#9D174D;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:4rem 1.2rem 2.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(202,138,4,.14),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(162,28,175,.14),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:1.1rem 0 .7rem;font-weight:900}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.08rem}
+
+  /* poster grid */
+  .posters{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:1rem 0 1.5rem}
+  @media(max-width:900px){.posters{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.posters{grid-template-columns:1fr}}
+
+  .poster{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.5rem 1.3rem;color:#fff;text-align:center;font-family:'Poppins',sans-serif}
+  .poster::after{content:"";position:absolute;inset:0;pointer-events:none}
+  .poster *{position:relative;z-index:2}
+  .p-top{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;opacity:.92}
+  .p-mid{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .p-emoji{font-size:2.6rem;line-height:1}
+  .p-title{font-family:'Playfair Display',serif;font-weight:900;line-height:1.05;font-size:clamp(1.4rem,3vw,1.8rem);text-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .p-sub{font-size:.9rem;font-weight:600;opacity:.95}
+  .p-badge{display:inline-block;font-weight:800;font-size:.85rem;padding:.45rem 1rem;border-radius:30px;letter-spacing:.5px}
+  .p-foot{font-size:.66rem;font-weight:600;letter-spacing:1px;opacity:.9;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.3);padding-top:.6rem}
+  .p-biz{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px}
+  .p-big{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.6rem,8vw,3.8rem);line-height:.9;text-shadow:0 4px 16px rgba(0,0,0,.4)}
+
+  /* 1 Bridal Package — blush rose & gold */
+  .p-bridal{background:linear-gradient(160deg,#7B2C4A 0%,#B14A6E 42%,#E08AA6 78%,#7A5A12 100%)}
+  .p-bridal::after{background:radial-gradient(circle at 18% 16%,rgba(250,204,21,.4),transparent 24%),radial-gradient(circle at 82% 22%,rgba(255,255,255,.42),transparent 18%),radial-gradient(circle at 70% 84%,rgba(255,210,225,.4),transparent 24%)}
+  .p-bridal .p-title{color:#FCE9A8}
+  .p-bridal .p-badge{background:linear-gradient(135deg,#F5D78A,#CA8A04);color:#3A1020}
+  .p-bridal .p-biz{color:#FCE9A8}
+  /* 2 Facial Offer — fresh aqua & mint */
+  .p-facial{background:linear-gradient(160deg,#065F6B 0%,#0E9AA7 44%,#2DD4BF 80%,#A7F3D0 100%)}
+  .p-facial::after{background:radial-gradient(circle at 78% 20%,rgba(255,255,255,.4),transparent 22%),radial-gradient(circle at 20% 78%,rgba(255,255,255,.28),transparent 28%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.08),transparent 60%)}
+  .p-facial .p-big{color:#fff}
+  .p-facial .p-title{color:#ECFEFF}
+  .p-facial .p-badge{background:#fff;color:#065F6B;text-transform:uppercase}
+  /* 3 Haircut + Spa Combo — violet & teal */
+  .p-combo{background:linear-gradient(150deg,#4C1D95 0%,#7C3AED 42%,#9333EA 72%,#14B8A6 100%)}
+  .p-combo::after{background:radial-gradient(circle at 16% 18%,rgba(255,255,255,.4),transparent 16%),radial-gradient(circle at 84% 24%,rgba(180,255,235,.4),transparent 18%),radial-gradient(circle at 30% 82%,rgba(255,210,255,.38),transparent 22%)}
+  .p-combo .p-title{color:#FFFFFF}
+  .p-combo .p-badge{background:#FACC15;color:#4C1D95}
+  /* 4 Festive Glow — magenta, gold & diya warmth */
+  .p-festive{background:linear-gradient(160deg,#7F1D1D 0%,#BE185D 40%,#DB2777 72%,#F59E0B 100%)}
+  .p-festive::after{background:radial-gradient(circle at 18% 20%,rgba(250,204,21,.5),transparent 22%),radial-gradient(circle at 82% 30%,rgba(255,235,150,.45),transparent 20%),radial-gradient(circle at 30% 84%,rgba(255,200,120,.45),transparent 24%),radial-gradient(circle at 86% 80%,rgba(255,255,255,.35),transparent 16%)}
+  .p-festive .p-title{color:#FCE9A8}
+  .p-festive .p-badge{background:linear-gradient(135deg,#F5D78A,#CA8A04);color:#3A0A18}
+  .p-festive .p-biz{color:#FCE9A8}
+  /* 5 Membership — luxe black & gold */
+  .p-member{background:linear-gradient(160deg,#0B0B12 0%,#1F1B2E 45%,#2E2640 75%,#3B2F0C 100%)}
+  .p-member::after{background:radial-gradient(circle at 20% 18%,rgba(245,215,138,.4),transparent 24%),radial-gradient(circle at 82% 26%,rgba(255,255,255,.22),transparent 16%),radial-gradient(circle at 50% 86%,rgba(212,175,55,.4),transparent 26%)}
+  .p-member .p-big{color:#F5D78A}
+  .p-member .p-title{color:#FCE9A8}
+  .p-member .p-badge{background:linear-gradient(135deg,#F5D78A,#CA8A04);color:#1A1404}
+  .p-member .p-biz{color:#FCE9A8}
+  /* 6 Refer & Earn — playful coral & purple */
+  .p-refer{background:linear-gradient(150deg,#A21CAF 0%,#EC4899 42%,#FB7185 78%,#FACC15 100%)}
+  .p-refer::after{background:radial-gradient(circle at 18% 22%,rgba(255,255,255,.4),transparent 22%),radial-gradient(circle at 84% 30%,rgba(255,255,160,.42),transparent 20%),radial-gradient(circle at 30% 84%,rgba(200,160,255,.4),transparent 22%)}
+  .p-refer .p-big{color:#fff}
+  .p-refer .p-badge{background:#fff;color:#A21CAF;text-transform:uppercase}
+
+  /* customise line + cta */
+  .cust-line{text-align:center;color:var(--muted);font-size:1rem;font-weight:600;max-width:640px;margin:.5rem auto 0}
+  .cta{text-align:center;padding:3.5rem 1.2rem 5rem}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.6rem}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 1.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">These are sample poster designs. We create custom posters with your salon's name, offer and brand.</div>
+
+<header class="hero">
+  <span class="tagpill">★ Salon & Beauty Marketing Posters</span>
+  <h1>Salon &amp; beauty offer poster designs — ready for <em>WhatsApp, Instagram &amp; Facebook</em></h1>
+  <p>Share-ready posters for bridal packages, facials, spa combos, festive glow, memberships and referrals — designed to fill your salon's appointment book.</p>
+</header>
+
+<section class="wrap">
+  <div class="posters">
+
+    <!-- 1. BRIDAL PACKAGE -->
+    <article class="poster p-bridal">
+      <div class="p-top">💍 Your Big Day 💍</div>
+      <div class="p-mid">
+        <div class="p-emoji">💍 👰 ✨</div>
+        <div class="p-title">Bridal Package</div>
+        <div class="p-sub">Look stunning from haldi to reception</div>
+        <span class="p-badge">Special Pricing</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Glow &amp; Grace</div>Glow &amp; Grace · Salon &amp; Spa</div>
+    </article>
+
+    <!-- 2. FACIAL OFFER -->
+    <article class="poster p-facial">
+      <div class="p-top">💆 Fresh Glow 💆</div>
+      <div class="p-mid">
+        <div class="p-big">30%<br>OFF</div>
+        <div class="p-title">Facial Offer</div>
+        <span class="p-badge">Glowing Skin · 30% Off</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Glow &amp; Grace</div>Glow &amp; Grace · Salon &amp; Spa</div>
+    </article>
+
+    <!-- 3. HAIRCUT + SPA COMBO -->
+    <article class="poster p-combo">
+      <div class="p-top">💇 Pamper Combo 💇</div>
+      <div class="p-mid">
+        <div class="p-emoji">💇 💆 💖</div>
+        <div class="p-title">Haircut + Spa</div>
+        <div class="p-sub">Style &amp; relax in one visit</div>
+        <span class="p-badge">Combo @ ₹499</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Glow &amp; Grace</div>Glow &amp; Grace · Salon &amp; Spa</div>
+    </article>
+
+    <!-- 4. FESTIVE GLOW PACKAGE -->
+    <article class="poster p-festive">
+      <div class="p-top">🪔 Festive Ready 🪔</div>
+      <div class="p-mid">
+        <div class="p-emoji">🪔 ✨ 💄</div>
+        <div class="p-title">Festive Glow Package</div>
+        <div class="p-sub">Shine bright this festive season</div>
+        <span class="p-badge">Special Festive Offer</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Glow &amp; Grace</div>Glow &amp; Grace · Salon &amp; Spa</div>
+    </article>
+
+    <!-- 5. MEMBERSHIP -->
+    <article class="poster p-member">
+      <div class="p-top">⭐ VIP Membership ⭐</div>
+      <div class="p-mid">
+        <div class="p-big">12</div>
+        <div class="p-title">Membership Plan</div>
+        <div class="p-sub">12 services · save big all year</div>
+        <span class="p-badge">Join &amp; Save Big</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Glow &amp; Grace</div>Glow &amp; Grace · Salon &amp; Spa</div>
+    </article>
+
+    <!-- 6. REFER & EARN -->
+    <article class="poster p-refer">
+      <div class="p-top">🎁 Bring a Friend 🎁</div>
+      <div class="p-mid">
+        <div class="p-big">₹100<br>OFF</div>
+        <div class="p-title">Refer &amp; Earn</div>
+        <span class="p-badge">Refer a Friend · ₹100 Off</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Glow &amp; Grace</div>Glow &amp; Grace · Salon &amp; Spa</div>
+    </article>
+
+  </div>
+
+  <p class="cust-line">Every poster is customised with your salon name, colours and offer.</p>
+</section>
+
+<section class="cta">
+  <h2>Get custom posters for your salon</h2>
+  <p>Tell us your offer and salon name — we'll design ready-to-post graphics for WhatsApp, Instagram and Facebook.</p>
+  <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">📲 Get custom posters on WhatsApp</a>
+</section>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

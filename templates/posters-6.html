@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedding-Season Offer Posters — Sample Designs by SVLB</title>
+<meta name="description" content="Elegant wedding-season offer poster designs by Sri Vara Lakshmi Balaji Enterprises — Wedding Specials, Catering Packages, Decor & Stage, Photography Deals, Bridal Wear and Book Early & Save. Custom posters for WhatsApp, Instagram & Facebook with your business name, colours and offer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF7F2; --card:#FFFFFF; --ink:#2A1A20; --muted:#7A6A70;
+    --primary:#7A1F2B; --gold:#B8860B; --line:#EFE6DA;
+    --shadow:0 14px 40px rgba(60,20,30,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.9rem 1.7rem;cursor:pointer;border:none;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn-wa{background:#7A1F2B;color:#fff;box-shadow:0 10px 26px rgba(122,31,43,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* demo note */
+  .demo-note{background:#FBEFD6;color:#7A1F2B;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:4rem 1.2rem 2.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(184,134,11,.16),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(122,31,43,.12),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:1.1rem 0 .7rem;font-weight:900}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.08rem}
+
+  /* poster grid */
+  .posters{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:1rem 0 1.5rem}
+  @media(max-width:900px){.posters{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.posters{grid-template-columns:1fr}}
+
+  .poster{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.5rem 1.3rem;color:#fff;text-align:center;font-family:'Poppins',sans-serif}
+  .poster::after{content:"";position:absolute;inset:0;pointer-events:none}
+  .poster *{position:relative;z-index:2}
+  .p-top{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;opacity:.92}
+  .p-mid{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .p-emoji{font-size:2.6rem;line-height:1}
+  .p-title{font-family:'Playfair Display',serif;font-weight:900;line-height:1.05;font-size:clamp(1.4rem,3vw,1.8rem);text-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .p-sub{font-size:.9rem;font-weight:600;opacity:.95}
+  .p-badge{display:inline-block;font-weight:800;font-size:.85rem;padding:.45rem 1rem;border-radius:30px;letter-spacing:.5px}
+  .p-foot{font-size:.66rem;font-weight:600;letter-spacing:1px;opacity:.9;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.3);padding-top:.6rem}
+  .p-biz{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px}
+  .p-big{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.6rem,8vw,3.8rem);line-height:.9;text-shadow:0 4px 16px rgba(0,0,0,.4)}
+
+  /* 1 Wedding Season Specials — deep maroon & gold */
+  .p-special{background:linear-gradient(160deg,#4A0E1A 0%,#7A1F2B 48%,#9C2A38 78%,#5C3A0A 100%)}
+  .p-special::after{background:radial-gradient(circle at 18% 16%,rgba(245,215,138,.45),transparent 24%),radial-gradient(circle at 82% 22%,rgba(255,255,255,.32),transparent 18%),radial-gradient(circle at 30% 84%,rgba(212,175,55,.4),transparent 24%),radial-gradient(circle at 86% 80%,rgba(255,215,120,.4),transparent 22%)}
+  .p-special .p-title{color:#FCE9A8}
+  .p-special .p-badge{background:linear-gradient(135deg,#F5D78A,#B8860B);color:#4A0E1A}
+  .p-special .p-biz{color:#FCE9A8}
+  /* 2 Catering Packages — warm gold & burgundy */
+  .p-catering{background:linear-gradient(160deg,#5C1320 0%,#8A2A1E 42%,#B8860B 82%,#D6A93C 100%)}
+  .p-catering::after{background:radial-gradient(circle at 76% 20%,rgba(255,245,210,.4),transparent 26%),radial-gradient(circle at 22% 80%,rgba(255,230,160,.34),transparent 30%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.06),transparent 60%)}
+  .p-catering .p-title{color:#FFF4D6}
+  .p-catering .p-badge{background:#FBEFD6;color:#7A1F2B}
+  .p-catering .p-biz{color:#FFF4D6}
+  /* 3 Decor & Stage — blush rose & gold */
+  .p-decor{background:linear-gradient(160deg,#6E1E3A 0%,#A63B5E 40%,#C97A8E 76%,#C9A24B 100%)}
+  .p-decor::after{background:radial-gradient(circle at 16% 18%,rgba(255,255,255,.45),transparent 16%),radial-gradient(circle at 72% 16%,rgba(255,225,235,.4),transparent 16%),radial-gradient(circle at 84% 62%,rgba(245,215,138,.4),transparent 18%),radial-gradient(circle at 28% 72%,rgba(255,255,255,.34),transparent 16%)}
+  .p-decor .p-title{color:#FFF0F4}
+  .p-decor .p-badge{background:linear-gradient(135deg,#F5D78A,#B8860B);color:#6E1E3A}
+  .p-decor .p-biz{color:#FFF0F4}
+  /* 4 Photography Deals — twilight plum & champagne */
+  .p-photo{background:linear-gradient(160deg,#2A1230 0%,#4A1E40 44%,#7A2F4A 78%,#B89B5E 100%)}
+  .p-photo::after{background:radial-gradient(circle at 20% 22%,rgba(245,225,170,.4),transparent 22%),radial-gradient(circle at 82% 30%,rgba(255,255,255,.34),transparent 18%),radial-gradient(circle at 50% 82%,rgba(212,175,55,.32),transparent 26%)}
+  .p-photo .p-title{color:#F6E7C2}
+  .p-photo .p-badge{background:linear-gradient(135deg,#F5E2A8,#B8860B);color:#2A1230}
+  .p-photo .p-biz{color:#F6E7C2}
+  /* 5 Bridal Wear — regal red & gold zari */
+  .p-bridal{background:linear-gradient(150deg,#5A0A14 0%,#8E1422 42%,#B82E2E 76%,#C9A24B 100%)}
+  .p-bridal::after{background:radial-gradient(circle at 18% 22%,rgba(245,215,138,.45),transparent 20%),radial-gradient(circle at 84% 24%,rgba(255,235,170,.42),transparent 18%),radial-gradient(circle at 30% 84%,rgba(255,215,120,.42),transparent 22%)}
+  .p-bridal .p-title{color:#FCE9A8}
+  .p-bridal .p-badge{background:linear-gradient(135deg,#F5D78A,#B8860B);color:#5A0A14}
+  .p-bridal .p-biz{color:#FCE9A8}
+  /* 6 Book Early & Save — elegant emerald-gold accent on maroon */
+  .p-early{background:linear-gradient(160deg,#3A0C16 0%,#6E1626 44%,#9C8A2A 82%,#D6BE5C 100%)}
+  .p-early::after{background:radial-gradient(circle at 50% 60%,rgba(245,215,138,.4),transparent 52%)}
+  .p-early .p-big{color:#FCE9A8}
+  .p-early .p-title{color:#FFF6E0}
+  .p-early .p-badge{background:#2A1A20;color:#F5D78A;text-transform:uppercase}
+  .p-early .p-biz{color:#FCE9A8}
+
+  /* customise line + cta */
+  .cust-line{text-align:center;color:var(--muted);font-size:1rem;font-weight:600;max-width:640px;margin:.5rem auto 0}
+  .cta{text-align:center;padding:3.5rem 1.2rem 5rem}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.6rem}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 1.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#7A1F2B;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(122,31,43,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">These are sample poster designs. We create custom posters with your business name, offer and brand.</div>
+
+<header class="hero">
+  <span class="tagpill">★ Wedding-Season Marketing Posters</span>
+  <h1>Elegant wedding-season offer posters — ready for <em>WhatsApp, Instagram &amp; Facebook</em></h1>
+  <p>A graceful set of share-ready posters for wedding specials, catering, decor, photography, bridal wear and early-booking savings — designed to make your business shine in the feed.</p>
+</header>
+
+<section class="wrap">
+  <div class="posters">
+
+    <!-- 1. WEDDING SEASON SPECIALS -->
+    <article class="poster p-special">
+      <div class="p-top">💍 Wedding Season 💍</div>
+      <div class="p-mid">
+        <div class="p-emoji">💍 ✨ 💐</div>
+        <div class="p-title">💍 Wedding Season Specials</div>
+        <div class="p-sub">Make your big day unforgettable</div>
+        <span class="p-badge">Exclusive Season Offers</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Grand Affairs</div>Grand Affairs · Weddings &amp; Events</div>
+    </article>
+
+    <!-- 2. WEDDING CATERING PACKAGES -->
+    <article class="poster p-catering">
+      <div class="p-top">🍽️ Curated Menus 🍽️</div>
+      <div class="p-mid">
+        <div class="p-emoji">🍽️ 🥂 🍮</div>
+        <div class="p-title">🍽️ Wedding Catering Packages</div>
+        <div class="p-sub">Veg &amp; non-veg feast menus</div>
+        <span class="p-badge">Packages from ₹499/plate</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Grand Affairs</div>Grand Affairs · Weddings &amp; Events</div>
+    </article>
+
+    <!-- 3. DECOR & STAGE SETUP OFFERS -->
+    <article class="poster p-decor">
+      <div class="p-top">🎀 Dream Settings 🎀</div>
+      <div class="p-mid">
+        <div class="p-emoji">🎀 🌸 🕯️</div>
+        <div class="p-title">🎀 Decor &amp; Stage Setup Offers</div>
+        <div class="p-sub">Floral mandaps &amp; grand stages</div>
+        <span class="p-badge">Themed Decor Discounts</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Grand Affairs</div>Grand Affairs · Weddings &amp; Events</div>
+    </article>
+
+    <!-- 4. WEDDING PHOTOGRAPHY DEALS -->
+    <article class="poster p-photo">
+      <div class="p-top">📸 Timeless Memories 📸</div>
+      <div class="p-mid">
+        <div class="p-emoji">📸 🎥 💞</div>
+        <div class="p-title">📸 Wedding Photography Deals</div>
+        <div class="p-sub">Candid, cinematic &amp; albums</div>
+        <span class="p-badge">Photo + Video Combos</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Grand Affairs</div>Grand Affairs · Weddings &amp; Events</div>
+    </article>
+
+    <!-- 5. BRIDAL WEAR COLLECTION -->
+    <article class="poster p-bridal">
+      <div class="p-top">👗 New Arrivals 👗</div>
+      <div class="p-mid">
+        <div class="p-emoji">👗 👑 💎</div>
+        <div class="p-title">👗 Bridal Wear Collection</div>
+        <div class="p-sub">Lehengas, sarees &amp; sherwanis</div>
+        <span class="p-badge">Designer Bridal Range</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Grand Affairs</div>Grand Affairs · Weddings &amp; Events</div>
+    </article>
+
+    <!-- 6. BOOK EARLY & SAVE 15% -->
+    <article class="poster p-early">
+      <div class="p-top">🎁 Limited-Time Offer 🎁</div>
+      <div class="p-mid">
+        <div class="p-big">15%<br>OFF</div>
+        <div class="p-title">🎁 Book Early &amp; Save 15%</div>
+        <span class="p-badge">Advance Booking Discount</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Grand Affairs</div>Grand Affairs · Weddings &amp; Events</div>
+    </article>
+
+  </div>
+
+  <p class="cust-line">Every poster is customised with your business name, colours and offer.</p>
+</section>
+
+<section class="cta">
+  <h2>Get custom posters for your business</h2>
+  <p>Tell us your offer, season and business name — we'll design ready-to-post graphics for WhatsApp, Instagram and Facebook.</p>
+  <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">📲 Get custom posters on WhatsApp</a>
+</section>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

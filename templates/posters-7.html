@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summer Offer Posters — Sample Designs by SVLB</title>
+<meta name="description" content="Bright summer offer poster designs by Sri Vara Lakshmi Balaji Enterprises — Summer Sale, Cool Drinks B1G1, AC Service, Summer Camp, Mango Festival and Holiday Packages. Custom posters for WhatsApp, Instagram & Facebook with your shop name, colours and offer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F8FC; --card:#FFFFFF; --ink:#1B2030; --muted:#6B7280;
+    --primary:#0A7A4E; --gold:#CA8A04; --line:#E7E9F2;
+    --shadow:0 14px 40px rgba(20,24,45,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.9rem 1.7rem;cursor:pointer;border:none;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn-wa{background:#0A7A4E;color:#fff;box-shadow:0 10px 26px rgba(10,122,78,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* demo note */
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:4rem 1.2rem 2.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(250,204,21,.20),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(249,115,22,.14),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:1.1rem 0 .7rem;font-weight:900}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.08rem}
+
+  /* poster grid */
+  .posters{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:1rem 0 1.5rem}
+  @media(max-width:900px){.posters{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.posters{grid-template-columns:1fr}}
+
+  .poster{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.5rem 1.3rem;color:#fff;text-align:center;font-family:'Poppins',sans-serif}
+  .poster::after{content:"";position:absolute;inset:0;pointer-events:none}
+  .poster *{position:relative;z-index:2}
+  .p-top{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;opacity:.92}
+  .p-mid{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .p-emoji{font-size:2.6rem;line-height:1}
+  .p-title{font-family:'Playfair Display',serif;font-weight:900;line-height:1.05;font-size:clamp(1.4rem,3vw,1.8rem);text-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .p-sub{font-size:.9rem;font-weight:600;opacity:.95}
+  .p-badge{display:inline-block;font-weight:800;font-size:.85rem;padding:.45rem 1rem;border-radius:30px;letter-spacing:.5px}
+  .p-foot{font-size:.66rem;font-weight:600;letter-spacing:1px;opacity:.9;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.3);padding-top:.6rem}
+  .p-biz{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px}
+
+  /* 1 Summer Sale — sunset orange & yellow */
+  .p-sale{background:linear-gradient(160deg,#F59E0B 0%,#F97316 45%,#EF4444 80%,#DC2626 100%)}
+  .p-sale::after{background:radial-gradient(circle at 50% 18%,rgba(255,255,255,.35),transparent 24%),radial-gradient(circle at 16% 70%,rgba(255,240,150,.4),transparent 26%),radial-gradient(circle at 84% 76%,rgba(255,255,255,.28),transparent 22%)}
+  .p-sale .p-big{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.8rem,8vw,4rem);line-height:.9;color:#FFF7ED;text-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .p-sale .p-title{color:#FFF7ED}
+  .p-sale .p-badge{background:#FFF7ED;color:#DC2626;text-transform:uppercase}
+  /* 2 Cool Drinks — fresh aqua & lime */
+  .p-drink{background:linear-gradient(160deg,#06B6D4 0%,#0EA5E9 42%,#22D3EE 78%,#A3E635 100%)}
+  .p-drink::after{background:radial-gradient(circle at 20% 22%,rgba(255,255,255,.4),transparent 20%),radial-gradient(circle at 82% 28%,rgba(255,255,255,.32),transparent 18%),radial-gradient(circle at 50% 84%,rgba(190,255,120,.4),transparent 24%)}
+  .p-drink .p-title{color:#06283D}
+  .p-drink,.p-drink .p-top,.p-drink .p-sub,.p-drink .p-foot{color:#06283D}
+  .p-drink .p-badge{background:#06283D;color:#A3E635;text-transform:uppercase}
+  .p-drink .p-biz{color:#06283D}
+  .p-drink .p-foot{border-top-color:rgba(6,40,61,.3)}
+  /* 3 AC Service — cool icy blue */
+  .p-ac{background:linear-gradient(160deg,#1E3A8A 0%,#2563EB 42%,#38BDF8 80%,#BAE6FD 100%)}
+  .p-ac::after{background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.5),transparent 14%),radial-gradient(circle at 74% 20%,rgba(255,255,255,.42),transparent 12%),radial-gradient(circle at 86% 66%,rgba(255,255,255,.4),transparent 13%),radial-gradient(circle at 28% 76%,rgba(255,255,255,.38),transparent 12%)}
+  .p-ac .p-title{color:#FFFFFF}
+  .p-ac .p-badge{background:#FFFFFF;color:#1E3A8A;text-transform:uppercase}
+  /* 4 Summer Camp — playful green & sky */
+  .p-camp{background:linear-gradient(160deg,#16A34A 0%,#22C55E 42%,#FACC15 80%,#F97316 100%)}
+  .p-camp::after{background:radial-gradient(circle at 18% 22%,rgba(255,255,255,.4),transparent 22%),radial-gradient(circle at 84% 30%,rgba(255,255,150,.42),transparent 20%),radial-gradient(circle at 50% 84%,rgba(120,255,180,.4),transparent 22%)}
+  .p-camp .p-title{color:#FFFFFF}
+  .p-camp .p-badge{background:#FFFFFF;color:#16A34A;text-transform:uppercase}
+  /* 5 Mango Festival — ripe mango gold */
+  .p-mango{background:linear-gradient(160deg,#FBBF24 0%,#F59E0B 42%,#EA580C 78%,#16A34A 100%)}
+  .p-mango::after{background:radial-gradient(circle at 22% 18%,rgba(255,255,255,.4),transparent 22%),radial-gradient(circle at 80% 24%,rgba(255,250,180,.42),transparent 20%),radial-gradient(circle at 40% 84%,rgba(120,220,120,.4),transparent 24%)}
+  .p-mango .p-title{color:#FFF7ED}
+  .p-mango .p-badge{background:#16351A;color:#FBBF24;text-transform:uppercase}
+  /* 6 Holiday Packages — tropical teal & coral */
+  .p-holiday{background:linear-gradient(160deg,#0EA5E9 0%,#14B8A6 42%,#F59E0B 80%,#FB7185 100%)}
+  .p-holiday::after{background:radial-gradient(circle at 50% 16%,rgba(255,255,255,.35),transparent 22%),radial-gradient(circle at 18% 74%,rgba(255,240,150,.4),transparent 26%),radial-gradient(circle at 84% 78%,rgba(255,255,255,.3),transparent 22%)}
+  .p-holiday .p-title{color:#FFFFFF}
+  .p-holiday .p-badge{background:#FFFFFF;color:#0E7490;text-transform:uppercase}
+
+  /* customise line + cta */
+  .cust-line{text-align:center;color:var(--muted);font-size:1rem;font-weight:600;max-width:640px;margin:.5rem auto 0}
+  .cta{text-align:center;padding:3.5rem 1.2rem 5rem}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.6rem}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 1.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">These are sample poster designs. We create custom posters with your shop's name, offer and brand.</div>
+
+<header class="hero">
+  <span class="tagpill">★ Marketing & Social Media Posters</span>
+  <h1>Bright summer offer poster designs — ready for <em>WhatsApp, Instagram &amp; Facebook</em></h1>
+  <p>A sunny set of share-ready posters for summer sales, cool drinks, AC service, summer camps, mango festivals and holiday packages — designed to make your shop stand out in the feed.</p>
+</header>
+
+<section class="wrap">
+  <div class="posters">
+
+    <!-- 1. SUMMER SALE -->
+    <article class="poster p-sale">
+      <div class="p-top">☀️ Beat the Heat ☀️</div>
+      <div class="p-mid">
+        <div class="p-big">50%<br>OFF</div>
+        <div class="p-title">☀️ Summer Sale</div>
+        <div class="p-sub">Hot deals, cool prices</div>
+        <span class="p-badge">Up to 50% Off</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 2. COOL SUMMER DRINKS -->
+    <article class="poster p-drink">
+      <div class="p-top">🥤 Stay Refreshed 🥤</div>
+      <div class="p-mid">
+        <div class="p-emoji">🥤 🧊 🍹</div>
+        <div class="p-title">Cool Summer Drinks</div>
+        <div class="p-sub">Chilled &amp; refreshing</div>
+        <span class="p-badge">Buy 1 Get 1</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 3. AC SERVICE SPECIAL -->
+    <article class="poster p-ac">
+      <div class="p-top">❄️ Summer Ready ❄️</div>
+      <div class="p-mid">
+        <div class="p-emoji">❄️ 🛠️ 💨</div>
+        <div class="p-title">AC Service Special</div>
+        <div class="p-sub">Stay cool all season</div>
+        <span class="p-badge">Book Now &amp; Save</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 4. SUMMER CAMP ADMISSIONS -->
+    <article class="poster p-camp">
+      <div class="p-top">🏕️ Fun Awaits 🏕️</div>
+      <div class="p-mid">
+        <div class="p-emoji">🏕️ 🎨 ⚽</div>
+        <div class="p-title">Summer Camp Admissions Open</div>
+        <div class="p-sub">Learn, play &amp; grow</div>
+        <span class="p-badge">Enroll Today</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 5. MANGO FESTIVAL SPECIALS -->
+    <article class="poster p-mango">
+      <div class="p-top">🥭 King of Fruits 🥭</div>
+      <div class="p-mid">
+        <div class="p-emoji">🥭 🌿 🥭</div>
+        <div class="p-title">Mango Festival Specials</div>
+        <div class="p-sub">Fresh, juicy &amp; sweet</div>
+        <span class="p-badge">Season's Best Prices</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 6. SUMMER HOLIDAY PACKAGES -->
+    <article class="poster p-holiday">
+      <div class="p-top">✈️ Getaway Time ✈️</div>
+      <div class="p-mid">
+        <div class="p-emoji">✈️ 🏖️ 🌴</div>
+        <div class="p-title">Summer Holiday Packages</div>
+        <div class="p-sub">Book your dream escape</div>
+        <span class="p-badge">Special Summer Rates</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+  </div>
+
+  <p class="cust-line">Every poster is customised with your shop name, colours and offer.</p>
+</section>
+
+<section class="cta">
+  <h2>Get custom posters for your shop</h2>
+  <p>Tell us your summer offer and shop name — we'll design ready-to-post graphics for WhatsApp, Instagram and Facebook.</p>
+  <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">📲 Get custom posters on WhatsApp</a>
+</section>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

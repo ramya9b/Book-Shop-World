@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinic WhatsApp Appointment Automation — Sample Demo by SVLB</title>
+<meta name="description" content="Sample showing WhatsApp automation for a clinic & pharmacy — instant appointment booking, doctor info and confirmations, 24/7. Get this set up for your clinic by Sri Vara Lakshmi Balaji Enterprises.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wa-dark:#075E54; --wa-teal:#128C7E; --wa-green:#25D366;
+    --bg:#F4F6F7; --card:#FFFFFF; --ink:#1F2A2E; --muted:#5D6B70;
+    --line:#E4E9EB; --chat-bg:#ECE5DD; --bubble-in:#FFFFFF; --bubble-out:#DCF8C6;
+    --gold:#CA8A04;
+    --shadow:0 10px 30px rgba(7,94,84,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.9rem 1.6rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-wa{background:var(--wa-green);color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* demo note banner */
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:3.5rem 1.2rem 1rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(37,211,102,.14),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(7,94,84,.12),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--wa-teal);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:1.1rem 0 .6rem;font-weight:800}
+  .hero h1 em{color:var(--wa-teal);font-style:normal}
+  .hero p{max-width:560px;margin:0 auto 1.4rem;color:var(--muted);font-size:1.06rem}
+
+  /* phone mockup */
+  .phone-stage{display:flex;justify-content:center;padding:2rem 1rem 3.5rem}
+  .phone{width:320px;max-width:calc(100vw - 2rem);background:#111B21;border-radius:38px;padding:12px;box-shadow:0 24px 60px rgba(7,94,84,.28),0 0 0 2px rgba(255,255,255,.04)}
+  .phone-screen{border-radius:28px;overflow:hidden;background:var(--chat-bg);display:flex;flex-direction:column;height:580px}
+  .wa-header{background:var(--wa-dark);color:#fff;display:flex;align-items:center;gap:.7rem;padding:.7rem .9rem}
+  .wa-avatar{width:40px;height:40px;border-radius:50%;background:#0a7567;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex:0 0 auto}
+  .wa-meta{line-height:1.25;min-width:0}
+  .wa-name{font-weight:700;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wa-status{font-size:.72rem;opacity:.85}
+  .wa-icons{margin-left:auto;display:flex;gap:.9rem;font-size:1rem;opacity:.9}
+  .wa-chat{flex:1;overflow-y:auto;padding:.9rem .75rem;display:flex;flex-direction:column;gap:.5rem;
+     background-image:radial-gradient(rgba(0,0,0,.025) 1px,transparent 1px);background-size:18px 18px}
+  .bubble{max-width:80%;min-width:3.5rem;padding:.45rem .7rem .5rem;border-radius:12px;font-size:.83rem;line-height:1.4;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.08);word-wrap:break-word}
+  .bubble.in{background:var(--bubble-in);align-self:flex-start;border-top-left-radius:3px}
+  .bubble.out{background:var(--bubble-out);align-self:flex-end;border-top-right-radius:3px}
+  .bubble .t{display:inline-block;float:right;margin:.35rem 0 -.1rem .5rem;font-size:.6rem;color:#667;opacity:.65;white-space:nowrap}
+  .bubble.out .t{color:#5a8a4a}
+  .bubble strong{font-weight:700}
+  .bubble em{font-style:normal;font-weight:700}
+  /* typing indicator */
+  .typing{align-self:flex-start;background:#fff;border-radius:12px;border-top-left-radius:3px;padding:.6rem .8rem;display:flex;gap:.25rem;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+  .typing span{width:7px;height:7px;border-radius:50%;background:#9aa7ab;animation:tdot 1.2s infinite ease-in-out}
+  .typing span:nth-child(2){animation-delay:.2s}
+  .typing span:nth-child(3){animation-delay:.4s}
+  @keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+  .wa-input{background:#F0F0F0;display:flex;align-items:center;gap:.5rem;padding:.55rem .7rem}
+  .wa-inbox{flex:1;background:#fff;border-radius:20px;padding:.5rem .9rem;color:#9aa7ab;font-size:.82rem}
+  .wa-send{width:38px;height:38px;border-radius:50%;background:var(--wa-green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;flex:0 0 auto}
+
+  /* sections */
+  section{padding:3.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.4rem}
+  .sec-head .eyebrow{color:var(--wa-teal);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.78rem}
+  .sec-head h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:.4rem 0 .5rem;font-weight:800}
+  .sec-head p{color:var(--muted)}
+
+  /* features */
+  .features{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  @media(max-width:780px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.feat-grid{grid-template-columns:1fr}}
+  .feat{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.4rem;box-shadow:var(--shadow)}
+  .feat .ico{font-size:1.9rem;display:inline-flex;width:54px;height:54px;align-items:center;justify-content:center;border-radius:14px;background:rgba(37,211,102,.12);margin-bottom:.7rem}
+  .feat h3{font-size:1.08rem;margin-bottom:.3rem}
+  .feat p{color:var(--muted);font-size:.9rem}
+
+  /* CTA */
+  .cta{text-align:center;background:linear-gradient(135deg,var(--wa-dark),var(--wa-teal));color:#fff;border-radius:24px;padding:3rem 1.5rem;box-shadow:var(--shadow)}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;margin-bottom:.6rem}
+  .cta p{max-width:480px;margin:0 auto 1.6rem;opacity:.92}
+  .cta .btn-wa{background:#fff;color:var(--wa-dark)}
+
+  footer{background:var(--ink);color:#CBD7DA;text-align:center;padding:2.5rem 1.2rem 5rem}
+  footer .small{color:#8EA0A4;font-size:.82rem;margin-top:.5rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">This is a sample showing WhatsApp appointment automation — your real clinic number, doctors and replies would be set up for you.</div>
+
+<header class="hero">
+  <span class="tagpill">🩺 Clinic WhatsApp Automation</span>
+  <h1>Book appointments on WhatsApp <em>in seconds — 24/7</em></h1>
+  <p>Patients message your clinic and instantly book appointments, see doctors, timings and pharmacy info — automatically, even after hours. Here's a live sample of how it feels.</p>
+</header>
+
+<div class="phone-stage">
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="wa-header">
+        <div class="wa-avatar" aria-hidden="true">🩺</div>
+        <div class="wa-meta">
+          <div class="wa-name">CareWell Clinic &amp; Pharmacy</div>
+          <div class="wa-status">online</div>
+        </div>
+        <div class="wa-icons" aria-hidden="true"><span>📹</span><span>📞</span><span>⋮</span></div>
+      </div>
+      <div class="wa-chat" role="log" aria-label="Sample WhatsApp conversation">
+        <div class="bubble out">Welcome to CareWell Clinic 🩺 Reply: 1️⃣ Book Appointment  2️⃣ Our Doctors  3️⃣ Timings  4️⃣ Pharmacy<span class="t">9:41 AM</span></div>
+        <div class="bubble in">1<span class="t">9:41 AM</span></div>
+        <div class="bubble out">Please share patient name &amp; preferred date/time. <em>Dr. Meera Rao (General)</em> is available today 10 AM–8 PM 🗓️<span class="t">9:41 AM</span></div>
+        <div class="bubble in">Rahul, today 6pm<span class="t">9:42 AM</span></div>
+        <div class="bubble out">✅ Appointment confirmed for Rahul, today 6:00 PM with Dr. Meera Rao. Token <em>#24</em>. Please arrive 10 mins early 🙏<span class="t">9:42 AM</span></div>
+        <div class="typing" aria-label="typing"><span></span><span></span><span></span></div>
+      </div>
+      <div class="wa-input">
+        <div class="wa-inbox">Type a message…</div>
+        <div class="wa-send" aria-hidden="true">➤</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What it does</div>
+      <h2>Your clinic's WhatsApp, working around the clock</h2>
+      <p>Set up once — it greets, books, informs and confirms, so no patient enquiry is ever missed.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat"><span class="ico">⚡</span><h3>Instant replies 24/7</h3><p>Every patient message gets an answer in seconds — day, night, weekends and holidays.</p></div>
+      <div class="feat"><span class="ico">🗓️</span><h3>Auto appointment booking</h3><p>Capture patient name and preferred time, then confirm the slot — all inside the chat.</p></div>
+      <div class="feat"><span class="ico">👩‍⚕️</span><h3>Share doctors &amp; timings</h3><p>Send doctor availability, specialities and clinic hours the moment a patient asks.</p></div>
+      <div class="feat"><span class="ico">💊</span><h3>Pharmacy enquiries</h3><p>Answer medicine availability and refill questions automatically, around the clock.</p></div>
+      <div class="feat"><span class="ico">🎫</span><h3>Token &amp; reminders</h3><p>Issue a token number and send arrival reminders so patients are never left waiting.</p></div>
+      <div class="feat"><span class="ico">📊</span><h3>Never miss a patient</h3><p>Every enquiry is answered and logged — no appointment request slips through.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Automate your clinic's WhatsApp — never miss a patient</h2>
+      <p>We'll set up your real number, your doctors, timings and auto-replies for you. Tap below and we'll get you started.</p>
+      <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+WhatsApp+automation+for+my+business" target="_blank" rel="noopener">📲 Automate my WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Clinic WhatsApp Appointment Automation — sample by SVLB</div>
+  <div class="small">CareWell Clinic &amp; Pharmacy is a demo. Your real number, doctors and replies would be set up for you.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>
