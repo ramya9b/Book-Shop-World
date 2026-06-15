@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grand Affairs Events · Wedding & Event Planner — Demo Website</title>
+<meta name="description" content="Demo event & wedding planner website template by Sri Vara Lakshmi Balaji Enterprises. Get a website like this for your business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF6F0; --card:#FFFFFF; --ink:#2A1620; --muted:#7A5C68;
+    --primary:#9D174D; --primary-d:#7A1138; --gold:#C99A2E; --line:#EDDCE2;
+    --shadow:0 10px 30px rgba(74,20,44,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;letter-spacing:.3px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(157,23,77,.3)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,246,240,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;color:var(--primary)}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.85rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5rem 1.2rem 5.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(201,154,46,.18),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(157,23,77,.16),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.6rem,7.5vw,4.6rem);line-height:1.04;margin:1.1rem 0 .6rem;font-weight:700}
+  .hero h1 em{color:var(--primary);font-style:italic}
+  .hero p{max-width:560px;margin:0 auto 1.8rem;color:var(--muted);font-size:1.08rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;color:var(--muted);font-size:.9rem;font-weight:600}
+  .hero-strip b{color:var(--ink)}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(2rem,4.5vw,3rem);margin:.4rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* story */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,#C99A2E,#9D174D);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+
+  /* packages */
+  .pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  @media(max-width:680px){.pkg-grid{grid-template-columns:1fr}}
+  .pkg{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.5rem 1.6rem;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .pkg h3{font-size:1.5rem;color:var(--primary);margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem}
+  .pkg .price{font-weight:700;color:var(--gold);font-size:1rem;margin-bottom:.8rem}
+  .pkg ul{list-style:none;margin:0 0 1.1rem;padding:0;flex:1}
+  .pkg li{padding:.4rem 0;border-bottom:1px dashed var(--line);font-size:.92rem;color:var(--muted);display:flex;gap:.5rem}
+  .pkg li:last-child{border-bottom:none}
+  .pkg li::before{content:"✓";color:var(--primary);font-weight:700}
+  .pkg .btn{align-self:flex-start;padding:.6rem 1.2rem;font-size:.85rem}
+
+  /* why */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+  @media(max-width:780px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:440px){.why-grid{grid-template-columns:1fr}}
+  .why{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.4rem;text-align:center;box-shadow:var(--shadow)}
+  .why .ic{font-size:2rem}
+  .why h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--primary);margin:.4rem 0 .3rem}
+  .why p{font-size:.86rem;color:var(--muted)}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+  @media(max-width:680px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .g-tile{aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:#fff}
+
+  /* reviews */
+  .reviews{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+  .rev .stars{color:var(--gold);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem}
+  .rev .who{font-weight:700;font-size:.9rem}
+
+  /* enquire */
+  .enquire{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.enquire{grid-template-columns:1fr}}
+  .enquire-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow)}
+  .enquire-card h3{font-size:1.5rem;margin-bottom:.6rem}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .map-art{border-radius:18px;background:linear-gradient(135deg,#7A1138,#2A1620);min-height:240px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#EAD9E0;text-align:center;padding:3rem 1.2rem 2rem}
+  footer .brand{color:#fff}
+  footer .small{color:#B69AA6;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">Grand Affairs<small>Events & Wedding Planner</small></div>
+    <div class="nav-links">
+      <a href="#packages">Packages</a>
+      <a href="#gallery">Portfolio</a>
+      <a href="#enquire">Enquire</a>
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">💐 Plan My Event</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">✨ Weddings · Parties · Corporate · Since 2014</span>
+  <h1>We make moments <em>magical</em></h1>
+  <p>From dream weddings to grand celebrations — we plan, design and deliver flawless events end to end. Tell us your vision on WhatsApp and we'll make it unforgettable.</p>
+  <div class="hero-cta">
+    <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">💐 Plan My Event</a>
+    <a class="btn btn-o" href="#packages">View Packages</a>
+  </div>
+  <div class="hero-strip"><span>🎉 <b>200+</b> Events</span><span>⭐ <b>4.9</b> Rating</span><span>💍 <b>End-to-End</b> Planning</span><span>💰 <b>On-Budget</b> Promise</span></div>
+</header>
+
+<section id="story" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">Who We Are</div>
+        <h2>Celebrations crafted with heart, perfected over the years</h2>
+      </div>
+      <p style="color:var(--muted)">Grand Affairs Events is a full-service planning team that turns big days into lifelong memories. From intimate ceremonies to lavish receptions, we handle every detail — venue, decor, catering, and entertainment — so you can simply enjoy the moment.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Trusted vendors, transparent budgets, and a team that treats your celebration like our own.</p>
+    </div>
+    <div class="story-art">💍</div>
+  </div>
+</section>
+
+<section id="packages" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">What We Plan</div><h2>Our Packages</h2><p>Tailored services for every kind of celebration</p></div>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <h3>💍 Weddings</h3>
+        <div class="price">From ₹1,50,000</div>
+        <ul>
+          <li>Full venue &amp; vendor coordination</li>
+          <li>Theme decor, stage &amp; mandap design</li>
+          <li>Catering, invites &amp; guest management</li>
+          <li>Day-of on-site event managers</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+      <div class="pkg">
+        <h3>🎂 Birthdays &amp; Parties</h3>
+        <div class="price">From ₹25,000</div>
+        <ul>
+          <li>Themed decor, balloons &amp; backdrops</li>
+          <li>Cake, catering &amp; live counters</li>
+          <li>Entertainment, games &amp; hosts</li>
+          <li>Photography add-ons available</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+      <div class="pkg">
+        <h3>🎊 Corporate Events</h3>
+        <div class="price">From ₹75,000</div>
+        <ul>
+          <li>Conferences, launches &amp; off-sites</li>
+          <li>Stage, AV, branding &amp; seating</li>
+          <li>Hospitality &amp; guest logistics</li>
+          <li>Award nights &amp; team galas</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+      <div class="pkg">
+        <h3>🎈 Decor &amp; Stage</h3>
+        <div class="price">From ₹40,000</div>
+        <ul>
+          <li>Floral, drape &amp; lighting design</li>
+          <li>Custom stage &amp; entrance setups</li>
+          <li>Photo zones &amp; props</li>
+          <li>Setup &amp; teardown handled</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+      <div class="pkg">
+        <h3>🥂 Catering Coordination</h3>
+        <div class="price">From ₹500 / plate</div>
+        <ul>
+          <li>Curated menus — veg &amp; non-veg</li>
+          <li>Live counters &amp; dessert stations</li>
+          <li>Trusted, hygienic catering partners</li>
+          <li>Service staff &amp; crockery included</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+      <div class="pkg">
+        <h3>✨ Custom Affairs</h3>
+        <div class="price">Tailored quote</div>
+        <ul>
+          <li>Engagements, baby showers &amp; more</li>
+          <li>Destination &amp; theme events</li>
+          <li>Bespoke planning, your vision first</li>
+          <li>Built fully around your budget</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">💐 Get a Custom Quote on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Why Choose Us</div><h2>Celebrations done right</h2><p>Everything handled, so you can be a guest at your own event</p></div>
+  <div class="why-grid">
+    <div class="why"><div class="ic">🤝</div><h4>End-to-End Planning</h4><p>One team from first idea to final farewell.</p></div>
+    <div class="why"><div class="ic">⭐</div><h4>Trusted Vendors</h4><p>A vetted network of decor, catering &amp; AV partners.</p></div>
+    <div class="why"><div class="ic">💰</div><h4>On-Budget Promise</h4><p>Transparent pricing with no surprise costs.</p></div>
+    <div class="why"><div class="ic">🎉</div><h4>200+ Events</h4><p>A decade of flawlessly executed celebrations.</p></div>
+  </div>
+</section>
+
+<section id="gallery" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Our Work</div><h2>Portfolio</h2><p>Your real event photos would shine here</p></div>
+    <div class="gallery">
+      <div class="g-tile" style="background:linear-gradient(135deg,#9D174D,#7A1138)">🎉</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#C99A2E,#9A6B12)">💍</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#BE185D,#831843)">🎂</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#7C2D12,#9D174D)">🎊</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#A21CAF,#701A75)">🥂</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#D97706,#C99A2E)">🎈</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#DB2777,#9D174D)">💐</div>
+      <div class="g-tile" style="background:linear-gradient(135deg,#B45309,#7A1138)">✨</div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Loved By Clients</div><h2>What People Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"They planned our wedding down to the last petal. Stress-free, beautiful, and exactly on budget. We just enjoyed our day!"</p><div class="who">— Priya &amp; Arjun</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Booked them for my daughter's first birthday. The decor was stunning and the WhatsApp planning was so easy. Highly recommend!"</p><div class="who">— Kavya N.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Our company launch event ran flawlessly. Professional team, trusted vendors, and great attention to detail."</p><div class="who">— Rahul M.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="enquire" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Let's Plan Together</div><h2>Enquire Now</h2></div>
+  <div class="enquire">
+    <div class="enquire-card">
+      <h3>📍 Reach Us</h3>
+      <div class="row">🏠 <span><b>Grand Affairs Events</b><br>123 Celebration Avenue, Your City</span></div>
+      <div class="row">🕒 <span><b>Open daily</b> · 10:00 AM – 8:00 PM</span></div>
+      <div class="row">📞 <span><b>Bookings &amp; enquiries</b><br>WhatsApp us anytime</span></div>
+      <div style="margin-top:1rem"><a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+event+planner+website+like+the+Grand+Affairs+demo" target="_blank" rel="noopener">💐 Plan My Event</a></div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Grand Affairs Events</div>
+  <div class="small">123 Celebration Avenue, Your City · Open 10am–8pm · A demo website</div>
+  <div class="small">© Grand Affairs Events (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

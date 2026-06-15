@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoCare Garage · Car Service & Auto Repair — Demo Website</title>
+<meta name="description" content="Demo car service & garage website template by Sri Vara Lakshmi Balaji Enterprises. Get a website like this for your auto repair business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F4F6; --card:#FFFFFF; --ink:#1F2937; --muted:#6B7280;
+    --primary:#DC2626; --primary-d:#B91C1C; --gold:#FACC15; --line:#E5E7EB;
+    --shadow:0 10px 30px rgba(31,41,55,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.display{font-family:'Oswald',sans-serif;letter-spacing:.5px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:8px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;text-transform:uppercase;letter-spacing:.5px;font-size:.9rem}
+  .btn-p{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(220,38,38,.3)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(31,41,55,.92);backdrop-filter:blur(10px);border-bottom:3px solid var(--primary)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;color:#fff;text-transform:uppercase}
+  .brand span{color:var(--gold)}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:#9CA3AF;text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem;color:#E5E7EB}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.8rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5rem 1.2rem 5.5rem;overflow:hidden;background:var(--ink);color:#fff}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(220,38,38,.30),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(250,204,21,.14),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:var(--gold);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:6px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.02;margin:1.1rem 0 .6rem;font-weight:700;text-transform:uppercase}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero p{max-width:560px;margin:0 auto 1.8rem;color:#D1D5DB;font-size:1.08rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;color:#9CA3AF;font-size:.9rem;font-weight:600}
+  .hero-strip b{color:#fff}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--primary);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .6rem;text-transform:uppercase}
+  .sec-head p{color:var(--muted)}
+
+  /* story */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:16px;background:linear-gradient(135deg,#374151,#1F2937);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow);border:3px solid var(--gold)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+
+  /* services */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:880px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.svc-grid{grid-template-columns:1fr}}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column;border-top:4px solid var(--primary)}
+  .svc .icon{font-size:2.4rem;margin-bottom:.6rem}
+  .svc h3{font-size:1.2rem;margin-bottom:.4rem;text-transform:uppercase}
+  .svc p{font-size:.9rem;color:var(--muted);flex:1}
+  .svc .price{font-family:'Oswald',sans-serif;font-weight:700;color:var(--ink);font-size:1.05rem;margin:.8rem 0}
+  .svc .price span{color:var(--primary)}
+  .svc .btn{width:100%;justify-content:center;padding:.6rem 1rem}
+
+  /* why choose */
+  .why{background:var(--ink);color:#fff;border-top:4px solid var(--primary)}
+  .why .sec-head h2{color:#fff}
+  .why .sec-head .eyebrow{color:var(--gold)}
+  .trust-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+  @media(max-width:780px){.trust-row{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:440px){.trust-row{grid-template-columns:1fr}}
+  .trust{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:1.4rem;text-align:center}
+  .trust .t-ico{font-size:2.2rem}
+  .trust b{display:block;font-family:'Oswald',sans-serif;font-size:1.05rem;margin:.5rem 0 .2rem;text-transform:uppercase;letter-spacing:.5px}
+  .trust span{font-size:.85rem;color:#9CA3AF}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+  @media(max-width:680px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .g-tile{aspect-ratio:1;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:#fff}
+
+  /* reviews */
+  .reviews{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:1.4rem;border-left:4px solid var(--gold)}
+  .rev .stars{color:var(--gold);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem}
+  .rev .who{font-weight:700;font-size:.9rem}
+
+  /* visit */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.visit{grid-template-columns:1fr}}
+  .visit-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.6rem;box-shadow:var(--shadow);border-top:4px solid var(--primary)}
+  .visit-card h3{margin-bottom:.6rem;text-transform:uppercase}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .map-art{border-radius:14px;background:linear-gradient(135deg,#1f2937,#374151);min-height:240px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#D1D5DB;text-align:center;padding:3rem 1.2rem 2rem;border-top:4px solid var(--primary)}
+  footer .brand{color:#fff;display:inline-block}
+  footer .small{color:#9CA3AF;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">Auto<span>Care</span> Garage<small>Car Service & Repair</small></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit Us</a>
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">🔧 Book a Service</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">★ Certified Mechanics · Since 2010</span>
+  <h1>Your car, in <em>expert hands</em></h1>
+  <p>Honest, reliable auto repair with genuine parts and transparent pricing. From a quick oil change to full bodywork — we get you back on the road, fast.</p>
+  <div class="hero-cta">
+    <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">🔧 Book a Service</a>
+    <a class="btn btn-o" href="#services">View Services</a>
+  </div>
+  <div class="hero-strip"><span>🔧 <b>15+</b> Years</span><span>⭐ <b>4.9</b> Rating</span><span>🕒 <b>Same-Day</b> Service</span><span>🚚 <b>Free</b> Pickup & Drop</span></div>
+</header>
+
+<section id="story" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">Who We Are</div>
+        <h2>A trusted garage, built on honest work</h2>
+      </div>
+      <p style="color:var(--muted)">AutoCare Garage has kept the city moving for over a decade. Our certified mechanics treat every vehicle like their own — diagnosing the real problem, using genuine parts, and never charging for work you don't need.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Fast turnaround, clear quotes before we start, and a workshop you can actually trust.</p>
+    </div>
+    <div class="story-art">🔧</div>
+  </div>
+</section>
+
+<section id="services" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">What We Do</div><h2>Our Services</h2><p>Everything your vehicle needs, under one roof</p></div>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="icon">🛠️</div>
+        <h3>General Service</h3>
+        <p>Complete multi-point inspection, fluids, filters and tune-up to keep your car running smooth.</p>
+        <div class="price">From <span>₹2,499</span></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="svc">
+        <div class="icon">🛢️</div>
+        <h3>Oil Change</h3>
+        <p>Premium engine oil & filter replacement with a free top-up check. Quick, clean and done right.</p>
+        <div class="price">From <span>₹999</span></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="svc">
+        <div class="icon">❄️</div>
+        <h3>AC Service</h3>
+        <p>AC gas refill, cooling-coil cleaning and leak check so your cabin stays cool all summer.</p>
+        <div class="price">From <span>₹1,499</span></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="svc">
+        <div class="icon">🎨</div>
+        <h3>Denting & Painting</h3>
+        <p>Expert dent removal and showroom-finish painting that makes your car look brand new.</p>
+        <div class="price"><span>Call for quote</span></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="svc">
+        <div class="icon">🛞</div>
+        <h3>Wheel Alignment</h3>
+        <p>Computerised alignment & balancing for safer handling and longer tyre life.</p>
+        <div class="price">From <span>₹799</span></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">Book</a>
+      </div>
+      <div class="svc">
+        <div class="icon">🚨</div>
+        <h3>Breakdown Assistance</h3>
+        <p>Stuck on the road? Call us for on-spot help and towing — we'll reach you quickly.</p>
+        <div class="price"><span>Call for quote</span></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">Book</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">🔧 Get a Free Quote on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Why AutoCare</div><h2>Why Choose Us</h2></div>
+    <div class="trust-row">
+      <div class="trust"><div class="t-ico">✅</div><b>Certified Mechanics</b><span>Trained, experienced experts</span></div>
+      <div class="trust"><div class="t-ico">🕒</div><b>Same-Day Service</b><span>Back on the road fast</span></div>
+      <div class="trust"><div class="t-ico">🛡️</div><b>Genuine Parts</b><span>Only quality, warranted parts</span></div>
+      <div class="trust"><div class="t-ico">💰</div><b>Transparent Pricing</b><span>Clear quotes, no surprises</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Inside The Workshop</div><h2>Gallery</h2><p>Your real workshop & vehicle photos would shine here</p></div>
+  <div class="gallery">
+    <div class="g-tile" style="background:linear-gradient(135deg,#DC2626,#991B1B)">🚗</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#374151,#1F2937)">🔧</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#2563EB,#1E40AF)">🛠️</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#F59E0B,#B45309)">🔋</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#10B981,#047857)">🛞</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#6B7280,#374151)">🚙</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">⚙️</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#EF4444,#B91C1C)">🧰</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Trusted By Drivers</div><h2>What People Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"Got my car serviced same day and the pricing was exactly as quoted. Honest mechanics — hard to find these days!"</p><div class="who">— Rajesh M.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Their pickup & drop saved me so much hassle. The AC works like new and the staff explained everything clearly."</p><div class="who">— Priya S.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Denting and painting came out flawless. Car looks brand new. Will only trust AutoCare from now on."</p><div class="who">— Imran K.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Drop By</div><h2>Visit Us</h2></div>
+  <div class="visit">
+    <div class="visit-card">
+      <h3>📍 Find Us</h3>
+      <div class="row">🏠 <span><b>AutoCare Garage</b><br>123 Workshop Road, Your City</span></div>
+      <div class="row">🕒 <span><b>Open</b> · Mon–Sat, 9:00 AM – 8:00 PM</span></div>
+      <div class="row">🚚 <span><b>Free pickup & drop</b> across the city</span></div>
+      <div class="row">📞 <span><b>Bookings & breakdowns</b><br>WhatsApp us anytime</span></div>
+      <div style="margin-top:1rem"><a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+car+service+website+like+the+AutoCare+demo" target="_blank" rel="noopener">🔧 Book a Service</a></div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">AutoCare Garage</div>
+  <div class="small">123 Workshop Road, Your City · Mon–Sat 9am–8pm · A demo website</div>
+  <div class="small">© AutoCare Garage (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

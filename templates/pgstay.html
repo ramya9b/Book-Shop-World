@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comfort Stay PG & Hostel · Paying-Guest Accommodation — Demo Website</title>
+<meta name="description" content="Demo PG & hostel website template by Sri Vara Lakshmi Balaji Enterprises. Single, sharing & AC rooms with food, Wi-Fi & laundry for students and working professionals. Get a website like this for your business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2FAF8; --card:#FFFFFF; --ink:#0F2A28; --muted:#5C7A75;
+    --primary:#0F766E; --primary-d:#0B5A53; --gold:#F59E0B; --line:#D8ECE8;
+    --shadow:0 10px 30px rgba(15,42,40,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Poppins',sans-serif}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(15,118,110,.3)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(242,250,248,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:1.35rem;color:var(--primary)}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.85rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5rem 1.2rem 5.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(245,158,11,.16),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(15,118,110,.14),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.4rem,7vw,4.2rem);line-height:1.05;margin:1.1rem 0 .6rem;font-weight:800}
+  .hero h1 em{color:var(--primary);font-style:italic}
+  .hero p{max-width:560px;margin:0 auto 1.8rem;color:var(--muted);font-size:1.08rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;color:var(--muted);font-size:.9rem;font-weight:600}
+  .hero-strip b{color:var(--ink)}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* about */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,#14B8A6,#0F766E);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+  .blocks{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}
+  .block-pill{display:inline-flex;align-items:center;gap:.45rem;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:.5rem 1rem;font-weight:600;font-size:.9rem;box-shadow:var(--shadow)}
+
+  /* rooms (priced) */
+  .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  @media(max-width:680px){.menu-grid{grid-template-columns:1fr}}
+  .menu-cat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .menu-cat h3{font-size:1.25rem;color:var(--primary);margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
+  .room-rent{font-family:'Poppins',sans-serif;font-weight:800;font-size:1.5rem;color:var(--gold);margin-bottom:.2rem}
+  .room-rent span{font-family:'Inter';font-weight:600;font-size:.82rem;color:var(--muted)}
+  .room-sub{font-size:.86rem;color:var(--muted);margin-bottom:.9rem}
+  .feat{display:flex;align-items:flex-start;gap:.5rem;padding:.4rem 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+  .feat:last-child{border-bottom:none}
+  .feat .tick{color:var(--primary);font-weight:700}
+  .menu-cat .btn{margin-top:1rem;align-self:flex-start;padding:.6rem 1.2rem;font-size:.85rem}
+
+  /* amenities */
+  .amen-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+  @media(max-width:780px){.amen-grid{grid-template-columns:repeat(2,1fr)}}
+  .amen{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1rem;text-align:center;box-shadow:var(--shadow)}
+  .amen .ic{font-size:2rem}
+  .amen .lbl{font-weight:700;font-size:.92rem;margin-top:.5rem}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1.6rem}
+  @media(max-width:680px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .g-tile{aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:#fff}
+
+  /* reviews */
+  .reviews{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+  .rev .stars{color:var(--gold);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem}
+  .rev .who{font-weight:700;font-size:.9rem}
+
+  /* visit */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.visit{grid-template-columns:1fr}}
+  .visit-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow)}
+  .visit-card h3{margin-bottom:.6rem}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .map-art{border-radius:18px;background:linear-gradient(135deg,#0F766E,#0B5A53);min-height:240px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#D6EAE6;text-align:center;padding:3rem 1.2rem 2rem}
+  footer .brand{color:#fff}
+  footer .small{color:#9FC2BC;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">Comfort Stay<small>PG & Hostel</small></div>
+    <div class="nav-links">
+      <a href="#rooms">Rooms & Rent</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#visit">Visit Us</a>
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Book a Visit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">★ Ladies & Gents · Near IT Parks & Colleges</span>
+  <h1>A comfortable <em>home</em> away from home</h1>
+  <p>Clean, furnished rooms with home-style food, Wi-Fi and laundry — built for students and working professionals. Move in and feel at home from day one.</p>
+  <div class="hero-cta">
+    <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Book a Visit</a>
+    <a class="btn btn-o" href="#rooms">View Rooms & Rent</a>
+  </div>
+  <div class="hero-strip"><span>🛏️ <b>4</b> Room Types</span><span>⭐ <b>4.9</b> Rating</span><span>🍱 <b>Food</b> Included</span><span>🔒 <b>24/7</b> Security</span></div>
+</header>
+
+<section id="about" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">About Us</div>
+        <h2>Safe, friendly stays for students & professionals</h2>
+      </div>
+      <p style="color:var(--muted)">Comfort Stay PG & Hostel is a welcoming, well-kept home in the heart of the city — just minutes from leading IT parks and colleges. We focus on cleanliness, tasty home-style meals and a warm, secure environment so you can focus on what matters.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Separate blocks for ladies and gents, friendly wardens, and everything furnished — simply bring your bags and settle in.</p>
+      <div class="blocks">
+        <span class="block-pill">👩 Ladies Block</span>
+        <span class="block-pill">👨 Gents Block</span>
+        <span class="block-pill">🏢 Near IT Parks & Colleges</span>
+      </div>
+    </div>
+    <div class="story-art">🏠</div>
+  </div>
+</section>
+
+<section id="rooms" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Choose Your Room</div><h2>Room Types & Rent</h2><p>All-inclusive monthly rent — food, Wi-Fi & housekeeping covered</p></div>
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>🛏️ Single Room</h3>
+        <div class="room-rent">₹12,000 <span>/ month</span></div>
+        <div class="room-sub">Your own private space &amp; peace of mind</div>
+        <div class="feat"><span class="tick">✓</span> Private furnished room with study table</div>
+        <div class="feat"><span class="tick">✓</span> Attached/shared bathroom with hot water</div>
+        <div class="feat"><span class="tick">✓</span> 3 home-style meals + Wi-Fi included</div>
+        <div class="feat"><span class="tick">✓</span> Daily housekeeping &amp; weekly laundry</div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Enquire Now</a>
+      </div>
+      <div class="menu-cat">
+        <h3>🛏️ Double Sharing</h3>
+        <div class="room-rent">₹8,000 <span>/ month</span></div>
+        <div class="room-sub">Comfortable room shared by two</div>
+        <div class="feat"><span class="tick">✓</span> Furnished beds, wardrobes &amp; study desk</div>
+        <div class="feat"><span class="tick">✓</span> Hot water &amp; clean shared washrooms</div>
+        <div class="feat"><span class="tick">✓</span> 3 home-style meals + Wi-Fi included</div>
+        <div class="feat"><span class="tick">✓</span> Housekeeping &amp; laundry covered</div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Enquire Now</a>
+      </div>
+      <div class="menu-cat">
+        <h3>🛏️ Triple Sharing</h3>
+        <div class="room-rent">₹6,000 <span>/ month</span></div>
+        <div class="room-sub">Most affordable &amp; budget-friendly</div>
+        <div class="feat"><span class="tick">✓</span> Furnished beds with personal storage</div>
+        <div class="feat"><span class="tick">✓</span> Hot water &amp; well-maintained washrooms</div>
+        <div class="feat"><span class="tick">✓</span> 3 home-style meals + Wi-Fi included</div>
+        <div class="feat"><span class="tick">✓</span> Housekeeping &amp; laundry covered</div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Enquire Now</a>
+      </div>
+      <div class="menu-cat">
+        <h3>❄️ Deluxe AC Room</h3>
+        <div class="room-rent">₹15,000 <span>/ month</span></div>
+        <div class="room-sub">Premium comfort with air conditioning</div>
+        <div class="feat"><span class="tick">✓</span> Spacious AC room, premium furnishing</div>
+        <div class="feat"><span class="tick">✓</span> Attached bathroom &amp; 24/7 hot water</div>
+        <div class="feat"><span class="tick">✓</span> 3 home-style meals + high-speed Wi-Fi</div>
+        <div class="feat"><span class="tick">✓</span> Daily housekeeping &amp; priority laundry</div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Enquire Now</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Check Availability on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="amenities" class="wrap">
+  <div class="sec-head"><div class="eyebrow">All Included</div><h2>Amenities & Comforts</h2><p>Everything you need for an easy, worry-free stay</p></div>
+  <div class="amen-grid">
+    <div class="amen"><div class="ic">🍱</div><div class="lbl">Food Included</div></div>
+    <div class="amen"><div class="ic">📶</div><div class="lbl">High-Speed Wi-Fi</div></div>
+    <div class="amen"><div class="ic">🧺</div><div class="lbl">Laundry</div></div>
+    <div class="amen"><div class="ic">🧹</div><div class="lbl">Housekeeping</div></div>
+    <div class="amen"><div class="ic">🔒</div><div class="lbl">24/7 Security</div></div>
+    <div class="amen"><div class="ic">🚿</div><div class="lbl">Hot Water</div></div>
+    <div class="amen"><div class="ic">🛏️</div><div class="lbl">Fully Furnished</div></div>
+    <div class="amen"><div class="ic">⚡</div><div class="lbl">Power Backup</div></div>
+  </div>
+  <div class="sec-head" style="margin:3rem auto 0"><div class="eyebrow">A Peek Inside</div><h2>Gallery</h2><p>Your real room & common-area photos would shine here</p></div>
+  <div class="gallery">
+    <div class="g-tile" style="background:linear-gradient(135deg,#14B8A6,#0F766E)">🛏️</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#F59E0B,#D97706)">🍱</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#0EA5E9,#0369A1)">📶</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">🛋️</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#10B981,#047857)">🧺</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#EC4899,#BE185D)">🚿</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#F97316,#C2410C)">📚</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#0F766E,#0B5A53)">🔒</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Loved By Residents</div><h2>What Residents Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"Felt like home from day one. The food is just like mom makes it, rooms are spotless, and it's so close to my office. Highly recommend!"</p><div class="who">— Priya S., IT Professional</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Safe and well-managed ladies block. Wardens are caring, Wi-Fi is fast, and laundry &amp; housekeeping make student life so easy."</p><div class="who">— Divya M., Engineering Student</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Great value for the rent. AC room is super comfortable, food is tasty, and the 24/7 security gives my parents real peace of mind."</p><div class="who">— Arjun K., Working Professional</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Come Say Hi</div><h2>Enquire & Visit</h2></div>
+  <div class="visit">
+    <div class="visit-card">
+      <h3>📍 Find Us</h3>
+      <div class="row">🏠 <span><b>Comfort Stay PG &amp; Hostel</b><br>123 Tech Park Road, Your City</span></div>
+      <div class="row">👩👨 <span><b>Separate Ladies &amp; Gents blocks</b><br>Near IT parks &amp; colleges</span></div>
+      <div class="row">🕒 <span><b>Visits welcome daily</b> · 9:00 AM – 8:00 PM</span></div>
+      <div class="row">📞 <span><b>Bookings &amp; enquiries</b><br>WhatsApp us anytime</span></div>
+      <div style="margin-top:1rem"><a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+PG+hostel+website+like+the+Comfort+Stay+demo" target="_blank" rel="noopener">🏠 Book a Visit</a></div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Comfort Stay PG &amp; Hostel</div>
+  <div class="small">123 Tech Park Road, Your City · Ladies &amp; Gents · Visits 9am–8pm · A demo website</div>
+  <div class="small">© Comfort Stay PG &amp; Hostel (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

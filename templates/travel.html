@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wanderlust Travels · Travel & Tours Agency — Demo Website</title>
+<meta name="description" content="Demo travel agency website template by Sri Vara Lakshmi Balaji Enterprises. Get a website like this for your tours & travel business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F0F9FF; --card:#FFFFFF; --ink:#0C2A3A; --muted:#5B7588;
+    --primary:#0EA5E9; --primary-d:#0284C7; --accent:#F97316; --line:#D8ECF7;
+    --shadow:0 10px 30px rgba(12,42,58,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.display{font-family:'Poppins',sans-serif}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(14,165,233,.3)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-a{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(249,115,22,.3)}
+  .btn-a:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(240,249,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:1.35rem;color:var(--primary)}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.85rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5rem 1.2rem 5.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(14,165,233,.18),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(249,115,22,.16),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.4rem,7vw,4.2rem);line-height:1.05;margin:1.1rem 0 .6rem;font-weight:800}
+  .hero h1 em{color:var(--accent);font-style:italic}
+  .hero p{max-width:560px;margin:0 auto 1.8rem;color:var(--muted);font-size:1.08rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;color:var(--muted);font-size:.9rem;font-weight:600}
+  .hero-strip b{color:var(--ink)}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--accent);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* story */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,#38BDF8,#0EA5E9);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+
+  /* services row */
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem}
+  @media(max-width:780px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:440px){.svc-grid{grid-template-columns:1fr}}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.3rem;text-align:center;box-shadow:var(--shadow)}
+  .svc .ic{font-size:2rem}
+  .svc h4{font-family:'Poppins',sans-serif;margin:.5rem 0 .3rem;font-size:1.02rem}
+  .svc p{color:var(--muted);font-size:.85rem}
+
+  /* packages */
+  .pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  @media(max-width:680px){.pkg-grid{grid-template-columns:1fr}}
+  .pkg{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .pkg h3{font-size:1.25rem;color:var(--primary);margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem}
+  .pkg .from{font-weight:700;color:var(--accent);font-size:1.05rem;margin-bottom:.8rem}
+  .pkg .from span{color:var(--muted);font-weight:500;font-size:.82rem}
+  .inc{padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+  .inc:last-of-type{border-bottom:none}
+  .inc b{color:var(--ink)}
+  .inc .i-desc{font-size:.82rem;color:var(--muted)}
+  .pkg .btn{margin-top:1rem;align-self:flex-start}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+  @media(max-width:680px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .g-tile{aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:#fff;flex-direction:column;gap:.3rem}
+  .g-tile span{font-size:.72rem;font-weight:600;letter-spacing:.5px}
+
+  /* reviews */
+  .reviews{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+  .rev .stars{color:var(--accent);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem}
+  .rev .who{font-weight:700;font-size:.9rem}
+
+  /* enquire */
+  .enquire{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.enquire{grid-template-columns:1fr}}
+  .enq-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow)}
+  .enq-card h3{margin-bottom:.6rem}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .map-art{border-radius:18px;background:linear-gradient(135deg,#0C2A3A,#155E75);min-height:240px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#CFE6F2;text-align:center;padding:3rem 1.2rem 2rem}
+  footer .brand{color:#fff}
+  footer .small{color:#8FB3C6;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">Wanderlust Travels<small>Travel & Tours</small></div>
+    <div class="nav-links">
+      <a href="#packages">Packages</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#enquire">Enquire</a>
+      <a class="btn btn-a" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Plan My Trip</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">✈️ Curated Tours · Trusted Since 2012</span>
+  <h1>Explore the world <em>with us</em></h1>
+  <p>Handpicked holidays, honeymoons & pilgrimages — flights, hotels, visas and itineraries sorted. Just tell us your dream, and we'll plan it on WhatsApp.</p>
+  <div class="hero-cta">
+    <a class="btn btn-a" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Plan My Trip</a>
+    <a class="btn btn-o" href="#packages">View Packages</a>
+  </div>
+  <div class="hero-strip"><span>🌍 <b>50+</b> Destinations</span><span>⭐ <b>4.9</b> Rating</span><span>🧳 <b>12,000+</b> Travellers</span><span>🛡️ <b>100%</b> Safe Trips</span></div>
+</header>
+
+<section id="story" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">Who We Are</div>
+        <h2>Your trusted travel partner for over a decade</h2>
+      </div>
+      <p style="color:var(--muted)">From weekend getaways to once-in-a-lifetime journeys, Wanderlust Travels crafts every trip with care. We handle the bookings, the visas and the little details — so you only have to pack your bags and make memories.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Best prices, real human support, and itineraries tailored to you.</p>
+    </div>
+    <div class="story-art">🌏</div>
+  </div>
+  <div class="svc-grid">
+    <div class="svc"><div class="ic">✈️</div><h4>Flights</h4><p>Best-fare domestic & international tickets</p></div>
+    <div class="svc"><div class="ic">🏨</div><h4>Hotels & Stays</h4><p>Handpicked, budget to luxury</p></div>
+    <div class="svc"><div class="ic">🛂</div><h4>Visa Assistance</h4><p>Documentation & end-to-end support</p></div>
+    <div class="svc"><div class="ic">🗺️</div><h4>Custom Itineraries</h4><p>Trips designed around you</p></div>
+  </div>
+</section>
+
+<section id="packages" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Our Packages</div><h2>Tours For Every Traveller</h2><p>Transparent pricing — what you see is what you pay</p></div>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <h3>🏖️ Domestic Tours</h3>
+        <div class="from">From ₹8,999 <span>/ per person</span></div>
+        <div class="inc"><b>Goa Beach Escape</b><div class="i-desc">3N/4D · stay, breakfast & sightseeing</div></div>
+        <div class="inc"><b>Kerala Backwaters</b><div class="i-desc">Houseboat, hill stations & cab transfers</div></div>
+        <div class="inc"><b>Rajasthan Heritage</b><div class="i-desc">Forts, palaces & desert camp</div></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Enquire Now</a>
+      </div>
+      <div class="pkg">
+        <h3>🗼 International Holidays</h3>
+        <div class="from">From ₹49,999 <span>/ per person</span></div>
+        <div class="inc"><b>Dubai Delight</b><div class="i-desc">4N/5D · visa, hotel, desert safari</div></div>
+        <div class="inc"><b>Thailand & Bali</b><div class="i-desc">Beaches, islands & airport transfers</div></div>
+        <div class="inc"><b>Singapore + Malaysia</b><div class="i-desc">City tours, theme parks & meals</div></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Enquire Now</a>
+      </div>
+      <div class="pkg">
+        <h3>💖 Honeymoon Packages</h3>
+        <div class="from">From ₹24,999 <span>/ per couple</span></div>
+        <div class="inc"><b>Maldives Romance</b><div class="i-desc">Water villa, candle-light dinner</div></div>
+        <div class="inc"><b>Manali & Shimla</b><div class="i-desc">Snow points, cosy resort stay</div></div>
+        <div class="inc"><b>Andaman Islands</b><div class="i-desc">Private beaches & scuba add-on</div></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Enquire Now</a>
+      </div>
+      <div class="pkg">
+        <h3>🕌 Pilgrimage / Char Dham</h3>
+        <div class="from">From ₹14,999 <span>/ per person</span></div>
+        <div class="inc"><b>Char Dham Yatra</b><div class="i-desc">Guided darshan, stay & transport</div></div>
+        <div class="inc"><b>Tirupati & Rameshwaram</b><div class="i-desc">Special darshan & comfortable cabs</div></div>
+        <div class="inc"><b>Vaishno Devi</b><div class="i-desc">Helicopter add-on available</div></div>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Enquire Now</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-a" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Get a Custom Quote on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="destinations" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Where To Next</div><h2>Popular Destinations</h2><p>Your real destination photos would shine here</p></div>
+  <div class="gallery">
+    <div class="g-tile" style="background:linear-gradient(135deg,#38BDF8,#0369A1)">✈️<span>Dubai</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#FBBF24,#F97316)">🏖️<span>Goa</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#34D399,#047857)">🏔️<span>Manali</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#A78BFA,#6D28D9)">🕌 <span>Char Dham</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#F472B6,#BE185D)">🗼<span>Paris</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#22D3EE,#0E7490)">🏝️<span>Maldives</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#60A5FA,#1D4ED8)">🚢<span>Cruise</span></div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#FB923C,#C2410C)">🎒<span>Backpacking</span></div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Loved By Travellers</div><h2>What Our Guests Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"Our Dubai trip was flawless — visa, hotel and tours all sorted. Booking everything on WhatsApp was so easy!"</p><div class="who">— Priya & Arjun</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Did the Char Dham Yatra with my parents. Smooth arrangements, caring guides. Truly stress-free."</p><div class="who">— Ramesh Iyer</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Best honeymoon ever in the Maldives. The custom itinerary was perfect and prices were unbeatable."</p><div class="who">— Sneha M.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="enquire" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Start Your Journey</div><h2>Enquire Now</h2></div>
+  <div class="enquire">
+    <div class="enq-card">
+      <h3>📍 Reach Us</h3>
+      <div class="row">🏠 <span><b>Wanderlust Travels</b><br>123 Main Road, Your City</span></div>
+      <div class="row">🕒 <span><b>Open daily</b> · 9:00 AM – 8:00 PM</span></div>
+      <div class="row">📞 <span><b>Bookings & enquiries</b><br>WhatsApp us anytime</span></div>
+      <div style="margin-top:1rem"><a class="btn btn-a" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+travel+website+like+the+Wanderlust+demo" target="_blank" rel="noopener">📲 Plan My Trip</a></div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Wanderlust Travels</div>
+  <div class="small">123 Main Road, Your City · Open 9am–8pm · A demo website</div>
+  <div class="small">© Wanderlust Travels (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>
