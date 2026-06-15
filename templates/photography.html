@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Candid Frames Studio · Photography & Events — Demo Website</title>
+<meta name="description" content="Demo photography & events studio website template by Sri Vara Lakshmi Balaji Enterprises. Get a website like this for your studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F1E8; --card:#FFFFFF; --ink:#18120E; --muted:#7C6E5F;
+    --primary:#D4A24E; --primary-d:#B45309; --gold:#C08A2E; --line:#E7DBC8;
+    --shadow:0 12px 34px rgba(24,18,14,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--primary);color:#18120E;box-shadow:0 8px 20px rgba(212,162,78,.4)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(247,241,232,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;color:var(--primary-d)}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem}
+  .nav-links a:hover{color:var(--primary-d)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.85rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5.5rem 1.2rem 6rem;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,#241A12,#18120E 70%);color:#F7F1E8}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(55% 50% at 50% 0%,rgba(212,162,78,.28),transparent),
+     radial-gradient(50% 60% at 88% 100%,rgba(180,83,9,.22),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:rgba(247,241,232,.08);border:1px solid rgba(212,162,78,.45);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.6rem,7.5vw,4.8rem);line-height:1.02;margin:1.1rem 0 .6rem;font-weight:700}
+  .hero h1 em{color:var(--primary);font-style:italic}
+  .hero p{max-width:580px;margin:0 auto 1.8rem;color:#D9CBB8;font-size:1.1rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.6rem;color:#C9B89F;font-size:.9rem;font-weight:600}
+  .hero-strip b{color:#F7F1E8}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(2.1rem,4.5vw,3rem);margin:.3rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* story */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,#D4A24E,#B45309 60%,#241A12);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+
+  /* packages */
+  .pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  @media(max-width:680px){.pkg-grid{grid-template-columns:1fr}}
+  .pkg{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.6rem 1.7rem;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .pkg.feat{border:1.5px solid var(--primary);position:relative}
+  .pkg.feat::after{content:"Most Booked";position:absolute;top:1.2rem;right:1.2rem;background:var(--primary);color:#18120E;font-size:.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.3rem .6rem;border-radius:20px}
+  .pkg h3{font-size:1.6rem;color:var(--primary-d);display:flex;align-items:center;gap:.5rem}
+  .pkg .price{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:2rem;color:var(--ink);margin:.3rem 0 .2rem}
+  .pkg .price small{font-family:'Inter';font-size:.8rem;font-weight:500;color:var(--muted)}
+  .pkg ul{list-style:none;margin:.9rem 0 1.3rem;display:flex;flex-direction:column;gap:.45rem}
+  .pkg li{font-size:.9rem;color:var(--muted);padding-left:1.5rem;position:relative}
+  .pkg li::before{content:"✦";position:absolute;left:0;color:var(--primary)}
+  .pkg .btn{margin-top:auto;justify-content:center}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  @media(max-width:680px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .g-tile{aspect-ratio:3/4;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;color:#fff;box-shadow:var(--shadow)}
+
+  /* reviews */
+  .reviews{background:#18120E;color:#F7F1E8;border-top:1px solid #2A2016;border-bottom:1px solid #2A2016}
+  .reviews .sec-head h2{color:#F7F1E8}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:rgba(247,241,232,.05);border:1px solid rgba(212,162,78,.25);border-radius:16px;padding:1.4rem}
+  .rev .stars{color:var(--primary);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem;color:#E5D9C7}
+  .rev .who{font-weight:700;font-size:.9rem;color:var(--primary)}
+
+  /* booking */
+  .booking{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.booking{grid-template-columns:1fr}}
+  .booking-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow)}
+  .booking-card h3{margin-bottom:.6rem;font-size:1.5rem}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .map-art{border-radius:18px;background:linear-gradient(135deg,#241A12,#3A2A1C);min-height:240px;display:flex;align-items:center;justify-content:center;color:#F7F1E8;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#E9DDCF;text-align:center;padding:3rem 1.2rem 2rem}
+  footer .brand{color:#fff}
+  footer .small{color:#B6A493;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">Candid Frames<small>Photography & Events</small></div>
+    <div class="nav-links">
+      <a href="#packages">Packages</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#book">Book Us</a>
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book a Shoot</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">★ Weddings · Events · Portraits · Since 2014</span>
+  <h1>Moments, beautifully <em>captured</em></h1>
+  <p>Cinematic photography and films for the days you'll never want to forget. From grand weddings to quiet portraits — we frame the feeling, not just the photo.</p>
+  <div class="hero-cta">
+    <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book a Shoot</a>
+    <a class="btn btn-o" href="#portfolio" style="color:#F7F1E8;border-color:#F7F1E8">View Portfolio</a>
+  </div>
+  <div class="hero-strip"><span>📸 <b>500+</b> Shoots</span><span>⭐ <b>4.9</b> Rating</span><span>💍 <b>180+</b> Weddings</span><span>🎞️ <b>4K</b> Films</span></div>
+</header>
+
+<section id="story" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">Our Craft</div>
+        <h2>A studio that chases light, emotion & story</h2>
+      </div>
+      <p style="color:var(--muted)">At Candid Frames Studio we believe the best photographs are felt before they are seen. For a decade we've quietly worked the corners of weddings and celebrations — catching the glance, the laugh, the happy tear.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Warm, unobtrusive, and obsessed with detail — we hand-edit every frame so your gallery looks timeless, never trendy.</p>
+    </div>
+    <div class="story-art">📷</div>
+  </div>
+</section>
+
+<section id="packages" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Investment</div><h2>Photography Packages</h2><p>Transparent pricing — customise any package to suit your day</p></div>
+    <div class="pkg-grid">
+      <div class="pkg feat">
+        <h3>💍 Wedding</h3>
+        <div class="price">₹45,000 <small>/ full day</small></div>
+        <ul>
+          <li>Two photographers + one cinematographer</li>
+          <li>Full-day candid & traditional coverage</li>
+          <li>300+ edited photos in online gallery</li>
+          <li>3–4 min cinematic highlight film</li>
+          <li>Premium printed album (30 sheets)</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book Wedding</a>
+      </div>
+      <div class="pkg">
+        <h3>🌅 Pre-Wedding</h3>
+        <div class="price">₹18,000 <small>/ session</small></div>
+        <ul>
+          <li>Half-day shoot at one location</li>
+          <li>Concept & outfit guidance included</li>
+          <li>80+ edited photos in online gallery</li>
+          <li>60-sec reel for social media</li>
+          <li>One styled couple poster print</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book Pre-Wedding</a>
+      </div>
+      <div class="pkg">
+        <h3>🎂 Events &amp; Birthdays</h3>
+        <div class="price">₹12,000 <small>/ event</small></div>
+        <ul>
+          <li>Up to 4 hours of coverage</li>
+          <li>Candid + group & décor shots</li>
+          <li>150+ edited photos in online gallery</li>
+          <li>30-sec event reel</li>
+          <li>Same-week soft-copy delivery</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book Event</a>
+      </div>
+      <div class="pkg">
+        <h3>👶 Portrait / Maternity</h3>
+        <div class="price">₹8,000 <small>/ session</small></div>
+        <ul>
+          <li>Studio or outdoor, 2 hours</li>
+          <li>Props, backdrops & styling support</li>
+          <li>40+ edited photos in online gallery</li>
+          <li>5 retouched signature portraits</li>
+          <li>One framed print to take home</li>
+        </ul>
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book Portrait</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📲 Get a Custom Quote on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Selected Work</div><h2>Portfolio</h2><p>Your real photographs would fill these frames</p></div>
+  <div class="gallery">
+    <div class="g-tile" style="background:linear-gradient(135deg,#D4A24E,#B45309)">📸</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#9D174D,#500724)">💍</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#7C3AED,#3B0764)">👰</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#EA580C,#7C2D12)">🎂</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#F59E0B,#92400E)">🌅</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#0EA5A4,#134E4A)">👶</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#DB2777,#831843)">🎉</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#3F3F46,#18181B)">🖼️</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Kind Words</div><h2>What Our Clients Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"They captured our wedding so beautifully — every photo feels like a memory we can hold. The highlight film made us cry happy tears!"</p><div class="who">— Divya &amp; Arjun</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Calm, professional and incredibly talented. Our pre-wedding shoot felt effortless and the reel got hundreds of likes overnight."</p><div class="who">— Priya N.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Booked them for my daughter's first birthday. Candid, sweet, and delivered within the week. Will book again for sure!"</p><div class="who">— Rakesh M.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Let's Create Together</div><h2>Book Your Shoot</h2></div>
+  <div class="booking">
+    <div class="booking-card">
+      <h3>📅 Reserve Your Date</h3>
+      <div class="row">🏠 <span><b>Candid Frames Studio</b><br>123 Main Road, Your City</span></div>
+      <div class="row">🕒 <span><b>Studio hours</b> · 10:00 AM – 8:00 PM</span></div>
+      <div class="row">📞 <span><b>Enquiries & bookings</b><br>WhatsApp us anytime</span></div>
+      <div style="margin-top:1rem;display:flex;gap:.7rem;flex-wrap:wrap">
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📸 Book a Shoot</a>
+        <a class="btn btn-o" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+photography+website+like+the+Candid+Frames+demo" target="_blank" rel="noopener">📅 Check Availability</a>
+      </div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Candid Frames Studio</div>
+  <div class="small">123 Main Road, Your City · Studio 10am–8pm · A demo website</div>
+  <div class="small">© Candid Frames Studio (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>
