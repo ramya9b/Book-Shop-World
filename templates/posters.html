@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Festive & Offer Posters — Sample Designs by SVLB</title>
+<meta name="description" content="Sample festive and offer poster designs by Sri Vara Lakshmi Balaji Enterprises. Custom posters for WhatsApp, Instagram & Facebook with your shop name, colours and offer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F8FC; --card:#FFFFFF; --ink:#1B2030; --muted:#6B7280;
+    --primary:#0A7A4E; --gold:#CA8A04; --line:#E7E9F2;
+    --shadow:0 14px 40px rgba(20,24,45,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.9rem 1.7rem;cursor:pointer;border:none;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn-wa{background:#0A7A4E;color:#fff;box-shadow:0 10px 26px rgba(10,122,78,.35)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* demo note */
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:4rem 1.2rem 2.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(202,138,4,.14),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(10,122,78,.12),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-family:'Poppins',sans-serif;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:1.1rem 0 .7rem;font-weight:900}
+  .hero h1 em{color:var(--primary);font-style:normal}
+  .hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.08rem}
+
+  /* poster grid */
+  .posters{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:1rem 0 1.5rem}
+  @media(max-width:900px){.posters{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.posters{grid-template-columns:1fr}}
+
+  .poster{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.5rem 1.3rem;color:#fff;text-align:center;font-family:'Poppins',sans-serif}
+  .poster::after{content:"";position:absolute;inset:0;pointer-events:none}
+  .poster *{position:relative;z-index:2}
+  .p-top{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;opacity:.92}
+  .p-mid{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .p-emoji{font-size:2.6rem;line-height:1}
+  .p-title{font-family:'Playfair Display',serif;font-weight:900;line-height:1.05;font-size:clamp(1.4rem,3vw,1.8rem);text-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .p-sub{font-size:.9rem;font-weight:600;opacity:.95}
+  .p-badge{display:inline-block;font-weight:800;font-size:.85rem;padding:.45rem 1rem;border-radius:30px;letter-spacing:.5px}
+  .p-foot{font-size:.66rem;font-weight:600;letter-spacing:1px;opacity:.9;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.3);padding-top:.6rem}
+  .p-biz{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;letter-spacing:.5px}
+
+  /* 1 Diwali */
+  .p-diwali{background:linear-gradient(160deg,#7B1113 0%,#B91C1C 38%,#D97706 78%,#F59E0B 100%)}
+  .p-diwali::after{background:radial-gradient(circle at 20% 18%,rgba(255,215,120,.35),transparent 32%),radial-gradient(circle at 82% 80%,rgba(255,180,80,.3),transparent 34%)}
+  .p-diwali .p-badge{background:#FCD34D;color:#7B1113}
+  /* 2 Pongal */
+  .p-pongal{background:linear-gradient(155deg,#FDE047 0%,#A3E635 45%,#65A30D 100%)}
+  .p-pongal::after{background:radial-gradient(circle at 80% 15%,rgba(255,255,255,.4),transparent 30%)}
+  .p-pongal,.p-pongal .p-sub,.p-pongal .p-top,.p-pongal .p-foot{color:#3F2D0B}
+  .p-pongal .p-title{color:#3F2D0B;text-shadow:0 1px 6px rgba(255,255,255,.4)}
+  .p-pongal .p-biz{color:#3F2D0B}
+  .p-pongal .p-badge{background:#16A34A;color:#fff}
+  .p-pongal .p-foot{border-top-color:rgba(63,45,11,.3)}
+  /* 3 Grand Opening */
+  .p-opening{background:linear-gradient(150deg,#6D28D9 0%,#DB2777 45%,#F97316 80%,#FACC15 100%)}
+  .p-opening::after{background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.35),transparent 22%),radial-gradient(circle at 88% 30%,rgba(255,255,150,.4),transparent 20%),radial-gradient(circle at 30% 85%,rgba(120,255,200,.35),transparent 24%)}
+  .p-opening .p-badge{background:#fff;color:#DB2777}
+  /* 4 Mega Sale */
+  .p-sale{background:linear-gradient(160deg,#0B0B0F 0%,#1F2937 40%,#B91C1C 100%)}
+  .p-sale::after{background:radial-gradient(circle at 50% 60%,rgba(239,68,68,.4),transparent 55%)}
+  .p-sale .p-big{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(3rem,9vw,4.4rem);line-height:.9;color:#FACC15;text-shadow:0 4px 16px rgba(0,0,0,.5)}
+  .p-sale .p-badge{background:#EF4444;color:#fff;text-transform:uppercase}
+  /* 5 New Arrivals */
+  .p-new{background:linear-gradient(160deg,#0F172A 0%,#1E1B4B 45%,#312E81 100%)}
+  .p-new::after{background:radial-gradient(circle at 25% 22%,rgba(202,138,4,.4),transparent 30%),radial-gradient(circle at 78% 78%,rgba(212,175,55,.28),transparent 34%)}
+  .p-new .p-title{color:#FCE9A8}
+  .p-new .p-badge{background:linear-gradient(135deg,#F5D78A,#CA8A04);color:#1F1300}
+  .p-new .p-biz{color:#FCE9A8}
+  /* 6 Festival Special / New Year */
+  .p-festival{background:linear-gradient(155deg,#065F46 0%,#047857 40%,#B91C1C 100%)}
+  .p-festival::after{background:radial-gradient(circle at 18% 80%,rgba(250,204,21,.4),transparent 28%),radial-gradient(circle at 85% 20%,rgba(255,255,255,.3),transparent 24%)}
+  .p-festival .p-badge{background:#FACC15;color:#7B1113}
+
+  /* customise line + cta */
+  .cust-line{text-align:center;color:var(--muted);font-size:1rem;font-weight:600;max-width:640px;margin:.5rem auto 0}
+  .cta{text-align:center;padding:3.5rem 1.2rem 5rem}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.6rem}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 1.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">These are sample poster designs. We create custom posters with your shop's name, offer and brand.</div>
+
+<header class="hero">
+  <span class="tagpill">★ Marketing & Social Media Posters</span>
+  <h1>Festive &amp; Offer Posters — ready for <em>WhatsApp, Instagram &amp; Facebook</em></h1>
+  <p>Eye-catching, share-ready poster designs for every festival, sale and special day — made to make your shop stand out in the feed.</p>
+</header>
+
+<section class="wrap">
+  <div class="posters">
+
+    <!-- 1. DIWALI -->
+    <article class="poster p-diwali">
+      <div class="p-top">✨ Festive Greetings ✨</div>
+      <div class="p-mid">
+        <div class="p-emoji">🪔 ✨ 🪔</div>
+        <div class="p-title">Happy Diwali!</div>
+        <div class="p-sub">Light up the savings</div>
+        <span class="p-badge">Festive Offer — 20% OFF</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 2. PONGAL / SANKRANTI -->
+    <article class="poster p-pongal">
+      <div class="p-top">🌾 Harvest Festival 🌾</div>
+      <div class="p-mid">
+        <div class="p-emoji">🌾 🍚 🐄</div>
+        <div class="p-title">Happy Pongal!</div>
+        <div class="p-sub">Celebrate the harvest with us</div>
+        <span class="p-badge">Special Combo Meals</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 3. GRAND OPENING -->
+    <article class="poster p-opening">
+      <div class="p-top">🎊 You're Invited 🎊</div>
+      <div class="p-mid">
+        <div class="p-emoji">🎉 🎊 🎈</div>
+        <div class="p-title">GRAND OPENING</div>
+        <div class="p-sub">Doors are now open</div>
+        <span class="p-badge">Visit Us Today!</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 4. MEGA SALE -->
+    <article class="poster p-sale">
+      <div class="p-top">🏷️ This Weekend Only 🏷️</div>
+      <div class="p-mid">
+        <div class="p-big">50%<br>OFF</div>
+        <span class="p-badge">Mega Sale</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 5. NEW ARRIVALS -->
+    <article class="poster p-new">
+      <div class="p-top">✨ Just Landed ✨</div>
+      <div class="p-mid">
+        <div class="p-emoji">✨ 🛍️ ✨</div>
+        <div class="p-title">New Arrivals</div>
+        <div class="p-sub">Fresh stock you'll love</div>
+        <span class="p-badge">Now In Store</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+    <!-- 6. FESTIVAL SPECIAL / NEW YEAR -->
+    <article class="poster p-festival">
+      <div class="p-top">🎄 Festival Special 🎄</div>
+      <div class="p-mid">
+        <div class="p-emoji">🎄 ⭐ 🎁</div>
+        <div class="p-title">Season's Greetings</div>
+        <div class="p-sub">Wishing you joy &amp; savings</div>
+        <span class="p-badge">Special Offers Inside</span>
+      </div>
+      <div class="p-foot"><div class="p-biz">Sri Annapurna</div>Sri Annapurna · KR Puram</div>
+    </article>
+
+  </div>
+
+  <p class="cust-line">Every poster is customised with your shop name, colours and offer.</p>
+</section>
+
+<section class="cta">
+  <h2>Get custom posters for your shop</h2>
+  <p>Tell us your festival, offer and shop name — we'll design ready-to-post graphics for WhatsApp, Instagram and Facebook.</p>
+  <a class="btn btn-wa" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">📲 Get custom posters on WhatsApp</a>
+</section>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+want+festive+offer+posters+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Sample by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>
