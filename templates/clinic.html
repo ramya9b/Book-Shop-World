@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CareWell Clinic &amp; Pharmacy · Family Healthcare — Demo Website</title>
+<meta name="description" content="Demo clinic & pharmacy website template by Sri Vara Lakshmi Balaji Enterprises. Get a website like this for your healthcare practice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F9FB; --card:#FFFFFF; --ink:#0F2A33; --muted:#5E7A83;
+    --primary:#0E7490; --primary-d:#0B5A70; --accent:#0891B2; --line:#DCEAEF;
+    --shadow:0 10px 30px rgba(14,116,144,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Source Serif 4',Georgia,serif}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(14,116,144,.3)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(244,249,251,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:1.35rem;color:var(--primary)}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem}
+  .nav-links a:hover{color:var(--primary)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.85rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5rem 1.2rem 5.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(8,145,178,.16),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(14,116,144,.14),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.4rem,7vw,4.2rem);line-height:1.05;margin:1.1rem 0 .6rem;font-weight:700}
+  .hero h1 em{color:var(--primary);font-style:italic}
+  .hero p{max-width:560px;margin:0 auto 1.8rem;color:var(--muted);font-size:1.08rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;color:var(--muted);font-size:.9rem;font-weight:600}
+  .hero-strip b{color:var(--ink)}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--accent);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* doctor / intro */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,#22D3EE,#0E7490);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow);position:relative}
+  .doc-badge{position:absolute;bottom:1rem;left:1rem;right:1rem;background:rgba(255,255,255,.94);border-radius:14px;padding:.8rem 1rem;text-align:left;box-shadow:0 6px 18px rgba(15,42,51,.15)}
+  .doc-badge b{display:block;font-size:1rem;color:var(--ink)}
+  .doc-badge span{font-size:.82rem;color:var(--muted)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+
+  /* services */
+  .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  @media(max-width:680px){.menu-grid{grid-template-columns:1fr}}
+  .menu-cat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.4rem 1.5rem;box-shadow:var(--shadow)}
+  .menu-cat h3{font-size:1.25rem;color:var(--primary);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+  .menu-cat .svc-desc{color:var(--muted);font-size:.95rem;margin-bottom:.8rem}
+  .svc-note{display:inline-block;background:#E6F4F8;color:var(--primary-d);font-weight:600;font-size:.78rem;padding:.3rem .8rem;border-radius:30px}
+
+  /* why choose us */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+  @media(max-width:780px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+  .why{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1rem;text-align:center;box-shadow:var(--shadow)}
+  .why .ico{font-size:2rem;display:block;margin-bottom:.5rem}
+  .why b{display:block;font-size:.98rem;margin-bottom:.2rem}
+  .why span{font-size:.84rem;color:var(--muted)}
+
+  /* reviews */
+  .reviews{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+  .rev .stars{color:var(--accent);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem}
+  .rev .who{font-weight:700;font-size:.9rem}
+
+  /* visit */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.visit{grid-template-columns:1fr}}
+  .visit-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow)}
+  .visit-card h3{margin-bottom:.6rem}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .emergency{margin-top:1rem;background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;border-radius:12px;padding:.8rem 1rem;font-size:.9rem;font-weight:600}
+  .map-art{border-radius:18px;background:linear-gradient(135deg,#0F2A33,#0E7490);min-height:240px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#D6E6EB;text-align:center;padding:3rem 1.2rem 2rem}
+  footer .brand{color:#fff}
+  footer .small{color:#9CBDC6;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">CareWell<small>Clinic &amp; Pharmacy</small></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#visit">Visit Us</a>
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+clinic+website+like+the+CareWell+demo" target="_blank" rel="noopener">📅 Book Appointment</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">✚ Family Care · Open 7 Days</span>
+  <h1>Quality care, close to <em>home</em></h1>
+  <p>Trusted doctors, an in-house pharmacy, and quick lab reports — all under one roof. Walk in or book your appointment on WhatsApp in seconds.</p>
+  <div class="hero-cta">
+    <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+clinic+website+like+the+CareWell+demo" target="_blank" rel="noopener">📅 Book Appointment</a>
+    <a class="btn btn-o" href="#services">Our Services</a>
+  </div>
+  <div class="hero-strip"><span>👩‍⚕️ <b>Qualified</b> Doctors</span><span>⭐ <b>4.9</b> Rating</span><span>🕒 Open <b>8am–9pm</b></span><span>💊 In-house <b>Pharmacy</b></span></div>
+</header>
+
+<section id="about" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">Your Doctor</div>
+        <h2>Compassionate, personalised healthcare</h2>
+      </div>
+      <p style="color:var(--muted)">At CareWell Clinic &amp; Pharmacy, you're seen by experienced doctors who take the time to listen. From everyday illnesses to ongoing health management, we treat every patient like family — with clear advice and honest care.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Comfortable waiting area, short wait times, and a pharmacy right next door so you can leave with your medicines in hand.</p>
+    </div>
+    <div class="story-art">👩‍⚕️
+      <div class="doc-badge">
+        <b>Dr. Meera Rao, MBBS, MD</b>
+        <span>General Physician · 15+ years experience</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">How We Help</div><h2>Our Services</h2><p>Everyday care for the whole family</p></div>
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>🩺 General Medicine</h3>
+        <div class="svc-desc">Consultation for fever, infections, blood pressure, diabetes and routine health concerns.</div>
+        <span class="svc-note">🕒 8am–9pm · Walk-in or appointment</span>
+      </div>
+      <div class="menu-cat">
+        <h3>💊 Pharmacy</h3>
+        <div class="svc-desc">In-house pharmacy stocked with genuine medicines, supplements and everyday essentials.</div>
+        <span class="svc-note">💊 Open daily · Affordable pricing</span>
+      </div>
+      <div class="menu-cat">
+        <h3>🧪 Lab Tests / Sample Collection</h3>
+        <div class="svc-desc">Blood and urine tests with on-site sample collection. Reports delivered quickly.</div>
+        <span class="svc-note">🧪 Reports same-day where possible</span>
+      </div>
+      <div class="menu-cat">
+        <h3>💉 Vaccination</h3>
+        <div class="svc-desc">Child immunisation, flu shots and adult vaccines, administered safely by trained staff.</div>
+        <span class="svc-note">📅 By appointment</span>
+      </div>
+      <div class="menu-cat">
+        <h3>📋 Health Check-ups</h3>
+        <div class="svc-desc">Preventive packages covering vitals, blood work and a doctor review — know your numbers.</div>
+        <span class="svc-note">💳 Affordable · Insurance accepted</span>
+      </div>
+      <div class="menu-cat">
+        <h3>🩹 Minor Procedures &amp; Dressings</h3>
+        <div class="svc-desc">Wound dressing, injections, BP &amp; sugar checks and other day-to-day clinical care.</div>
+        <span class="svc-note">🕒 Walk-in welcome</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+clinic+website+like+the+CareWell+demo" target="_blank" rel="noopener">📅 Book an Appointment on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Trusted By Families</div><h2>Why Choose Us</h2><p>Care you can count on, every visit</p></div>
+  <div class="why-grid">
+    <div class="why"><span class="ico">✅</span><b>Qualified Doctors</b><span>Experienced &amp; certified</span></div>
+    <div class="why"><span class="ico">🕒</span><b>Open 7 Days</b><span>8am–9pm, no waiting</span></div>
+    <div class="why"><span class="ico">💊</span><b>In-house Pharmacy</b><span>Genuine medicines</span></div>
+    <div class="why"><span class="ico">🧪</span><b>Quick Lab Reports</b><span>Fast, accurate results</span></div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Patient Stories</div><h2>What Patients Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"Dr. Rao is so patient and thorough. Got my consultation, tests and medicines all in one visit. Truly convenient."</p><div class="who">— Lakshmi N.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Booked an appointment on WhatsApp and was seen on time. Clean clinic and the pharmacy had everything I needed."</p><div class="who">— Rahul S.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Took my child for vaccinations — gentle, caring staff and clear guidance. Highly recommend for families."</p><div class="who">— Fatima A.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Come See Us</div><h2>Visit &amp; Appointments</h2></div>
+  <div class="visit">
+    <div class="visit-card">
+      <h3>📍 Find Us</h3>
+      <div class="row">🏥 <span><b>CareWell Clinic &amp; Pharmacy</b><br>123 Main Road, Your City</span></div>
+      <div class="row">🕒 <span><b>Open 7 days</b> · 8:00 AM – 9:00 PM</span></div>
+      <div class="row">📅 <span><b>Appointments &amp; queries</b><br>WhatsApp us anytime</span></div>
+      <div class="emergency">🚨 Medical emergency? Call <b>+91 99454 11489</b> or visit your nearest emergency room.</div>
+      <div style="margin-top:1rem"><a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+clinic+website+like+the+CareWell+demo" target="_blank" rel="noopener">📅 Book Appointment</a></div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">CareWell Clinic &amp; Pharmacy</div>
+  <div class="small">123 Main Road, Your City · Open 8am–9pm, 7 days · A demo website</div>
+  <div class="small">© CareWell Clinic &amp; Pharmacy (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>

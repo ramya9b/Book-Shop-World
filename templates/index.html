@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Websites · Sri Vara Lakshmi Balaji Enterprises</title>
+<meta name="description" content="See sample websites we build for local businesses — restaurants, salons, boutiques, clinics and more. Get your own website on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#EEF8F3;--card:#fff;--ink:#0C1E14;--muted:#4A7260;--green:#0A7A4E;--gold:#C8920A;--line:#BDD9CC;--shadow:0 10px 30px rgba(0,0,0,.10)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.85rem 1.6rem;cursor:pointer;border:none;background:var(--green);color:#fff;box-shadow:0 8px 20px rgba(10,122,78,.3);transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+
+  header{text-align:center;padding:3.5rem 1.2rem 2.5rem;background:
+     radial-gradient(60% 60% at 50% 0%,rgba(10,122,78,.10),transparent)}
+  .kicker{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--green);font-weight:700;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;padding:.4rem 1rem;border-radius:30px}
+  header h1{font-size:clamp(2rem,5vw,3.2rem);margin:1rem 0 .6rem}
+  header p{max-width:600px;margin:0 auto;color:var(--muted);font-size:1.06rem}
+  .biz{font-weight:700;color:var(--green)}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;padding:1rem 0 2rem}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,.16)}
+  .thumb{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;gap:.3rem;position:relative}
+  .thumb .emoji{font-size:3.4rem;filter:drop-shadow(0 6px 12px rgba(0,0,0,.25))}
+  .thumb .biz-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.25rem}
+  .thumb .type{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.9}
+  .c-body{padding:1.2rem 1.3rem 1.4rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+  .c-body h3{font-size:1.2rem}
+  .c-body p{color:var(--muted);font-size:.92rem;flex:1}
+  .c-link{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;color:var(--green);margin-top:.3rem}
+  .c-link::after{content:"→";transition:transform .15s}
+  .card:hover .c-link::after{transform:translateX(4px)}
+
+  .cta{background:var(--green);color:#fff;text-align:center;border-radius:24px;padding:2.6rem 1.4rem;margin:1rem 0 3rem;box-shadow:var(--shadow)}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.5rem}
+  .cta p{opacity:.92;max-width:520px;margin:0 auto 1.4rem}
+  .cta .btn{background:#fff;color:var(--green)}
+  .feats{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;color:#fff;opacity:.9;font-size:.85rem;font-weight:600;margin-top:1.4rem}
+
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1rem 1.2rem 3rem}
+  footer a{color:var(--green);font-weight:600}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="kicker">💻 Website Creation</span>
+  <h1>Websites we build for local businesses</h1>
+  <p>Take a look at sample sites by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span>. Pick the one closest to your business — yours will have your name, photos, menu and details.</p>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+
+    <a class="card" href="restaurant.html">
+      <div class="thumb" style="background:linear-gradient(135deg,#F59E0B,#C2410C)">
+        <span class="emoji">🍽️</span><span class="biz-name">Spice Garden</span><span class="type">Restaurant & Cafe</span>
+      </div>
+      <div class="c-body">
+        <h3>Restaurant / Cafe</h3>
+        <p>Menu with prices, gallery, reviews, table booking &amp; WhatsApp ordering. Perfect for restaurants, cafes &amp; cloud kitchens.</p>
+        <span class="c-link">View live demo</span>
+      </div>
+    </a>
+
+    <a class="card" href="salon.html">
+      <div class="thumb" style="background:linear-gradient(135deg,#EC4899,#9D174D)">
+        <span class="emoji">💇</span><span class="biz-name">Glow &amp; Grace</span><span class="type">Salon & Spa</span>
+      </div>
+      <div class="c-body">
+        <h3>Salon / Beauty Parlour</h3>
+        <p>Service price menu, gallery, reviews &amp; appointment booking. Great for salons, parlours, spas &amp; bridal studios.</p>
+        <span class="c-link">View live demo</span>
+      </div>
+    </a>
+
+    <a class="card" href="boutique.html">
+      <div class="thumb" style="background:linear-gradient(135deg,#1f2937,#C99A2E)">
+        <span class="emoji">👗</span><span class="biz-name">Élan Boutique</span><span class="type">Clothing & Fashion</span>
+      </div>
+      <div class="c-body">
+        <h3>Clothing / Boutique</h3>
+        <p>Collections, prices, offers banner, gallery &amp; WhatsApp ordering. Ideal for boutiques, retail &amp; fashion stores.</p>
+        <span class="c-link">View live demo</span>
+      </div>
+    </a>
+
+    <a class="card" href="clinic.html">
+      <div class="thumb" style="background:linear-gradient(135deg,#0E7490,#0891B2)">
+        <span class="emoji">🩺</span><span class="biz-name">CareWell Clinic</span><span class="type">Clinic & Pharmacy</span>
+      </div>
+      <div class="c-body">
+        <h3>Clinic / Pharmacy</h3>
+        <p>Doctor profile, services, timings, trust points &amp; appointment enquiry. Built for clinics, pharmacies &amp; healthcare.</p>
+        <span class="c-link">View live demo</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="cta">
+    <h2>Want a website like these?</h2>
+    <p>We design fast, mobile-friendly, Google-ready websites for your business — with your photos, content and WhatsApp ordering built in.</p>
+    <a class="btn" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">📲 Get Your Website on WhatsApp</a>
+    <div class="feats"><span>📱 Mobile-friendly</span><span>⚡ Fast loading</span><span>🔍 Google-ready</span><span>💬 WhatsApp orders</span></div>
+  </div>
+</main>
+
+<footer>
+  Sri Vara Lakshmi Balaji Enterprises · KR Puram, Bengaluru ·
+  <a href="/">← Back to our shop</a>
+</footer>
+
+</body>
+</html>

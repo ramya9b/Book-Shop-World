@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Élan Boutique · Clothing & Fashion Store — Demo Website</title>
+<meta name="description" content="Demo boutique website template by Sri Vara Lakshmi Balaji Enterprises. Get a stylish fashion store website like this for your business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF7F4; --card:#FFFFFF; --ink:#1A1A1A; --muted:#7C7269;
+    --primary:#111827; --primary-d:#000000; --gold:#C99A2E; --blush:#F4D9D2;
+    --line:#EDE3DC;
+    --shadow:0 10px 30px rgba(26,26,26,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.8rem 1.5rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s}
+  .btn-p{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(17,24,39,.28)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-o:hover{background:var(--ink);color:#fff}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,247,244,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--primary);letter-spacing:.5px}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:.6rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+  .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;font-size:.92rem}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-links .btn{padding:.55rem 1.1rem;font-size:.85rem}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{position:relative;text-align:center;padding:5rem 1.2rem 5.5rem;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 50% 0%,rgba(201,154,46,.14),transparent),
+     radial-gradient(50% 60% at 90% 100%,rgba(244,217,210,.55),transparent);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .tagpill{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--gold);font-weight:600;font-size:.78rem;letter-spacing:1px;padding:.4rem 1rem;border-radius:30px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2.4rem,7vw,4.2rem);line-height:1.05;margin:1.1rem 0 .6rem;font-weight:800}
+  .hero h1 em{color:var(--gold);font-style:italic}
+  .hero p{max-width:560px;margin:0 auto 1.8rem;color:var(--muted);font-size:1.08rem}
+  .hero-cta{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .hero-strip{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;color:var(--muted);font-size:.9rem;font-weight:600}
+  .hero-strip b{color:var(--ink)}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 2.6rem}
+  .sec-head .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .6rem}
+  .sec-head p{color:var(--muted)}
+
+  /* sale strip */
+  .sale-strip{background:linear-gradient(90deg,#111827,#2c2238);color:#fff;text-align:center;padding:1.1rem 1.2rem;font-weight:700;letter-spacing:.5px;font-size:1.02rem}
+  .sale-strip b{color:var(--gold)}
+
+  /* story */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
+  .story-art{aspect-ratio:4/3;border-radius:20px;background:linear-gradient(135deg,#F4D9D2,#C99A2E);display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow)}
+  @media(max-width:780px){.story{grid-template-columns:1fr}.story-art{order:-1}}
+
+  /* collections */
+  .col-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.col-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.col-grid{grid-template-columns:1fr}}
+  .prod{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}
+  .prod:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(26,26,26,.14)}
+  .prod-img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:3.4rem}
+  .prod-body{padding:1.1rem 1.3rem 1.3rem}
+  .prod-body h3{font-size:1.18rem;color:var(--primary);margin-bottom:.25rem}
+  .prod-body .p-desc{font-size:.85rem;color:var(--muted);margin-bottom:.7rem}
+  .prod-body .p-foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+  .prod-body .p-price{font-weight:800;color:var(--gold)}
+  .prod-body .p-shop{font-weight:700;font-size:.82rem;color:var(--primary);border:1.5px solid var(--ink);border-radius:30px;padding:.35rem .9rem}
+  .prod-body .p-shop:hover{background:var(--ink);color:#fff}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+  @media(max-width:680px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .g-tile{aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:#fff}
+
+  /* reviews */
+  .reviews{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media(max-width:780px){.rev-grid{grid-template-columns:1fr}}
+  .rev{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+  .rev .stars{color:var(--gold);letter-spacing:2px}
+  .rev p{margin:.6rem 0 1rem;font-size:.95rem}
+  .rev .who{font-weight:700;font-size:.9rem}
+
+  /* visit */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  @media(max-width:780px){.visit{grid-template-columns:1fr}}
+  .visit-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow)}
+  .visit-card h3{margin-bottom:.6rem}
+  .row{display:flex;gap:.7rem;padding:.45rem 0;color:var(--muted)}
+  .row b{color:var(--ink)}
+  .map-art{border-radius:18px;background:linear-gradient(135deg,#111827,#3a2f3a);min-height:240px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-direction:column;gap:.4rem}
+
+  footer{background:var(--ink);color:#E9DFD8;text-align:center;padding:3rem 1.2rem 2rem}
+  footer .brand{color:#fff}
+  footer .small{color:#B6A89E;font-size:.82rem;margin-top:.6rem}
+
+  /* SVLB built-by badge */
+  .builtby{position:fixed;right:1rem;bottom:1rem;z-index:80;display:flex;align-items:center;gap:.6rem;background:#0A7A4E;color:#fff;border-radius:40px;padding:.7rem 1.1rem;box-shadow:0 10px 26px rgba(10,122,78,.4);font-weight:700;font-size:.86rem;max-width:calc(100vw - 2rem)}
+  .builtby small{display:block;font-weight:500;font-size:.66rem;opacity:.85}
+  .builtby:hover{transform:translateY(-2px)}
+  .demo-note{background:#FEF3C7;color:#92400E;text-align:center;font-size:.8rem;font-weight:600;padding:.5rem}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-note">🎬 This is a sample website — every button connects to a WhatsApp enquiry. Your real site would use your own details.</div>
+
+<nav>
+  <div class="wrap nav">
+    <div class="brand">Élan Boutique<small>Clothing & Fashion</small></div>
+    <div class="nav-links">
+      <a href="#collections">Shop</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit Us</a>
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">🛍️ Shop on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tagpill">✦ New Season Collection · Handpicked Styles</span>
+  <h1>Wear your <em>elegance</em></h1>
+  <p>Curated ethnic & western fashion, fresh arrivals every week. Browse the collection, then shop instantly on WhatsApp — styled, packed, and delivered to your door.</p>
+  <div class="hero-cta">
+    <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">🛍️ Shop on WhatsApp</a>
+    <a class="btn btn-o" href="#collections">View Collections</a>
+  </div>
+  <div class="hero-strip"><span>👗 <b>500+</b> Styles</span><span>⭐ <b>4.9</b> Rating</span><span>🆕 <b>New</b> Arrivals Weekly</span><span>🚚 <b>Free</b> Delivery</span></div>
+</header>
+
+<div class="sale-strip">🎉 Festive Sale — Up to <b>40% off</b> on ethnic wear · Use code <b>ELAN40</b> on WhatsApp</div>
+
+<section id="story" class="wrap">
+  <div class="story">
+    <div>
+      <div class="sec-head" style="text-align:left;margin:0 0 1rem">
+        <div class="eyebrow">Our Story</div>
+        <h2>A boutique built around your personal style</h2>
+      </div>
+      <p style="color:var(--muted)">From everyday kurtis to statement sarees, Élan Boutique handpicks every piece for quality, fit, and finish. We believe great fashion should feel effortless — and personal.</p>
+      <p style="color:var(--muted);margin-top:.8rem">Friendly styling advice, easy exchanges, and new looks dropping every week.</p>
+    </div>
+    <div class="story-art">🧵</div>
+  </div>
+</section>
+
+<section id="collections" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Shop The Look</div><h2>Our Collections</h2><p>A glimpse of our most-loved styles</p></div>
+    <div class="col-grid">
+      <div class="prod">
+        <div class="prod-img" style="background:linear-gradient(135deg,#F4D9D2,#C99A2E)">👗</div>
+        <div class="prod-body">
+          <h3>Ethnic Wear</h3>
+          <div class="p-desc">Anarkalis, lehengas & festive sets</div>
+          <div class="p-foot"><span class="p-price">From ₹1,499</span><a class="p-shop" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Shop →</a></div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="prod-img" style="background:linear-gradient(135deg,#FBCFE8,#9D174D)">👚</div>
+        <div class="prod-body">
+          <h3>Western Tops</h3>
+          <div class="p-desc">Casual & party tops, all sizes</div>
+          <div class="p-foot"><span class="p-price">From ₹799</span><a class="p-shop" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Shop →</a></div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="prod-img" style="background:linear-gradient(135deg,#C7D2FE,#4338CA)">🥻</div>
+        <div class="prod-body">
+          <h3>Kurtis</h3>
+          <div class="p-desc">Cotton, rayon & printed dailywear</div>
+          <div class="p-foot"><span class="p-price">From ₹599</span><a class="p-shop" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Shop →</a></div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="prod-img" style="background:linear-gradient(135deg,#FECACA,#B91C1C)">🪡</div>
+        <div class="prod-body">
+          <h3>Sarees</h3>
+          <div class="p-desc">Silk, georgette & designer drapes</div>
+          <div class="p-foot"><span class="p-price">From ₹1,299</span><a class="p-shop" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Shop →</a></div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="prod-img" style="background:linear-gradient(135deg,#FDE68A,#B45309)">👜</div>
+        <div class="prod-body">
+          <h3>Accessories</h3>
+          <div class="p-desc">Bags, jewellery & scarves</div>
+          <div class="p-foot"><span class="p-price">From ₹299</span><a class="p-shop" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Shop →</a></div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="prod-img" style="background:linear-gradient(135deg,#D1FAE5,#047857)">🧥</div>
+        <div class="prod-body">
+          <h3>Co-ord Sets</h3>
+          <div class="p-desc">Trendy matching two-piece sets</div>
+          <div class="p-foot"><span class="p-price">From ₹999</span><a class="p-shop" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Shop →</a></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">🛍️ Browse Full Catalogue on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="wrap">
+  <div class="sec-head"><div class="eyebrow">The Lookbook</div><h2>Gallery</h2><p>Your real product & styling photos would shine here</p></div>
+  <div class="gallery">
+    <div class="g-tile" style="background:linear-gradient(135deg,#F4D9D2,#C99A2E)">👗</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#FDE68A,#B45309)">👜</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#FBCFE8,#9D174D)">👠</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#C7D2FE,#4338CA)">🧥</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#FECACA,#B91C1C)">💍</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#111827,#3a2f3a)">🕶️</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#D1FAE5,#047857)">🧣</div>
+    <div class="g-tile" style="background:linear-gradient(135deg,#E9D5FF,#7E22CE)">👚</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Loved By Shoppers</div><h2>What People Say</h2></div>
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>"Gorgeous collection and the fit is perfect. Ordering over WhatsApp was so easy — delivered in two days!"</p><div class="who">— Divya M.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"My go-to for festive shopping. Quality fabrics, lovely colours, and the styling tips are a bonus."</p><div class="who">— Reshma T.</div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>"Beautiful kurtis at honest prices. The team is so helpful and exchanges were hassle-free. Highly recommend!"</p><div class="who">— Priya N.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="wrap">
+  <div class="sec-head"><div class="eyebrow">Come Say Hi</div><h2>Visit Us</h2></div>
+  <div class="visit">
+    <div class="visit-card">
+      <h3>📍 Find Us</h3>
+      <div class="row">🏠 <span><b>Élan Boutique</b><br>123 Fashion Street, Your City</span></div>
+      <div class="row">🕒 <span><b>Open daily</b> · 10:30 AM – 9:00 PM</span></div>
+      <div class="row">📞 <span><b>Styling & orders</b><br>WhatsApp us anytime</span></div>
+      <div style="margin-top:1rem;display:flex;gap:.7rem;flex-wrap:wrap">
+        <a class="btn btn-p" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">🛍️ Shop on WhatsApp</a>
+        <a class="btn btn-o" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+boutique+website+like+the+Elan+demo" target="_blank" rel="noopener">Enquire</a>
+      </div>
+    </div>
+    <div class="map-art">🗺️<div>Your Google Map goes here</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Élan Boutique</div>
+  <div class="small">123 Fashion Street, Your City · Open 10:30am–9pm · A demo website</div>
+  <div class="small">© Élan Boutique (sample). Not a real business.</div>
+</footer>
+
+<a class="builtby" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">
+  <span>✨</span>
+  <span>Website by SVLB<small>Get yours → tap to WhatsApp</small></span>
+</a>
+
+</body>
+</html>
