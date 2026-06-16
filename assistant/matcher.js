@@ -107,10 +107,19 @@ function perUnit(item) { return item.unit ? (' per ' + item.unit) : ''; }
 
 /* Compose the reply for a single confidently-matched item. */
 function replyForItem(item, intent) {
-  const name = item.name || item.id;
+  const name = (item.name || item.id) + (item.brand ? ` (${item.brand})` : '');
   const inStock = item.in_stock !== false;
+  const hasQty = typeof item.qty === 'number';
+  const stockNote = hasQty ? `${item.qty} in stock` : (inStock ? 'in stock' : 'out of stock');
+
   if (typeof intent === 'object' && intent.kind === 'order') {
     if (!inStock) return `Sorry, *${name}* is out of stock right now. We'll restock soon — anything else?`;
+    if (hasQty && intent.qty > item.qty) {
+      const t2 = (typeof item.price_inr === 'number') ? item.price_inr * item.qty : null;
+      return `We only have *${item.qty}* ${name} right now` +
+        (t2 != null ? ` (${rupees(item.price_inr)}${perUnit(item)} each = *${rupees(t2)}*)` : '') +
+        `. Shall I keep those for you? Reply *yes*. 🙏`;
+    }
     const total = (typeof item.price_inr === 'number') ? item.price_inr * intent.qty : null;
     const line = `${intent.qty} × *${name}* (${rupees(item.price_inr)}${perUnit(item)})`;
     return total != null
@@ -119,14 +128,15 @@ function replyForItem(item, intent) {
   }
   if (intent === 'availability') {
     return inStock
-      ? `✅ Yes, *${name}* is in stock — ${rupees(item.price_inr)}${perUnit(item)}.`
+      ? `✅ Yes, *${name}* is available — ${rupees(item.price_inr)}${perUnit(item)} · ${stockNote}.`
       : `❌ Sorry, *${name}* is out of stock right now. We'll restock soon.`;
   }
   if (intent === 'price') {
-    return `*${name}* — ${rupees(item.price_inr)}${perUnit(item)}.` + (inStock ? '' : ' (currently out of stock)');
+    return `*${name}* — ${rupees(item.price_inr)}${perUnit(item)}.` +
+      (hasQty ? ` (${item.qty} in stock)` : (inStock ? '' : ' (currently out of stock)'));
   }
   // info
-  return `*${name}* — ${rupees(item.price_inr)}${perUnit(item)} · ${inStock ? 'in stock ✅' : 'out of stock ❌'}.`;
+  return `*${name}* — ${rupees(item.price_inr)}${perUnit(item)} · ${hasQty ? (item.qty + ' in stock ✅') : (inStock ? 'in stock ✅' : 'out of stock ❌')}.`;
 }
 
 /* Top-level: take the catalog + the customer's text (+ optional shopStatus),

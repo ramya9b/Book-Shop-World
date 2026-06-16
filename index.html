@@ -6635,9 +6635,14 @@ window.addEventListener('DOMContentLoaded', function(){
         <div class="svlbk-row" style="justify-content:flex-start">
           <button class="svlbk-btn-ghost" type="button" onclick="svlbkAddItem()">+ Add item</button>
           <button class="svlbk-btn-ghost" type="button" id="svlbkVoiceBtn" onclick="svlbkVoice()" style="border-color:var(--saffron);color:var(--saffron)">🎤 Add by voice</button>
+          <select id="svlbkVoiceLang" class="svlbk-in" style="width:auto;padding:.4rem .55rem" aria-label="Voice language" title="Voice language">
+            <option value="en-IN">English</option>
+            <option value="te-IN">తెలుగు</option>
+            <option value="kn-IN">ಕನ್ನಡ</option>
+          </select>
           <button class="svlbk-btn" type="button" id="svlbkSaveCatBtn" onclick="svlbkSaveCatalog()" style="margin-top:0;margin-left:auto">Save catalog</button>
         </div>
-        <p class="svlbk-hint" id="svlbkVoiceTip" style="margin-top:.45rem">🎤 Say <b>quantity → item → “by BRAND” → “PRICE rupees”</b>. e.g. <i>“5 blue pens by Pentonic at 10 rupees”</i>. You can review &amp; edit before saving.</p>
+        <p class="svlbk-hint" id="svlbkVoiceTip" style="margin-top:.45rem">🎤 <b>English:</b> say <i>“5 blue pens by Pentonic at 10 rupees”</i> (quantity → item → “by BRAND” → “PRICE rupees”). <b>Telugu/Kannada:</b> say the item name — it's saved as the name &amp; an alias; add price/quantity yourself. Review before saving.</p>
       </section>
     </div>
   </div>
@@ -6670,11 +6675,11 @@ function renderPublicStock(){
     }
     var nm = document.createElement('div'); nm.className = 'cname'; nm.textContent = it.name || it.id;
     body.appendChild(nm);
-    /* brand line (if set) */
+    /* brand chip (if set) */
     if(it.brand){
-      var bd = document.createElement('div');
-      bd.style.cssText = 'font-size:.74rem;color:var(--muted);margin-top:1px';
-      bd.textContent = 'by ' + it.brand;
+      var bd = document.createElement('span');
+      bd.textContent = it.brand;
+      bd.style.cssText = 'display:inline-block;font-size:.66rem;font-weight:700;color:var(--saffron);background:rgba(10,122,78,.10);padding:.12rem .55rem;border-radius:20px;margin-top:.3rem';
       body.appendChild(bd);
     }
     var ft = document.createElement('div'); ft.className = 'cfooter';
@@ -6920,13 +6925,21 @@ function svlbkVoice(){
   var btn = svlbkEl('svlbkVoiceBtn');
   if(svlbkRecog){ try{ svlbkRecog.stop(); }catch(e){} return; }   // tap again to stop
   var r = new SR(); svlbkRecog = r;
-  r.lang = 'en-IN'; r.interimResults = false; r.maxAlternatives = 1; r.continuous = false;
+  var lang = (svlbkEl('svlbkVoiceLang') || {}).value || 'en-IN';
+  r.lang = lang; r.interimResults = false; r.maxAlternatives = 1; r.continuous = false;
   btn.textContent = '🔴 Listening… (tap to stop)';
-  svlbkMsg(msg,'ok','Listening… say e.g. “5 blue pens by Pentonic at 10 rupees”.');
+  svlbkMsg(msg,'ok', lang === 'en-IN' ? 'Listening… say e.g. “5 blue pens by Pentonic at 10 rupees”.' : 'Listening… say the item name.');
   r.onresult = function(ev){
     var t = ev.results[0][0].transcript;
-    var p = svlbkParseVoice(t);
-    var c = svlbkAddCard({ name:p.name, brand:p.brand, qty:p.qty, price_inr:p.price, unit:p.unit, category:'', id:svlbkSlug(p.name) });
+    var item;
+    if(lang === 'en-IN'){
+      var p = svlbkParseVoice(t);
+      item = { name:p.name, brand:p.brand, qty:p.qty, price_inr:p.price, unit:p.unit, category:'', id:svlbkSlug(p.name), aliases:[] };
+    } else {
+      var qm = t.match(/(\d+)/);
+      item = { name:t.trim(), aliases:[t.trim()], qty: qm ? parseInt(qm[1],10) : null, unit:'piece', category:'', id:svlbkSlug(t) };
+    }
+    var c = svlbkAddCard(item);
     svlbkRefreshCount(); c.scrollIntoView({ block:'center' });
     svlbkMsg(msg,'ok','Heard: “'+t+'” → added below. Check the details, then Save catalog.');
   };
