@@ -6659,7 +6659,24 @@ function renderPublicStock(){
   inStock.forEach(function(it){
     var card = document.createElement('div'); card.className = 'pcard svlbk-stk-card';
     var body = document.createElement('div'); body.className = 'cbody';
+    /* quantity badge (if tracked) */
+    if(typeof it.qty === 'number'){
+      var low = it.qty <= 5;
+      var qb = document.createElement('span');
+      qb.textContent = low ? ('Only ' + it.qty + ' left') : (it.qty + ' in stock');
+      qb.style.cssText = 'display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.02em;padding:.14rem .55rem;border-radius:20px;margin-bottom:.4rem;' +
+        (low ? 'background:#FEF3C7;color:#92400E;' : 'background:#E4F6EE;color:#065F46;');
+      body.appendChild(qb);
+    }
     var nm = document.createElement('div'); nm.className = 'cname'; nm.textContent = it.name || it.id;
+    body.appendChild(nm);
+    /* brand line (if set) */
+    if(it.brand){
+      var bd = document.createElement('div');
+      bd.style.cssText = 'font-size:.74rem;color:var(--muted);margin-top:1px';
+      bd.textContent = 'by ' + it.brand;
+      body.appendChild(bd);
+    }
     var ft = document.createElement('div'); ft.className = 'cfooter';
     var pr = document.createElement('div');
     var ps = document.createElement('span'); ps.className = 'cprice';
@@ -6668,11 +6685,11 @@ function renderPublicStock(){
     if(it.unit){ pr.appendChild(document.createElement('br')); var u = document.createElement('small'); u.textContent = '/ ' + it.unit; pr.appendChild(u); }
     var ask = document.createElement('button'); ask.className = 'add-btn'; ask.type = 'button'; ask.textContent = (typeof t==='function' ? (t('add')||'Ask') : 'Ask');
     ask.addEventListener('click', function(){
-      var msg = 'Hi, is ' + (it.name || it.id) + ' available?';
+      var msg = 'Hi, is ' + (it.name || it.id) + (it.brand ? (' (' + it.brand + ')') : '') + ' available?';
       window.open('https://wa.me/919945411489?text=' + encodeURIComponent(msg), '_blank');
     });
     ft.appendChild(pr); ft.appendChild(ask);
-    body.appendChild(nm); body.appendChild(ft); card.appendChild(body); grid.appendChild(card);
+    body.appendChild(ft); card.appendChild(body); grid.appendChild(card);
   });
   sec.style.display = '';
 }
