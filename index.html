@@ -2161,6 +2161,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <span id="hoursText">Checking…</span>
     </span>
     <button onclick="goHome()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="Home">🏠 Home</button>
+    <button onclick="openStockPage()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="See items in stock">🟢 In Stock</button>
     <div class="hdr-r">
       <!-- Mobile search icon (shown only on mobile) -->
       <button id="mobSrchToggle" onclick="toggleMobSearch()" aria-label="Search" style="display:none;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(242,251,246,0.90);border:1.5px solid rgba(255,255,255,0.75);border-radius:50%;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 2px 8px rgba(0,0,0,0.08);flex-shrink:0;">
@@ -2340,6 +2341,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <div class="cat-grid" id="homeCatGrid"></div>
   </div>
 
+  <!-- IN STOCK NOW (teaser; full list on the dedicated /?stock=1 page) -->
+  <div class="home-section" id="liveStockSection" style="margin-top:1.5rem;display:none">
+    <div class="home-section-hdr">
+      <h3>📦 In Stock Now <span class="svlbk-live-tag">live</span></h3>
+      <a onclick="openStockPage()" id="liveStockSeeAll" style="cursor:pointer">See all →</a>
+    </div>
+    <div class="featured-grid" id="liveStockGrid"></div>
+  </div>
+
   <!-- FEATURED PRODUCTS -->
   <div class="home-section" style="margin-top:1.5rem">
     <div class="home-section-hdr">
@@ -2347,15 +2357,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <a onclick="goShop('all')">See All →</a>
     </div>
     <div class="featured-grid" id="homeFeaturedGrid"></div>
-  </div>
-
-  <!-- IN STOCK NOW (live from the Firebase catalog; hidden until items load) -->
-  <div class="home-section" id="liveStockSection" style="margin-top:1.5rem;display:none">
-    <div class="home-section-hdr">
-      <h3>📦 In Stock Now</h3>
-      <span class="svlbk-live-tag">live</span>
-    </div>
-    <div class="featured-grid" id="liveStockGrid"></div>
   </div>
 
   <!-- TRUST SECTION -->
@@ -6591,6 +6592,34 @@ window.addEventListener('DOMContentLoaded', function(){
 @media (prefers-reduced-motion:reduce){ #svlbkAdmin *{transition:none !important;animation:none !important} }
 </style>
 
+<!-- ════════ DEDICATED "IN STOCK" PAGE (opens via the nav button or ?stock=1) ════════ -->
+<style>
+  .stockpage{position:fixed;inset:0;z-index:1500;background:var(--bg,#EEF8F3);display:none;flex-direction:column;font-family:'DM Sans',sans-serif}
+  body.stock-open .stockpage{display:flex}
+  .stockpage-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;background:#fff;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .stockpage-bar h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--text);margin:0;display:flex;align-items:center;gap:.4rem;white-space:nowrap}
+  .stockpage-search{flex:1;min-width:150px}
+  .stockpage-search input{width:100%;font:inherit;padding:.5rem .85rem;border:1px solid var(--border);border-radius:30px;background:#fff;color:var(--text)}
+  .stockpage-count{font-size:.8rem;color:var(--muted);font-weight:700;white-space:nowrap}
+  .stockpage-close{background:none;border:1px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;color:var(--muted);flex:0 0 auto}
+  .stockpage-close:hover{background:#f3f3f3}
+  .stockpage-body{flex:1;overflow-y:auto;width:100%;max-width:1100px;margin:0 auto;padding:1.2rem 1rem 3rem}
+  .stockpage :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){ .stockpage *{transition:none !important} }
+</style>
+<div id="stockPage" class="stockpage" role="dialog" aria-modal="true" aria-label="Items in stock today">
+  <div class="stockpage-bar">
+    <h2>🟢 In Stock Today <span class="svlbk-live-tag">live</span></h2>
+    <div class="stockpage-search"><input id="stockSearch" type="search" placeholder="Search stock…" oninput="renderStockPage()" aria-label="Search items in stock"></div>
+    <span class="stockpage-count" id="stockPageCount">0 items</span>
+    <button class="stockpage-close" type="button" onclick="closeStockPage()" aria-label="Close">✕</button>
+  </div>
+  <div class="stockpage-body">
+    <div class="featured-grid" id="stockPageGrid"></div>
+    <div id="stockPageEmpty" style="display:none;text-align:center;color:var(--muted);padding:3rem 1rem">No matching items in stock right now — try a different search, or <a href="https://wa.me/919945411489" style="color:var(--saffron);font-weight:700">WhatsApp us</a>.</div>
+  </div>
+</div>
+
 <div id="svlbkAdmin" role="dialog" aria-modal="true" aria-label="Shop owner admin">
   <div class="svlbk-sheet">
     <button class="svlbk-x" type="button" onclick="closeStockAdmin()" aria-label="Close admin">✕</button>
@@ -6654,49 +6683,85 @@ function svlbkMsg(el,kind,txt){ if(!el)return; el.textContent=txt; el.className=
 function svlbkClear(el){ if(!el)return; el.textContent=''; el.className='svlbk-msg'; }
 function svlbkEl(id){ return document.getElementById(id); }
 
-/* ── Public "In stock now" section (read-only, no login) ── */
+/* ── Build one in-stock card (shared by the home teaser + the dedicated page) ── */
+function svlbkStockCard(it){
+  var card = document.createElement('div'); card.className = 'pcard svlbk-stk-card';
+  var body = document.createElement('div'); body.className = 'cbody';
+  if(typeof it.qty === 'number'){
+    var low = it.qty <= 5;
+    var qb = document.createElement('span');
+    qb.textContent = low ? ('Only ' + it.qty + ' left') : (it.qty + ' in stock');
+    qb.style.cssText = 'display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.02em;padding:.14rem .55rem;border-radius:20px;margin-bottom:.4rem;' +
+      (low ? 'background:#FEF3C7;color:#92400E;' : 'background:#E4F6EE;color:#065F46;');
+    body.appendChild(qb);
+  }
+  var nm = document.createElement('div'); nm.className = 'cname'; nm.textContent = it.name || it.id;
+  body.appendChild(nm);
+  if(it.brand){
+    var bd = document.createElement('span');
+    bd.textContent = it.brand;
+    bd.style.cssText = 'display:inline-block;font-size:.66rem;font-weight:700;color:var(--saffron);background:rgba(10,122,78,.10);padding:.12rem .55rem;border-radius:20px;margin-top:.3rem';
+    body.appendChild(bd);
+  }
+  var ft = document.createElement('div'); ft.className = 'cfooter';
+  var pr = document.createElement('div');
+  var ps = document.createElement('span'); ps.className = 'cprice';
+  ps.textContent = (typeof it.price_inr === 'number') ? ('₹' + it.price_inr) : '';
+  pr.appendChild(ps);
+  if(it.unit){ pr.appendChild(document.createElement('br')); var u = document.createElement('small'); u.textContent = '/ ' + it.unit; pr.appendChild(u); }
+  var ask = document.createElement('button'); ask.className = 'add-btn'; ask.type = 'button'; ask.textContent = (typeof t==='function' ? (t('add')||'Ask') : 'Ask');
+  ask.addEventListener('click', function(){
+    var msg = 'Hi, is ' + (it.name || it.id) + (it.brand ? (' (' + it.brand + ')') : '') + ' available?';
+    window.open('https://wa.me/919945411489?text=' + encodeURIComponent(msg), '_blank');
+  });
+  ft.appendChild(pr); ft.appendChild(ask);
+  body.appendChild(ft); card.appendChild(body);
+  return card;
+}
+function svlbkInStock(){ return (window.SVLB_CATALOG || []).filter(function(it){ return it && it.in_stock; }); }
+
+/* ── Home teaser: first few in-stock items + "See all (N) →" ── */
 function renderPublicStock(){
   var grid = svlbkEl('liveStockGrid'), sec = svlbkEl('liveStockSection');
-  if(!grid || !sec) return;
-  var inStock = (window.SVLB_CATALOG || []).filter(function(it){ return it && it.in_stock; });
+  if(grid && sec){
+    var inStock = svlbkInStock();
+    grid.innerHTML = '';
+    if(!inStock.length){ sec.style.display = 'none'; }
+    else {
+      inStock.slice(0, 6).forEach(function(it){ grid.appendChild(svlbkStockCard(it)); });
+      sec.style.display = '';
+      var sa = svlbkEl('liveStockSeeAll'); if(sa) sa.textContent = 'See all (' + inStock.length + ') →';
+    }
+  }
+  if(document.body.classList.contains('stock-open')) renderStockPage();
+}
+
+/* ── Dedicated "In Stock" page (full list + search), URL ?stock=1 ── */
+function renderStockPage(){
+  var grid = svlbkEl('stockPageGrid'); if(!grid) return;
+  var q = ((svlbkEl('stockSearch') && svlbkEl('stockSearch').value) || '').toLowerCase().trim();
+  var items = svlbkInStock();
+  if(q){ items = items.filter(function(it){
+    var hay = ((it.name||'') + ' ' + (it.brand||'') + ' ' + (it.category||'') + ' ' + ((it.aliases||[]).join(' '))).toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }); }
   grid.innerHTML = '';
-  if(!inStock.length){ sec.style.display = 'none'; return; }
-  inStock.forEach(function(it){
-    var card = document.createElement('div'); card.className = 'pcard svlbk-stk-card';
-    var body = document.createElement('div'); body.className = 'cbody';
-    /* quantity badge (if tracked) */
-    if(typeof it.qty === 'number'){
-      var low = it.qty <= 5;
-      var qb = document.createElement('span');
-      qb.textContent = low ? ('Only ' + it.qty + ' left') : (it.qty + ' in stock');
-      qb.style.cssText = 'display:inline-block;font-size:.65rem;font-weight:800;letter-spacing:.02em;padding:.14rem .55rem;border-radius:20px;margin-bottom:.4rem;' +
-        (low ? 'background:#FEF3C7;color:#92400E;' : 'background:#E4F6EE;color:#065F46;');
-      body.appendChild(qb);
-    }
-    var nm = document.createElement('div'); nm.className = 'cname'; nm.textContent = it.name || it.id;
-    body.appendChild(nm);
-    /* brand chip (if set) */
-    if(it.brand){
-      var bd = document.createElement('span');
-      bd.textContent = it.brand;
-      bd.style.cssText = 'display:inline-block;font-size:.66rem;font-weight:700;color:var(--saffron);background:rgba(10,122,78,.10);padding:.12rem .55rem;border-radius:20px;margin-top:.3rem';
-      body.appendChild(bd);
-    }
-    var ft = document.createElement('div'); ft.className = 'cfooter';
-    var pr = document.createElement('div');
-    var ps = document.createElement('span'); ps.className = 'cprice';
-    ps.textContent = (typeof it.price_inr === 'number') ? ('₹' + it.price_inr) : '';
-    pr.appendChild(ps);
-    if(it.unit){ pr.appendChild(document.createElement('br')); var u = document.createElement('small'); u.textContent = '/ ' + it.unit; pr.appendChild(u); }
-    var ask = document.createElement('button'); ask.className = 'add-btn'; ask.type = 'button'; ask.textContent = (typeof t==='function' ? (t('add')||'Ask') : 'Ask');
-    ask.addEventListener('click', function(){
-      var msg = 'Hi, is ' + (it.name || it.id) + (it.brand ? (' (' + it.brand + ')') : '') + ' available?';
-      window.open('https://wa.me/919945411489?text=' + encodeURIComponent(msg), '_blank');
-    });
-    ft.appendChild(pr); ft.appendChild(ask);
-    body.appendChild(ft); card.appendChild(body); grid.appendChild(card);
-  });
-  sec.style.display = '';
+  var cnt = svlbkEl('stockPageCount'); if(cnt) cnt.textContent = items.length + (items.length === 1 ? ' item' : ' items');
+  var empty = svlbkEl('stockPageEmpty');
+  if(!items.length){ if(empty) empty.style.display = 'block'; return; }
+  if(empty) empty.style.display = 'none';
+  items.forEach(function(it){ grid.appendChild(svlbkStockCard(it)); });
+}
+function openStockPage(){
+  if(typeof initFirebaseLive === 'function') initFirebaseLive();
+  document.body.classList.add('stock-open'); document.body.style.overflow = 'hidden';
+  renderStockPage();
+  var s = svlbkEl('stockSearch'); if(s){ s.value=''; }
+  try{ if(history.replaceState) history.replaceState(null,'', '?stock=1'); }catch(e){}
+}
+function closeStockPage(){
+  document.body.classList.remove('stock-open'); document.body.style.overflow = '';
+  try{ if(history.replaceState) history.replaceState(null,'', location.pathname); }catch(e){}
 }
 
 /* ── Open / close the admin overlay ── */
@@ -6984,6 +7049,10 @@ function svlbkParseVoice(raw){
 /* Open the admin when the URL says so */
 if(window.location.search.indexOf('admin=stock') !== -1){
   window.addEventListener('load', function(){ setTimeout(openStockAdmin, 300); });
+}
+/* Open the dedicated In-Stock page via ?stock=1 (shareable link) */
+if(window.location.search.indexOf('stock=1') !== -1){
+  window.addEventListener('load', function(){ setTimeout(openStockPage, 300); });
 }
 </script>
 
