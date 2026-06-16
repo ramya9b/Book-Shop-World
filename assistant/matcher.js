@@ -45,7 +45,12 @@ function lev(a, b) {
 
 /* All searchable phrases for an item: name, id (underscores -> spaces), aliases. */
 function phrasesFor(item) {
-  const list = [item.name, item.id ? String(item.id).replace(/_/g, ' ') : ''].concat(item.aliases || []);
+  const list = [
+    item.name,
+    item.brand || '',
+    item.brand ? (item.brand + ' ' + item.name) : '',
+    item.id ? String(item.id).replace(/_/g, ' ') : ''
+  ].concat(item.aliases || []);
   return list.map(normalize).filter(Boolean);
 }
 

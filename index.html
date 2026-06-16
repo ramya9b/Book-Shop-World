@@ -6632,10 +6632,12 @@ window.addEventListener('DOMContentLoaded', function(){
         <div class="svlbk-row"><h3>Catalog</h3><span class="svlbk-count" id="svlbkCount">0 items</span></div>
         <div id="svlbkCatMsg" class="svlbk-msg" role="status" aria-live="polite"></div>
         <div id="svlbkItems"></div>
-        <div class="svlbk-row">
+        <div class="svlbk-row" style="justify-content:flex-start">
           <button class="svlbk-btn-ghost" type="button" onclick="svlbkAddItem()">+ Add item</button>
-          <button class="svlbk-btn" type="button" id="svlbkSaveCatBtn" onclick="svlbkSaveCatalog()" style="margin-top:0">Save catalog</button>
+          <button class="svlbk-btn-ghost" type="button" id="svlbkVoiceBtn" onclick="svlbkVoice()" style="border-color:var(--saffron);color:var(--saffron)">🎤 Add by voice</button>
+          <button class="svlbk-btn" type="button" id="svlbkSaveCatBtn" onclick="svlbkSaveCatalog()" style="margin-top:0;margin-left:auto">Save catalog</button>
         </div>
+        <p class="svlbk-hint" id="svlbkVoiceTip" style="margin-top:.45rem">🎤 Say <b>quantity → item → “by BRAND” → “PRICE rupees”</b>. e.g. <i>“5 blue pens by Pentonic at 10 rupees”</i>. You can review &amp; edit before saving.</p>
       </section>
     </div>
   </div>
@@ -6793,8 +6795,10 @@ function svlbkAddCard(item){
   head.appendChild(tag); head.appendChild(del); card.appendChild(head);
 
   var f = document.createElement('div'); f.className = 'svlbk-fields';
-  var fName = svlbkField('Name','text',item.name,{full:true,ph:'A4 Paper Ream'});
+  var fName = svlbkField('Name','text',item.name,{full:true,ph:'Blue Pen'});
+  var fBrand = svlbkField('Brand / Company','text',item.brand,{ph:'e.g. Pentonic, Navneet'});
   var fPrice = svlbkField('Price (₹)','number',(item.price_inr != null ? item.price_inr : ''),{inputmode:'decimal',ph:'0'});
+  var fQty = svlbkField('Quantity in stock','number',(item.qty != null ? item.qty : ''),{inputmode:'numeric',ph:'e.g. 5'});
   var fCat = svlbkField('Category','text',item.category,{ph:'paper / pens / books …'});
   var fUnit = svlbkField('Unit','text',item.unit,{ph:'piece / ream / box …'});
   var fId = svlbkField('ID','text',item.id,{ph:'a4_paper'});
@@ -6807,20 +6811,30 @@ function svlbkAddCard(item){
   cb.addEventListener('change', function(){ stt.textContent = cb.checked ? 'In stock' : 'Out of stock'; });
   tg.appendChild(cb); tg.appendChild(tk); tg.appendChild(stt);
   sw.appendChild(sl); sw.appendChild(tg);
+  /* Quantity drives in-stock: any number > 0 marks the item in stock */
+  fQty._input.addEventListener('input', function(){
+    var v = fQty._input.value.trim();
+    if(v !== ''){ cb.checked = Number(v) > 0; stt.textContent = cb.checked ? 'In stock' : 'Out of stock'; }
+  });
   var fAli = svlbkField('Aliases','textarea',(item.aliases || []).join(', '),
     {full:true,hint:'Comma-separated. Add Telugu, Kannada, Hindi & Tinglish names and common misspellings — this drives the assistant’s matching.'});
 
-  f.appendChild(fName); f.appendChild(fPrice); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(fAli);
+  f.appendChild(fName); f.appendChild(fBrand); f.appendChild(fPrice); f.appendChild(fQty); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(fAli);
   card.appendChild(f);
 
   card._read = function(){
     var pr = fPrice._input.value.trim();
+    var qv = fQty._input.value.trim();
+    var qty = qv === '' ? null : Number(qv);
     return {
       id: fId._input.value.trim().toLowerCase(),
       name: fName._input.value.trim(),
+      brand: fBrand._input.value.trim(),
+      qty: qty,
       aliases: fAli._input.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean),
       price_inr: pr === '' ? '' : Number(pr), priceRaw: pr,
-      in_stock: cb.checked, category: fCat._input.value.trim(), unit: fUnit._input.value.trim()
+      in_stock: qty != null ? qty > 0 : cb.checked,
+      category: fCat._input.value.trim(), unit: fUnit._input.value.trim()
     };
   };
   svlbkEl('svlbkItems').appendChild(card);
@@ -6861,19 +6875,80 @@ function svlbkSaveCatalog(){
     if(!/^[a-z0-9_]+$/.test(r.id)) return svlbkMsg(m,'err', 'The id “' + r.id + '” can use only lowercase letters, numbers and underscores.');
     if(!r.name) return svlbkMsg(m,'err', where + ' (' + r.id + ') needs a name.');
     if(r.priceRaw === '' || isNaN(r.price_inr)) return svlbkMsg(m,'err', where + ' (' + r.id + ') needs a numeric price.');
+    if(r.qty != null && (isNaN(r.qty) || r.qty < 0)) return svlbkMsg(m,'err', where + ' (' + r.id + ') has an invalid quantity.');
     if(seen[r.id]) return svlbkMsg(m,'err', 'Two items share the id “' + r.id + '” — ids must be unique.');
     seen[r.id] = true;
   }
   var stamp = new Date().toISOString();
   var obj = {};
   rows.forEach(function(r){
-    obj[r.id] = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:stamp };
+    var entry = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:stamp };
+    if(r.brand) entry.brand = r.brand;
+    if(r.qty != null && !isNaN(r.qty)) entry.qty = r.qty;
+    obj[r.id] = entry;
   });
   var btn = svlbkEl('svlbkSaveCatBtn'); btn.disabled = true;
   fbDatabase.ref('catalog').set(obj)
     .then(function(){ svlbkMsg(m,'ok','Catalog saved — ' + rows.length + (rows.length === 1 ? ' item.' : ' items.')); })
     .catch(function(err){ svlbkMsg(m,'err', svlbkWriteErr(err)); })
     .then(function(){ btn.disabled = false; });
+}
+
+/* ───────── Voice stock entry (Web Speech API · en-IN) ───────── */
+var svlbkRecog = null;
+function svlbkVoice(){
+  var msg = svlbkEl('svlbkCatMsg'); svlbkClear(msg);
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ return svlbkMsg(msg,'err','Voice needs Chrome on Android or desktop — this browser doesn’t support it. You can still type the item.'); }
+  var btn = svlbkEl('svlbkVoiceBtn');
+  if(svlbkRecog){ try{ svlbkRecog.stop(); }catch(e){} return; }   // tap again to stop
+  var r = new SR(); svlbkRecog = r;
+  r.lang = 'en-IN'; r.interimResults = false; r.maxAlternatives = 1; r.continuous = false;
+  btn.textContent = '🔴 Listening… (tap to stop)';
+  svlbkMsg(msg,'ok','Listening… say e.g. “5 blue pens by Pentonic at 10 rupees”.');
+  r.onresult = function(ev){
+    var t = ev.results[0][0].transcript;
+    var p = svlbkParseVoice(t);
+    var c = svlbkAddCard({ name:p.name, brand:p.brand, qty:p.qty, price_inr:p.price, unit:p.unit, category:'', id:svlbkSlug(p.name) });
+    svlbkRefreshCount(); c.scrollIntoView({ block:'center' });
+    svlbkMsg(msg,'ok','Heard: “'+t+'” → added below. Check the details, then Save catalog.');
+  };
+  r.onerror = function(ev){
+    var e = ev.error || 'error';
+    var txt = (e==='not-allowed'||e==='service-not-allowed') ? 'Microphone blocked — allow mic access for this site and try again.'
+            : (e==='no-speech') ? 'Didn’t catch that — tap 🎤 and speak again.'
+            : 'Voice error: '+e+'.';
+    svlbkMsg(msg,'err',txt);
+  };
+  r.onend = function(){ svlbkRecog = null; var b = svlbkEl('svlbkVoiceBtn'); if(b) b.textContent = '🎤 Add by voice'; };
+  try{ r.start(); }catch(e){ svlbkRecog = null; btn.textContent = '🎤 Add by voice'; svlbkMsg(msg,'err','Could not start voice — tap 🎤 again.'); }
+}
+function svlbkSlug(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
+function svlbkTitle(s){ return (s||'').replace(/\b([a-z])/g, function(m){ return m.toUpperCase(); }).trim(); }
+function svlbkSingular(s){
+  var w = (s||'').trim().split(' '); if(!w.length || !w[0]) return s;
+  var last = w[w.length-1];
+  if(/(x|ch|sh|s)es$/.test(last)) last = last.replace(/es$/,'');      // boxes->box, glasses->glass
+  else if(/[^s]s$/.test(last)) last = last.replace(/s$/,'');          // pens->pen, reams->ream
+  w[w.length-1] = last; return w.join(' ');
+}
+var SVLBK_NUM = {one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,fifteen:15,twenty:20,thirty:30,forty:40,fifty:50,hundred:100};
+function svlbkParseVoice(raw){
+  var text = ' ' + String(raw||'').toLowerCase().trim() + ' ';
+  text = text.replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen|twenty|thirty|forty|fifty|hundred)\b/g, function(w){ return ' '+SVLBK_NUM[w]+' '; });
+  var price=null, brand='', qty=null;
+  var pm = text.match(/\b(?:at|for)\s+(\d+)\b/) || text.match(/\b(\d+)\s*(?:rupees|rupee|rs)\b/) || text.match(/\b(?:rupees|rupee|rs)\s*(\d+)\b/);
+  if(pm){ price = parseInt(pm[1],10); text = text.replace(pm[0],' '); }
+  var bm = text.match(/\bby\s+([a-z0-9]+)\b/) || text.match(/\bbrand\s+([a-z0-9]+)\b/) || text.match(/\bcompany\s+([a-z0-9]+)\b/) || text.match(/\b([a-z0-9]+)\s+brand\b/) || text.match(/\b([a-z0-9]+)\s+company\b/);
+  if(bm){ brand = svlbkTitle(bm[1]); text = text.replace(bm[0],' '); }
+  var qm = text.match(/\b(\d+)\b/);
+  if(qm){ qty = parseInt(qm[1],10); text = text.replace(qm[0],' '); }
+  var name = text.replace(/\b(add|stock|enter|put|of|the|a|an|please|nos|number|numbers|rupees|rupee|rs|at|for|each)\b/g,' ').replace(/\s+/g,' ').trim();
+  var unit = 'piece';
+  var unitMap = {pens:'piece',pen:'piece',reams:'ream',ream:'ream',boxes:'box',box:'box',sheets:'sheet',sheet:'sheet',sets:'set',set:'set',pieces:'piece',piece:'piece',packs:'pack',pack:'pack',bottles:'bottle',bottle:'bottle',rolls:'roll',roll:'roll'};
+  var words = name.split(' '); var last = words[words.length-1];
+  if(unitMap[last]) unit = unitMap[last];
+  return { qty:qty, name:svlbkTitle(svlbkSingular(name)), brand:brand, price:price, unit:unit };
 }
 
 /* Open the admin when the URL says so */
