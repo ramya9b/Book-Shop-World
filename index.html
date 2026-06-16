@@ -6682,6 +6682,26 @@ window.addEventListener('DOMContentLoaded', function(){
 function svlbkMsg(el,kind,txt){ if(!el)return; el.textContent=txt; el.className='svlbk-msg show '+kind; }
 function svlbkClear(el){ if(!el)return; el.textContent=''; el.className='svlbk-msg'; }
 function svlbkEl(id){ return document.getElementById(id); }
+/* Resize/compress an image file to a small JPEG data-URL thumbnail (in-browser) */
+function svlbkResizeImage(file, maxDim, quality, cb){
+  try{
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var img = new Image();
+      img.onload = function(){
+        var w = img.width, h = img.height, scale = Math.min(1, maxDim / Math.max(w, h));
+        var cw = Math.max(1, Math.round(w*scale)), ch = Math.max(1, Math.round(h*scale));
+        var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+        cv.getContext('2d').drawImage(img, 0, 0, cw, ch);
+        try{ cb(cv.toDataURL('image/jpeg', quality)); }catch(err){ cb(null); }
+      };
+      img.onerror = function(){ cb(null); };
+      img.src = e.target.result;
+    };
+    reader.onerror = function(){ cb(null); };
+    reader.readAsDataURL(file);
+  }catch(e){ cb(null); }
+}
 
 /* ── Build one in-stock card (shared by the home teaser + the dedicated page) ── */
 function svlbkStockCard(it){
@@ -6715,7 +6735,16 @@ function svlbkStockCard(it){
     window.open('https://wa.me/919945411489?text=' + encodeURIComponent(msg), '_blank');
   });
   ft.appendChild(pr); ft.appendChild(ask);
-  body.appendChild(ft); card.appendChild(body);
+  body.appendChild(ft);
+  if(it.image){
+    var im = document.createElement('div');
+    im.style.cssText = 'width:100%;aspect-ratio:4/3;background:#f2f2f2;overflow:hidden';
+    var pimg = document.createElement('img'); pimg.src = it.image; pimg.alt = it.name || ''; pimg.loading = 'lazy';
+    pimg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
+    im.appendChild(pimg);
+    card.appendChild(im);
+  }
+  card.appendChild(body);
   return card;
 }
 function svlbkInStock(){ return (window.SVLB_CATALOG || []).filter(function(it){ return it && it.in_stock; }); }
@@ -6906,7 +6935,25 @@ function svlbkAddCard(item){
   var fAli = svlbkField('Aliases','textarea',(item.aliases || []).join(', '),
     {full:true,hint:'Comma-separated. Add Telugu, Kannada, Hindi & Tinglish names and common misspellings — this drives the assistant’s matching.'});
 
-  f.appendChild(fName); f.appendChild(fBrand); f.appendChild(fPrice); f.appendChild(fQty); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(fAli);
+  /* photo (resized to a small thumbnail in the browser) */
+  var imgWrap = document.createElement('div'); imgWrap.className = 'svlbk-full';
+  var imgLbl = document.createElement('label'); imgLbl.textContent = 'Photo (optional)';
+  var imgRow = document.createElement('div'); imgRow.style.cssText = 'display:flex;align-items:center;gap:.6rem;flex-wrap:wrap';
+  var imgData = item.image || '';
+  var imgPrev = document.createElement('img'); imgPrev.alt = '';
+  imgPrev.style.cssText = 'width:50px;height:50px;border-radius:8px;object-fit:cover;border:1px solid var(--border);' + (imgData ? '' : 'display:none');
+  if(imgData) imgPrev.src = imgData;
+  var imgIn = document.createElement('input'); imgIn.type = 'file'; imgIn.accept = 'image/*'; imgIn.style.cssText = 'font-size:.82rem;flex:1;min-width:120px';
+  imgIn.addEventListener('change', function(ev){
+    var fl = ev.target.files && ev.target.files[0]; if(!fl) return;
+    svlbkResizeImage(fl, 400, 0.6, function(url){ if(url){ imgData = url; imgPrev.src = url; imgPrev.style.display = ''; } });
+  });
+  var imgRm = document.createElement('button'); imgRm.type = 'button'; imgRm.textContent = 'Remove'; imgRm.className = 'svlbk-del';
+  imgRm.addEventListener('click', function(){ imgData = ''; imgPrev.style.display = 'none'; imgPrev.removeAttribute('src'); imgIn.value = ''; });
+  imgRow.appendChild(imgPrev); imgRow.appendChild(imgIn); imgRow.appendChild(imgRm);
+  imgWrap.appendChild(imgLbl); imgWrap.appendChild(imgRow);
+
+  f.appendChild(fName); f.appendChild(fBrand); f.appendChild(fPrice); f.appendChild(fQty); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(imgWrap); f.appendChild(fAli);
   card.appendChild(f);
 
   card._read = function(){
@@ -6918,6 +6965,7 @@ function svlbkAddCard(item){
       name: fName._input.value.trim(),
       brand: fBrand._input.value.trim(),
       qty: qty,
+      image: imgData,
       aliases: fAli._input.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean),
       price_inr: pr === '' ? '' : Number(pr), priceRaw: pr,
       in_stock: qty != null ? qty > 0 : cb.checked,
@@ -6972,6 +7020,7 @@ function svlbkSaveCatalog(){
     var entry = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:stamp };
     if(r.brand) entry.brand = r.brand;
     if(r.qty != null && !isNaN(r.qty)) entry.qty = r.qty;
+    if(r.image) entry.image = r.image;
     obj[r.id] = entry;
   });
   var btn = svlbkEl('svlbkSaveCatBtn'); btn.disabled = true;
