@@ -6665,6 +6665,7 @@ window.addEventListener('DOMContentLoaded', function(){
           <button class="svlbk-btn-ghost" type="button" onclick="svlbkAddItem()">+ Add item</button>
           <button class="svlbk-btn-ghost" type="button" id="svlbkVoiceBtn" onclick="svlbkVoice()" style="border-color:var(--saffron);color:var(--saffron)">🎤 Add by voice</button>
           <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkPhotos()" title="Add many items at once — pick several product photos" style="border-color:var(--gold);color:#8a6400">📷 Bulk photos</button>
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkText()" title="Add many items at once — paste a list" style="border-color:var(--gold);color:#8a6400">📋 Paste list</button>
           <select id="svlbkVoiceLang" class="svlbk-in" style="width:auto;padding:.4rem .55rem" aria-label="Voice language" title="Voice language">
             <option value="en-IN">English</option>
             <option value="te-IN">తెలుగు</option>
@@ -6932,9 +6933,10 @@ function svlbkAddCard(item){
   var fId = svlbkField('ID','text',item.id,{ph:'a4_paper'});
   /* For new items, auto-fill the ID from the name (until the owner edits the ID) so bulk/quick entry stays fast */
   var idAuto = !item.id;
+  if(idAuto && item.name){ fId._input.value = svlbkSlugId(item.name); }
   fId._input.addEventListener('input', function(){ idAuto = false; });
   fName._input.addEventListener('input', function(){
-    if(idAuto){ fId._input.value = fName._input.value.trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
+    if(idAuto){ fId._input.value = svlbkSlugId(fName._input.value); }
   });
   var sw = document.createElement('div');
   var sl = document.createElement('label'); sl.textContent = 'In stock';
@@ -6997,6 +6999,8 @@ function svlbkAddCard(item){
   return card;
 }
 function svlbkAddItem(){ var c = svlbkAddCard({}); svlbkRefreshCount(); c.scrollIntoView({block:'nearest'}); }
+/* Slugify a name into a valid catalog ID (lowercase, underscores). */
+function svlbkSlugId(s){ return String(s || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''); }
 /* Bulk add: pick many product photos at once → one pre-filled card per photo. */
 function svlbkBulkPhotos(){
   var inp = document.createElement('input');
@@ -7019,6 +7023,57 @@ function svlbkBulkPhotos(){
     });
   });
   inp.click();
+}
+/* Parse a pasted list: one item per line — "Name, Price, Quantity, Brand"
+   (price/quantity/brand optional). Commas OR tabs (spreadsheet paste) both work. */
+function svlbkParseList(text){
+  var rows = [];
+  String(text || '').split(/\r?\n/).forEach(function(line){
+    line = line.trim(); if(!line) return;
+    var parts = line.split(/\t|,/).map(function(s){ return s.trim(); });
+    var name = parts[0] || ''; if(!name) return;
+    var priceStr = (parts[1] || '').replace(/[^\d.]/g, '');
+    var qtyStr = (parts[2] || '').replace(/[^\d]/g, '');
+    rows.push({
+      name: name,
+      brand: parts[3] || '',
+      price_inr: priceStr === '' ? '' : Number(priceStr),
+      qty: qtyStr === '' ? null : Number(qtyStr)
+    });
+  });
+  return rows;
+}
+/* Bulk add via a pasted list — opens a small textarea modal. */
+function svlbkBulkText(){
+  if(document.getElementById('svlbkBulkModal')) return;
+  var ov = document.createElement('div'); ov.id = 'svlbkBulkModal';
+  ov.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:1rem';
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#fff;border-radius:14px;max-width:520px;width:100%;padding:1.1rem 1.2rem;box-shadow:0 12px 40px rgba(0,0,0,.3);max-height:90vh;overflow:auto';
+  var h = document.createElement('h3'); h.textContent = '📋 Paste a list'; h.style.cssText = 'margin:.1rem 0 .5rem';
+  var hint = document.createElement('p'); hint.className = 'svlbk-hint'; hint.style.margin = '.1rem 0 .6rem';
+  hint.innerHTML = 'One item per line: <b>Name, Price, Quantity, Brand</b> — price/quantity/brand are optional. Commas or tabs (paste from Excel/Sheets) both work.';
+  var ta = document.createElement('textarea');
+  ta.className = 'svlbk-in'; ta.rows = 8; ta.style.cssText = 'width:100%;font-family:monospace;font-size:.85rem';
+  ta.placeholder = 'Blue Pen, 10, 50, Pentonic\nA4 Paper, 320, 12, JK\nStapler, 85, 8';
+  var row = document.createElement('div'); row.style.cssText = 'display:flex;gap:.5rem;justify-content:flex-end;margin-top:.7rem';
+  var cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'svlbk-btn-ghost'; cancel.textContent = 'Cancel';
+  var add = document.createElement('button'); add.type = 'button'; add.className = 'svlbk-btn'; add.style.marginTop = '0'; add.textContent = 'Add items';
+  cancel.addEventListener('click', function(){ ov.remove(); });
+  ov.addEventListener('click', function(e){ if(e.target === ov) ov.remove(); });
+  add.addEventListener('click', function(){
+    var rows = svlbkParseList(ta.value);
+    if(!rows.length){ ta.style.borderColor = '#b91c1c'; ta.focus(); return; }
+    var first = null;
+    rows.forEach(function(r){ var c = svlbkAddCard(r); if(!first) first = c; });
+    svlbkRefreshCount();
+    ov.remove();
+    svlbkMsg(svlbkEl('svlbkCatMsg'), 'ok', 'Added ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + ' from your list. Review name, price & quantity, then “Save catalog”.');
+    if(first) first.scrollIntoView({ block: 'center' });
+  });
+  row.appendChild(cancel); row.appendChild(add);
+  box.appendChild(h); box.appendChild(hint); box.appendChild(ta); box.appendChild(row);
+  ov.appendChild(box); document.body.appendChild(ov); ta.focus();
 }
 function svlbkRefreshCount(){
   var n = document.querySelectorAll('#svlbkItems .svlbk-item').length;

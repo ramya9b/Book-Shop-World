@@ -45,4 +45,34 @@ test.describe('bulk stock entry', () => {
 
     expect(id).toBe('a4_copy_paper');
   });
+
+  test('paste-a-list creates one card per line with parsed fields', async ({ page }) => {
+    await page.goto(fileUrl, { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => typeof window.svlbkAddCard === 'function', null, { timeout: 20000 });
+
+    const out = await page.evaluate(() => {
+      const items = document.getElementById('svlbkItems');
+      items.innerHTML = '';
+      const text = 'Blue Pen, 10, 50, Pentonic\nA4 Paper, 320, 12, JK\nStapler, 85, 8\n\n   \nGel Pen';
+      const rows = window.svlbkParseList(text);
+      rows.forEach(r => window.svlbkAddCard(r));
+      const first = items.firstElementChild;
+      const val = ph => { const i = Array.from(first.querySelectorAll('input')).find(x => x.placeholder === ph); return i ? i.value : null; };
+      return {
+        rowCount: rows.length,
+        cardCount: items.children.length,
+        firstName: val('Blue Pen'),
+        firstPrice: val('0'),
+        firstId: val('a4_paper'),
+        firstBrand: val('e.g. Pentonic, Navneet'),
+      };
+    });
+
+    expect(out.rowCount).toBe(4);          // 3 full lines + "Gel Pen"; blanks skipped
+    expect(out.cardCount).toBe(4);
+    expect(out.firstName).toBe('Blue Pen');
+    expect(out.firstPrice).toBe('10');
+    expect(out.firstBrand).toBe('Pentonic');
+    expect(out.firstId).toBe('blue_pen');  // auto-filled from name
+  });
 });
