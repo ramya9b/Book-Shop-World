@@ -43,7 +43,7 @@ async function sendWhatsApp(to, text) {
     body: JSON.stringify({ messaging_product: 'whatsapp', to, type: 'text', text: { body: text } })
   });
   const j = await r.json().catch(() => ({}));
-  if (!r.ok) console.error('TEXT SEND FAILED', r.status, JSON.stringify(j));
+  if (!r.ok) console.error('WAERR', r.status, (j.error && j.error.code), '-', (j.error && j.error.message));
   else console.log('TEXT SENT', JSON.stringify(j));
 }
 
@@ -56,7 +56,7 @@ async function sendWhatsAppImage(to, link, caption) {
     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ messaging_product: 'whatsapp', to, type: 'image', image: { link, caption } })
   });
-  if (!r.ok) { const j = await r.json().catch(() => ({})); console.error('IMAGE SEND FAILED', r.status, JSON.stringify(j)); throw new Error('image send ' + r.status); }
+  if (!r.ok) { const j = await r.json().catch(() => ({})); console.error('WAERR-IMG', r.status, (j.error && j.error.code), '-', (j.error && j.error.message)); throw new Error('image send ' + r.status); }
   else console.log('IMAGE SENT');
 }
 
@@ -79,13 +79,6 @@ module.exports = async (req, res) => {
         req.body.entry[0].changes && req.body.entry[0].changes[0] &&
         req.body.entry[0].changes[0].value;
       const msg = value && value.messages && value.messages[0];
-
-      console.log('INBOUND', JSON.stringify({
-        hasMessages: !!(value && value.messages),
-        hasStatuses: !!(value && value.statuses),
-        type: msg && msg.type,
-        text: msg && msg.text && msg.text.body
-      }));
 
       // Ignore delivery/read receipts and non-text messages.
       if (!msg || msg.type !== 'text') return res.status(200).json({ ignored: true });
