@@ -12,10 +12,14 @@
      WHATSAPP_PHONE_ID       the WhatsApp "Phone number ID"
      FIREBASE_DB_URL         (optional) defaults to the svlb-shop RTDB URL
    ────────────────────────────────────────────────────────────────────────── */
-const { handleMessage, toArray } = require('../assistant/matcher.js');
+const { handleMessage, matchOne, toArray } = require('../assistant/matcher.js');
 
 const DB = process.env.FIREBASE_DB_URL ||
   'https://svlb-shop-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+/* Public base URL of the site — used to build product-photo links for WhatsApp. */
+const PUBLIC_BASE = (process.env.WHATSAPP_PUBLIC_BASE ||
+  'https://varalaxmibalajienterprises.vercel.app').replace(/\/+$/, '');
 
 /* Small warm-instance cache so we don't refetch the catalog on every message. */
 let _cache = { at: 0, catalog: [], status: null };
@@ -38,6 +42,18 @@ async function sendWhatsApp(to, text) {
     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ messaging_product: 'whatsapp', to, type: 'text', text: { body: text } })
   });
+}
+
+async function sendWhatsAppImage(to, link, caption) {
+  const phoneId = process.env.WHATSAPP_PHONE_ID;
+  const token = process.env.WHATSAPP_TOKEN;
+  if (!phoneId || !token) { console.error('WHATSAPP_PHONE_ID / WHATSAPP_TOKEN not set'); return; }
+  const r = await fetch(`https://graph.facebook.com/v20.0/${phoneId}/messages`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messaging_product: 'whatsapp', to, type: 'image', image: { link, caption } })
+  });
+  if (!r.ok) throw new Error('image send ' + r.status);   // let caller fall back to text
 }
 
 module.exports = async (req, res) => {
@@ -67,7 +83,17 @@ module.exports = async (req, res) => {
       const text = msg.text && msg.text.body ? msg.text.body : '';
       const { catalog, status } = await getData();
       const reply = handleMessage(catalog, text, status);
-      await sendWhatsApp(from, reply);
+      const one = matchOne(catalog, text);
+      if (one && one.image && one.id) {
+        // Send the product photo with the reply as the caption; fall back to text if the image send fails.
+        try {
+          await sendWhatsAppImage(from, `${PUBLIC_BASE}/api/img?id=${encodeURIComponent(one.id)}`, reply);
+        } catch (imgErr) {
+          await sendWhatsApp(from, reply);
+        }
+      } else {
+        await sendWhatsApp(from, reply);
+      }
       return res.status(200).json({ ok: true });
     } catch (e) {
       console.error('webhook error:', e);

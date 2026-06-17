@@ -183,4 +183,14 @@ function toArray(catalogObj) {
   });
 }
 
-module.exports = { normalize, search, detectIntent, replyForItem, handleMessage, toArray };
+/* Return the single confidently-matched item (or null) — mirrors handleMessage's
+   "clear winner" rule. Used to attach a photo to the WhatsApp reply. */
+function matchOne(catalog, text) {
+  const matches = search(catalog, text, 4);
+  if (!matches.length) return null;
+  const top = matches[0];
+  const clearWinner = matches.length === 1 || (top.score - matches[1].score) >= 20;
+  return (clearWinner && top.score >= 45) ? top.item : null;
+}
+
+module.exports = { normalize, search, detectIntent, replyForItem, handleMessage, matchOne, toArray };
