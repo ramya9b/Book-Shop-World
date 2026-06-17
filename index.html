@@ -6664,6 +6664,7 @@ window.addEventListener('DOMContentLoaded', function(){
         <div class="svlbk-row" style="justify-content:flex-start">
           <button class="svlbk-btn-ghost" type="button" onclick="svlbkAddItem()">+ Add item</button>
           <button class="svlbk-btn-ghost" type="button" id="svlbkVoiceBtn" onclick="svlbkVoice()" style="border-color:var(--saffron);color:var(--saffron)">🎤 Add by voice</button>
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkPhotos()" title="Add many items at once — pick several product photos" style="border-color:var(--gold);color:#8a6400">📷 Bulk photos</button>
           <select id="svlbkVoiceLang" class="svlbk-in" style="width:auto;padding:.4rem .55rem" aria-label="Voice language" title="Voice language">
             <option value="en-IN">English</option>
             <option value="te-IN">తెలుగు</option>
@@ -6671,7 +6672,7 @@ window.addEventListener('DOMContentLoaded', function(){
           </select>
           <button class="svlbk-btn" type="button" id="svlbkSaveCatBtn" onclick="svlbkSaveCatalog()" style="margin-top:0;margin-left:auto">Save catalog</button>
         </div>
-        <p class="svlbk-hint" id="svlbkVoiceTip" style="margin-top:.45rem">🎤 <b>English:</b> say <i>“5 blue pens by Pentonic at 10 rupees”</i> (quantity → item → “by BRAND” → “PRICE rupees”). <b>Telugu/Kannada:</b> say the item name — it's saved as the name &amp; an alias; add price/quantity yourself. Review before saving.</p>
+        <p class="svlbk-hint" id="svlbkVoiceTip" style="margin-top:.45rem">🎤 <b>English:</b> say <i>“5 blue pens by Pentonic at 10 rupees”</i> (quantity → item → “by BRAND” → “PRICE rupees”). <b>Telugu/Kannada:</b> say the item name — it's saved as the name &amp; an alias; add price/quantity yourself. <b>📷 Bulk photos:</b> pick several product photos at once — one card is created per photo (image filled in), so you only type name, price &amp; quantity. Review before saving.</p>
       </section>
     </div>
   </div>
@@ -6929,6 +6930,12 @@ function svlbkAddCard(item){
   var fCat = svlbkField('Category','text',item.category,{ph:'paper / pens / books …'});
   var fUnit = svlbkField('Unit','text',item.unit,{ph:'piece / ream / box …'});
   var fId = svlbkField('ID','text',item.id,{ph:'a4_paper'});
+  /* For new items, auto-fill the ID from the name (until the owner edits the ID) so bulk/quick entry stays fast */
+  var idAuto = !item.id;
+  fId._input.addEventListener('input', function(){ idAuto = false; });
+  fName._input.addEventListener('input', function(){
+    if(idAuto){ fId._input.value = fName._input.value.trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
+  });
   var sw = document.createElement('div');
   var sl = document.createElement('label'); sl.textContent = 'In stock';
   var tg = document.createElement('label'); tg.className = 'svlbk-toggle';
@@ -6990,6 +6997,29 @@ function svlbkAddCard(item){
   return card;
 }
 function svlbkAddItem(){ var c = svlbkAddCard({}); svlbkRefreshCount(); c.scrollIntoView({block:'nearest'}); }
+/* Bulk add: pick many product photos at once → one pre-filled card per photo. */
+function svlbkBulkPhotos(){
+  var inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true;
+  inp.addEventListener('change', function(ev){
+    var files = ev.target.files; if(!files || !files.length) return;
+    var total = files.length, done = 0, made = 0, first = null;
+    var m = svlbkEl('svlbkCatMsg');
+    svlbkMsg(m, 'ok', 'Processing ' + total + ' photo' + (total === 1 ? '' : 's') + '…');
+    Array.prototype.forEach.call(files, function(fl){
+      svlbkResizeImage(fl, 400, 0.6, function(url){
+        done++;
+        if(url){ var c = svlbkAddCard({ image: url }); if(!first) first = c; made++; }
+        if(done === total){
+          svlbkRefreshCount();
+          if(first) first.scrollIntoView({ block: 'center' });
+          svlbkMsg(m, 'ok', 'Added ' + made + ' item' + (made === 1 ? '' : 's') + ' from photos. Fill in name, price & quantity for each, then “Save catalog”.');
+        }
+      });
+    });
+  });
+  inp.click();
+}
 function svlbkRefreshCount(){
   var n = document.querySelectorAll('#svlbkItems .svlbk-item').length;
   var el = svlbkEl('svlbkCount'); if(el) el.textContent = n + (n === 1 ? ' item' : ' items');
