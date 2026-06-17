@@ -7,6 +7,10 @@
     "shopStatus": {
       ".read": true,
       ".write": "auth !== null && auth.token.email === 'srrgkenterprises@gmail.com'"
+    },
+    "catalogCost": {
+      ".read": "auth !== null && auth.token.email === 'srrgkenterprises@gmail.com'",
+      ".write": "auth !== null && auth.token.email === 'srrgkenterprises@gmail.com'"
     }
   }
 }

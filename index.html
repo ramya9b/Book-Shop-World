@@ -6913,7 +6913,18 @@ function svlbkAddCard(item){
   var f = document.createElement('div'); f.className = 'svlbk-fields';
   var fName = svlbkField('Name','text',item.name,{full:true,ph:'Blue Pen'});
   var fBrand = svlbkField('Brand / Company','text',item.brand,{ph:'e.g. Pentonic, Navneet'});
-  var fPrice = svlbkField('Price (₹)','number',(item.price_inr != null ? item.price_inr : ''),{inputmode:'decimal',ph:'0'});
+  var fPrice = svlbkField('Selling price (₹)','number',(item.price_inr != null ? item.price_inr : ''),{inputmode:'decimal',ph:'0'});
+  var fCost = svlbkField('Cost price (₹) · private','number',(item.cost != null ? item.cost : ''),{inputmode:'decimal',ph:'what you paid'});
+  var profitEl = document.createElement('div'); profitEl.className = 'svlbk-full svlbk-hint'; profitEl.style.margin = '-.1rem 0 .2rem';
+  var updProfit = function(){
+    var s = parseFloat(fPrice._input.value), c = parseFloat(fCost._input.value);
+    if(!isNaN(s) && !isNaN(c)){
+      var p = s - c, pct = c > 0 ? Math.round(p / c * 100) : null;
+      profitEl.textContent = (p >= 0 ? '🟢 Profit ₹' + p : '🔴 Loss ₹' + Math.abs(p)) + (pct != null ? ' · ' + pct + '% margin' : '');
+      profitEl.style.color = p >= 0 ? '#065F46' : '#991B1B';
+    } else { profitEl.textContent = ''; }
+  };
+  fPrice._input.addEventListener('input', updProfit); fCost._input.addEventListener('input', updProfit);
   var fQty = svlbkField('Quantity in stock','number',(item.qty != null ? item.qty : ''),{inputmode:'numeric',ph:'e.g. 5'});
   var fCat = svlbkField('Category','text',item.category,{ph:'paper / pens / books …'});
   var fUnit = svlbkField('Unit','text',item.unit,{ph:'piece / ream / box …'});
@@ -6953,18 +6964,21 @@ function svlbkAddCard(item){
   imgRow.appendChild(imgPrev); imgRow.appendChild(imgIn); imgRow.appendChild(imgRm);
   imgWrap.appendChild(imgLbl); imgWrap.appendChild(imgRow);
 
-  f.appendChild(fName); f.appendChild(fBrand); f.appendChild(fPrice); f.appendChild(fQty); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(imgWrap); f.appendChild(fAli);
+  f.appendChild(fName); f.appendChild(fBrand); f.appendChild(fPrice); f.appendChild(fCost); f.appendChild(profitEl); f.appendChild(fQty); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(imgWrap); f.appendChild(fAli);
   card.appendChild(f);
+  updProfit();
 
   card._read = function(){
     var pr = fPrice._input.value.trim();
     var qv = fQty._input.value.trim();
     var qty = qv === '' ? null : Number(qv);
+    var cv = fCost._input.value.trim();
     return {
       id: fId._input.value.trim().toLowerCase(),
       name: fName._input.value.trim(),
       brand: fBrand._input.value.trim(),
       qty: qty,
+      cost: cv === '' ? null : Number(cv),
       image: imgData,
       aliases: fAli._input.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean),
       price_inr: pr === '' ? '' : Number(pr), priceRaw: pr,
@@ -6983,9 +6997,12 @@ function svlbkRefreshCount(){
 function svlbkLoadCatalog(){
   var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
   if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
-  fbDatabase.ref('catalog').once('value').then(function(snap){
-    var v = snap.val() || {};
-    var arr = Object.keys(v).map(function(id){ var it = v[id] || {}; it.id = id; return it; });
+  Promise.all([
+    fbDatabase.ref('catalog').once('value').then(function(s){ return s.val() || {}; }),
+    fbDatabase.ref('catalogCost').once('value').then(function(s){ return s.val() || {}; }).catch(function(){ return {}; })
+  ]).then(function(res){
+    var v = res[0], costs = res[1] || {};
+    var arr = Object.keys(v).map(function(id){ var it = v[id] || {}; it.id = id; if(costs[id] != null) it.cost = costs[id]; return it; });
     arr.sort(function(a,b){ return (a.category||'').localeCompare(b.category||'') || (a.name||'').localeCompare(b.name||''); });
     var box = svlbkEl('svlbkItems'); box.innerHTML = '';
     arr.forEach(function(it){ svlbkAddCard(it); });
@@ -7015,17 +7032,26 @@ function svlbkSaveCatalog(){
     seen[r.id] = true;
   }
   var stamp = new Date().toISOString();
-  var obj = {};
+  var obj = {}, costObj = {};
   rows.forEach(function(r){
     var entry = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:stamp };
     if(r.brand) entry.brand = r.brand;
     if(r.qty != null && !isNaN(r.qty)) entry.qty = r.qty;
     if(r.image) entry.image = r.image;
     obj[r.id] = entry;
+    if(r.cost != null && !isNaN(r.cost)) costObj[r.id] = r.cost;   // private — owner-only node
   });
   var btn = svlbkEl('svlbkSaveCatBtn'); btn.disabled = true;
   fbDatabase.ref('catalog').set(obj)
-    .then(function(){ svlbkMsg(m,'ok','Catalog saved — ' + rows.length + (rows.length === 1 ? ' item.' : ' items.')); })
+    .then(function(){
+      // Save cost prices to the private node (skipped gracefully if its rule isn't published yet)
+      if(Object.keys(costObj).length === 0) return true;
+      return fbDatabase.ref('catalogCost').set(costObj).then(function(){ return true; }).catch(function(){ return false; });
+    })
+    .then(function(costOk){
+      svlbkMsg(m,'ok','Catalog saved — ' + rows.length + (rows.length === 1 ? ' item.' : ' items.') +
+        (costOk === false ? ' (Publish the updated Firebase rules to save cost prices privately.)' : ''));
+    })
     .catch(function(err){ svlbkMsg(m,'err', svlbkWriteErr(err)); })
     .then(function(){ btn.disabled = false; });
 }
