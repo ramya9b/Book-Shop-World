@@ -26,7 +26,7 @@ test.describe('S1 — i18n (EN/TE/KN)', () => {
 test.describe('S2 — WhatsApp ordering', () => {
   test('shop WhatsApp links use the correct number', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    expect(await page.locator('a[href*="wa.me/919945411489"]').count()).toBeGreaterThan(0);
+    expect(await page.locator('a[href*="wa.me/919620079597"]').count()).toBeGreaterThan(0);
   });
 
   test('cart -> "Order via WhatsApp" opens wa.me with a total', async ({ page }) => {
@@ -38,7 +38,7 @@ test.describe('S2 — WhatsApp ordering', () => {
       page.getByRole('button', { name: /order via whatsapp/i }).click(),
     ]);
     // wa.me redirects to api.whatsapp.com/send — assert the number + order text, not the host.
-    expect(popup.url()).toContain('919945411489');
+    expect(popup.url()).toContain('919620079597');
     expect(decodeURIComponent(popup.url())).toMatch(/Total/i);
   });
 });
