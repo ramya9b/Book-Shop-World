@@ -6589,6 +6589,23 @@ window.addEventListener('DOMContentLoaded', function(){
 .svlbk-stk-card .cbody{padding:.7rem .8rem}
 .svlbk-live-tag{font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--saffron,#0A7A4E);padding:.15rem .5rem;border-radius:20px;align-self:center}
 @media (max-width:560px){ .svlbk-fields{grid-template-columns:1fr} }
+/* ── Catalog: compact item list ── */
+.svlbk-search{width:100%;margin:.1rem 0 .55rem}
+.svlbk-list{display:flex;flex-direction:column;gap:.4rem;max-height:340px;overflow-y:auto;margin:.2rem 0 .3rem;padding-right:.15rem}
+.svlbk-lrow{display:flex;align-items:center;gap:.6rem;border:1px solid var(--border,#BDD9CC);border-radius:10px;background:#fff;padding:.5rem .6rem}
+.svlbk-lrow.unsaved{border-color:var(--gold,#C8920A);background:#FFFBF0}
+.svlbk-lthumb{width:34px;height:34px;border-radius:7px;object-fit:cover;border:1px solid var(--border);flex:0 0 auto;background:#f3f3f3}
+.svlbk-lmain{flex:1;min-width:0}
+.svlbk-lname{font-weight:700;font-size:.9rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.svlbk-lmeta{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.svlbk-lmeta .udot{color:var(--gold,#C8920A);font-weight:800}
+.svlbk-lqty{font-size:.7rem;font-weight:800;padding:.12rem .45rem;border-radius:20px;flex:0 0 auto}
+.svlbk-lqty.in{background:#E4F6EE;color:#065F46}.svlbk-lqty.low{background:#FEF3C7;color:#92400E}.svlbk-lqty.out{background:#FEE2E2;color:#991B1B}
+.svlbk-licon{background:transparent;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.85rem;padding:.3rem .5rem;flex:0 0 auto}
+.svlbk-licon:hover{background:#f3f3f3}
+.svlbk-empty{font-size:.84rem;color:var(--muted);text-align:center;padding:1rem .5rem}
+.svlbk-formcard{border:1px solid var(--border,#BDD9CC);border-radius:12px;background:#FAFDFB;padding:.85rem .95rem;margin-top:.3rem}
+.svlbk-formcard h4{margin:.1rem 0 .5rem;font-family:'Playfair Display',serif;font-size:1rem;color:var(--text)}
 @media (prefers-reduced-motion:reduce){ #svlbkAdmin *{transition:none !important;animation:none !important} }
 </style>
 
@@ -6659,22 +6676,76 @@ window.addEventListener('DOMContentLoaded', function(){
       <!-- catalog -->
       <section class="svlbk-block">
         <div class="svlbk-row"><h3>Catalog</h3><span class="svlbk-count" id="svlbkCount">0 items</span></div>
-        <p class="svlbk-hint" style="margin:.1rem 0 .5rem"><b>4 ways to add stock:</b> &nbsp;<b>+ Add item</b> — type one item · &nbsp;<b>🎤 Add by voice</b> — speak it (English/తెలుగు/ಕನ್ನಡ) · &nbsp;<b>📷 Bulk photos</b> — pick many photos, one card each · &nbsp;<b>📋 Paste list</b> — paste many lines at once. Fill the details on each card, then <b>Save catalog</b>.</p>
         <div id="svlbkCatMsg" class="svlbk-msg" role="status" aria-live="polite"></div>
-        <div id="svlbkItems"></div>
-        <div class="svlbk-row" style="justify-content:flex-start">
-          <button class="svlbk-btn-ghost" type="button" onclick="svlbkAddItem()">+ Add item</button>
-          <button class="svlbk-btn-ghost" type="button" id="svlbkVoiceBtn" onclick="svlbkVoice()" style="border-color:var(--saffron);color:var(--saffron)">🎤 Add by voice</button>
-          <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkPhotos()" title="Add many items at once — pick several product photos" style="border-color:var(--gold);color:#8a6400">📷 Bulk photos</button>
-          <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkText()" title="Add many items at once — paste a list" style="border-color:var(--gold);color:#8a6400">📋 Paste list</button>
-          <select id="svlbkVoiceLang" class="svlbk-in" style="width:auto;padding:.4rem .55rem" aria-label="Voice language" title="Voice language">
-            <option value="en-IN">English</option>
-            <option value="te-IN">తెలుగు</option>
-            <option value="kn-IN">ಕನ್ನಡ</option>
-          </select>
-          <button class="svlbk-btn" type="button" id="svlbkSaveCatBtn" onclick="svlbkSaveCatalog()" style="margin-top:0;margin-left:auto">Save catalog</button>
+
+        <!-- existing items (compact list) -->
+        <input id="svlbkSearch" class="svlbk-search" type="search" placeholder="🔎 Search your items…" oninput="svlbkRenderList()" aria-label="Search catalog">
+        <div id="svlbkList" class="svlbk-list" aria-label="Saved items"></div>
+        <div class="svlbk-row" style="justify-content:flex-start;gap:.4rem">
+          <button class="svlbk-btn" type="button" onclick="svlbkNewItem()" style="margin-top:0">+ New item</button>
+          <button class="svlbk-btn-ghost" type="button" id="svlbkSaveAllBtn" onclick="svlbkSaveAllUnsaved()" style="display:none;border-color:var(--gold);color:#8a6400"></button>
         </div>
-        <p class="svlbk-hint" id="svlbkVoiceTip" style="margin-top:.45rem">🎤 <b>English:</b> say <i>“5 blue pens by Pentonic at 10 rupees”</i> (quantity → item → “by BRAND” → “PRICE rupees”). <b>Telugu/Kannada:</b> say the item name — it's saved as the name &amp; an alias; add price/quantity yourself. <b>📷 Bulk photos:</b> pick several product photos at once — one card is created per photo (image filled in), so you only type name, price &amp; quantity. Review before saving.</p>
+
+        <!-- single add / edit form -->
+        <div class="svlbk-formcard">
+          <h4 id="svlbkFormTitle">Add a new item</h4>
+          <div class="svlbk-fields">
+            <div class="svlbk-full">
+              <label for="svlbkfName">Name</label>
+              <input id="svlbkfName" type="text" list="svlbkDLNames" placeholder="Type a new name, or pick one" autocomplete="off">
+              <p class="svlbk-hint">Pick from the ▾ list to reuse a name, or just type a new one — new names are remembered for next time.</p>
+            </div>
+            <div><label for="svlbkfBrand">Brand / Company</label><input id="svlbkfBrand" type="text" list="svlbkDLBrands" placeholder="e.g. Pentonic" autocomplete="off"></div>
+            <div><label for="svlbkfPrice">Selling price (₹)</label><input id="svlbkfPrice" type="number" inputmode="decimal" placeholder="0"></div>
+            <div><label for="svlbkfCost">Cost price (₹) · private</label><input id="svlbkfCost" type="number" inputmode="decimal" placeholder="what you paid"></div>
+            <div><label for="svlbkfQty">Quantity in stock</label><input id="svlbkfQty" type="number" inputmode="numeric" placeholder="e.g. 5"></div>
+            <p class="svlbk-full svlbk-hint" id="svlbkfProfit" style="margin:-.1rem 0 .2rem"></p>
+            <div><label for="svlbkfCat">Category</label><input id="svlbkfCat" type="text" list="svlbkDLCats" placeholder="pens / paper / books…" autocomplete="off"></div>
+            <div><label for="svlbkfUnit">Unit</label><input id="svlbkfUnit" type="text" list="svlbkDLUnits" placeholder="piece / ream / box…" autocomplete="off"></div>
+            <div><label for="svlbkfId">ID (auto)</label><input id="svlbkfId" type="text" placeholder="blue_pen"></div>
+            <div>
+              <label>In stock</label>
+              <label class="svlbk-toggle"><input type="checkbox" id="svlbkfStock" checked><span class="svlbk-track"></span><span id="svlbkfStockLbl">In stock</span></label>
+            </div>
+            <div class="svlbk-full">
+              <label>Photo (optional)</label>
+              <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+                <img id="svlbkfPhotoPrev" alt="" style="width:50px;height:50px;border-radius:8px;object-fit:cover;border:1px solid var(--border);display:none">
+                <input id="svlbkfPhoto" type="file" accept="image/*" style="font-size:.82rem;flex:1;min-width:120px">
+                <button type="button" class="svlbk-del" onclick="svlbkFormPhotoRemove()">Remove</button>
+              </div>
+            </div>
+            <div class="svlbk-full">
+              <label for="svlbkfAliases">Aliases</label>
+              <textarea id="svlbkfAliases" rows="2" placeholder="blue pen, neeli pen, నీలం పెన్…"></textarea>
+              <p class="svlbk-hint">Comma-separated. Add Telugu, Kannada, Hindi &amp; Tinglish names and common misspellings — this drives the assistant’s matching.</p>
+            </div>
+          </div>
+          <div class="svlbk-row" style="justify-content:flex-start;gap:.4rem">
+            <button class="svlbk-btn" type="button" id="svlbkSaveItemBtn" onclick="svlbkSaveItem()" style="margin-top:0">Save item</button>
+            <button class="svlbk-btn-ghost" type="button" onclick="svlbkClearForm()">Clear</button>
+            <button class="svlbk-btn-ghost" type="button" id="svlbkVoiceBtn" onclick="svlbkVoice()" style="border-color:var(--saffron);color:var(--saffron)">🎤 Speak to fill</button>
+            <select id="svlbkVoiceLang" style="width:auto;padding:.4rem .55rem;border:1px solid var(--border);border-radius:9px" aria-label="Voice language" title="Voice language">
+              <option value="en-IN">English</option>
+              <option value="te-IN">తెలుగు</option>
+              <option value="kn-IN">ಕನ್ನಡ</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- bulk tools -->
+        <div class="svlbk-row" style="justify-content:flex-start;gap:.4rem;margin-top:.7rem">
+          <span class="svlbk-hint" style="align-self:center">Add many at once:</span>
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkPhotos()" title="Pick several product photos — one draft each" style="border-color:var(--gold);color:#8a6400">📷 Bulk photos</button>
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkBulkText()" title="Paste a list of items" style="border-color:var(--gold);color:#8a6400">📋 Paste list</button>
+        </div>
+        <p class="svlbk-hint" style="margin-top:.45rem">🎤 <b>Speak to fill</b> (English): say <i>“5 blue pens by Pentonic at 10 rupees”</i> → fills the form; review &amp; <b>Save item</b>. <b>Bulk</b> tools add draft rows to the list above (marked ●) — open each to finish, or <b>Save all</b>.</p>
+
+        <!-- datalists power the type-or-pick dropdowns -->
+        <datalist id="svlbkDLNames"></datalist>
+        <datalist id="svlbkDLBrands"></datalist>
+        <datalist id="svlbkDLCats"></datalist>
+        <datalist id="svlbkDLUnits"></datalist>
       </section>
     </div>
   </div>
@@ -6904,158 +6975,321 @@ function svlbkField(labelText, type, value, opts){
   if(opts.hint){ var h = document.createElement('p'); h.className = 'svlbk-hint'; h.textContent = opts.hint; w.appendChild(h); }
   w._input = inp; return w;
 }
-function svlbkAddCard(item){
-  item = item || {};
-  var card = document.createElement('div'); card.className = 'svlbk-item';
-  var head = document.createElement('div'); head.className = 'svlbk-item-head';
-  var tag = document.createElement('span'); tag.className = 'svlbk-tag'; tag.textContent = item.id ? ('#' + item.id) : 'new item';
-  var del = document.createElement('button'); del.type = 'button'; del.className = 'svlbk-del'; del.textContent = 'Remove';
-  del.addEventListener('click', function(){ card.remove(); svlbkRefreshCount(); });
-  head.appendChild(tag); head.appendChild(del); card.appendChild(head);
+/* ───────── Catalog admin: single form + item list (per-item save) ───────── */
+var svlbkCat = [];            // in-memory items: saved (from Firebase) + unsaved drafts
+var svlbkEditingId = null;    // saved id being edited (null = new item or draft)
+var svlbkEditingKey = null;   // in-memory key of the row being edited
+var svlbkIdAuto = true;       // auto-fill ID from name until the owner edits the ID
+var svlbkPhotoData = '';      // current form photo (data-URL)
+var svlbkDraftN = 0;          // counter for draft keys
+var svlbkFormWired = false;
 
-  var f = document.createElement('div'); f.className = 'svlbk-fields';
-  var fName = svlbkField('Name','text',item.name,{full:true,ph:'Blue Pen'});
-  var fBrand = svlbkField('Brand / Company','text',item.brand,{ph:'e.g. Pentonic, Navneet'});
-  var fPrice = svlbkField('Selling price (₹)','number',(item.price_inr != null ? item.price_inr : ''),{inputmode:'decimal',ph:'0'});
-  var fCost = svlbkField('Cost price (₹) · private','number',(item.cost != null ? item.cost : ''),{inputmode:'decimal',ph:'what you paid'});
-  var profitEl = document.createElement('div'); profitEl.className = 'svlbk-full svlbk-hint'; profitEl.style.margin = '-.1rem 0 .2rem';
-  var updProfit = function(){
-    var s = parseFloat(fPrice._input.value), c = parseFloat(fCost._input.value);
-    if(!isNaN(s) && !isNaN(c)){
-      var p = s - c, pct = c > 0 ? Math.round(p / c * 100) : null;
-      profitEl.textContent = (p >= 0 ? '🟢 Profit ₹' + p : '🔴 Loss ₹' + Math.abs(p)) + (pct != null ? ' · ' + pct + '% margin' : '');
-      profitEl.style.color = p >= 0 ? '#065F46' : '#991B1B';
-    } else { profitEl.textContent = ''; }
-  };
-  fPrice._input.addEventListener('input', updProfit); fCost._input.addEventListener('input', updProfit);
-  var fQty = svlbkField('Quantity in stock','number',(item.qty != null ? item.qty : ''),{inputmode:'numeric',ph:'e.g. 5'});
-  var fCat = svlbkField('Category','text',item.category,{ph:'paper / pens / books …'});
-  var fUnit = svlbkField('Unit','text',item.unit,{ph:'piece / ream / box …'});
-  var fId = svlbkField('ID','text',item.id,{ph:'a4_paper'});
-  /* For new items, auto-fill the ID from the name (until the owner edits the ID) so bulk/quick entry stays fast */
-  var idAuto = !item.id;
-  if(idAuto && item.name){ fId._input.value = svlbkSlugId(item.name); }
-  fId._input.addEventListener('input', function(){ idAuto = false; });
-  fName._input.addEventListener('input', function(){
-    if(idAuto){ fId._input.value = svlbkSlugId(fName._input.value); }
-  });
-  var sw = document.createElement('div');
-  var sl = document.createElement('label'); sl.textContent = 'In stock';
-  var tg = document.createElement('label'); tg.className = 'svlbk-toggle';
-  var cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = item.in_stock !== false;
-  var tk = document.createElement('span'); tk.className = 'svlbk-track';
-  var stt = document.createElement('span'); stt.textContent = cb.checked ? 'In stock' : 'Out of stock';
-  cb.addEventListener('change', function(){ stt.textContent = cb.checked ? 'In stock' : 'Out of stock'; });
-  tg.appendChild(cb); tg.appendChild(tk); tg.appendChild(stt);
-  sw.appendChild(sl); sw.appendChild(tg);
-  /* Quantity drives in-stock: any number > 0 marks the item in stock */
-  fQty._input.addEventListener('input', function(){
-    var v = fQty._input.value.trim();
-    if(v !== ''){ cb.checked = Number(v) > 0; stt.textContent = cb.checked ? 'In stock' : 'Out of stock'; }
-  });
-  var fAli = svlbkField('Aliases','textarea',(item.aliases || []).join(', '),
-    {full:true,hint:'Comma-separated. Add Telugu, Kannada, Hindi & Tinglish names and common misspellings — this drives the assistant’s matching.'});
+function svlbkEsc(s){ return String(s == null ? '' : s).replace(/[<>&]/g, function(c){ return c === '<' ? '&lt;' : c === '>' ? '&gt;' : '&amp;'; }); }
+function svlbkVal(id, v){ var e = svlbkEl(id); if(e) e.value = (v == null ? '' : String(v)); }
+function svlbkGet(id){ var e = svlbkEl(id); return e ? e.value : ''; }
+function svlbkFind(key){ for(var i = 0; i < svlbkCat.length; i++){ if((svlbkCat[i]._key || svlbkCat[i].id) === key) return svlbkCat[i]; } return null; }
 
-  /* photo (resized to a small thumbnail in the browser) */
-  var imgWrap = document.createElement('div'); imgWrap.className = 'svlbk-full';
-  var imgLbl = document.createElement('label'); imgLbl.textContent = 'Photo (optional)';
-  var imgRow = document.createElement('div'); imgRow.style.cssText = 'display:flex;align-items:center;gap:.6rem;flex-wrap:wrap';
-  var imgData = item.image || '';
-  var imgPrev = document.createElement('img'); imgPrev.alt = '';
-  imgPrev.style.cssText = 'width:50px;height:50px;border-radius:8px;object-fit:cover;border:1px solid var(--border);' + (imgData ? '' : 'display:none');
-  if(imgData) imgPrev.src = imgData;
-  var imgIn = document.createElement('input'); imgIn.type = 'file'; imgIn.accept = 'image/*'; imgIn.style.cssText = 'font-size:.82rem;flex:1;min-width:120px';
-  imgIn.addEventListener('change', function(ev){
-    var fl = ev.target.files && ev.target.files[0]; if(!fl) return;
-    svlbkResizeImage(fl, 400, 0.6, function(url){ if(url){ imgData = url; imgPrev.src = url; imgPrev.style.display = ''; } });
-  });
-  var imgRm = document.createElement('button'); imgRm.type = 'button'; imgRm.textContent = 'Remove'; imgRm.className = 'svlbk-del';
-  imgRm.addEventListener('click', function(){ imgData = ''; imgPrev.style.display = 'none'; imgPrev.removeAttribute('src'); imgIn.value = ''; });
-  imgRow.appendChild(imgPrev); imgRow.appendChild(imgIn); imgRow.appendChild(imgRm);
-  imgWrap.appendChild(imgLbl); imgWrap.appendChild(imgRow);
-
-  f.appendChild(fName); f.appendChild(fBrand); f.appendChild(fPrice); f.appendChild(fCost); f.appendChild(profitEl); f.appendChild(fQty); f.appendChild(fCat); f.appendChild(fUnit); f.appendChild(fId); f.appendChild(sw); f.appendChild(imgWrap); f.appendChild(fAli);
-  card.appendChild(f);
-  updProfit();
-
-  card._read = function(){
-    var pr = fPrice._input.value.trim();
-    var qv = fQty._input.value.trim();
-    var qty = qv === '' ? null : Number(qv);
-    var cv = fCost._input.value.trim();
-    return {
-      id: fId._input.value.trim().toLowerCase(),
-      name: fName._input.value.trim(),
-      brand: fBrand._input.value.trim(),
-      qty: qty,
-      cost: cv === '' ? null : Number(cv),
-      image: imgData,
-      aliases: fAli._input.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean),
-      price_inr: pr === '' ? '' : Number(pr), priceRaw: pr,
-      in_stock: qty != null ? qty > 0 : cb.checked,
-      category: fCat._input.value.trim(), unit: fUnit._input.value.trim()
-    };
-  };
-  svlbkEl('svlbkItems').appendChild(card);
-  return card;
-}
-function svlbkAddItem(){ var c = svlbkAddCard({}); svlbkRefreshCount(); c.scrollIntoView({block:'nearest'}); }
-/* Slugify a name into a valid catalog ID (lowercase, underscores). */
-function svlbkSlugId(s){ return String(s || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''); }
-/* Bulk add: pick many product photos at once → one pre-filled card per photo. */
-function svlbkBulkPhotos(){
-  var inp = document.createElement('input');
-  inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true;
-  inp.addEventListener('change', function(ev){
-    var files = ev.target.files; if(!files || !files.length) return;
-    var total = files.length, done = 0, made = 0, first = null;
-    var m = svlbkEl('svlbkCatMsg');
-    svlbkMsg(m, 'ok', 'Processing ' + total + ' photo' + (total === 1 ? '' : 's') + '…');
-    Array.prototype.forEach.call(files, function(fl){
-      svlbkResizeImage(fl, 400, 0.6, function(url){
-        done++;
-        if(url){ var c = svlbkAddCard({ image: url }); if(!first) first = c; made++; }
-        if(done === total){
-          svlbkRefreshCount();
-          if(first) first.scrollIntoView({ block: 'center' });
-          svlbkMsg(m, 'ok', 'Added ' + made + ' item' + (made === 1 ? '' : 's') + ' from photos. Fill in name, price & quantity for each, then “Save catalog”.');
-        }
-      });
+function svlbkLoadCatalog(){
+  var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
+  if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
+  svlbkWireForm();
+  Promise.all([
+    fbDatabase.ref('catalog').once('value').then(function(s){ return s.val() || {}; }),
+    fbDatabase.ref('catalogCost').once('value').then(function(s){ return s.val() || {}; }).catch(function(){ return {}; })
+  ]).then(function(res){
+    var v = res[0], costs = res[1] || {};
+    svlbkCat = Object.keys(v).map(function(id){
+      var it = v[id] || {}; it.id = id; it._key = id; it._unsaved = false;
+      if(costs[id] != null) it.cost = costs[id];
+      it.aliases = it.aliases || [];
+      return it;
     });
-  });
-  inp.click();
+    svlbkSortCat(); svlbkRefreshDatalists(); svlbkRenderList(); svlbkClearForm();
+  }).catch(function(err){ svlbkMsg(m,'err','Could not load catalog: ' + ((err && err.code) || 'error')); });
 }
-/* Parse a pasted list: one item per line — "Name, Price, Quantity, Brand"
-   (price/quantity/brand optional). Commas OR tabs (spreadsheet paste) both work. */
+
+function svlbkSortCat(){
+  svlbkCat.sort(function(a,b){
+    var ua = a._unsaved ? 0 : 1, ub = b._unsaved ? 0 : 1;
+    if(ua !== ub) return ua - ub;
+    return (a.category||'').localeCompare(b.category||'') || (a.name||'').localeCompare(b.name||'');
+  });
+}
+
+function svlbkUniq(getter){
+  var seen = {}, out = [];
+  svlbkCat.forEach(function(it){ var val = (getter(it)||'').trim(); var k = val.toLowerCase(); if(val && !seen[k]){ seen[k] = 1; out.push(val); } });
+  out.sort(function(a,b){ return a.localeCompare(b); });
+  return out;
+}
+function svlbkFillDL(id, vals){
+  var dl = svlbkEl(id); if(!dl) return;
+  dl.innerHTML = '';
+  vals.forEach(function(v){ var o = document.createElement('option'); o.value = v; dl.appendChild(o); });
+}
+function svlbkRefreshDatalists(){
+  svlbkFillDL('svlbkDLNames', svlbkUniq(function(it){ return it.name; }));
+  svlbkFillDL('svlbkDLBrands', svlbkUniq(function(it){ return it.brand; }));
+  svlbkFillDL('svlbkDLCats', svlbkUniq(function(it){ return it.category; }));
+  var units = svlbkUniq(function(it){ return it.unit; });
+  var low = units.map(function(x){ return x.toLowerCase(); });
+  ['piece','ream','box','set','pack','sheet','bottle','roll'].forEach(function(u){ if(low.indexOf(u) < 0) units.push(u); });
+  svlbkFillDL('svlbkDLUnits', units);
+}
+
+function svlbkQtyBadge(it){
+  if(it.qty == null) return it.in_stock === false ? {cls:'out',txt:'Out'} : {cls:'in',txt:'In stock'};
+  if(it.qty <= 0) return {cls:'out',txt:'Out'};
+  if(it.qty <= 5) return {cls:'low',txt:'Only ' + it.qty};
+  return {cls:'in',txt:it.qty + ' in stock'};
+}
+function svlbkRenderList(){
+  var box = svlbkEl('svlbkList'); if(!box) return;
+  var q = ((svlbkEl('svlbkSearch')||{}).value || '').toLowerCase().trim();
+  var items = svlbkCat.filter(function(it){
+    if(!q) return true;
+    return (it.name||'').toLowerCase().indexOf(q) >= 0 || (it.brand||'').toLowerCase().indexOf(q) >= 0 ||
+           (it.category||'').toLowerCase().indexOf(q) >= 0 || (it.id||'').toLowerCase().indexOf(q) >= 0;
+  });
+  box.innerHTML = '';
+  if(!svlbkCat.length){ box.innerHTML = '<div class="svlbk-empty">No items yet. Add your first item in the form below.</div>'; }
+  else if(!items.length){ box.innerHTML = '<div class="svlbk-empty">No items match “' + svlbkEsc(q) + '”.</div>'; }
+  items.forEach(function(it){
+    var row = document.createElement('div'); row.className = 'svlbk-lrow' + (it._unsaved ? ' unsaved' : '');
+    var thumb;
+    if(it.image){ thumb = document.createElement('img'); thumb.className = 'svlbk-lthumb'; thumb.src = it.image; thumb.alt = ''; }
+    else { thumb = document.createElement('div'); thumb.className = 'svlbk-lthumb'; }
+    var main = document.createElement('div'); main.className = 'svlbk-lmain';
+    var nm = document.createElement('div'); nm.className = 'svlbk-lname'; nm.textContent = (it._unsaved ? '● ' : '') + (it.name || '(no name yet)');
+    var meta = document.createElement('div'); meta.className = 'svlbk-lmeta';
+    var bits = []; if(it.brand) bits.push(it.brand);
+    if(it.price_inr != null && it.price_inr !== '') bits.push('₹' + it.price_inr);
+    if(it.category) bits.push(it.category);
+    meta.textContent = bits.join(' · ') || (it._unsaved ? 'draft — tap ✎ to finish' : '—');
+    main.appendChild(nm); main.appendChild(meta);
+    var badge = svlbkQtyBadge(it); var b = document.createElement('span'); b.className = 'svlbk-lqty ' + badge.cls; b.textContent = badge.txt;
+    var edit = document.createElement('button'); edit.type = 'button'; edit.className = 'svlbk-licon'; edit.title = 'Edit'; edit.setAttribute('aria-label','Edit ' + (it.name||'item')); edit.textContent = '✎';
+    edit.addEventListener('click', function(){ svlbkEditItem(it._key || it.id); });
+    var del = document.createElement('button'); del.type = 'button'; del.className = 'svlbk-licon'; del.title = 'Delete'; del.setAttribute('aria-label','Delete ' + (it.name||'item')); del.textContent = '🗑';
+    del.addEventListener('click', function(){ svlbkDeleteItem(it._key || it.id); });
+    row.appendChild(thumb); row.appendChild(main); row.appendChild(b); row.appendChild(edit); row.appendChild(del);
+    box.appendChild(row);
+  });
+  var n = svlbkCat.length, el = svlbkEl('svlbkCount'); if(el) el.textContent = n + (n === 1 ? ' item' : ' items');
+  var drafts = svlbkCat.filter(function(it){ return it._unsaved; }).length;
+  var sa = svlbkEl('svlbkSaveAllBtn');
+  if(sa){ if(drafts){ sa.style.display = ''; sa.textContent = '💾 Save all unsaved (' + drafts + ')'; } else { sa.style.display = 'none'; } }
+}
+
+function svlbkSetPhoto(url){
+  svlbkPhotoData = url || '';
+  var p = svlbkEl('svlbkfPhotoPrev');
+  if(p){ if(svlbkPhotoData){ p.src = svlbkPhotoData; p.style.display = ''; } else { p.removeAttribute('src'); p.style.display = 'none'; } }
+  if(!url){ var fin = svlbkEl('svlbkfPhoto'); if(fin) fin.value = ''; }
+}
+function svlbkFormPhotoRemove(){ svlbkSetPhoto(''); }
+
+function svlbkUpdProfit(){
+  var s = parseFloat(svlbkGet('svlbkfPrice')), c = parseFloat(svlbkGet('svlbkfCost')), el = svlbkEl('svlbkfProfit');
+  if(!el) return;
+  if(!isNaN(s) && !isNaN(c)){
+    var p = s - c, pct = c > 0 ? Math.round(p / c * 100) : null;
+    el.textContent = (p >= 0 ? '🟢 Profit ₹' + p : '🔴 Loss ₹' + Math.abs(p)) + (pct != null ? ' · ' + pct + '% margin' : '');
+    el.style.color = p >= 0 ? '#065F46' : '#991B1B';
+  } else { el.textContent = ''; }
+}
+function svlbkUpdStockLbl(){
+  var qv = svlbkGet('svlbkfQty').trim(), cb = svlbkEl('svlbkfStock');
+  if(cb && qv !== '') cb.checked = Number(qv) > 0;
+  var lbl = svlbkEl('svlbkfStockLbl'); if(lbl && cb) lbl.textContent = cb.checked ? 'In stock' : 'Out of stock';
+}
+
+function svlbkClearForm(){
+  svlbkEditingId = null; svlbkEditingKey = null; svlbkIdAuto = true;
+  ['svlbkfName','svlbkfBrand','svlbkfPrice','svlbkfCost','svlbkfQty','svlbkfCat','svlbkfUnit','svlbkfId','svlbkfAliases'].forEach(function(id){ svlbkVal(id,''); });
+  var cb = svlbkEl('svlbkfStock'); if(cb) cb.checked = true;
+  svlbkSetPhoto('');
+  svlbkUpdProfit(); svlbkUpdStockLbl();
+  var t = svlbkEl('svlbkFormTitle'); if(t) t.textContent = 'Add a new item';
+}
+function svlbkNewItem(){ svlbkClearForm(); var n = svlbkEl('svlbkfName'); if(n){ n.focus(); n.scrollIntoView({block:'center'}); } }
+
+function svlbkFillForm(it){
+  svlbkVal('svlbkfName', it.name); svlbkVal('svlbkfBrand', it.brand);
+  svlbkVal('svlbkfPrice', it.price_inr != null ? it.price_inr : ''); svlbkVal('svlbkfCost', it.cost != null ? it.cost : '');
+  svlbkVal('svlbkfQty', it.qty != null ? it.qty : ''); svlbkVal('svlbkfCat', it.category); svlbkVal('svlbkfUnit', it.unit);
+  svlbkVal('svlbkfId', it.id); svlbkVal('svlbkfAliases', (it.aliases || []).join(', '));
+  var cb = svlbkEl('svlbkfStock'); if(cb) cb.checked = it.qty != null ? it.qty > 0 : it.in_stock !== false;
+  svlbkSetPhoto(it.image || '');
+  svlbkIdAuto = !it.id;
+  if(svlbkIdAuto && it.name && !it.id){ svlbkVal('svlbkfId', svlbkSlug(it.name)); }
+  svlbkUpdProfit(); svlbkUpdStockLbl();
+}
+function svlbkEditItem(key){
+  var it = svlbkFind(key); if(!it) return;
+  svlbkFillForm(it);
+  svlbkEditingKey = key;
+  svlbkEditingId = it._unsaved ? null : it.id;   // drafts persist as new items
+  var t = svlbkEl('svlbkFormTitle'); if(t){ t.textContent = it._unsaved ? 'Finish this item' : ('Edit: ' + (it.name || it.id)); t.scrollIntoView({block:'center'}); }
+}
+
+function svlbkReadForm(){
+  var pr = svlbkGet('svlbkfPrice').trim(), qv = svlbkGet('svlbkfQty').trim(), cv = svlbkGet('svlbkfCost').trim();
+  var qty = qv === '' ? null : Number(qv);
+  var stk = svlbkEl('svlbkfStock');
+  return {
+    id: svlbkGet('svlbkfId').trim().toLowerCase(),
+    name: svlbkGet('svlbkfName').trim(),
+    brand: svlbkGet('svlbkfBrand').trim(),
+    qty: qty,
+    cost: cv === '' ? null : Number(cv),
+    image: svlbkPhotoData,
+    aliases: svlbkGet('svlbkfAliases').split(',').map(function(s){ return s.trim(); }).filter(Boolean),
+    price_inr: pr === '' ? '' : Number(pr), priceRaw: pr,
+    in_stock: qty != null ? qty > 0 : (stk ? stk.checked : true),
+    category: svlbkGet('svlbkfCat').trim(), unit: svlbkGet('svlbkfUnit').trim()
+  };
+}
+function svlbkValidateRow(r){
+  if(!r.name) return 'Enter a name.';
+  if(!r.id) return 'This item needs an id (it usually auto-fills from the name).';
+  if(!/^[a-z0-9_]+$/.test(r.id)) return 'The id “' + r.id + '” can use only lowercase letters, numbers and underscores.';
+  if(r.priceRaw === '' || isNaN(r.price_inr)) return 'Enter a numeric selling price.';
+  if(r.qty != null && (isNaN(r.qty) || r.qty < 0)) return 'Quantity looks invalid.';
+  return null;
+}
+function svlbkWriteErr(err){
+  var c = (err && err.code) || '';
+  if(c === 'PERMISSION_DENIED') return 'Permission denied — sign in as the owner, and make sure the Firebase rules are set.';
+  return 'Could not save — ' + (c || 'try again') + '.';
+}
+function svlbkBuildEntry(r){
+  var entry = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:new Date().toISOString() };
+  if(r.brand) entry.brand = r.brand;
+  if(r.qty != null && !isNaN(r.qty)) entry.qty = r.qty;
+  if(r.image) entry.image = r.image;
+  return entry;
+}
+function svlbkPersistItem(r, oldId){
+  return fbDatabase.ref('catalog/' + r.id).set(svlbkBuildEntry(r)).then(function(){
+    var jobs = [];
+    if(oldId && oldId !== r.id){
+      jobs.push(fbDatabase.ref('catalog/' + oldId).remove().catch(function(){}));
+      jobs.push(fbDatabase.ref('catalogCost/' + oldId).remove().catch(function(){}));
+    }
+    return Promise.all(jobs);
+  }).then(function(){
+    if(r.cost != null && !isNaN(r.cost)){
+      return fbDatabase.ref('catalogCost/' + r.id).set(r.cost).then(function(){ return true; }).catch(function(){ return false; });
+    }
+    return fbDatabase.ref('catalogCost/' + r.id).remove().then(function(){ return true; }).catch(function(){ return true; });
+  });
+}
+function svlbkApplyToMemory(r, key, oldId){
+  svlbkCat = svlbkCat.filter(function(it){
+    var k = it._key || it.id;
+    if(key && k === key) return false;
+    if(it.id && (it.id === r.id || it.id === oldId)) return false;
+    return true;
+  });
+  svlbkCat.push({ id:r.id, _key:r.id, _unsaved:false, name:r.name, brand:r.brand, qty:r.qty, cost:r.cost,
+    image:r.image, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit });
+}
+function svlbkSaveItem(){
+  var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
+  if(!fbDatabase) return svlbkMsg(m,'err','Not connected to Firebase.');
+  var r = svlbkReadForm();
+  var err = svlbkValidateRow(r); if(err) return svlbkMsg(m,'err',err);
+  var clash = svlbkCat.filter(function(it){ return !it._unsaved && it.id === r.id; })[0];
+  if(clash && r.id !== svlbkEditingId){
+    return svlbkMsg(m,'err','An item with id “' + r.id + '” already exists. Tap it in the list to edit it, or change the name / ID.');
+  }
+  var btn = svlbkEl('svlbkSaveItemBtn'); btn.disabled = true;
+  svlbkPersistItem(r, svlbkEditingId).then(function(costOk){
+    svlbkApplyToMemory(r, svlbkEditingKey, svlbkEditingId);
+    svlbkSortCat(); svlbkRefreshDatalists(); svlbkRenderList(); svlbkClearForm();
+    svlbkMsg(m,'ok','Saved “' + r.name + '”.' + (costOk === false ? ' (Publish the Firebase rules to save cost privately.)' : ''));
+  }).catch(function(e){ svlbkMsg(m,'err', svlbkWriteErr(e)); }).then(function(){ btn.disabled = false; });
+}
+function svlbkDeleteItem(key){
+  var it = svlbkFind(key); if(!it) return;
+  var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
+  if(it._unsaved){
+    svlbkCat = svlbkCat.filter(function(x){ return (x._key || x.id) !== key; });
+    if(svlbkEditingKey === key) svlbkClearForm();
+    svlbkRenderList(); svlbkMsg(m,'ok','Draft removed.');
+    return;
+  }
+  if(!window.confirm('Delete “' + (it.name || it.id) + '” from the catalog? This removes it for customers too.')) return;
+  fbDatabase.ref('catalog/' + it.id).remove().then(function(){
+    return fbDatabase.ref('catalogCost/' + it.id).remove().catch(function(){});
+  }).then(function(){
+    svlbkCat = svlbkCat.filter(function(x){ return x.id !== it.id; });
+    if(svlbkEditingId === it.id) svlbkClearForm();
+    svlbkRefreshDatalists(); svlbkRenderList();
+    svlbkMsg(m,'ok','Deleted “' + (it.name || it.id) + '”.');
+  }).catch(function(e){ svlbkMsg(m,'err', svlbkWriteErr(e)); });
+}
+
+/* ── Bulk helpers → add draft rows to the list ── */
+function svlbkAddDraft(item){
+  item = item || {};
+  item._unsaved = true; item._key = 'draft' + (svlbkDraftN++);
+  item.aliases = item.aliases || [];
+  if(item.id == null) item.id = svlbkSlug(item.name || '');
+  svlbkCat.push(item);
+}
 function svlbkParseList(text){
   var rows = [];
   String(text || '').split(/\r?\n/).forEach(function(line){
     line = line.trim(); if(!line) return;
     var parts = line.split(/\t|,/).map(function(s){ return s.trim(); });
     var name = parts[0] || ''; if(!name) return;
-    var priceStr = (parts[1] || '').replace(/[^\d.]/g, '');
-    var qtyStr = (parts[2] || '').replace(/[^\d]/g, '');
-    rows.push({
-      name: name,
-      brand: parts[3] || '',
-      price_inr: priceStr === '' ? '' : Number(priceStr),
-      qty: qtyStr === '' ? null : Number(qtyStr)
-    });
+    var priceStr = (parts[1] || '').replace(/[^\d.]/g, ''); var qtyStr = (parts[2] || '').replace(/[^\d]/g, '');
+    rows.push({ name:name, brand:parts[3] || '', price_inr: priceStr === '' ? '' : Number(priceStr), qty: qtyStr === '' ? null : Number(qtyStr) });
   });
   return rows;
 }
-/* Bulk add via a pasted list — opens a small textarea modal. */
+function svlbkDraftToRow(it){
+  var qty = it.qty != null ? Number(it.qty) : null;
+  var priceEmpty = (it.price_inr === '' || it.price_inr == null);
+  return {
+    id: (it.id || svlbkSlug(it.name || '')).toLowerCase(),
+    name: (it.name || '').trim(), brand: (it.brand || '').trim(), qty: qty,
+    cost: it.cost != null ? Number(it.cost) : null, image: it.image || '', aliases: it.aliases || [],
+    price_inr: priceEmpty ? '' : Number(it.price_inr), priceRaw: priceEmpty ? '' : String(it.price_inr),
+    in_stock: qty != null ? qty > 0 : (it.in_stock !== false),
+    category: (it.category || '').trim(), unit: (it.unit || '').trim()
+  };
+}
+function svlbkBulkPhotos(){
+  var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true;
+  inp.addEventListener('change', function(ev){
+    var files = ev.target.files; if(!files || !files.length) return;
+    var total = files.length, done = 0, made = 0, m = svlbkEl('svlbkCatMsg');
+    svlbkMsg(m,'ok','Processing ' + total + ' photo' + (total === 1 ? '' : 's') + '…');
+    Array.prototype.forEach.call(files, function(fl){
+      svlbkResizeImage(fl, 400, 0.6, function(url){
+        done++; if(url){ svlbkAddDraft({ image:url, name:'' }); made++; }
+        if(done === total){
+          svlbkSortCat(); svlbkRenderList();
+          svlbkMsg(m,'ok','Added ' + made + ' photo draft' + (made === 1 ? '' : 's') + ' to the list — tap ✎ on each to add name, price & quantity, then Save all.');
+        }
+      });
+    });
+  });
+  inp.click();
+}
 function svlbkBulkText(){
-  if(document.getElementById('svlbkBulkModal')) return;
+  if(svlbkEl('svlbkBulkModal')) return;
   var ov = document.createElement('div'); ov.id = 'svlbkBulkModal';
   ov.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:1rem';
   var box = document.createElement('div');
   box.style.cssText = 'background:#fff;border-radius:14px;max-width:520px;width:100%;padding:1.1rem 1.2rem;box-shadow:0 12px 40px rgba(0,0,0,.3);max-height:90vh;overflow:auto';
   var h = document.createElement('h3'); h.textContent = '📋 Paste a list'; h.style.cssText = 'margin:.1rem 0 .5rem';
   var hint = document.createElement('p'); hint.className = 'svlbk-hint'; hint.style.margin = '.1rem 0 .6rem';
-  hint.innerHTML = 'One item per line: <b>Name, Price, Quantity, Brand</b> — price/quantity/brand are optional. Commas or tabs (paste from Excel/Sheets) both work.';
-  var ta = document.createElement('textarea');
-  ta.className = 'svlbk-in'; ta.rows = 8; ta.style.cssText = 'width:100%;font-family:monospace;font-size:.85rem';
+  hint.innerHTML = 'One item per line: <b>Name, Price, Quantity, Brand</b> — price/quantity/brand optional. Commas or tabs (Excel/Sheets) both work.';
+  var ta = document.createElement('textarea'); ta.rows = 8; ta.style.cssText = 'width:100%;font-family:monospace;font-size:.85rem;padding:.55rem .65rem;border:1px solid var(--border);border-radius:9px;box-sizing:border-box';
   ta.placeholder = 'Blue Pen, 10, 50, Pentonic\nA4 Paper, 320, 12, JK\nStapler, 85, 8';
   var row = document.createElement('div'); row.style.cssText = 'display:flex;gap:.5rem;justify-content:flex-end;margin-top:.7rem';
   var cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'svlbk-btn-ghost'; cancel.textContent = 'Cancel';
@@ -7065,81 +7299,43 @@ function svlbkBulkText(){
   add.addEventListener('click', function(){
     var rows = svlbkParseList(ta.value);
     if(!rows.length){ ta.style.borderColor = '#b91c1c'; ta.focus(); return; }
-    var first = null;
-    rows.forEach(function(r){ var c = svlbkAddCard(r); if(!first) first = c; });
-    svlbkRefreshCount();
-    ov.remove();
-    svlbkMsg(svlbkEl('svlbkCatMsg'), 'ok', 'Added ' + rows.length + ' item' + (rows.length === 1 ? '' : 's') + ' from your list. Review name, price & quantity, then “Save catalog”.');
-    if(first) first.scrollIntoView({ block: 'center' });
+    rows.forEach(function(r){ svlbkAddDraft(r); });
+    svlbkSortCat(); svlbkRefreshDatalists(); svlbkRenderList(); ov.remove();
+    svlbkMsg(svlbkEl('svlbkCatMsg'),'ok','Added ' + rows.length + ' draft' + (rows.length === 1 ? '' : 's') + ' to the list. Review each, then Save all.');
   });
   row.appendChild(cancel); row.appendChild(add);
   box.appendChild(h); box.appendChild(hint); box.appendChild(ta); box.appendChild(row);
   ov.appendChild(box); document.body.appendChild(ov); ta.focus();
 }
-function svlbkRefreshCount(){
-  var n = document.querySelectorAll('#svlbkItems .svlbk-item').length;
-  var el = svlbkEl('svlbkCount'); if(el) el.textContent = n + (n === 1 ? ' item' : ' items');
-}
-function svlbkLoadCatalog(){
+function svlbkSaveAllUnsaved(){
   var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
-  if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
-  Promise.all([
-    fbDatabase.ref('catalog').once('value').then(function(s){ return s.val() || {}; }),
-    fbDatabase.ref('catalogCost').once('value').then(function(s){ return s.val() || {}; }).catch(function(){ return {}; })
-  ]).then(function(res){
-    var v = res[0], costs = res[1] || {};
-    var arr = Object.keys(v).map(function(id){ var it = v[id] || {}; it.id = id; if(costs[id] != null) it.cost = costs[id]; return it; });
-    arr.sort(function(a,b){ return (a.category||'').localeCompare(b.category||'') || (a.name||'').localeCompare(b.name||''); });
-    var box = svlbkEl('svlbkItems'); box.innerHTML = '';
-    arr.forEach(function(it){ svlbkAddCard(it); });
-    svlbkRefreshCount();
-    if(!arr.length) svlbkMsg(m,'ok','No items yet. Choose “+ Add item” to start.');
-  }).catch(function(err){ svlbkMsg(m,'err','Could not load catalog: ' + ((err&&err.code)||'error')); });
+  var drafts = svlbkCat.filter(function(it){ return it._unsaved; });
+  if(!drafts.length) return;
+  var ready = [], notReady = 0;
+  drafts.forEach(function(it){ var r = svlbkDraftToRow(it); if(svlbkValidateRow(r)){ notReady++; } else { ready.push({ it:it, r:r }); } });
+  if(!ready.length){ return svlbkMsg(m,'err','None are ready yet — each needs at least a name and a numeric price. Tap ✎ to fill them in.'); }
+  var btn = svlbkEl('svlbkSaveAllBtn'); btn.disabled = true;
+  Promise.all(ready.map(function(x){ return svlbkPersistItem(x.r, null).then(function(){ return true; }).catch(function(){ return false; }); }))
+  .then(function(results){
+    ready.forEach(function(x){ svlbkApplyToMemory(x.r, x.it._key, null); });
+    svlbkSortCat(); svlbkRefreshDatalists(); svlbkRenderList();
+    var okN = results.filter(Boolean).length;
+    svlbkMsg(m,'ok','Saved ' + okN + ' item' + (okN === 1 ? '' : 's') + '.' + (notReady ? (' ' + notReady + ' still need a name/price — tap ✎.') : ''));
+  }).catch(function(e){ svlbkMsg(m,'err', svlbkWriteErr(e)); }).then(function(){ btn.disabled = false; });
 }
-function svlbkWriteErr(err){
-  var c = (err && err.code) || '';
-  if(c === 'PERMISSION_DENIED') return 'Permission denied — sign in as the owner, and make sure the Firebase rules are set.';
-  return 'Could not save — ' + (c || 'try again') + '.';
-}
-function svlbkSaveCatalog(){
-  var m = svlbkEl('svlbkCatMsg'); svlbkClear(m);
-  if(!fbDatabase){ return svlbkMsg(m,'err','Not connected to Firebase.'); }
-  var cards = [].slice.call(document.querySelectorAll('#svlbkItems .svlbk-item'));
-  var rows = cards.map(function(c){ return c._read(); });
-  var seen = {};
-  for(var i = 0; i < rows.length; i++){
-    var r = rows[i], where = 'Item ' + (i + 1);
-    if(!r.id) return svlbkMsg(m,'err', where + ' needs an id.');
-    if(!/^[a-z0-9_]+$/.test(r.id)) return svlbkMsg(m,'err', 'The id “' + r.id + '” can use only lowercase letters, numbers and underscores.');
-    if(!r.name) return svlbkMsg(m,'err', where + ' (' + r.id + ') needs a name.');
-    if(r.priceRaw === '' || isNaN(r.price_inr)) return svlbkMsg(m,'err', where + ' (' + r.id + ') needs a numeric price.');
-    if(r.qty != null && (isNaN(r.qty) || r.qty < 0)) return svlbkMsg(m,'err', where + ' (' + r.id + ') has an invalid quantity.');
-    if(seen[r.id]) return svlbkMsg(m,'err', 'Two items share the id “' + r.id + '” — ids must be unique.');
-    seen[r.id] = true;
-  }
-  var stamp = new Date().toISOString();
-  var obj = {}, costObj = {};
-  rows.forEach(function(r){
-    var entry = { name:r.name, aliases:r.aliases, price_inr:r.price_inr, in_stock:r.in_stock, category:r.category, unit:r.unit, updated_at:stamp };
-    if(r.brand) entry.brand = r.brand;
-    if(r.qty != null && !isNaN(r.qty)) entry.qty = r.qty;
-    if(r.image) entry.image = r.image;
-    obj[r.id] = entry;
-    if(r.cost != null && !isNaN(r.cost)) costObj[r.id] = r.cost;   // private — owner-only node
-  });
-  var btn = svlbkEl('svlbkSaveCatBtn'); btn.disabled = true;
-  fbDatabase.ref('catalog').set(obj)
-    .then(function(){
-      // Save cost prices to the private node (skipped gracefully if its rule isn't published yet)
-      if(Object.keys(costObj).length === 0) return true;
-      return fbDatabase.ref('catalogCost').set(costObj).then(function(){ return true; }).catch(function(){ return false; });
-    })
-    .then(function(costOk){
-      svlbkMsg(m,'ok','Catalog saved — ' + rows.length + (rows.length === 1 ? ' item.' : ' items.') +
-        (costOk === false ? ' (Publish the updated Firebase rules to save cost prices privately.)' : ''));
-    })
-    .catch(function(err){ svlbkMsg(m,'err', svlbkWriteErr(err)); })
-    .then(function(){ btn.disabled = false; });
+
+function svlbkWireForm(){
+  if(svlbkFormWired) return; svlbkFormWired = true;
+  var name = svlbkEl('svlbkfName'), id = svlbkEl('svlbkfId');
+  if(name) name.addEventListener('input', function(){ if(svlbkIdAuto && id) id.value = svlbkSlug(name.value); });
+  if(id) id.addEventListener('input', function(){ svlbkIdAuto = false; });
+  var price = svlbkEl('svlbkfPrice'), cost = svlbkEl('svlbkfCost');
+  if(price) price.addEventListener('input', svlbkUpdProfit);
+  if(cost) cost.addEventListener('input', svlbkUpdProfit);
+  var qty = svlbkEl('svlbkfQty'); if(qty) qty.addEventListener('input', svlbkUpdStockLbl);
+  var stk = svlbkEl('svlbkfStock'); if(stk) stk.addEventListener('change', function(){ var l = svlbkEl('svlbkfStockLbl'); if(l) l.textContent = stk.checked ? 'In stock' : 'Out of stock'; });
+  var photo = svlbkEl('svlbkfPhoto');
+  if(photo) photo.addEventListener('change', function(ev){ var fl = ev.target.files && ev.target.files[0]; if(!fl) return; svlbkResizeImage(fl, 400, 0.6, function(url){ if(url) svlbkSetPhoto(url); }); });
 }
 
 /* ───────── Voice stock entry (Web Speech API · en-IN) ───────── */
@@ -7160,14 +7356,14 @@ function svlbkVoice(){
     var item;
     if(lang === 'en-IN'){
       var p = svlbkParseVoice(t);
-      item = { name:p.name, brand:p.brand, qty:p.qty, price_inr:p.price, unit:p.unit, category:'', id:svlbkSlug(p.name), aliases:[] };
+      item = { name:p.name, brand:p.brand, qty:p.qty, price_inr:p.price, unit:p.unit, category:'', aliases:[] };
     } else {
       var qm = t.match(/(\d+)/);
-      item = { name:t.trim(), aliases:[t.trim()], qty: qm ? parseInt(qm[1],10) : null, unit:'piece', category:'', id:svlbkSlug(t) };
+      item = { name:t.trim(), aliases:[t.trim()], qty: qm ? parseInt(qm[1],10) : null, unit:'piece', category:'' };
     }
-    var c = svlbkAddCard(item);
-    svlbkRefreshCount(); c.scrollIntoView({ block:'center' });
-    svlbkMsg(msg,'ok','Heard: “'+t+'” → added below. Check the details, then Save catalog.');
+    svlbkClearForm(); svlbkFillForm(item);
+    var n = svlbkEl('svlbkfName'); if(n) n.scrollIntoView({ block:'center' });
+    svlbkMsg(msg,'ok','Heard: “'+t+'” → filled the form. Check the details, then Save item.');
   };
   r.onerror = function(ev){
     var e = ev.error || 'error';
