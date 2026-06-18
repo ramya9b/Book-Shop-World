@@ -63,4 +63,22 @@ test.describe('catalog admin — form + bulk drafts', () => {
     expect(out.filled).toBe('Blue Pen|Pentonic');
     expect(out.cleared).toBe('');
   });
+
+  test('camera button exists and photo preview shows/clears', async ({ page }) => {
+    await page.goto(fileUrl, { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => typeof window.svlbkTakePhoto === 'function', null, { timeout: 20000 });
+    const out = await page.evaluate(() => {
+      const btn = document.querySelector('[onclick="svlbkTakePhoto()"]');
+      window.svlbkSetPhoto('data:image/jpeg;base64,/9j/4AAQSkZJRg==');
+      const prev = document.getElementById('svlbkfPhotoPrev');
+      const shown = prev.style.display !== 'none' && (prev.getAttribute('src') || '').startsWith('data:image');
+      window.svlbkFormPhotoRemove();
+      const hidden = prev.style.display === 'none';
+      return { hasBtn: !!btn, isFn: typeof window.svlbkTakePhoto === 'function', shown, hidden };
+    });
+    expect(out.hasBtn).toBe(true);
+    expect(out.isFn).toBe(true);
+    expect(out.shown).toBe(true);
+    expect(out.hidden).toBe(true);
+  });
 });
