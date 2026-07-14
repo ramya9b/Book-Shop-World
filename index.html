@@ -2276,11 +2276,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
   <!-- ── LANDMARKS & GOOGLE REVIEWS ── -->
   <div style="max-width:calc(var(--sw)+1080px);margin:.9rem auto 0;padding:0 1.5rem;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:.6rem">
-    <a class="google-reviews-badge" href="https://www.google.com/maps/place/SRI+Varalakshmi+Balaji+Enterprises/@13.0038388,77.6961625,17z" target="_blank" rel="noopener" title="View on Google Maps">
+    <a class="google-reviews-badge" id="grBadge" style="display:none" href="https://www.google.com/maps/place/SRI+Varalakshmi+Balaji+Enterprises/@13.0038388,77.6961625,17z" target="_blank" rel="noopener" title="See our Google reviews">
       <div class="gr-g">G</div>
-      <div class="gr-stars">★★★★★</div>
-      <span class="gr-score">4.8</span>
-      <span class="gr-count">120+ reviews</span>
+      <div class="gr-stars" id="grStars">★★★★★</div>
+      <span class="gr-score" id="grScore"></span>
+      <span class="gr-count" id="grCount"></span>
     </a>
   </div>
 
@@ -6417,6 +6417,23 @@ function svlbkCountView(tries){
   } catch(e){ svlbkHideViews(); }
 }
 svlbkCountView();
+
+/* ── Live Google rating + review count (from /api/google-reviews). Shows the
+      badge only when real data loads — otherwise it stays hidden (no fake). ── */
+(function(){
+  try {
+    fetch('/api/google-reviews').then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+      if(!d || !d.rating) return;   // not configured / no data → badge stays hidden
+      var badge = document.getElementById('grBadge');
+      var sc = document.getElementById('grScore'), ct = document.getElementById('grCount'), st = document.getElementById('grStars');
+      var rating = Number(d.rating);
+      if(sc) sc.textContent = rating.toFixed(1);
+      if(ct) ct.textContent = (d.total != null ? d.total : 0) + (d.total === 1 ? ' review' : ' reviews');
+      if(st){ var full = Math.max(0, Math.min(5, Math.round(rating))); st.textContent = '★★★★★'.slice(0, full) + '☆☆☆☆☆'.slice(0, 5 - full); }
+      if(badge) badge.style.display = '';
+    }).catch(function(){});
+  } catch(e){}
+})();
 </script>
 
 <!-- ── MOBILE SEARCH OVERLAY ── -->
