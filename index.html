@@ -1097,6 +1097,11 @@ body.shop-view #homePage { display:none !important }
   transition:border-color .2s,box-shadow .2s;
 }
 .reviews-google-btn:hover{border-color:var(--saffron);box-shadow:0 0 0 3px rgba(10,122,78,.1)}
+.review-qr{display:inline-flex;flex-direction:column;align-items:center;gap:.3rem;background:#fff;border:1px solid var(--border);border-radius:12px;padding:.5rem;box-shadow:var(--shadow)}
+.review-qr svg{display:block;width:96px;height:96px;border-radius:4px}
+.review-qr span{font-size:.68rem;font-weight:700;color:var(--muted)}
+.footer-review-link{color:var(--gold);text-decoration:none;font-weight:800;font-size:.9rem}
+.footer-review-link:hover{text-decoration:underline}
 .reviews-note{font-size:.72rem;color:var(--muted)}
 @media(max-width:700px){.reviews-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.reviews-grid{grid-template-columns:1fr}}
@@ -2584,6 +2589,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         ⭐ Leave a Google Review
       </a>
       <span class="reviews-note">Your feedback helps more families find us!</span>
+      <div class="review-qr"><svg width="96" height="96" role="img" aria-label="QR code to leave a Google review for Sri Vara Lakshmi Balaji Enterprises" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 31" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h31v31H0z"/><path stroke="#000000" d="M1 1.5h7m2 0h1m2 0h2m2 0h1m1 0h3m1 0h7M1 2.5h1m5 0h1m4 0h2m2 0h1m1 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m1 0h1m1 0h2m2 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h6m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h2m1 0h2m3 0h1m3 0h1m1 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h4m2 0h3m1 0h1m1 0h1m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m1 0h2m2 0h3m1 0h1m1 0h1M1 9.5h1m1 0h5m2 0h1m1 0h5m1 0h2m3 0h5M1 10.5h2m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h1m2 0h6m3 0h1M1 11.5h1m1 0h2m2 0h1m1 0h1m1 0h1m2 0h3m2 0h1m4 0h2M3 12.5h1m1 0h1m2 0h1m1 0h2m3 0h1m3 0h1m1 0h1m1 0h1m1 0h2m1 0h1M1 13.5h3m2 0h4m1 0h2m3 0h3m7 0h2M2 14.5h3m1 0h1m1 0h1m1 0h1m1 0h3m2 0h2m2 0h5m3 0h1M3 15.5h2m1 0h3m2 0h1m2 0h4m1 0h1m1 0h1m3 0h3M2 16.5h1m1 0h3m1 0h4m1 0h2m2 0h1m2 0h1m4 0h1m2 0h1M1 17.5h1m2 0h7m1 0h2m1 0h1m5 0h2m1 0h1m1 0h2M1 18.5h2m1 0h3m1 0h2m11 0h5m1 0h1m1 0h1M1 19.5h1m3 0h3m1 0h2m5 0h2m1 0h1m1 0h1m1 0h1m3 0h1M1 20.5h1m3 0h1m2 0h1m1 0h2m3 0h3m2 0h1m2 0h2m3 0h1M1 21.5h1m1 0h1m2 0h4m1 0h1m6 0h1m2 0h5m1 0h3M9 22.5h4m1 0h4m1 0h1m1 0h1m3 0h5M1 23.5h7m2 0h1m3 0h3m1 0h1m2 0h1m1 0h1m1 0h3M1 24.5h1m5 0h1m1 0h1m3 0h2m4 0h3m3 0h1m3 0h1M1 25.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h2m1 0h1m2 0h5m1 0h1M1 26.5h1m1 0h3m1 0h1m1 0h1m1 0h1m4 0h6m4 0h4M1 27.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h4M1 28.5h1m5 0h1m3 0h3m2 0h2m3 0h2m1 0h1m1 0h1m1 0h1M1 29.5h7m1 0h1m3 0h1m1 0h2m5 0h4m1 0h1"/></svg><span>📱 Scan to review us</span></div>
     </div>
   </section>
 
@@ -2778,7 +2784,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <footer><p data-i18n="footer">📍 KR Puram, Bengaluru &nbsp;|&nbsp;
   <a href="https://wa.me/919620079597" target="_blank" style="color:var(--saffron);text-decoration:none;font-weight:600">📲 +91 99454 11489</a> &nbsp;|&nbsp;
   <a href="https://wa.me/918073815650" target="_blank" style="color:var(--saffron);text-decoration:none;font-weight:600">📲 +91 80738 15650</a> &nbsp;|&nbsp;
-  <strong>Sri Vara Lakshmi Balaji Enterprises</strong></p></footer>
+  <strong>Sri Vara Lakshmi Balaji Enterprises</strong></p>
+<p style="text-align:center;margin:.55rem 0 0"><a class="footer-review-link" href="https://g.page/r/CSDeRfp0yQfiEBM/review" target="_blank" rel="noopener">⭐ Rate us on Google</a></p></footer>
 
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
 <div class="drawer" id="drawer">
