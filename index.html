@@ -6429,20 +6429,31 @@ function toggleFaq(item){
   if(!isOpen) item.classList.add('open');
 }
 
-(function(){
+/* ── Real page-view counter (Firebase). Counts once per browser per day;
+      hides itself if the count can't be read (so it never shows fake data). ── */
+function svlbkShowViews(n){
+  var el = document.getElementById('vcText');
+  if(el && n != null){ el.textContent = '👀 ' + n + (n === 1 ? ' view today' : ' views today'); }
+}
+function svlbkHideViews(){ var c = document.getElementById('visitorCounter'); if(c) c.style.display = 'none'; }
+function svlbkCountView(tries){
+  tries = tries || 0;
   try {
-    var key = 'svlb_vc';
+    if(!window.fbDatabase){ return tries < 15 ? setTimeout(function(){ svlbkCountView(tries + 1); }, 700) : svlbkHideViews(); }
     var today = new Date().toISOString().slice(0,10);
-    var stored = JSON.parse(localStorage.getItem(key) || '{}');
-    if(stored.date !== today){ stored = {date:today, count:0}; }
-    stored.count = (stored.count||0) + 1;
-    localStorage.setItem(key, JSON.stringify(stored));
-    /* Add a random crowd factor so counter feels real (35–85 other visitors) */
-    var crowd = stored.count + Math.floor(Math.abs(Math.sin(new Date().getDate()*7+new Date().getMonth()*31))*50) + 35;
-    var el = document.getElementById('vcText');
-    if(el){ el.textContent = '👀 ' + crowd + ' people viewed this page today'; }
-  } catch(e){}
-})();
+    var ref = fbDatabase.ref('pageViews/' + today);
+    var seenKey = 'svlb_pv_' + today;
+    if(localStorage.getItem(seenKey)){
+      ref.once('value').then(function(s){ s.val() != null ? svlbkShowViews(s.val()) : svlbkHideViews(); }).catch(svlbkHideViews);
+      return;
+    }
+    ref.transaction(function(c){ return (c || 0) + 1; }, function(err, committed, snap){
+      if(!err && committed){ try{ localStorage.setItem(seenKey, '1'); }catch(e){} svlbkShowViews(snap.val()); }
+      else { svlbkHideViews(); }
+    });
+  } catch(e){ svlbkHideViews(); }
+}
+svlbkCountView();
 </script>
 
 <!-- ── MOBILE SEARCH OVERLAY ── -->
