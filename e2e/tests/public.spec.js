@@ -75,12 +75,19 @@ test.describe('S4/S5 — PWA + SEO', () => {
   });
 });
 
-test.describe('S8 — public "In Stock Now"', () => {
-  test('lists in-stock items and hides out-of-stock', async ({ page }) => {
+test.describe('S8 — "In Stock" is owner-only', () => {
+  test('end users see neither the In Stock button nor the home teaser', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#liveStockSection')).toBeVisible({ timeout: 30000 }); // Firebase WS connect
-    await expect(page.locator('#liveStockGrid .svlbk-stk-card').first()).toBeVisible();
-    await expect(page.locator('#liveStockGrid')).not.toContainText('Glue Stick'); // out of stock
+    // Give Firebase the same window it had before; the section must stay hidden for the public.
+    await page.waitForTimeout(3000);
+    await expect(page.locator('#stockNavBtn')).toBeHidden();
+    await expect(page.locator('#liveStockSection')).toBeHidden();
+  });
+
+  test('shared ?stock=1 link does not open the stock page for the public', async ({ page }) => {
+    await page.goto('/?stock=1', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(3000);
+    await expect(page.locator('body')).not.toHaveClass(/stock-open/);
   });
 });
 

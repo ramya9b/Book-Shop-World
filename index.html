@@ -2167,7 +2167,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <span id="hoursText">Checking…</span>
     </span>
     <button onclick="goHome()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="Home">🏠 Home</button>
-    <button onclick="openStockPage()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="See items in stock">🟢 In Stock</button>
+    <button id="stockNavBtn" onclick="openStockPage()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="See items in stock (owner only)">🟢 In Stock</button>
     <div class="hdr-r">
       <!-- Mobile search icon (shown only on mobile) -->
       <button id="mobSrchToggle" onclick="toggleMobSearch()" aria-label="Search" style="display:none;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(242,251,246,0.90);border:1.5px solid rgba(255,255,255,0.75);border-radius:50%;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 2px 8px rgba(0,0,0,0.08);flex-shrink:0;">
@@ -6616,6 +6616,10 @@ window.addEventListener('DOMContentLoaded', function(){
   .stockpage-body{flex:1;overflow-y:auto;width:100%;max-width:1100px;margin:0 auto;padding:1.2rem 1rem 3rem}
   .stockpage :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   @media (prefers-reduced-motion:reduce){ .stockpage *{transition:none !important} }
+  /* Public "In Stock" browsing is owner-only — hidden until the owner signs in (body.owner-in) */
+  #stockNavBtn{display:none !important}
+  body.owner-in #stockNavBtn{display:flex !important}
+  body:not(.owner-in) #liveStockSection{display:none !important}
 </style>
 <div id="stockPage" class="stockpage" role="dialog" aria-modal="true" aria-label="Items in stock today">
   <div class="stockpage-bar">
@@ -6851,6 +6855,8 @@ function renderStockPage(){
   items.forEach(function(it){ grid.appendChild(svlbkStockCard(it)); });
 }
 function openStockPage(){
+  /* Owner-only: end users (not signed in) can't open the stock page, even via a shared ?stock=1 link */
+  if(!document.body.classList.contains('owner-in')){ closeStockPage(); return; }
   if(typeof initFirebaseLive === 'function') initFirebaseLive();
   document.body.classList.add('stock-open'); document.body.style.overflow = 'hidden';
   renderStockPage();
@@ -6905,6 +6911,13 @@ function svlbkLogout(){ if(fbAuth) fbAuth.signOut(); }
 /* Called from onAuthStateChanged in initFirebaseLive */
 function svlbkOnAuth(user){
   var ov = svlbkEl('svlbkAdmin'); if(!ov) return;
+  /* Owner sign-in reveals the public "In Stock" browsing UI (button, home teaser, ?stock=1 page) */
+  var isOwner = !!(user && user.email === OWNER_EMAIL);
+  document.body.classList.toggle('owner-in', isOwner);
+  if(typeof renderPublicStock === 'function') renderPublicStock();
+  if(!isOwner && document.body.classList.contains('stock-open') && typeof closeStockPage === 'function') closeStockPage();
+  /* Owner deep-linked to ?stock=1: auth resolves after the initial auto-open, so open it now */
+  if(isOwner && window.location.search.indexOf('stock=1') !== -1 && !document.body.classList.contains('stock-open')) openStockPage();
   if(user && user.email === OWNER_EMAIL){
     if(ov.style.display !== 'none') svlbkShowPanel(user);
   } else if(user && user.email !== OWNER_EMAIL){
