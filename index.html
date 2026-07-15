@@ -6625,6 +6625,8 @@ window.addEventListener('DOMContentLoaded', function(){
   #stockNavBtn{display:none !important}
   body.owner-in #stockNavBtn{display:flex !important}
   body:not(.owner-in) #liveStockSection{display:none !important}
+  /* Views-today badge is owner-only (counting still runs for every visitor) */
+  body:not(.owner-in) #visitorCounter{display:none !important}
 </style>
 <div id="stockPage" class="stockpage" role="dialog" aria-modal="true" aria-label="Items in stock today">
   <div class="stockpage-bar">
