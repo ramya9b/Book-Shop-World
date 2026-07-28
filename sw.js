@@ -1,5 +1,5 @@
-/* Sri Vara Lakshmi Balaji Enterprises — Service Worker v27 */
-const CACHE_NAME = 'svlb-v27';
+/* Sri Vara Lakshmi Balaji Enterprises — Service Worker v28 */
+const CACHE_NAME = 'svlb-v28';
 const CACHE_URLS = ['/', './index.html'];
 
 /* Install — pre-cache shell */
@@ -28,6 +28,8 @@ self.addEventListener('fetch', function(e) {
   if (e.request.method !== 'GET') return;
   /* Skip cross-origin requests (YouTube, WhatsApp, etc.) */
   if (!e.request.url.startsWith(self.location.origin)) return;
+  /* Don't cache large media (song samples) — let the browser stream them directly */
+  if (e.request.url.indexOf('/media/') !== -1) return;
 
   e.respondWith(
     fetch(e.request)
