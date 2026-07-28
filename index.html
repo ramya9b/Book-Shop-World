@@ -2172,7 +2172,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <span class="hb-dot"></span>
       <span id="hoursText">Checking…</span>
     </span>
-    <button onclick="goHome()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="Home">🏠 Home</button>
+    <button id="navServicesBtn" class="nav-pg-btn" onclick="goHome()" title="Our Services">🛠️ Services</button>
+    <button id="navBooksBtn" class="nav-pg-btn" onclick="goShop('all')" title="Books &amp; Stationery">📚 Books<span class="nav-btn-suffix">&nbsp;&amp; Stationery</span></button>
     <button id="stockNavBtn" onclick="openStockPage()" style="background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:.3rem" title="See items in stock (owner only)">🟢 In Stock</button>
     <div class="hdr-r">
       <!-- Mobile search icon (shown only on mobile) -->
@@ -2241,7 +2242,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <p id="heroDesc">Stationery · Xerox & Printing · Project Work · LIC Insurance · Wellness Coaching & more</p>
         <div class="hero-btns">
           <button class="hero-btn-primary" id="heroShopBtn" onclick="goShop('all')">
-            🛍️ Browse All Products
+            📚 Browse Books & Stationery
           </button>
           <button class="hero-btn-wa" id="heroWABtn" onclick="window.open('https://wa.me/919620079597','_blank')">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -2487,13 +2488,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </div>
   </div>
 
-  <!-- CATEGORY SHOWCASE -->
-  <div class="home-section">
-    <div class="home-section-hdr">
-      <h3>🗂️ Browse by Category</h3>
-      <a onclick="goShop('all')">View All →</a>
+  <!-- BOOKS & STATIONERY CALL-TO-ACTION (catalog lives on the shop page) -->
+  <div class="home-section" style="text-align:center">
+    <div class="home-section-hdr" style="justify-content:center">
+      <h3>📚 Looking for books &amp; stationery?</h3>
     </div>
-    <div class="cat-grid" id="homeCatGrid"></div>
+    <p style="color:var(--muted);max-width:640px;margin:.25rem auto 1rem">Browse our full range of notebooks, pens, art &amp; school supplies — order on WhatsApp or visit the shop.</p>
+    <button class="hero-btn-primary" onclick="goShop('all')">📚 Browse Books &amp; Stationery →</button>
   </div>
 
   <!-- IN STOCK NOW (teaser; full list on the dedicated /?stock=1 page) -->
@@ -2503,15 +2504,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <a onclick="openStockPage()" id="liveStockSeeAll" style="cursor:pointer">See all →</a>
     </div>
     <div class="featured-grid" id="liveStockGrid"></div>
-  </div>
-
-  <!-- FEATURED PRODUCTS -->
-  <div class="home-section" style="margin-top:1.5rem">
-    <div class="home-section-hdr">
-      <h3>⭐ Popular Items</h3>
-      <a onclick="goShop('all')">See All →</a>
-    </div>
-    <div class="featured-grid" id="homeFeaturedGrid"></div>
   </div>
 
   <!-- TRUST SECTION -->
@@ -6654,6 +6646,12 @@ window.addEventListener('DOMContentLoaded', function(){
   body:not(.owner-in) #liveStockSection{display:none !important}
   /* Views-today badge is owner-only (counting still runs for every visitor) */
   body:not(.owner-in) #visitorCounter{display:none !important}
+  /* Two-page nav toggle: Services (home-view) vs Books & Stationery (shop-view) */
+  .nav-pg-btn{background:rgba(10,122,78,.1);border:1.5px solid rgba(10,122,78,.25);color:var(--saffron);border-radius:20px;padding:.35rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:.3rem;white-space:nowrap;transition:background .2s,color .2s}
+  .nav-pg-btn:hover{background:rgba(10,122,78,.18)}
+  body.home-view #navServicesBtn,
+  body.shop-view #navBooksBtn{background:var(--saffron);color:#fff;border-color:var(--saffron)}
+  @media(max-width:600px){ .nav-btn-suffix{display:none} }
 </style>
 <div id="stockPage" class="stockpage" role="dialog" aria-modal="true" aria-label="Items in stock today">
   <div class="stockpage-bar">
