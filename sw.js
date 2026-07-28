@@ -1,5 +1,5 @@
-/* Sri Vara Lakshmi Balaji Enterprises — Service Worker v25 */
-const CACHE_NAME = 'svlb-v25';
+/* Sri Vara Lakshmi Balaji Enterprises — Service Worker v26 */
+const CACHE_NAME = 'svlb-v26';
 const CACHE_URLS = ['/', './index.html'];
 
 /* Install — pre-cache shell */
