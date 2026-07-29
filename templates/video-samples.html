@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Video Invitations & Promo Videos — Samples · Sri Vara Lakshmi Balaji Enterprises</title>
-<meta name="description" content="Sample video invitations & promo videos — animated designs with music for WhatsApp. Get your own on WhatsApp.">
+<title>Video Invitations & Greetings — Samples · Sri Vara Lakshmi Balaji Enterprises</title>
+<meta name="description" content="Sample video invitations & greetings — animated wedding invites and birthday videos with music for WhatsApp. Get your own on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,22 +26,21 @@
   header p{max-width:640px;margin:0 auto;color:var(--muted);font-size:1.06rem}
   .biz{font-weight:700;color:var(--green)}
 
-  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;padding:1rem 0 1rem}
-  .vcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-  .vcard video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover;background:#000}
-  .vcap{padding:.75rem .95rem 1rem}
-  .vcap strong{display:block;color:var(--ink);font-size:.98rem}
-  .vcap span{color:var(--muted);font-size:.82rem}
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.3rem;padding:1.2rem 0 1rem}
+  .vcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .vcard video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#000}
+  .vcap{padding:.85rem 1rem 1rem;display:flex;flex-direction:column;gap:.5rem}
+  .vtag{align-self:flex-start;font-size:.66rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--green);background:rgba(10,122,78,.09);border-radius:20px;padding:.22rem .6rem}
+  .vcap strong{color:var(--ink);font-size:1rem;font-family:'Playfair Display',serif}
+  .vcap span{color:var(--muted);font-size:.84rem}
+  .vwa{align-self:flex-start;display:inline-flex;align-items:center;gap:.4rem;background:var(--green);color:#fff;font-weight:700;font-size:.82rem;border-radius:30px;padding:.42rem .9rem;margin-top:.2rem}
 
-  .soon{background:#fff;border:1px dashed var(--line);border-radius:20px;text-align:center;padding:2.4rem 1.4rem;box-shadow:var(--shadow);margin:1rem 0}
-  .soon .em{font-size:2.6rem}
-  .soon h2{font-size:1.5rem;margin:.5rem 0 .3rem}
-  .soon p{color:var(--muted);max-width:520px;margin:0 auto 1.2rem}
-
-  .cta{background:var(--green);color:#fff;text-align:center;border-radius:24px;padding:2.6rem 1.4rem;margin:1.6rem 0 3rem;box-shadow:var(--shadow)}
+  .cta{background:var(--green);color:#fff;text-align:center;border-radius:24px;padding:2.6rem 1.4rem;margin:1.8rem 0 3rem;box-shadow:var(--shadow)}
   .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.5rem}
   .cta p{opacity:.92;max-width:520px;margin:0 auto 1.4rem}
   .cta .btn{background:#fff;color:var(--green)}
+  .feats{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;color:#fff;opacity:.9;font-size:.85rem;font-weight:600;margin-top:1.4rem}
+  .note{text-align:center;color:var(--muted);font-size:.9rem;background:#fff;border:1px dashed var(--line);border-radius:16px;padding:.9rem 1.2rem;margin:1rem auto 0;max-width:640px}
 
   footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1rem 1.2rem 3rem}
   footer a{color:var(--green);font-weight:600}
@@ -51,37 +50,64 @@
 <body>
 
 <header>
-  <span class="kicker">🎬 Video Invitations</span>
+  <span class="kicker">🎬 Video Invitations & Greetings</span>
   <h1>Sample videos</h1>
-  <p>Animated video invitations &amp; promo videos with music by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span> — perfect for sharing on WhatsApp &amp; Instagram.</p>
+  <p>Animated video invitations &amp; greetings with music by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span> — perfect for WhatsApp &amp; Instagram. Tap play to watch.</p>
 </header>
 
 <main class="wrap">
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       WHEN VIDEO CLIPS ARE READY: delete the ".soon" block below and add
-       one <div class="vcard"> per video inside <div class="vgrid"> like:
+  <div class="vgrid">
 
-       <div class="vgrid">
-         <div class="vcard">
-           <video controls preload="none" playsinline poster="/media/videos/poster1.jpg"
-                  src="/media/videos/wedding-invite.mp4"></video>
-           <div class="vcap"><strong>Wedding Invitation</strong><span>Animated · with music</span></div>
-         </div>
-       </div>
-       ══════════════════════════════════════════════════════════════════ -->
+    <div class="vcard">
+      <video controls preload="none" playsinline poster="/media/videos/marriage-invitation.jpg" src="/media/videos/marriage-invitation.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">💍 Wedding</span>
+        <strong>Wedding Invitation</strong>
+        <span>Animated invite with names, date &amp; music</span>
+        <a class="vwa" href="https://wa.me/919620079597?text=Hi%2C+I+want+a+video+invitation+like+your+samples" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
 
-  <div class="soon">
-    <div class="em">🎬</div>
-    <h2>Video samples coming soon</h2>
-    <p>We create animated video invitations &amp; short promo videos with music. Want to see samples or order one? Message us on WhatsApp and we'll share the latest.</p>
-    <a class="btn" href="https://wa.me/919620079597?text=Hi%2C+I+want+to+see+your+video+invitation+samples" target="_blank" rel="noopener">📲 Ask for Video Samples</a>
+    <div class="vcard">
+      <video controls preload="none" playsinline poster="/media/videos/birthday-song.jpg" src="/media/videos/birthday-song.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">🎂 Birthday</span>
+        <strong>Birthday Name Greeting</strong>
+        <span>Personalised with the name &amp; message</span>
+        <a class="vwa" href="https://wa.me/919620079597?text=Hi%2C+I+want+a+birthday+video+like+your+samples" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+    <div class="vcard">
+      <video controls preload="none" playsinline poster="/media/videos/birthday-greeting.jpg" src="/media/videos/birthday-greeting.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">🎂 Birthday</span>
+        <strong>Birthday Photo Collage</strong>
+        <span>Your photos + music, animated</span>
+        <a class="vwa" href="https://wa.me/919620079597?text=Hi%2C+I+want+a+birthday+photo+video+like+your+samples" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+    <div class="vcard">
+      <video controls preload="none" playsinline poster="/media/videos/birthday-telugu.jpg" src="/media/videos/birthday-telugu.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">🎂 Telugu Birthday</span>
+        <strong>పుట్టినరోజు శుభాకాంక్షలు</strong>
+        <span>Telugu birthday greeting with flowers &amp; music</span>
+        <a class="vwa" href="https://wa.me/919620079597?text=Hi%2C+I+want+a+Telugu+birthday+video+like+your+samples" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
   </div>
+
+  <div class="note">▶️ These are short preview clips. We deliver the <strong>full-length HD video</strong> for your event on WhatsApp.</div>
 
   <div class="cta">
     <h2>Want a video invitation?</h2>
     <p>We turn your event into an animated video with your names, photos &amp; music — ready to share on WhatsApp.</p>
     <a class="btn" href="https://wa.me/919620079597?text=Hi%2C+I+want+a+video+invitation+for+my+event" target="_blank" rel="noopener">📲 Get Your Video on WhatsApp</a>
+    <div class="feats"><span>🎬 Animated + music</span><span>💌 Fully personalised</span><span>📱 WhatsApp-ready</span></div>
   </div>
 </main>
 
