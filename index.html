@@ -2172,7 +2172,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <span class="hb-dot"></span>
       <span id="hoursText">Checking…</span>
     </span>
-    <button id="navServicesBtn" class="nav-pg-btn" onclick="goHome()" title="Our Services">🛠️ <span data-i18n="nav_services">Services</span></button>
+    <button id="navServicesBtn" class="nav-pg-btn" onclick="goServices()" title="Our Services">🛠️ <span data-i18n="nav_services">Services</span></button>
     <button id="navBooksBtn" class="nav-pg-btn" onclick="goShop('all')" title="Books &amp; Stationery">📚 <span data-i18n="nav_books">Books &amp; Stationery</span></button>
     <div class="menu-wrap">
       <button id="workMenuBtn" class="nav-pg-btn" onclick="toggleWorkMenu(event)" aria-haspopup="true" aria-expanded="false" title="Browse our design samples">📂 <span data-i18n="nav_work">Our Work</span> <span class="menu-caret">▾</span></button>
@@ -2291,7 +2291,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   </div>
 
   <!-- ── DIGITAL & MARKETING SERVICES ── -->
-  <section class="services-section" aria-label="Digital and Marketing Services">
+  <section class="services-section" id="servicesSection" aria-label="Digital and Marketing Services">
     <div class="services-section-hdr">
       <h3 data-i18n="h_digital">💻 Digital &amp; Marketing Services</h3>
       <span data-i18n="h_digital_sub">Grow your business online</span>
@@ -6744,6 +6744,18 @@ document.addEventListener('click', function(e){
   if(m && m.classList.contains('open') && !e.target.closest('.menu-wrap')) closeWorkMenu();
 });
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeWorkMenu(); });
+/* "Services" nav: switch to the Services page and scroll to the services cards */
+function goServices(){
+  if(typeof closeWorkMenu === 'function') closeWorkMenu();
+  var wasShop = document.body.classList.contains('shop-view');
+  if(wasShop && typeof goHome === 'function') goHome();
+  setTimeout(function(){
+    var el = document.getElementById('servicesSection');
+    if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    else window.scrollTo({ top:0, behavior:'smooth' });
+  }, wasShop ? 300 : 0);
+}
+
 /* AI Songs lives on the Services page — go home, then scroll to the samples */
 function goSongs(e){
   if(e){ e.preventDefault(); }
