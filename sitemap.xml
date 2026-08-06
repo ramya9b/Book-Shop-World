@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Single-page app: language is in-page state, so one canonical URL. -->
+  <!-- Main shop (single-page app: language is in-page state, so one canonical URL) -->
   <url>
     <loc>https://varalaxmibalajienterprises.vercel.app/</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Design & digital-services sample gallery -->
+  <url>
+    <loc>https://varalaxmibalajienterprises.vercel.app/templates/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sample showcases -->
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/logo-samples.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/invitation-samples.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/video-samples.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Presentation deck samples -->
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-goal-setting.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-self-confidence.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-voice-modulation.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-six-questions.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-six-questions-masterclass.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-chatgpt-simple.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-chatgpt-kids.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://varalaxmibalajienterprises.vercel.app/templates/deck-women-can-lead.html</loc><lastmod>2026-08-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
 </urlset>
