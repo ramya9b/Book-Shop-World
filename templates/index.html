@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sample Websites · Sri Vara Lakshmi Balaji Enterprises</title>
-<meta name="description" content="See sample websites we build for local businesses — restaurants, salons, boutiques, clinics and more. Get your own website on WhatsApp.">
+<title>Our Design Samples · Sri Vara Lakshmi Balaji Enterprises</title>
+<meta name="description" content="Design samples by Sri Vara Lakshmi Balaji Enterprises — websites, presentations, logos, invitations, videos, posters, Google profiles & WhatsApp marketing. Get yours on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -51,17 +51,50 @@
   footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1rem 1.2rem 3rem}
   footer a{color:var(--green);font-weight:600}
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* ── Tabbed sections ── */
+  .tab-bar{position:sticky;top:0;z-index:60;display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .2rem;margin:.2rem 0 1.2rem;background:rgba(238,248,243,.9);backdrop-filter:blur(12px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{flex:0 0 auto;font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:30px;padding:.55rem 1.05rem;cursor:pointer;white-space:nowrap;transition:transform .18s,box-shadow .2s,background .2s,color .2s,border-color .2s}
+  .tab-btn:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
+  .tab-btn.active{background:linear-gradient(135deg,var(--green),#0E7490);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(10,122,78,.32);transform:translateY(-1px)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block;animation:tabIn .45s cubic-bezier(.2,.7,.2,1)}
+  @keyframes tabIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .tab-panel.active .card{animation:cardIn .5s both}
+  .tab-panel.active .card:nth-child(1){animation-delay:.02s}
+  .tab-panel.active .card:nth-child(2){animation-delay:.07s}
+  .tab-panel.active .card:nth-child(3){animation-delay:.12s}
+  .tab-panel.active .card:nth-child(4){animation-delay:.17s}
+  .tab-panel.active .card:nth-child(5){animation-delay:.22s}
+  .tab-panel.active .card:nth-child(6){animation-delay:.27s}
+  .tab-panel.active .card:nth-child(n+7){animation-delay:.3s}
+  @keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:none}}
+  .tab-panel > h3{scroll-margin-top:70px}
+  @media(prefers-reduced-motion:reduce){.tab-panel.active,.tab-panel.active .card{animation:none}}
 </style>
 </head>
 <body>
 
 <header>
-  <span class="kicker">💻 Websites & Digital Marketing</span>
-  <h1>Websites we build for local businesses</h1>
-  <p>Sample work by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span>. Pick the website closest to your business — or scroll down for WhatsApp automation, Google profile &amp; poster samples too.</p>
+  <span class="kicker">🎨 Our Design Samples</span>
+  <h1>Sample work we create for businesses</h1>
+  <p>Design samples by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span>. Pick a category below — websites, presentations, logos, invitations, videos, posters &amp; more.</p>
 </header>
 
 <main class="wrap">
+
+  <div class="tab-bar" id="tabBar" role="tablist">
+    <button class="tab-btn active" data-target="websites">🌐 Websites</button>
+    <button class="tab-btn" data-target="presentations">🖥️ Presentations</button>
+    <button class="tab-btn" data-target="logos">🎨 Logos &amp; Invitations</button>
+    <button class="tab-btn" data-target="posters">🎉 Posters</button>
+    <button class="tab-btn" data-target="google-profile">📍 Google Profile</button>
+    <button class="tab-btn" data-target="google-maps">🗺️ Google Maps</button>
+    <button class="tab-btn" data-target="whatsapp">💬 WhatsApp</button>
+  </div>
+
+  <section class="tab-panel active" data-tab="websites">
   <div class="grid">
 
     <a class="card" href="restaurant.html">
@@ -220,7 +253,7 @@
 
   </div>
 
-  <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);margin:2.6rem 0 .2rem">Marketing &amp; Automation Samples</h2>
+  </section>
   <p style="text-align:center;color:var(--muted);margin:0 0 .4rem">Pick a service to see its samples</p>
 
   <style>
@@ -235,6 +268,7 @@
     <a href="#posters">🎉 Posters</a>
   </nav>
 
+  <section class="tab-panel" data-tab="whatsapp">
   <h3 id="whatsapp" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">💬 WhatsApp Automation &amp; Marketing</h3>
   <div class="grid">
 
@@ -302,6 +336,9 @@
 
   </div>
 
+  </section>
+
+  <section class="tab-panel" data-tab="google-profile">
   <h3 id="google-profile" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">📍 Google Business Profile</h3>
   <div class="grid">
 
@@ -375,6 +412,9 @@
 
   </div>
 
+  </section>
+
+  <section class="tab-panel" data-tab="google-maps">
   <h3 id="google-maps" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">🗺️ Google Maps Promotion</h3>
   <div class="grid">
 
@@ -442,6 +482,9 @@
 
   </div>
 
+  </section>
+
+  <section class="tab-panel" data-tab="posters">
   <h3 id="posters" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">🎉 Festive &amp; Offer Posters</h3>
   <div class="grid">
 
@@ -509,6 +552,9 @@
 
   </div>
 
+  </section>
+
+  <section class="tab-panel" data-tab="logos">
   <h3 id="logos" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">🎨 Logo, Branding &amp; Invitations</h3>
   <div class="grid">
 
@@ -548,6 +594,9 @@
   </div>
 
 
+  </section>
+
+  <section class="tab-panel" data-tab="presentations">
   <h3 id="presentations" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">🖥️ Presentation Designs</h3>
   <p style="color:var(--muted);margin:0 0 .2rem">Professional slide decks for coaching, business, school &amp; college — custom-designed from ₹100 per deck. Tap a deck to view all slides.</p>
   <div class="grid">
@@ -642,11 +691,13 @@
 
   </div>
 
+  </section>
+
   <div class="cta">
-    <h2>Want a website like these?</h2>
-    <p>We design fast, mobile-friendly, Google-ready websites for your business — with your photos, content and WhatsApp ordering built in.</p>
-    <a class="btn" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+website+demos+and+want+a+website+for+my+business" target="_blank" rel="noopener">📲 Get Your Website on WhatsApp</a>
-    <div class="feats"><span>📱 Mobile-friendly</span><span>⚡ Fast loading</span><span>🔍 Google-ready</span><span>💬 WhatsApp orders</span></div>
+    <h2>Want designs like these?</h2>
+    <p>Websites, presentations, logos, invitations, videos, posters &amp; more — custom-made for your business or event, delivered on WhatsApp.</p>
+    <a class="btn" href="https://wa.me/919620079597?text=Hi%2C+I+saw+your+design+samples+and+want+one+for+my+business" target="_blank" rel="noopener">📲 Get Yours on WhatsApp</a>
+    <div class="feats"><span>🎨 Custom design</span><span>⚡ Fast delivery</span><span>📱 WhatsApp-ready</span><span>💬 Any language</span></div>
   </div>
 </main>
 
@@ -654,6 +705,55 @@
   Sri Vara Lakshmi Balaji Enterprises · KR Puram, Bengaluru ·
   <a href="/">← Back to our shop</a>
 </footer>
+
+<script>
+(function(){
+  var VALID = {websites:1, whatsapp:1, 'google-profile':1, 'google-maps':1, posters:1, logos:1, presentations:1};
+  // header-menu anchors that live inside the Logos tab
+  var HASHMAP = {'':'websites', websites:'websites', whatsapp:'whatsapp',
+    'google-profile':'google-profile', 'google-maps':'google-maps', posters:'posters',
+    logos:'logos', invitations:'logos', videos:'logos', presentations:'presentations'};
+
+  function showTab(tab, scrollTop){
+    if(!VALID[tab]) tab = 'websites';
+    document.querySelectorAll('.tab-panel').forEach(function(p){
+      p.classList.toggle('active', p.getAttribute('data-tab') === tab);
+    });
+    document.querySelectorAll('.tab-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-target') === tab);
+    });
+    var ab = document.querySelector('.tab-btn.active');
+    if(ab) ab.scrollIntoView({inline:'center', block:'nearest'});
+    if(scrollTop) window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  var bar = document.getElementById('tabBar');
+  if(bar){
+    bar.addEventListener('click', function(e){
+      var b = e.target.closest('.tab-btn');
+      if(!b) return;
+      var tab = b.getAttribute('data-target');
+      showTab(tab, true);
+      try{ history.replaceState(null, '', '#' + tab); }catch(_){}
+    });
+  }
+
+  function fromHash(){
+    var h = (location.hash || '').replace('#','');
+    var tab = HASHMAP[h] || 'websites';
+    showTab(tab, false);
+    // if the anchor targets a specific card (invitations / videos), reveal it
+    if(h && (h === 'invitations' || h === 'videos')){
+      setTimeout(function(){
+        var el = document.getElementById(h);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 320);
+    }
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
 
 </body>
 </html>
