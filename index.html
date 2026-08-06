@@ -695,7 +695,7 @@ body.shop-view #homePage { display:none !important }
 
 /* ── HERO BANNER ── */
 .hero{
-  background:linear-gradient(135deg,#F5FBF8 0%,#E4F6EE 50%,#EEF8F3 100%);
+  background:linear-gradient(180deg,#FFF2E0 0%,#FFFFFF 50%,#E8F7ED 100%);
   padding:2.5rem 1.5rem 2rem;
   border-bottom:1px solid var(--border);
   position:relative;overflow:hidden;
@@ -711,8 +711,10 @@ body.shop-view #homePage { display:none !important }
   background:radial-gradient(circle,rgba(245,166,35,.06),transparent 70%);
 }
   .tricolour-strip{width:100%;height:5px;background:linear-gradient(90deg,#FF9933 0 33.33%,#ffffff 33.33% 66.66%,#138808 66.66% 100%);box-shadow:inset 0 -1px 0 rgba(0,0,0,.08)}
-  .hero-wheel{position:absolute;top:50%;right:5%;transform:translateY(-50%);width:155px;height:155px;color:#0A3D91;opacity:.16;z-index:0;pointer-events:none}
-  @media(max-width:760px){.hero-wheel{right:-26px;width:120px;opacity:.1}}
+  .hero-wheel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(460px,64vw);height:min(460px,64vw);color:#0A3D91;opacity:.14;z-index:0;pointer-events:none;animation:wheelSpin 44s linear infinite}
+  @keyframes wheelSpin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @media(max-width:760px){.hero-wheel{width:84vw;height:84vw;opacity:.11}}
+  @media(prefers-reduced-motion:reduce){.hero-wheel{animation:none}}
 .hero-inner{
   max-width:calc(var(--sw) + 1080px);
   margin:0 auto;
