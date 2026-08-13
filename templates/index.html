@@ -53,8 +53,17 @@
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
   /* ── Tabbed sections ── */
-  .tab-bar{position:sticky;top:0;z-index:60;display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .2rem;margin:.2rem 0 1.2rem;background:rgba(238,248,243,.9);backdrop-filter:blur(12px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  /* wrapper holds the sticky + the edge fades; the bar itself scrolls inside it */
+  .tab-wrap{position:sticky;top:0;z-index:60;margin:.2rem 0 1.2rem}
+  .tab-wrap::before,.tab-wrap::after{content:"";position:absolute;top:0;bottom:0;width:40px;pointer-events:none;z-index:2;opacity:0;transition:opacity .2s}
+  .tab-wrap::before{left:0;background:linear-gradient(to right,rgba(238,248,243,.98),rgba(238,248,243,0))}
+  .tab-wrap::after{right:0;background:linear-gradient(to left,rgba(238,248,243,.98),rgba(238,248,243,0))}
+  .tab-wrap.can-l::before{opacity:1}
+  .tab-wrap.can-r::after{opacity:1}
+  .tab-bar{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .2rem;background:rgba(238,248,243,.9);backdrop-filter:blur(12px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .tab-bar::-webkit-scrollbar{display:none}
+  /* if every tab fits, centre them and drop the scroll affordance entirely */
+  @media (min-width:1100px){.tab-bar{justify-content:center;flex-wrap:wrap}.tab-wrap::before,.tab-wrap::after{display:none}}
   .tab-btn{flex:0 0 auto;font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:30px;padding:.55rem 1.05rem;cursor:pointer;white-space:nowrap;transition:transform .18s,box-shadow .2s,background .2s,color .2s,border-color .2s}
   .tab-btn:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
   .tab-btn.active{background:linear-gradient(135deg,var(--green),#0E7490);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(10,122,78,.32);transform:translateY(-1px)}
@@ -86,6 +95,7 @@
 
 <main class="wrap">
 
+  <div class="tab-wrap" id="tabWrap">
   <div class="tab-bar" id="tabBar" role="tablist">
     <button class="tab-btn active" data-target="websites">🌐 Websites</button>
     <button class="tab-btn" data-target="resumes">📄 Resumes</button>
@@ -95,6 +105,7 @@
     <button class="tab-btn" data-target="google-profile">📍 Google Profile</button>
     <button class="tab-btn" data-target="google-maps">🗺️ Google Maps</button>
     <button class="tab-btn" data-target="whatsapp">💬 WhatsApp</button>
+  </div>
   </div>
 
   <section class="tab-panel active" data-tab="websites">
@@ -696,10 +707,27 @@
     });
     var ab = document.querySelector('.tab-btn.active');
     if(ab) ab.scrollIntoView({inline:'center', block:'nearest'});
+    if(typeof edges === 'function') setTimeout(edges, 320);
     if(scrollTop) window.scrollTo({top:0, behavior:'smooth'});
   }
 
   var bar = document.getElementById('tabBar');
+
+  /* show a fade on whichever side still has tabs off-screen, so it is
+     obvious the row scrolls (the scrollbar is hidden by design) */
+  var wrap = document.getElementById('tabWrap');
+  function edges(){
+    if(!bar || !wrap) return;
+    var max = bar.scrollWidth - bar.clientWidth;
+    wrap.classList.toggle('can-l', bar.scrollLeft > 4);
+    wrap.classList.toggle('can-r', max > 4 && bar.scrollLeft < max - 4);
+  }
+  if(bar){
+    bar.addEventListener('scroll', edges, {passive:true});
+    window.addEventListener('resize', edges);
+    edges();
+  }
+
   if(bar){
     bar.addEventListener('click', function(e){
       var b = e.target.closest('.tab-btn');
