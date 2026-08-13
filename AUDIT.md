@@ -1,5 +1,35 @@
 # SVLB Site Audit — Phase 1 (read-only)
 
+> ## ⚠️ SUPERSEDED — historical snapshot, not a to-do list
+>
+> This audit describes the site as it stood at **Phase 1**. Most of its findings
+> have since been fixed. Read it as a record of what *was* wrong, not as
+> outstanding work. Verified against the current tree:
+>
+> | Finding | Status |
+> |---|---|
+> | 5.07 MB single file, 75 base64-inlined images | **Fixed** — `index.html` is ~600 KB; 67 real files in `img/` |
+> | `FIREBASE_DB_URL` empty, no Auth, PIN-gated writes | **Fixed** — RTDB wired, Firebase Auth live, owner-write rules in `firebase-rules.json` |
+> | No `og:image` / `twitter:image` | **Fixed** — both set to `shop-collage.jpg` |
+> | `theme-color` green vs manifest orange | **Fixed** — both `#0A7A4E` |
+> | No `prefers-reduced-motion` | **Fixed** — 4 blocks |
+> | No `:focus-visible`, no `aria-pressed` | **Fixed** — 11 and 5 uses; `aria-*` 18 → 53, `role=` 4 → 21 |
+> | Redundant sitemap `hreflang` alternates | **Fixed** — removed; `lastmod` refreshed |
+> | `svlb-admin.html` / `svlb-catalog.json` missing | **Fixed** — both present |
+> | README documents wrong domain / 3-file layout | **Fixed** — see `README.md` |
+>
+> **Still open** from this audit:
+> - **Image `alt` coverage** — only 13 `alt=` attributes for 60+ images. The one
+>   a11y item that did not move.
+> - **Tap-target sizes** — never confirmed on a real device at ~390px.
+> - **Retired PIN still in source** — `SHOP_ADMIN_PIN` and its comparison branch
+>   remain in `index.html` as dead code. Writes are enforced server-side by the
+>   RTDB rules, so this is cleanup, not a hole.
+>
+> Everything below this line is the original Phase-1 text, unedited.
+
+---
+
 **Site:** Sri Vara Lakshmi Balaji Enterprises — stationery + services, KR Puram, Bengaluru
 **Repo:** single-file HTML PWA (`index.html`, 5.07 MB / 6,413 lines) + `vercel.json`, `manifest.json`, `sw.js`, `sitemap.xml`, `robots.txt`, icons
 **Live URL:** https://varalaxmibalajienterprises.vercel.app/ (from `sitemap.xml` / `robots.txt` / canonical)
