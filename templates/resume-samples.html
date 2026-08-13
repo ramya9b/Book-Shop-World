@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resume &amp; CV Designs — Sample Work · Sri Vara Lakshmi Balaji Enterprises</title>
+<meta name="description" content="Professional resume and CV design samples — fresher, corporate, ATS-friendly, creative and executive formats. View-only samples; get yours personalised on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#EEF8F3;--card:#fff;--ink:#0C1E14;--muted:#4A7260;--green:#0A7A4E;--gold:#C8920A;--line:#BDD9CC;--shadow:0 10px 30px rgba(0,0,0,.10)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  h1,h2{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.85rem 1.6rem;cursor:pointer;border:none;background:var(--green);color:#fff;box-shadow:0 8px 20px rgba(10,122,78,.3);transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+
+  header{text-align:center;padding:3.5rem 1.2rem 1.6rem;background:radial-gradient(60% 60% at 50% 0%,rgba(10,122,78,.10),transparent)}
+  .kicker{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--green);font-weight:700;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;padding:.4rem 1rem;border-radius:30px}
+  header h1{font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .6rem}
+  header p{max-width:660px;margin:0 auto;color:var(--muted);font-size:1.06rem}
+  .biz{font-weight:700;color:var(--green)}
+
+  .sec-h{font-family:'Playfair Display',serif;font-size:1.32rem;margin:1.8rem 0 .1rem;color:var(--ink);scroll-margin-top:1rem}
+  .sec-sub{color:var(--muted);font-size:.92rem;margin-bottom:.4rem}
+
+  .viewonly{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px dashed var(--gold);border-radius:16px;padding:.9rem 1.15rem;margin:1.2rem auto 0;max-width:720px;color:var(--muted);font-size:.9rem}
+  .viewonly strong{color:var(--ink)}
+  .viewonly .lk{font-size:1.4rem;line-height:1}
+
+  /* ── sample grid ─────────────────────────────────────────────── */
+  .dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.3rem;padding:.8rem 0 1rem}
+  .dcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:block;transition:transform .18s,box-shadow .18s;cursor:zoom-in;text-align:left;width:100%;font:inherit;color:inherit}
+  .dcard:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,.16)}
+  .dcap{padding:.75rem .95rem 1rem}
+  .dcap strong{display:block;color:var(--ink);font-size:.98rem}
+  .dcap span{color:var(--muted);font-size:.82rem;display:block}
+  .zoom{text-align:right;font-size:.74rem;color:var(--green);font-weight:700;margin-top:.35rem}
+
+  /* preview viewport — scales the A4 sheet down to card width */
+  .pv{position:relative;aspect-ratio:794/1123;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+  .pv .sheet{position:absolute;top:0;left:0;transform-origin:top left;transform:scale(var(--s,.3))}
+
+  /* ── anti-copy layers ────────────────────────────────────────── */
+  .protected{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+  .protected img,.protected svg{-webkit-user-drag:none;user-drag:none;pointer-events:none}
+  /* transparent shield sits above the sheet: swallows right-click, drag & long-press */
+  .shield{position:absolute;inset:0;z-index:6;background:transparent}
+  /* tiled diagonal watermark */
+  .wm{position:absolute;inset:0;z-index:5;pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='300'%20height='210'%3E%3Ctext%20x='6'%20y='120'%20transform='rotate(-24%206%20120)'%20font-family='Inter,Arial,sans-serif'%20font-size='19'%20font-weight='700'%20fill='rgba(10,122,78,0.11)'%3ESVLB%20SAMPLE%3C/text%3E%3C/svg%3E")}
+
+  /* ── A4 sheet base ───────────────────────────────────────────── */
+  .sheet{width:794px;height:1123px;background:#fff;overflow:hidden;position:relative;font-family:'Inter',Arial,sans-serif;color:#14231b;line-height:1.42}
+  .sheet h2,.sheet h3,.sheet h4{font-family:inherit}
+  .sheet .nm{font-size:34px;font-weight:700;letter-spacing:-.5px}
+  .sheet .rl{font-size:14px;letter-spacing:2.5px;text-transform:uppercase}
+  .sheet .ct{font-size:11.5px}
+  .sheet .st{font-size:11.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin:0 0 7px}
+  .sheet p,.sheet li{font-size:11.5px}
+  .sheet ul{margin:0;padding-left:15px}
+  .sheet li{margin-bottom:3px}
+  .job{margin-bottom:11px}
+  .job .jt{font-size:12.5px;font-weight:700}
+  .job .jm{font-size:10.5px;color:#5d7a6d;margin-bottom:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chips span{font-size:10px;padding:3px 8px;border-radius:20px;background:#EEF8F3;border:1px solid #CFE6DA}
+
+  /* 1 — Classic Professional */
+  .t1{padding:52px 58px}
+  .t1 .hd{border-bottom:3px solid #0A7A4E;padding-bottom:14px;margin-bottom:16px}
+  .t1 .nm{color:#0A7A4E}
+  .t1 .rl{color:#7d6a2e;margin-top:3px}
+  .t1 .ct{color:#5d7a6d;margin-top:8px}
+  .t1 .st{color:#0A7A4E;border-bottom:1px solid #d8e8e0;padding-bottom:4px;margin-top:16px}
+
+  /* 2 — Modern Two-Column */
+  .t2{display:grid;grid-template-columns:270px 1fr}
+  .t2 .side{background:#0C2B21;color:#dff0e8;padding:44px 26px}
+  .t2 .side .nm{font-size:27px;color:#fff;line-height:1.15}
+  .t2 .side .rl{font-size:11px;color:#8fd3b4;margin-top:6px}
+  .t2 .side .st{color:#8fd3b4;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:4px;margin-top:22px}
+  .t2 .side p,.t2 .side li{font-size:10.5px;color:#c9e4d8}
+  .t2 .side .av{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#0A7A4E,#0E7490);margin-bottom:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;font-weight:700}
+  .t2 .main{padding:44px 34px}
+  .t2 .main .st{color:#0A7A4E;margin-top:18px}
+  .t2 .main .st:first-child{margin-top:0}
+
+  /* 3 — Fresher / Campus */
+  .t3{padding:0}
+  .t3 .band{background:linear-gradient(135deg,#0A7A4E,#0E7490);color:#fff;padding:38px 52px;display:flex;align-items:center;gap:22px}
+  .t3 .band .av{width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.18);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:29px;font-weight:700;flex:0 0 auto}
+  .t3 .band .nm{font-size:30px}
+  .t3 .band .rl{font-size:11.5px;opacity:.92;margin-top:4px}
+  .t3 .band .ct{font-size:10.5px;opacity:.9;margin-top:7px}
+  .t3 .body{padding:26px 52px}
+  .t3 .st{color:#0A7A4E;margin-top:16px}
+  .t3 .st:first-child{margin-top:0}
+  .t3 .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+
+  /* 4 — ATS-Friendly Minimal */
+  .t4{padding:56px 62px;font-family:Arial,Helvetica,sans-serif;color:#111}
+  .t4 .nm{font-size:28px;letter-spacing:0;color:#000}
+  .t4 .ct{margin-top:6px;color:#333}
+  .t4 .st{color:#000;border-bottom:1.5px solid #000;padding-bottom:3px;margin-top:17px;letter-spacing:1px}
+  .t4 li,.t4 p{color:#222}
+
+  /* 5 — Creative */
+  .t5{padding:46px 52px;background:linear-gradient(160deg,#fffdf6 0%,#fff 42%)}
+  .t5 .hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px dashed #C8920A;padding-bottom:14px}
+  .t5 .nm{font-family:'Playfair Display',Georgia,serif;font-size:36px;color:#14231b}
+  .t5 .rl{color:#C8920A;margin-top:4px}
+  .t5 .ct{text-align:right;color:#5d7a6d;line-height:1.7}
+  .t5 .st{color:#C8920A;margin-top:18px}
+  .t5 .tl{border-left:2px solid #EBD9A6;padding-left:15px;margin-left:4px}
+  .t5 .tl .job{position:relative}
+  .t5 .tl .job::before{content:"";position:absolute;left:-21px;top:5px;width:9px;height:9px;border-radius:50%;background:#C8920A}
+
+  /* 6 — Executive */
+  .t6{padding:0}
+  .t6 .band{background:#14231b;color:#fff;padding:40px 56px}
+  .t6 .band .nm{font-family:'Playfair Display',Georgia,serif;font-size:37px}
+  .t6 .band .rl{color:#D9B44A;margin-top:5px}
+  .t6 .band .ct{margin-top:10px;opacity:.85}
+  .t6 .body{padding:30px 56px}
+  .t6 .st{color:#14231b;border-left:4px solid #D9B44A;padding-left:9px;margin-top:18px}
+  .t6 .st:first-child{margin-top:0}
+  .t6 .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 4px}
+  .t6 .kpi div{background:#F6F3EA;border-radius:8px;padding:9px 11px}
+  .t6 .kpi b{display:block;font-size:17px;color:#0A7A4E}
+  .t6 .kpi span{font-size:9.5px;color:#5d7a6d}
+
+  /* ── lightbox ────────────────────────────────────────────────── */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(8,20,15,.88);display:none;align-items:center;justify-content:center;padding:24px}
+  .lb.open{display:flex}
+  .lb-stage{position:relative;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+  .lb-close{position:absolute;top:14px;right:16px;z-index:110;background:#fff;color:var(--ink);border:none;border-radius:30px;padding:.5rem 1rem;font-weight:700;cursor:pointer;font-family:inherit}
+  .lb-cap{position:absolute;bottom:14px;left:16px;z-index:110;color:#fff;font-size:.85rem;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(140%);background:#14231b;color:#fff;padding:.75rem 1.2rem;border-radius:30px;font-size:.86rem;font-weight:600;z-index:200;transition:transform .28s;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  .cta{background:var(--green);color:#fff;text-align:center;border-radius:24px;padding:2.6rem 1.4rem;margin:1.8rem 0 3rem;box-shadow:var(--shadow)}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.5rem}
+  .cta p{opacity:.92;max-width:540px;margin:0 auto 1.4rem}
+  .cta .btn{background:#fff;color:var(--green)}
+  .feats{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;color:#fff;opacity:.9;font-size:.85rem;font-weight:600;margin-top:1.4rem}
+
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1rem 1.2rem 3rem}
+  footer a{color:var(--green);font-weight:600}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* printing must not yield a usable copy */
+  @media print{
+    body *{visibility:hidden!important}
+    body::before{visibility:visible!important;display:block;content:"Resume samples by Sri Vara Lakshmi Balaji Enterprises are view-only and cannot be printed. WhatsApp +91 99454 11489 to order your personalised resume.";
+      font-family:Arial,sans-serif;font-size:14pt;line-height:1.6;padding:40pt;text-align:center}
+  }
+</style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header>
+  <span class="kicker">📄 Resume &amp; CV Designs</span>
+  <h1>Resume formats we design</h1>
+  <p>Professionally formatted resumes by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span> — for freshers, working professionals and senior roles. We fill in your details, print it, and send you a copy on WhatsApp. Tap any sample to view it larger.</p>
+  <div class="viewonly">
+    <span class="lk">🔒</span>
+    <span><strong>These samples are view-only.</strong> They are display previews of our design work — not downloadable files. To get a resume you can keep, order a personalised one on WhatsApp and we'll deliver the finished copy to you.</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h3 id="samples" class="sec-h">📄 Six resume formats</h3>
+  <p class="sec-sub">All content shown is placeholder text. Your real details, experience and photo go in when we personalise it.</p>
+
+  <div class="dgrid" id="grid">
+
+    <!-- 1 ─ Classic Professional -->
+    <button class="dcard" type="button" data-title="Classic Professional" data-sub="Experienced roles · clean single column">
+      <div class="pv protected">
+        <div class="sheet t1">
+          <div class="hd">
+            <div class="nm">Ananya Rao</div>
+            <div class="rl">Senior Accounts Executive</div>
+            <div class="ct">Bengaluru, Karnataka · +91 98XXX XXXXX · ananya.sample@email.com</div>
+          </div>
+          <div class="st">Profile</div>
+          <p>Accounts professional with 6+ years in GST filing, reconciliation and payroll for retail and small-manufacturing clients. Comfortable owning month-end close end to end and training junior staff.</p>
+          <div class="st">Experience</div>
+          <div class="job"><div class="jt">Senior Accounts Executive — Sample Traders Pvt Ltd</div><div class="jm">Bengaluru · 2022 – Present</div>
+            <ul><li>Handle GST returns and TDS filing for 14 client accounts each month.</li><li>Cut invoice-to-payment turnaround from 21 days to 9 days.</li><li>Train and review the work of two junior accountants.</li></ul></div>
+          <div class="job"><div class="jt">Accounts Assistant — Example Retail Co.</div><div class="jm">Bengaluru · 2019 – 2022</div>
+            <ul><li>Maintained daily cash books and vendor ledgers in Tally ERP 9.</li><li>Prepared bank reconciliation statements for three branches.</li></ul></div>
+          <div class="st">Education</div>
+          <div class="job"><div class="jt">B.Com — Commerce &amp; Accountancy</div><div class="jm">Bangalore University · 2019 · First Class</div></div>
+          <div class="st">Skills</div>
+          <div class="chips"><span>Tally ERP 9</span><span>GST &amp; TDS</span><span>MS Excel</span><span>Payroll</span><span>Reconciliation</span><span>Zoho Books</span></div>
+          <div class="st">Languages</div>
+          <p>English · Kannada · Telugu · Hindi</p>
+        </div>
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="dcap"><strong>Classic Professional</strong><span>Experienced roles · clean single column</span><span class="zoom">View larger →</span></div>
+    </button>
+
+    <!-- 2 ─ Modern Two-Column -->
+    <button class="dcard" type="button" data-title="Modern Two-Column" data-sub="IT &amp; corporate · dark sidebar">
+      <div class="pv protected">
+        <div class="sheet t2">
+          <div class="side">
+            <div class="av">KM</div>
+            <div class="nm">Karthik Menon</div>
+            <div class="rl">Software Engineer</div>
+            <div class="st">Contact</div>
+            <p>Bengaluru, Karnataka<br>+91 98XXX XXXXX<br>karthik.sample@email.com</p>
+            <div class="st">Skills</div>
+            <ul><li>Java · Spring Boot</li><li>JavaScript · React</li><li>MySQL · MongoDB</li><li>Git · Docker</li><li>REST APIs</li><li>AWS (EC2, S3)</li></ul>
+            <div class="st">Education</div>
+            <p>B.E. Computer Science<br>VTU · 2020 · 8.4 CGPA</p>
+            <div class="st">Languages</div>
+            <p>English · Malayalam<br>Kannada · Hindi</p>
+          </div>
+          <div class="main">
+            <div class="st">Summary</div>
+            <p>Backend-leaning full-stack engineer with 4 years building internal tools and customer-facing web apps. Enjoys cleaning up legacy services and shipping small, well-tested changes.</p>
+            <div class="st">Experience</div>
+            <div class="job"><div class="jt">Software Engineer — Sample Tech Solutions</div><div class="jm">Bengaluru · 2022 – Present</div>
+              <ul><li>Built and maintain six Spring Boot microservices in production.</li><li>Reduced average API response time by 38% through query tuning.</li><li>Introduced unit tests, lifting coverage on core modules to 76%.</li></ul></div>
+            <div class="job"><div class="jt">Junior Developer — Example Softworks</div><div class="jm">Bengaluru · 2020 – 2022</div>
+              <ul><li>Developed React dashboards used by 200+ internal users.</li><li>Automated a manual reporting task, saving ~10 hours a week.</li></ul></div>
+            <div class="st">Projects</div>
+            <div class="job"><div class="jt">Inventory Tracker</div><div class="jm">Personal project</div>
+              <ul><li>Stock management web app with barcode scanning and alerts.</li></ul></div>
+            <div class="st">Certifications</div>
+            <ul><li>AWS Certified Cloud Practitioner</li><li>Oracle Certified Java Associate</li></ul>
+          </div>
+        </div>
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="dcap"><strong>Modern Two-Column</strong><span>IT &amp; corporate · dark sidebar</span><span class="zoom">View larger →</span></div>
+    </button>
+
+    <!-- 3 ─ Fresher / Campus -->
+    <button class="dcard" type="button" data-title="Fresher / Campus" data-sub="First job · studies &amp; projects first">
+      <div class="pv protected">
+        <div class="sheet t3">
+          <div class="band">
+            <div class="av">PN</div>
+            <div>
+              <div class="nm">Priya Nair</div>
+              <div class="rl">B.Com Graduate · Seeking Entry-Level Accounts Role</div>
+              <div class="ct">KR Puram, Bengaluru · +91 98XXX XXXXX · priya.sample@email.com</div>
+            </div>
+          </div>
+          <div class="body">
+            <div class="st">Career Objective</div>
+            <p>Recent commerce graduate looking for an entry-level accounts or audit role where I can apply my Tally and Excel training and learn from an experienced finance team.</p>
+            <div class="st">Education</div>
+            <div class="job"><div class="jt">B.Com — Accounting &amp; Finance</div><div class="jm">Bangalore University · 2025 · 78%</div></div>
+            <div class="job"><div class="jt">Class XII — Commerce</div><div class="jm">Karnataka State Board · 2022 · 82%</div></div>
+            <div class="st">Internships &amp; Training</div>
+            <div class="job"><div class="jt">Accounts Intern — Sample &amp; Co. Chartered Accountants</div><div class="jm">Bengaluru · 3 months, 2025</div>
+              <ul><li>Assisted with data entry of purchase and sales vouchers in Tally.</li><li>Helped compile documents for GST filing of small clients.</li></ul></div>
+            <div class="st">Academic Projects</div>
+            <div class="job"><div class="jt">Working Capital Study of a Retail Firm</div><div class="jm">Final-year project · 2025</div>
+              <ul><li>Analysed 3 years of financial statements and presented findings.</li></ul></div>
+            <div class="two">
+              <div>
+                <div class="st">Skills</div>
+                <div class="chips"><span>Tally</span><span>MS Excel</span><span>MS Word</span><span>Basic GST</span><span>Typing 40 wpm</span></div>
+              </div>
+              <div>
+                <div class="st">Activities</div>
+                <ul><li>NSS volunteer, 2 years</li><li>College commerce club treasurer</li><li>Inter-college quiz — 2nd place</li></ul>
+              </div>
+            </div>
+            <div class="st">Languages</div>
+            <p>English · Malayalam · Kannada · Hindi</p>
+          </div>
+        </div>
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="dcap"><strong>Fresher / Campus</strong><span>First job · studies &amp; projects first</span><span class="zoom">View larger →</span></div>
+    </button>
+
+    <!-- 4 ─ ATS-Friendly Minimal -->
+    <button class="dcard" type="button" data-title="ATS-Friendly Minimal" data-sub="Online applications · plain, machine-readable">
+      <div class="pv protected">
+        <div class="sheet t4">
+          <div class="nm">VIKRAM DESAI</div>
+          <div class="ct">Bengaluru, Karnataka 560036 | +91 98XXX XXXXX | vikram.sample@email.com</div>
+          <div class="st">Professional Summary</div>
+          <p>Operations supervisor with 8 years in warehousing and last-mile logistics. Experienced in shift planning, inventory accuracy and vendor coordination across teams of up to 40 staff.</p>
+          <div class="st">Core Skills</div>
+          <p>Inventory Management · Shift Planning · Vendor Coordination · SAP MM · Warehouse Safety · Team Training · MS Excel · Process Documentation</p>
+          <div class="st">Professional Experience</div>
+          <div class="job"><div class="jt">Operations Supervisor, Sample Logistics Ltd</div><div class="jm">Bengaluru | March 2021 – Present</div>
+            <ul><li>Supervise daily operations of a 22,000 sq ft distribution warehouse.</li><li>Improved inventory accuracy from 91% to 99.2% over four quarters.</li><li>Coordinate a team of 40 across three shifts, including rosters and training.</li><li>Reduced order-picking errors by 34% by redesigning the pick path.</li></ul></div>
+          <div class="job"><div class="jt">Warehouse Executive, Example Distribution Co.</div><div class="jm">Bengaluru | June 2017 – February 2021</div>
+            <ul><li>Managed inward and outward stock entries in SAP MM.</li><li>Conducted monthly cycle counts and reconciled variances.</li></ul></div>
+          <div class="st">Education</div>
+          <p>Bachelor of Business Administration, Bangalore University, 2017</p>
+          <div class="st">Certifications</div>
+          <p>Diploma in Supply Chain Management, 2019 · Forklift Safety Certification, 2020</p>
+          <div class="st">Languages</div>
+          <p>English, Kannada, Marathi, Hindi</p>
+        </div>
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="dcap"><strong>ATS-Friendly Minimal</strong><span>Online applications · plain, machine-readable</span><span class="zoom">View larger →</span></div>
+    </button>
+
+    <!-- 5 ─ Creative -->
+    <button class="dcard" type="button" data-title="Creative" data-sub="Design, teaching &amp; front-facing roles">
+      <div class="pv protected">
+        <div class="sheet t5">
+          <div class="hd">
+            <div>
+              <div class="nm">Sneha Kulkarni</div>
+              <div class="rl">Graphic Designer</div>
+            </div>
+            <div class="ct">Bengaluru<br>+91 98XXX XXXXX<br>sneha.sample@email.com</div>
+          </div>
+          <div class="st">About</div>
+          <p>Designer with 5 years across print and social media — packaging, festive campaigns and brand identity for local businesses. Happiest working directly with shop owners to turn a rough idea into something they're proud to put their name on.</p>
+          <div class="st">Experience</div>
+          <div class="tl">
+            <div class="job"><div class="jt">Senior Graphic Designer — Sample Creative Studio</div><div class="jm">Bengaluru · 2023 – Present</div>
+              <ul><li>Lead designer for 20+ small-business brand identities.</li><li>Designed festive campaign sets that lifted client enquiries by 40%.</li></ul></div>
+            <div class="job"><div class="jt">Graphic Designer — Example Print House</div><div class="jm">Bengaluru · 2020 – 2023</div>
+              <ul><li>Produced print-ready artwork for invitations, banners and packaging.</li><li>Managed pre-press checks, reducing reprint costs by a quarter.</li></ul></div>
+          </div>
+          <div class="st">Tools</div>
+          <div class="chips"><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>CorelDRAW</span><span>Canva</span><span>Figma</span></div>
+          <div class="st">Education</div>
+          <div class="job"><div class="jt">B.A. Visual Communication</div><div class="jm">Bangalore University · 2020</div></div>
+          <div class="st">Recognition</div>
+          <ul><li>Best Packaging Design — Sample Regional Print Awards, 2024</li><li>Featured in a local design showcase, 2023</li></ul>
+        </div>
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="dcap"><strong>Creative</strong><span>Design, teaching &amp; front-facing roles</span><span class="zoom">View larger →</span></div>
+    </button>
+
+    <!-- 6 ─ Executive -->
+    <button class="dcard" type="button" data-title="Executive" data-sub="Senior &amp; managerial · results up front">
+      <div class="pv protected">
+        <div class="sheet t6">
+          <div class="band">
+            <div class="nm">Arjun Bhat</div>
+            <div class="rl">General Manager — Retail Operations</div>
+            <div class="ct">Bengaluru, Karnataka · +91 98XXX XXXXX · arjun.sample@email.com</div>
+          </div>
+          <div class="body">
+            <div class="st">Executive Summary</div>
+            <p>Retail operations leader with 15 years scaling multi-store businesses across Karnataka. Track record of turning around underperforming stores, building second-line management and holding margin through cost pressure.</p>
+            <div class="kpi">
+              <div><b>18</b><span>Stores managed</span></div>
+              <div><b>₹42 Cr</b><span>Annual revenue owned</span></div>
+              <div><b>240+</b><span>Team members led</span></div>
+            </div>
+            <div class="st">Experience</div>
+            <div class="job"><div class="jt">General Manager, Retail Operations — Sample Retail Group</div><div class="jm">Bengaluru · 2019 – Present</div>
+              <ul><li>Own P&amp;L for 18 stores; grew like-for-like sales 12% year on year.</li><li>Turned around four loss-making stores to profitability within 3 quarters.</li><li>Built a store-manager training programme now used company-wide.</li></ul></div>
+            <div class="job"><div class="jt">Regional Manager — Example Stores Pvt Ltd</div><div class="jm">Bengaluru &amp; Mysuru · 2014 – 2019</div>
+              <ul><li>Managed 9 outlets across two cities with 120 staff.</li><li>Cut shrinkage from 2.1% to 0.7% through stock-audit discipline.</li></ul></div>
+            <div class="st">Education</div>
+            <div class="job"><div class="jt">MBA — Retail Management</div><div class="jm">Sample Institute of Management · 2014</div></div>
+            <div class="job"><div class="jt">B.Com</div><div class="jm">Bangalore University · 2010</div></div>
+            <div class="st">Languages</div>
+            <p>English · Kannada · Tulu · Hindi</p>
+          </div>
+        </div>
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="dcap"><strong>Executive</strong><span>Senior &amp; managerial · results up front</span><span class="zoom">View larger →</span></div>
+    </button>
+
+  </div>
+
+  <div class="cta">
+    <h2>Want a resume like these?</h2>
+    <p>Bring us your details — or just tell us on WhatsApp. We format it, proofread it, print it, and send you the finished copy. Same-day service available.</p>
+    <a class="btn" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+resume+samples+and+want+one+made" target="_blank" rel="noopener">📲 Get Your Resume on WhatsApp</a>
+    <div class="feats"><span>📄 Any format above</span><span>✍️ We type it for you</span><span>🖨️ Print + soft copy</span><span>⚡ Same-day possible</span></div>
+  </div>
+</main>
+
+<!-- lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Resume sample, larger view">
+  <button class="lb-close" id="lbClose" type="button">✕ Close</button>
+  <div class="lb-stage protected" id="lbStage"></div>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  Sri Vara Lakshmi Balaji Enterprises · KR Puram, Bengaluru ·
+  <a href="/">← Back to our shop</a> · <a href="index.html">More samples →</a>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var SHEET_W = 794, SHEET_H = 1123;
+
+  /* ── scale each A4 sheet to fit its card ─────────────────────── */
+  function fitCards(){
+    document.querySelectorAll('#grid .pv').forEach(function(pv){
+      pv.style.setProperty('--s', pv.clientWidth / SHEET_W);
+    });
+  }
+  fitCards();
+  window.addEventListener('resize', fitCards);
+
+  /* ── toast ───────────────────────────────────────────────────── */
+  var toastEl = document.getElementById('toast'), toastTimer;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2600);
+  }
+
+  /* ── lightbox ────────────────────────────────────────────────── */
+  var lb = document.getElementById('lb'),
+      stage = document.getElementById('lbStage'),
+      cap = document.getElementById('lbCap'),
+      lastFocus = null;
+
+  function openLB(card){
+    var sheet = card.querySelector('.sheet').cloneNode(true);
+    var scale = Math.min((window.innerWidth - 60) / SHEET_W, (window.innerHeight - 60) / SHEET_H);
+    stage.innerHTML = '';
+    stage.style.width  = (SHEET_W * scale) + 'px';
+    stage.style.height = (SHEET_H * scale) + 'px';
+    sheet.style.transformOrigin = 'top left';
+    sheet.style.transform = 'scale(' + scale + ')';
+    sheet.style.position = 'absolute';
+    sheet.style.top = '0'; sheet.style.left = '0';
+    stage.appendChild(sheet);
+    // re-apply the protection layers over the enlarged copy
+    ['wm','shield'].forEach(function(cls){
+      var d = document.createElement('div'); d.className = cls; stage.appendChild(d);
+    });
+    cap.textContent = card.dataset.title + ' — sample, view only';
+    lb.classList.add('open');
+    lastFocus = card;
+    document.getElementById('lbClose').focus();
+  }
+  function closeLB(){
+    lb.classList.remove('open');
+    stage.innerHTML = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.getElementById('grid').addEventListener('click', function(e){
+    var card = e.target.closest('.dcard');
+    if (card) openLB(card);
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLB);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLB(); });
+
+  /* ── deterrents ──────────────────────────────────────────────
+     These raise the effort needed to lift a sample. They are not
+     security: anything a browser renders can still be captured by
+     a determined visitor (screenshot, devtools, etc.). The real
+     protection is that no resume file is ever served — these are
+     live HTML previews, so there is nothing to download.        */
+
+  // right-click / long-press on any protected area
+  document.addEventListener('contextmenu', function(e){
+    if (e.target.closest('.protected')) {
+      e.preventDefault();
+      toast('🔒 Samples are view-only — WhatsApp us to order yours');
+    }
+  });
+
+  // dragging a sample out of the page
+  document.addEventListener('dragstart', function(e){
+    if (e.target.closest('.protected')) e.preventDefault();
+  });
+
+  // selection inside a sample (belt and braces alongside user-select:none)
+  document.addEventListener('selectstart', function(e){
+    if (e.target.closest('.protected')) e.preventDefault();
+  });
+
+  // save / print / view-source / devtools shortcuts
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    if (k === 'escape' && lb.classList.contains('open')) { closeLB(); return; }
+    var ctrl = e.ctrlKey || e.metaKey;
+    var blockedCtrl = ctrl && !e.shiftKey && (k === 's' || k === 'p' || k === 'u');
+    var blockedDev  = (ctrl && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 's')) || k === 'f12';
+    if (blockedCtrl || blockedDev) {
+      e.preventDefault();
+      toast('🔒 Samples are view-only — WhatsApp us to order yours');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -90,6 +90,7 @@
     <button class="tab-btn active" data-target="websites">🌐 Websites</button>
     <button class="tab-btn" data-target="presentations">🖥️ Presentations</button>
     <button class="tab-btn" data-target="logos">🎨 Logos &amp; Invitations</button>
+    <button class="tab-btn" data-target="resumes">📄 Resumes</button>
     <button class="tab-btn" data-target="posters">🎉 Posters</button>
     <button class="tab-btn" data-target="google-profile">📍 Google Profile</button>
     <button class="tab-btn" data-target="google-maps">🗺️ Google Maps</button>
@@ -546,6 +547,26 @@
 
   </section>
 
+  <section class="tab-panel" data-tab="resumes">
+  <h3 id="resumes" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">📄 Resume &amp; CV Designs</h3>
+  <div class="grid">
+
+    <a class="card" href="resume-samples.html">
+      <div class="thumb" style="background:linear-gradient(135deg,#0A7A4E,#0E7490)">
+        <span style="font-size:2.1rem">📄</span>
+        <strong style="font-size:.95rem">6 Resume Formats</strong>
+        <span style="font-size:.75rem;opacity:.9">Fresher · Corporate · ATS · Executive</span>
+      </div>
+      <div class="c-body">
+        <h3>Resumes &amp; CVs</h3>
+        <p>Six professionally formatted resume designs — fresher, two-column corporate, ATS-friendly, creative &amp; executive. View-only samples; we personalise, print &amp; send yours.</p>
+        <span class="c-link">View samples</span>
+      </div>
+    </a>
+
+  </div>
+  </section>
+
   <section class="tab-panel" data-tab="presentations">
   <h3 id="presentations" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">🖥️ Presentation Designs</h3>
   <p style="color:var(--muted);margin:0 0 .2rem">Professional slide decks for coaching, business, school &amp; college — custom-designed from ₹100 per deck. Tap a deck to view all slides.</p>
@@ -658,11 +679,12 @@
 
 <script>
 (function(){
-  var VALID = {websites:1, whatsapp:1, 'google-profile':1, 'google-maps':1, posters:1, logos:1, presentations:1};
+  var VALID = {websites:1, whatsapp:1, 'google-profile':1, 'google-maps':1, posters:1, logos:1, resumes:1, presentations:1};
   // header-menu anchors that live inside the Logos tab
   var HASHMAP = {'':'websites', websites:'websites', whatsapp:'whatsapp',
     'google-profile':'google-profile', 'google-maps':'google-maps', posters:'posters',
-    logos:'logos', invitations:'logos', videos:'logos', presentations:'presentations'};
+    logos:'logos', invitations:'logos', videos:'logos', resumes:'resumes',
+    presentations:'presentations'};
 
   function showTab(tab, scrollTop){
     if(!VALID[tab]) tab = 'websites';
