@@ -16,3 +16,5 @@ media/songs/*.mp4
 # web-sized previews under media/books/web/ are committed.
 media/books/*.pdf
 media/books/preview/
+# Canva re-exports of the same masters (~10 MB each, also never served).
+media/books/canva/
