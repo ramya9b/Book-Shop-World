@@ -1,17 +1,17 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('AI Song Samples', () => {
-  test('samples section renders with 5 playable songs on the Services page', async ({ page }) => {
+  test('samples section renders with 6 playable songs on the Services page', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     const section = page.locator('#songSamples');
     await expect(section).toBeVisible();
     await expect(section.getByRole('heading', { name: /AI Song Samples/i })).toBeVisible();
 
-    // 5 audio players, each with a same-origin mp3 source.
+    // 6 audio players, each with a same-origin mp3 source.
     const players = section.locator('audio');
-    await expect(players).toHaveCount(5);
-    for (let i = 0; i < 5; i++) {
+    await expect(players).toHaveCount(6);
+    for (let i = 0; i < 6; i++) {
       await expect(players.nth(i)).toHaveAttribute('src', /\/media\/songs\/.+\.mp3$/);
     }
 
