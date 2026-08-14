@@ -2196,8 +2196,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <a role="menuitem" href="/templates/#presentations">🖥️ Presentations</a>
         <a role="menuitem" href="#songSamples" onclick="goSongs(event)">🎵 AI Songs</a>
         <a role="menuitem" href="/templates/#invitations">💌 Invitations</a>
-        <a role="menuitem" href="/templates/#resumes">📄 Resumes &amp; CVs</a>
-        <a role="menuitem" href="/templates/#books">📖 Story Books</a>
+        <a role="menuitem" href="#resumeSamples" onclick="goSamples(event,'resumeSamples')">📄 Resumes &amp; CVs</a>
+        <a role="menuitem" href="#bookSamples" onclick="goSamples(event,'bookSamples')">📖 Story Books</a>
         <a role="menuitem" href="/templates/#videos">🎬 Videos</a>
         <a role="menuitem" href="/templates/#logos">🎨 Logos &amp; Branding</a>
         <a role="menuitem" href="/templates/#posters">🎉 Posters</a>
@@ -2489,6 +2489,132 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         </a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ── STORY BOOK SAMPLES ── -->
+  <section class="services-section" id="bookSamples" aria-label="Story Book Samples">
+    <div class="services-section-hdr">
+      <h3 data-i18n="h_books">📖 Story Book Samples</h3>
+      <span data-i18n="h_books_sub">Picture books we wrote &amp; illustrated — tap to preview</span>
+    </div>
+    <div class="sample-cards">
+
+      <a class="sample-card" href="/templates/book-samples.html">
+        <div class="sample-cover"><img src="/media/books/web/amara-whispering-stepwell-cover.jpg" alt="Cover of Amara and the Whispering Stepwell" loading="lazy" width="560" height="865"></div>
+        <div class="sample-title">Amara and the Whispering Stepwell</div>
+        <div class="sample-sub">A curious girl, an old stepwell, and the questions it answers</div>
+        <div class="sample-tags"><span>English</span><span>12 pages</span></div>
+        <span class="sample-link">Preview pages →</span>
+      </a>
+
+      <a class="sample-card" href="/templates/book-samples.html">
+        <div class="sample-cover"><img src="/media/books/web/pagilina-kunda-cover.jpg" alt="Cover of Pagilina Kunda, a Telugu picture book" loading="lazy" width="560" height="865"></div>
+        <div class="sample-title">పగిలిన కుండ</div>
+        <div class="sample-sub">Pagilina Kunda — The Cracked Pot</div>
+        <div class="sample-tags"><span>Telugu</span><span>10 pages</span></div>
+        <span class="sample-link">Preview pages →</span>
+      </a>
+
+      <a class="sample-card" href="/templates/book-samples.html">
+        <div class="sample-cover"><img src="/media/books/web/moodu-rangula-sahasam-cover.jpg" alt="Cover of Moodu Rangula Sahasam, a Telugu picture book" loading="lazy" width="560" height="865"></div>
+        <div class="sample-title">మూడు రంగుల సాహసం</div>
+        <div class="sample-sub">Moodu Rangula Sahasam — The Three-Colour Adventure</div>
+        <div class="sample-tags"><span>Telugu</span><span>10 pages</span></div>
+        <span class="sample-link">Preview pages →</span>
+      </a>
+
+      <a class="sample-card" href="/templates/book-samples.html">
+        <div class="sample-cover"><img src="/media/books/web/vittanam-odipoledu-cover.jpg" alt="Cover of Vittanam Odipoledu, a Telugu picture book about a seed" loading="lazy" width="560" height="865"></div>
+        <div class="sample-title">విత్తనం ఓడిపోలేదు</div>
+        <div class="sample-sub">Vittanam Odipoledu — The Seed Did Not Give Up</div>
+        <div class="sample-tags"><span>Telugu</span><span>10 pages</span></div>
+        <span class="sample-link">Preview pages →</span>
+      </a>
+
+      <a class="sample-card" href="/templates/book-samples.html">
+        <div class="sample-cover"><img src="/media/books/web/venakki-taggani-adugu-cover.jpg" alt="Cover of Venakki Taggani Adugu, a Telugu illustrated biography" loading="lazy" width="560" height="865"></div>
+        <div class="sample-title">వెనక్కి తగ్గని అడుగు</div>
+        <div class="sample-sub">Ansar Shaikh's inspiring journey — in Telugu</div>
+        <div class="sample-tags"><span>Telugu</span><span>12 pages</span><span>True story</span></div>
+        <span class="sample-link">Preview pages →</span>
+      </a>
+
+      <a class="sample-card" href="/templates/book-samples.html">
+        <div class="sample-cover"><img src="/media/books/web/onde-ondu-avakasha-cover.jpg" alt="Cover of Onde Ondu Avakasha, a Kannada illustrated biography" loading="lazy" width="560" height="865"></div>
+        <div class="sample-title">ಒಂದೇ ಒಂದು ಅವಕಾಶ</div>
+        <div class="sample-sub">Ansar Shaikh's inspiring journey — in Kannada</div>
+        <div class="sample-tags"><span>Kannada</span><span>12 pages</span><span>True story</span></div>
+        <span class="sample-link">Preview pages →</span>
+      </a>
+
+    </div>
+    <div class="sample-cta">
+      <span class="sample-cta-note" data-i18n="cta_books_note">Preview only — WhatsApp us to read a copy or get a custom story book made.</span>
+      <a class="svc-wa-btn" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+custom+story+book" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Get a story book
+      </a>
+    </div>
+  </section>
+
+  <!-- ── RESUME & CV SAMPLES ── -->
+  <section class="services-section" id="resumeSamples" aria-label="Resume and CV Samples">
+    <div class="services-section-hdr">
+      <h3 data-i18n="h_resumes">📄 Resume &amp; CV Samples</h3>
+      <span data-i18n="h_resumes_sub">Six formats we design — tap to view the full sample</span>
+    </div>
+    <div class="sample-cards sample-cards-sm">
+
+      <a class="sample-card sample-card-plain" href="/templates/resume-samples.html#samples">
+        <span class="sample-icon">📋</span>
+        <div class="sample-title">Classic Professional</div>
+        <div class="sample-sub">Experienced roles · clean single column</div>
+        <span class="sample-link">View sample →</span>
+      </a>
+
+      <a class="sample-card sample-card-plain" href="/templates/resume-samples.html#samples">
+        <span class="sample-icon">🗂️</span>
+        <div class="sample-title">Modern Two-Column</div>
+        <div class="sample-sub">IT &amp; corporate · dark sidebar</div>
+        <span class="sample-link">View sample →</span>
+      </a>
+
+      <a class="sample-card sample-card-plain" href="/templates/resume-samples.html#samples">
+        <span class="sample-icon">🎓</span>
+        <div class="sample-title">Fresher / Campus</div>
+        <div class="sample-sub">First job · studies &amp; projects first</div>
+        <span class="sample-link">View sample →</span>
+      </a>
+
+      <a class="sample-card sample-card-plain" href="/templates/resume-samples.html#samples">
+        <span class="sample-icon">🤖</span>
+        <div class="sample-title">ATS-Friendly Minimal</div>
+        <div class="sample-sub">Online applications · plain, machine-readable</div>
+        <span class="sample-link">View sample →</span>
+      </a>
+
+      <a class="sample-card sample-card-plain" href="/templates/resume-samples.html#samples">
+        <span class="sample-icon">🎨</span>
+        <div class="sample-title">Creative</div>
+        <div class="sample-sub">Design, teaching &amp; front-facing roles</div>
+        <span class="sample-link">View sample →</span>
+      </a>
+
+      <a class="sample-card sample-card-plain" href="/templates/resume-samples.html#samples">
+        <span class="sample-icon">💼</span>
+        <div class="sample-title">Executive</div>
+        <div class="sample-sub">Senior &amp; managerial · results up front</div>
+        <span class="sample-link">View sample →</span>
+      </a>
+
+    </div>
+    <div class="sample-cta">
+      <span class="sample-cta-note" data-i18n="cta_resume_note">We fill in your details, print it, and send your copy on WhatsApp.</span>
+      <a class="svc-wa-btn" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+resume+designed" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Get my resume made
+      </a>
     </div>
   </section>
 
@@ -3815,6 +3941,12 @@ const i18n = {
     h_services: '🛠️ Services & Pricing',
     h_songs: '🎧 AI Song Samples',
     h_songs_sub: "Custom songs we've created — tap play",
+    h_books: '📖 Story Book Samples',
+    h_books_sub: "Picture books we wrote & illustrated — tap to preview",
+    cta_books_note: 'Preview only — WhatsApp us to read a copy or get a custom story book made.',
+    h_resumes: '📄 Resume & CV Samples',
+    h_resumes_sub: 'Six formats we design — tap to view the full sample',
+    cta_resume_note: 'We fill in your details, print it, and send your copy on WhatsApp.',
     cta_books_h: '📚 Looking for books & stationery?',
     cta_books_p: 'Browse our full range of notebooks, pens, art & school supplies — order on WhatsApp or visit the shop.',
     cta_books_btn: '📚 Browse Books & Stationery →',
@@ -3978,6 +4110,12 @@ const i18n = {
     h_services: '🛠️ సేవలు & ధరలు',
     h_songs: '🎧 AI పాటల నమూనాలు',
     h_songs_sub: 'మేము రూపొందించిన కస్టమ్ పాటలు — ప్లే నొక్కండి',
+    h_books: '📖 కథల పుస్తకాల నమూనాలు',
+    h_books_sub: 'మేము రాసి, చిత్రించిన పిల్లల పుస్తకాలు — ప్రివ్యూ కోసం నొక్కండి',
+    cta_books_note: 'ప్రివ్యూ మాత్రమే — పూర్తి పుస్తకం లేదా కస్టమ్ కథల పుస్తకం కోసం వాట్సాప్‌లో సంప్రదించండి.',
+    h_resumes: '📄 రెజ్యూమె & CV నమూనాలు',
+    h_resumes_sub: 'మేము డిజైన్ చేసే ఆరు ఫార్మాట్లు — పూర్తి నమూనా చూడటానికి నొక్కండి',
+    cta_resume_note: 'మీ వివరాలు మేము నింపి, ప్రింట్ చేసి, వాట్సాప్‌లో మీ కాపీ పంపుతాము.',
     cta_books_h: '📚 పుస్తకాలు & స్టేషనరీ కావాలా?',
     cta_books_p: 'మా పూర్తి శ్రేణి నోట్‌బుక్‌లు, పెన్నులు, ఆర్ట్ & స్కూల్ సామాగ్రిని చూడండి — WhatsAppలో ఆర్డర్ చేయండి లేదా షాప్‌కి రండి.',
     cta_books_btn: '📚 పుస్తకాలు & స్టేషనరీ చూడండి →',
@@ -4150,6 +4288,12 @@ const i18n = {
     h_services: '🛠️ ಸೇವೆಗಳು & ಬೆಲೆಗಳು',
     h_songs: '🎧 AI ಹಾಡಿನ ಮಾದರಿಗಳು',
     h_songs_sub: 'ನಾವು ರಚಿಸಿದ ಕಸ್ಟಮ್ ಹಾಡುಗಳು — ಪ್ಲೇ ಒತ್ತಿ',
+    h_books: '📖 ಕಥಾ ಪುಸ್ತಕಗಳ ಮಾದರಿಗಳು',
+    h_books_sub: 'ನಾವು ಬರೆದು ಚಿತ್ರಿಸಿದ ಮಕ್ಕಳ ಪುಸ್ತಕಗಳು — ಪೂರ್ವವೀಕ್ಷಣೆಗೆ ಒತ್ತಿ',
+    cta_books_note: 'ಪೂರ್ವವೀಕ್ಷಣೆ ಮಾತ್ರ — ಪೂರ್ಣ ಪುಸ್ತಕ ಅಥವಾ ಕಸ್ಟಮ್ ಕಥಾ ಪುಸ್ತಕಕ್ಕಾಗಿ ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ.',
+    h_resumes: '📄 ರೆಸ್ಯೂಮ್ & CV ಮಾದರಿಗಳು',
+    h_resumes_sub: 'ನಾವು ವಿನ್ಯಾಸಗೊಳಿಸುವ ಆರು ಸ್ವರೂಪಗಳು — ಪೂರ್ಣ ಮಾದರಿ ನೋಡಲು ಒತ್ತಿ',
+    cta_resume_note: 'ನಿಮ್ಮ ವಿವರಗಳನ್ನು ನಾವು ತುಂಬಿ, ಮುದ್ರಿಸಿ, ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ನಿಮ್ಮ ಪ್ರತಿಯನ್ನು ಕಳುಹಿಸುತ್ತೇವೆ.',
     cta_books_h: '📚 ಪುಸ್ತಕಗಳು & ಸ್ಟೇಷನರಿ ಬೇಕೇ?',
     cta_books_p: 'ನಮ್ಮ ಸಂಪೂರ್ಣ ಶ್ರೇಣಿಯ ನೋಟ್‌ಬುಕ್‌ಗಳು, ಪೆನ್‌ಗಳು, ಆರ್ಟ್ & ಶಾಲಾ ಸಾಮಗ್ರಿಗಳನ್ನು ನೋಡಿ — WhatsAppನಲ್ಲಿ ಆರ್ಡರ್ ಮಾಡಿ ಅಥವಾ ಅಂಗಡಿಗೆ ಬನ್ನಿ.',
     cta_books_btn: '📚 ಪುಸ್ತಕಗಳು & ಸ್ಟೇಷನರಿ ನೋಡಿ →',
@@ -6791,16 +6935,19 @@ function goServices(){
   }, wasShop ? 300 : 0);
 }
 
-/* AI Songs lives on the Services page — go home, then scroll to the samples */
-function goSongs(e){
+/* Sample sections (songs, story books, resumes) live on the Services page —
+   go home first, then scroll to the requested section */
+function goSamples(e, id){
   if(e){ e.preventDefault(); }
   closeWorkMenu();
   if(typeof goHome === 'function') goHome();
   setTimeout(function(){
-    var el = document.getElementById('songSamples');
+    var el = document.getElementById(id);
     if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 250);
 }
+
+function goSongs(e){ goSamples(e, 'songSamples'); }
 
 /* ── Real page-view counter (Firebase). Counts once per browser per day;
       hides itself if the count can't be read (so it never shows fake data). ── */
@@ -7045,6 +7192,22 @@ window.addEventListener('DOMContentLoaded', function(){
   .song-card .song-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--text);line-height:1.3}
   .song-card audio{width:100%;height:40px;margin:.15rem 0}
   .song-card .svc-wa-btn{align-self:flex-start;margin-top:.1rem}
+  /* Story book & resume samples (same card system as the song samples) */
+  .sample-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+  .sample-cards-sm{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  .sample-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:.9rem;display:flex;flex-direction:column;gap:.4rem;box-shadow:0 2px 12px rgba(0,0,0,.05);text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s}
+  .sample-card:hover,.sample-card:focus-visible{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.12)}
+  .sample-card-plain{padding:1rem 1.1rem}
+  .sample-cover{border-radius:11px;overflow:hidden;background:#f3f1ec;aspect-ratio:560/865}
+  .sample-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .sample-icon{font-size:1.5rem;line-height:1}
+  .sample-card .sample-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.98rem;color:var(--text);line-height:1.3}
+  .sample-card .sample-sub{font-size:.78rem;color:var(--muted);line-height:1.45}
+  .sample-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+  .sample-tags span{font-size:.63rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--saffron);background:rgba(10,122,78,.09);border-radius:20px;padding:.2rem .55rem}
+  .sample-link{margin-top:auto;padding-top:.2rem;font-size:.78rem;font-weight:700;color:var(--saffron)}
+  .sample-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .9rem;margin-top:1rem}
+  .sample-cta-note{font-size:.8rem;color:var(--muted)}
   /* Header "Our Work" dropdown menu */
   .menu-wrap{position:relative;display:inline-block}
   .menu-caret{font-size:.7rem;opacity:.8}
