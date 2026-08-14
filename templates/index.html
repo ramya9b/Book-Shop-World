@@ -99,6 +99,7 @@
   <div class="tab-bar" id="tabBar" role="tablist">
     <button class="tab-btn active" data-target="websites">🌐 Websites</button>
     <button class="tab-btn" data-target="resumes">📄 Resumes</button>
+    <button class="tab-btn" data-target="books">📖 Story Books</button>
     <button class="tab-btn" data-target="presentations">🖥️ Presentations</button>
     <button class="tab-btn" data-target="logos">🎨 Logos &amp; Invitations</button>
     <button class="tab-btn" data-target="posters">🎉 Posters</button>
@@ -558,6 +559,22 @@
 
   </section>
 
+  <section class="tab-panel" data-tab="books">
+  <h3 id="books" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">📖 Illustrated Story Books</h3>
+  <div class="grid">
+
+    <a class="card" href="book-samples.html">
+      <div class="thumb" style="padding:0;overflow:hidden"><img src="/media/books/web/amara-whispering-stepwell-cover.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
+      <div class="c-body">
+        <h3>Story Books</h3>
+        <p>Six original picture books in Telugu, Kannada &amp; English — written, illustrated &amp; printed by us. Preview the covers and opening pages.</p>
+        <span class="c-link">View samples</span>
+      </div>
+    </a>
+
+  </div>
+  </section>
+
   <section class="tab-panel" data-tab="resumes">
   <h3 id="resumes" style="scroll-margin-top:1rem;font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .3rem;color:var(--ink)">📄 Resume &amp; CV Designs</h3>
   <div class="grid">
@@ -690,12 +707,12 @@
 
 <script>
 (function(){
-  var VALID = {websites:1, whatsapp:1, 'google-profile':1, 'google-maps':1, posters:1, logos:1, resumes:1, presentations:1};
+  var VALID = {websites:1, whatsapp:1, 'google-profile':1, 'google-maps':1, posters:1, logos:1, resumes:1, books:1, presentations:1};
   // header-menu anchors that live inside the Logos tab
   var HASHMAP = {'':'websites', websites:'websites', whatsapp:'whatsapp',
     'google-profile':'google-profile', 'google-maps':'google-maps', posters:'posters',
     logos:'logos', invitations:'logos', videos:'logos', resumes:'resumes',
-    presentations:'presentations'};
+    books:'books', presentations:'presentations'};
 
   function showTab(tab, scrollTop){
     if(!VALID[tab]) tab = 'websites';

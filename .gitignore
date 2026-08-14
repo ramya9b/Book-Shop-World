@@ -10,3 +10,9 @@ e2e/playwright-report/
 e2e/.cache/
 media/ppt/*.pptx
 media/songs/*.mp4
+
+# Story-book masters: print-resolution PDFs, 350-410 MB each (~2.2 GB total).
+# Far over GitHub's 100 MB per-file limit, and never served. Only the
+# web-sized previews under media/books/web/ are committed.
+media/books/*.pdf
+media/books/preview/

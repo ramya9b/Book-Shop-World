@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Illustrated Story Books — Sample Work · Sri Vara Lakshmi Balaji Enterprises</title>
+<meta name="description" content="Original illustrated story books in Telugu, Kannada and English — written and designed by Sri Vara Lakshmi Balaji Enterprises. Preview the covers and sample pages; ask on WhatsApp for the full book.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#EEF8F3;--card:#fff;--ink:#0C1E14;--muted:#4A7260;--green:#0A7A4E;--gold:#C8920A;--line:#BDD9CC;--shadow:0 10px 30px rgba(0,0,0,.10)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  h1,h2{font-family:'Playfair Display',serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:40px;padding:.85rem 1.6rem;cursor:pointer;border:none;background:var(--green);color:#fff;box-shadow:0 8px 20px rgba(10,122,78,.3);transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+
+  header{text-align:center;padding:3.5rem 1.2rem 1.6rem;background:radial-gradient(60% 60% at 50% 0%,rgba(10,122,78,.10),transparent)}
+  .kicker{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--green);font-weight:700;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;padding:.4rem 1rem;border-radius:30px}
+  header h1{font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .6rem}
+  header p{max-width:680px;margin:0 auto;color:var(--muted);font-size:1.06rem}
+  .biz{font-weight:700;color:var(--green)}
+
+  .sec-h{font-family:'Playfair Display',serif;font-size:1.32rem;margin:1.8rem 0 .1rem;color:var(--ink);scroll-margin-top:1rem}
+  .sec-sub{color:var(--muted);font-size:.92rem;margin-bottom:.4rem}
+
+  .viewonly{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px dashed var(--gold);border-radius:16px;padding:.9rem 1.15rem;margin:1.2rem auto 0;max-width:730px;color:var(--muted);font-size:.9rem;text-align:left}
+  .viewonly strong{color:var(--ink)}
+  .viewonly .lk{font-size:1.4rem;line-height:1;flex:0 0 auto}
+
+  /* ── shelf ───────────────────────────────────────────────────── */
+  .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.6rem 1.3rem;padding:1rem 0 1rem}
+  .bcard{background:none;border:none;padding:0;font:inherit;color:inherit;cursor:zoom-in;text-align:left;width:100%;display:block}
+  .bcover{position:relative;border-radius:6px 12px 12px 6px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.22);transition:transform .2s,box-shadow .2s;background:#e8e2d5}
+  .bcard:hover .bcover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 22px 48px rgba(0,0,0,.3)}
+  .bcover img{width:100%;height:auto;display:block}
+  /* spine highlight, so the cover reads as a book */
+  .bcover::before{content:"";position:absolute;top:0;bottom:0;left:0;width:9px;z-index:3;pointer-events:none;background:linear-gradient(to right,rgba(0,0,0,.28),rgba(255,255,255,.16) 65%,rgba(0,0,0,.06))}
+  .bmeta{padding:.7rem .15rem 0}
+  .bmeta strong{display:block;font-size:.95rem;line-height:1.3}
+  .bmeta .tl{color:var(--muted);font-size:.82rem;margin-top:.1rem}
+  .bmeta .tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.45rem}
+  .bmeta .tags span{font-size:.7rem;font-weight:700;padding:.18rem .5rem;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--green)}
+  .bmeta .zoom{display:block;font-size:.74rem;color:var(--green);font-weight:700;margin-top:.4rem}
+
+  /* ── anti-copy layers ────────────────────────────────────────── */
+  .protected{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+  .protected img{-webkit-user-drag:none;user-drag:none}
+  .shield{position:absolute;inset:0;z-index:6;background:transparent}
+  .wm{position:absolute;inset:0;z-index:5;pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='300'%20height='210'%3E%3Ctext%20x='6'%20y='120'%20transform='rotate(-24%206%20120)'%20font-family='Inter,Arial,sans-serif'%20font-size='19'%20font-weight='700'%20fill='rgba(10,122,78,0.13)'%3ESVLB%20SAMPLE%3C/text%3E%3C/svg%3E")}
+
+  /* ── lightbox ────────────────────────────────────────────────── */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(8,20,15,.9);display:none;padding:0;overflow:auto}
+  .lb.open{display:block}
+  .lb-inner{max-width:960px;margin:0 auto;padding:64px 16px 48px}
+  .lb-ttl{color:#fff;text-align:center;margin-bottom:.2rem;font-family:'Playfair Display',serif;font-size:1.5rem}
+  .lb-sub{color:#9fd3bb;text-align:center;font-size:.86rem;margin-bottom:1.4rem}
+  .lb-pg{position:relative;margin:0 auto 1.1rem;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+  .lb-pg img{width:100%;height:auto;display:block}
+  .lb-close{position:fixed;top:14px;right:16px;z-index:120;background:#fff;color:var(--ink);border:none;border-radius:30px;padding:.55rem 1.1rem;font-weight:700;cursor:pointer;font-family:inherit}
+  .lb-end{text-align:center;color:#cfe8dc;font-size:.9rem;background:rgba(255,255,255,.07);border:1px dashed rgba(255,255,255,.28);border-radius:16px;padding:1.1rem 1.2rem;margin-top:.4rem}
+  .lb-end .btn{margin-top:.9rem;background:#fff;color:var(--green)}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(140%);background:#14231b;color:#fff;padding:.75rem 1.2rem;border-radius:30px;font-size:.86rem;font-weight:600;z-index:200;transition:transform .28s;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  .cta{background:var(--green);color:#fff;text-align:center;border-radius:24px;padding:2.6rem 1.4rem;margin:1.8rem 0 3rem;box-shadow:var(--shadow)}
+  .cta h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:.5rem}
+  .cta p{opacity:.92;max-width:560px;margin:0 auto 1.4rem}
+  .cta .btn{background:#fff;color:var(--green)}
+  .feats{display:flex;gap:1.6rem;justify-content:center;flex-wrap:wrap;color:#fff;opacity:.9;font-size:.85rem;font-weight:600;margin-top:1.4rem}
+
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1rem 1.2rem 3rem}
+  footer a{color:var(--green);font-weight:600}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  @media print{
+    body *{visibility:hidden!important}
+    body::before{visibility:visible!important;display:block;content:"Story book previews by Sri Vara Lakshmi Balaji Enterprises are view-only and cannot be printed. WhatsApp +91 99454 11489 to ask about the full book.";
+      font-family:Arial,sans-serif;font-size:14pt;line-height:1.6;padding:40pt;text-align:center}
+  }
+</style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header>
+  <span class="kicker">📖 Illustrated Story Books</span>
+  <h1>Story books we've written &amp; illustrated</h1>
+  <p>Original picture books in Telugu, Kannada and English, written and designed by <span class="biz">Sri Vara Lakshmi Balaji Enterprises</span> — full-colour illustrations on every spread. Tap a cover to preview the first pages.</p>
+  <div class="viewonly">
+    <span class="lk">🔒</span>
+    <span><strong>Preview only.</strong> These are the cover and opening pages — the full books are not published here. Message us on WhatsApp to ask about reading or ordering a copy, or to have a custom story book made for your child, school or business.</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h3 id="books" class="sec-h">📚 Our story books</h3>
+  <p class="sec-sub">Six titles · Telugu, Kannada &amp; English · illustrated throughout</p>
+
+  <div class="shelf" id="shelf">
+
+    <button class="bcard" type="button"
+            data-title="Amara and the Whispering Stepwell" data-sub="English · 12 pages"
+            data-cover="/media/books/web/amara-whispering-stepwell-cover.jpg"
+            data-s1="/media/books/web/amara-whispering-stepwell-s1.jpg"
+            data-s2="/media/books/web/amara-whispering-stepwell-s2.jpg">
+      <div class="bcover protected">
+        <img src="/media/books/web/amara-whispering-stepwell-cover.jpg" alt="Cover of Amara and the Whispering Stepwell — a girl with a yellow satchel in a forest before an old stepwell" loading="lazy" width="560" height="865">
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="bmeta">
+        <strong>Amara and the Whispering Stepwell</strong>
+        <div class="tl">A curious girl, an old stepwell, and the questions it answers</div>
+        <div class="tags"><span>English</span><span>12 pages</span></div>
+        <span class="zoom">Preview pages →</span>
+      </div>
+    </button>
+
+    <button class="bcard" type="button"
+            data-title="పగిలిన కుండ · Pagilina Kunda" data-sub="Telugu · 10 pages"
+            data-cover="/media/books/web/pagilina-kunda-cover.jpg"
+            data-s1="/media/books/web/pagilina-kunda-s1.jpg"
+            data-s2="/media/books/web/pagilina-kunda-s2.jpg">
+      <div class="bcover protected">
+        <img src="/media/books/web/pagilina-kunda-cover.jpg" alt="Cover of Pagilina Kunda — an elderly farmer carrying a cracked pot on a bamboo pole beside marigold fields" loading="lazy" width="560" height="865">
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="bmeta">
+        <strong>పగిలిన కుండ</strong>
+        <div class="tl">Pagilina Kunda — The Cracked Pot</div>
+        <div class="tags"><span>Telugu</span><span>10 pages</span></div>
+        <span class="zoom">Preview pages →</span>
+      </div>
+    </button>
+
+    <button class="bcard" type="button"
+            data-title="మూడు రంగుల సాహసం · Moodu Rangula Sahasam" data-sub="Telugu · 10 pages"
+            data-cover="/media/books/web/moodu-rangula-sahasam-cover.jpg"
+            data-s1="/media/books/web/moodu-rangula-sahasam-s1.jpg"
+            data-s2="/media/books/web/moodu-rangula-sahasam-s2.jpg">
+      <div class="bcover protected">
+        <img src="/media/books/web/moodu-rangula-sahasam-cover.jpg" alt="Cover of Moodu Rangula Sahasam, a Telugu picture book" loading="lazy" width="560" height="865">
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="bmeta">
+        <strong>మూడు రంగుల సాహసం</strong>
+        <div class="tl">Moodu Rangula Sahasam — The Three-Colour Adventure</div>
+        <div class="tags"><span>Telugu</span><span>10 pages</span></div>
+        <span class="zoom">Preview pages →</span>
+      </div>
+    </button>
+
+    <button class="bcard" type="button"
+            data-title="విత్తనం ఓడిపోలేదు · Vittanam Odipoledu" data-sub="Telugu · 10 pages"
+            data-cover="/media/books/web/vittanam-odipoledu-cover.jpg"
+            data-s1="/media/books/web/vittanam-odipoledu-s1.jpg"
+            data-s2="/media/books/web/vittanam-odipoledu-s2.jpg">
+      <div class="bcover protected">
+        <img src="/media/books/web/vittanam-odipoledu-cover.jpg" alt="Cover of Vittanam Odipoledu, a Telugu picture book about a seed" loading="lazy" width="560" height="865">
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="bmeta">
+        <strong>విత్తనం ఓడిపోలేదు</strong>
+        <div class="tl">Vittanam Odipoledu — The Seed Did Not Give Up</div>
+        <div class="tags"><span>Telugu</span><span>10 pages</span></div>
+        <span class="zoom">Preview pages →</span>
+      </div>
+    </button>
+
+    <button class="bcard" type="button"
+            data-title="వెనక్కి తగ్గని అడుగు · Venakki Taggani Adugu" data-sub="Telugu · 12 pages"
+            data-cover="/media/books/web/venakki-taggani-adugu-cover.jpg"
+            data-s1="/media/books/web/venakki-taggani-adugu-s1.jpg"
+            data-s2="/media/books/web/venakki-taggani-adugu-s2.jpg">
+      <div class="bcover protected">
+        <img src="/media/books/web/venakki-taggani-adugu-cover.jpg" alt="Cover of Venakki Taggani Adugu, a Telugu illustrated biography" loading="lazy" width="560" height="865">
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="bmeta">
+        <strong>వెనక్కి తగ్గని అడుగు</strong>
+        <div class="tl">Ansar Shaikh's inspiring journey — in Telugu</div>
+        <div class="tags"><span>Telugu</span><span>12 pages</span><span>True story</span></div>
+        <span class="zoom">Preview pages →</span>
+      </div>
+    </button>
+
+    <button class="bcard" type="button"
+            data-title="ಒಂದೇ ಒಂದು ಅವಕಾಶ · Onde Ondu Avakasha" data-sub="Kannada · 12 pages"
+            data-cover="/media/books/web/onde-ondu-avakasha-cover.jpg"
+            data-s1="/media/books/web/onde-ondu-avakasha-s1.jpg"
+            data-s2="/media/books/web/onde-ondu-avakasha-s2.jpg">
+      <div class="bcover protected">
+        <img src="/media/books/web/onde-ondu-avakasha-cover.jpg" alt="Cover of Onde Ondu Avakasha, a Kannada illustrated biography" loading="lazy" width="560" height="865">
+        <div class="wm"></div><div class="shield"></div>
+      </div>
+      <div class="bmeta">
+        <strong>ಒಂದೇ ಒಂದು ಅವಕಾಶ</strong>
+        <div class="tl">Ansar Shaikh's inspiring journey — in Kannada</div>
+        <div class="tags"><span>Kannada</span><span>12 pages</span><span>True story</span></div>
+        <span class="zoom">Preview pages →</span>
+      </div>
+    </button>
+
+  </div>
+
+  <div class="cta">
+    <h2>Want a story book like these?</h2>
+    <p>We write, illustrate and print custom picture books — for your child, a school project, or a business that wants its story told. In Telugu, Kannada, Hindi or English.</p>
+    <a class="btn" href="https://wa.me/919945411489?text=Hi%2C+I+saw+your+story+books+and+want+to+know+more" target="_blank" rel="noopener">📲 Ask About Our Books</a>
+    <div class="feats"><span>✍️ Written &amp; illustrated</span><span>🌐 Any language</span><span>🖨️ Printed &amp; bound</span><span>🎁 Personalised</span></div>
+  </div>
+</main>
+
+<!-- lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Story book preview">
+  <button class="lb-close" id="lbClose" type="button">✕ Close</button>
+  <div class="lb-inner protected" id="lbInner"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  Sri Vara Lakshmi Balaji Enterprises · KR Puram, Bengaluru ·
+  <a href="/">← Back to our shop</a> · <a href="index.html">More samples →</a>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  var toastEl = document.getElementById('toast'), toastTimer;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2600);
+  }
+
+  var lb = document.getElementById('lb'),
+      inner = document.getElementById('lbInner'),
+      lastFocus = null;
+
+  function page(src, alt){
+    return '<div class="lb-pg"><img src="' + src + '" alt="' + alt + '" loading="lazy">' +
+           '<div class="wm"></div><div class="shield"></div></div>';
+  }
+
+  function openLB(card){
+    var d = card.dataset;
+    inner.innerHTML =
+      '<div class="lb-ttl">' + d.title + '</div>' +
+      '<div class="lb-sub">' + d.sub + ' · preview only</div>' +
+      page(d.cover, 'Cover') +
+      page(d.s1, 'Sample page') +
+      page(d.s2, 'Sample page') +
+      '<div class="lb-end">That\'s the preview — the rest of the book isn\'t published here.<br>' +
+      'Message us to read it, order a copy, or have your own story book made.' +
+      '<br><a class="btn" href="https://wa.me/919945411489?text=Hi%2C+I+want+to+know+more+about+your+story+books" target="_blank" rel="noopener">📲 Ask on WhatsApp</a></div>';
+    lb.classList.add('open');
+    lb.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    lastFocus = card;
+    document.getElementById('lbClose').focus();
+  }
+  function closeLB(){
+    lb.classList.remove('open');
+    inner.innerHTML = '';
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.getElementById('shelf').addEventListener('click', function(e){
+    var card = e.target.closest('.bcard');
+    if (card) openLB(card);
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLB);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLB(); });
+
+  /* ── deterrents ──────────────────────────────────────────────
+     Friction, not security. Anything the browser renders can still
+     be captured. The real protection is that only three pages of
+     each book are published at all.                              */
+  document.addEventListener('contextmenu', function(e){
+    if (e.target.closest('.protected')) {
+      e.preventDefault();
+      toast('🔒 Preview only — WhatsApp us about the full book');
+    }
+  });
+  document.addEventListener('dragstart', function(e){
+    if (e.target.closest('.protected')) e.preventDefault();
+  });
+  document.addEventListener('selectstart', function(e){
+    if (e.target.closest('.protected')) e.preventDefault();
+  });
+  document.addEventListener('keydown', function(e){
+    var k = (e.key || '').toLowerCase();
+    if (k === 'escape' && lb.classList.contains('open')) { closeLB(); return; }
+    var ctrl = e.ctrlKey || e.metaKey;
+    var blockedCtrl = ctrl && !e.shiftKey && (k === 's' || k === 'p' || k === 'u');
+    var blockedDev  = (ctrl && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 's')) || k === 'f12';
+    if (blockedCtrl || blockedDev) {
+      e.preventDefault();
+      toast('🔒 Preview only — WhatsApp us about the full book');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
