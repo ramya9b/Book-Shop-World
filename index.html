@@ -1022,6 +1022,19 @@ body.shop-view #homePage { display:none !important }
 }
 .svc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
 .svc-icon{font-size:1.6rem;margin-bottom:.55rem;display:block}
+/* Digital services: coloured icon tiles so nine cards are scannable */
+#servicesSection .svc-icon{width:44px;height:44px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.6rem;background:var(--tile,linear-gradient(135deg,#94A3B8,#475569));box-shadow:0 6px 14px var(--tile-glow,rgba(71,85,105,.28))}
+#servicesSection .svc-card{position:relative}
+.svc-badge{position:absolute;top:.7rem;right:.7rem;font-size:.6rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#fff;background:var(--gold);border-radius:20px;padding:.18rem .5rem;box-shadow:0 4px 10px rgba(232,135,30,.35)}
+.tl-teal{--tile:linear-gradient(135deg,#2DD4BF,#0E7490);--tile-glow:rgba(14,116,144,.3)}
+.tl-blue{--tile:linear-gradient(135deg,#60A5FA,#1D4ED8);--tile-glow:rgba(29,78,216,.3)}
+.tl-red{--tile:linear-gradient(135deg,#FB7185,#DC2626);--tile-glow:rgba(220,38,38,.3)}
+.tl-green{--tile:linear-gradient(135deg,#4ADE80,#128C7E);--tile-glow:rgba(18,140,126,.3)}
+.tl-amber{--tile:linear-gradient(135deg,#FCD34D,#D97706);--tile-glow:rgba(217,119,6,.3)}
+.tl-violet{--tile:linear-gradient(135deg,#C4B5FD,#6D28D9);--tile-glow:rgba(109,40,217,.3)}
+.tl-rose{--tile:linear-gradient(135deg,#F9A8D4,#DB2777);--tile-glow:rgba(219,39,119,.3)}
+.tl-cyan{--tile:linear-gradient(135deg,#67E8F9,#0891B2);--tile-glow:rgba(8,145,178,.3)}
+.tl-indigo{--tile:linear-gradient(135deg,#A5B4FC,#4338CA);--tile-glow:rgba(67,56,202,.3)}
 .svc-name{
   font-size:.88rem;font-weight:700;color:var(--text);
   margin-bottom:.3rem;line-height:1.3;
@@ -2320,7 +2333,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <div class="services-grid">
 
       <div class="svc-card">
-        <span class="svc-icon">🌐</span>
+        <span class="svc-badge">Popular</span>
+        <span class="svc-icon tl-teal">🌐</span>
         <div class="svc-name">Website Creation</div>
         <div class="svc-price">Custom <span class="svc-price-note">get a quote</span></div>
         <div class="svc-desc"><span data-i18n="d_website">Professional websites &amp; online shops for your business — mobile-friendly, fast, and Google-ready.</span> <a href="/templates/" style="color:var(--saffron);font-weight:700;white-space:nowrap">See samples →</a></div>
@@ -2331,7 +2345,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">📍</span>
+        <span class="svc-icon tl-blue">📍</span>
         <div class="svc-name">Google Business Profile</div>
         <div class="svc-price">Custom <span class="svc-price-note">setup</span></div>
         <div class="svc-desc"><span data-i18n="d_gbp">Get your shop on Google Search &amp; Maps with photos, hours &amp; reviews so customers find you easily.</span> <a href="/templates/#google-profile" style="color:var(--saffron);font-weight:700;white-space:nowrap">See sample →</a></div>
@@ -2342,7 +2356,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">🗺️</span>
+        <span class="svc-icon tl-red">🗺️</span>
         <div class="svc-name">Google Maps Promotion</div>
         <div class="svc-price">Custom <span class="svc-price-note">monthly</span></div>
         <div class="svc-desc"><span data-i18n="d_maps">Rank higher on Google Maps and reach more local customers searching for shops near you.</span> <a href="/templates/#google-maps" style="color:var(--saffron);font-weight:700;white-space:nowrap">See sample →</a></div>
@@ -2353,7 +2367,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">💬</span>
+        <span class="svc-icon tl-green">💬</span>
         <div class="svc-name">WhatsApp Marketing</div>
         <div class="svc-price">Custom <span class="svc-price-note">campaigns</span></div>
         <div class="svc-desc"><span data-i18n="d_wa">Reach customers directly — WhatsApp broadcasts, product catalogs &amp; auto-replies that drive repeat sales.</span> <a href="/templates/#whatsapp" style="color:var(--saffron);font-weight:700;white-space:nowrap">See sample →</a></div>
@@ -2364,7 +2378,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">🎉</span>
+        <span class="svc-badge">Popular</span>
+        <span class="svc-icon tl-amber">🎉</span>
         <div class="svc-name">Festive Offer Posts</div>
         <div class="svc-price">Custom <span class="svc-price-note">per design</span></div>
         <div class="svc-desc"><span data-i18n="d_posters">Eye-catching festival &amp; offer posters for WhatsApp, Instagram &amp; Facebook to boost your sales.</span> <a href="/templates/#posters" style="color:var(--saffron);font-weight:700;white-space:nowrap">See samples →</a></div>
@@ -2375,7 +2390,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">🎵</span>
+        <span class="svc-badge">Popular</span>
+        <span class="svc-icon tl-violet">🎵</span>
         <div class="svc-name">Custom AI Songs</div>
         <div class="svc-price">Custom <span class="svc-price-note">per song</span></div>
         <div class="svc-desc"><span data-i18n="d_songs">Personalised AI songs for birthdays, weddings, anniversaries &amp; business jingles — your names &amp; story turned into a shareable track.</span> <a href="#songSamples" style="color:var(--saffron);font-weight:700;white-space:nowrap">🎧 Hear samples →</a></div>
@@ -2386,7 +2402,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">🎨</span>
+        <span class="svc-icon tl-rose">🎨</span>
         <div class="svc-name">Logo &amp; Branding</div>
         <div class="svc-price">Custom <span class="svc-price-note">get a quote</span></div>
         <div class="svc-desc"><span data-i18n="d_logo">Logos, business cards &amp; shop boards that make your business look professional and memorable.</span> <a href="/templates/#logos" style="color:var(--saffron);font-weight:700;white-space:nowrap">See samples →</a></div>
@@ -2397,7 +2413,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">🎬</span>
+        <span class="svc-icon tl-cyan">🎬</span>
         <div class="svc-name">Invitations &amp; Video</div>
         <div class="svc-price">Custom <span class="svc-price-note">per design</span></div>
         <div class="svc-desc"><span data-i18n="d_invite">Digital wedding &amp; event invitations plus short promo &amp; greeting videos for WhatsApp &amp; Instagram.</span> <a href="/templates/#invitations" style="color:var(--saffron);font-weight:700;white-space:nowrap">See samples →</a></div>
@@ -2408,7 +2424,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       </div>
 
       <div class="svc-card">
-        <span class="svc-icon">🖥️</span>
+        <span class="svc-icon tl-indigo">🖥️</span>
         <div class="svc-name">Presentation Design</div>
         <div class="svc-price">From ₹100 <span class="svc-price-note">per deck</span></div>
         <div class="svc-desc"><span data-i18n="d_ppt">Professional slide decks for coaching, business, school &amp; college — your content, beautifully designed.</span> <a href="/templates/#presentations" style="color:var(--saffron);font-weight:700;white-space:nowrap">See samples →</a></div>
