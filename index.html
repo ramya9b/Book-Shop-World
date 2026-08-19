@@ -7115,10 +7115,19 @@ document.addEventListener('click', function(e){
   var a = e.target.closest && e.target.closest('a[href*="wa.me/"]');
   if(!a) return;
   try{
-    if(!window.fbDatabase) return;
     var day = new Date().toISOString().slice(0,10);
-    fbDatabase.ref('waClicks/' + day + '/' + svlbkWaLabel(a))
-              .transaction(function(c){ return (c || 0) + 1; });
+    var label = svlbkWaLabel(a);
+    if(window.fbDatabase){
+      fbDatabase.ref('waClicks/' + day + '/' + label)
+                .transaction(function(c){ return (c || 0) + 1; });
+    } else {
+      /* Firebase loads async (three chained scripts) — a tap in the first second
+         would otherwise be lost, so fall back to the same REST write the sample
+         pages use. keepalive lets it finish as the tab switches to WhatsApp. */
+      var id = Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+      fetch(FIREBASE_DB_URL + '/waTaps/' + day + '/' + encodeURIComponent(label) + '/' + id + '.json',
+            { method:'PUT', body:'1', keepalive:true }).catch(function(){});
+    }
   }catch(err){ /* never block the click */ }
 }, true);
 
