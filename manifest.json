@@ -4,24 +4,15 @@
   "description": "Stationery, Xerox, LIC Insurance, Wellness Coaching & more — KR Puram, Bengaluru",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F4F0EA",
+  "background_color": "#F1F4FB",
   "theme_color": "#2A3B8F",
   "orientation": "portrait-primary",
   "lang": "en-IN",
   "categories": ["shopping", "business", "finance"],
   "icons": [
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='38' fill='%230A7A4E'/><text y='.85em' font-size='140' x='18'>✒️</text></svg>",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%230A7A4E'/><text y='.85em' font-size='380' x='50'>✒️</text></svg>",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
     {
