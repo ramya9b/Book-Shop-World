@@ -8273,10 +8273,18 @@ function svlbkParseVoice(raw){
   return { qty:qty, name:svlbkTitle(svlbkSingular(name)), brand:brand, price:price, unit:unit };
 }
 
-/* Open the admin when the URL says so */
-if(window.location.search.indexOf('admin=stock') !== -1){
-  window.addEventListener('load', function(){ setTimeout(openStockAdmin, 300); });
+/* Open the admin when the URL says so.
+   Accepts ?admin=stock, ?admin=1 and #admin, and copes with the load event
+   having already fired (in which case the old listener never ran at all). */
+function svlbkMaybeOpenAdmin(){
+  var url = window.location.search + window.location.hash;
+  if(url.indexOf('admin') === -1) return;
+  var go = function(){ setTimeout(openStockAdmin, 250); };
+  if(document.readyState === 'complete') go();
+  else window.addEventListener('load', go);
 }
+svlbkMaybeOpenAdmin();
+window.addEventListener('hashchange', svlbkMaybeOpenAdmin);
 /* Open the dedicated In-Stock page via ?stock=1 (shareable link) */
 if(window.location.search.indexOf('stock=1') !== -1){
   window.addEventListener('load', function(){ setTimeout(openStockPage, 300); });
