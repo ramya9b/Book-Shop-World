@@ -29,7 +29,11 @@
   header p{max-width:640px;margin:0 auto;color:var(--muted);font-size:1.06rem}
   .biz{font-weight:700;color:var(--green)}
 
-  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.3rem;padding:1.2rem 0 1rem}
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.3rem;padding:1.2rem 0 1rem;align-items:start}
+  /* 9:16 clips need narrower columns, or a single card runs 600px tall */
+  .vgrid.reels{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .sec-h{font-family:'Playfair Display',serif;font-size:1.3rem;margin:2rem 0 .2rem;color:var(--ink)}
+  .sec-sub{color:var(--muted);font-size:.92rem}
   .vcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
   .vcard video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#000}
   /* Reels-format clips (9:16) — shown tall so nothing gets cropped */
@@ -64,6 +68,64 @@
 
 <main class="wrap">
 
+  <h3 class="sec-h">📱 Reels format · 9:16</h3>
+  <p class="sec-sub">Made for WhatsApp status &amp; Instagram — the way most people share them</p>
+  <div class="vgrid reels">
+
+    <div class="vcard portrait">
+      <video controls preload="none" playsinline poster="/media/aivideos/marriageinvitation.jpg" src="/media/aivideos/marriageinvitation.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">💍 Wedding</span>
+        <strong>Animated Wedding Invite</strong>
+        <span>Reels format for WhatsApp status &amp; Instagram — your names, date &amp; venue</span>
+        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+animated+wedding+invitation+video" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+    <div class="vcard portrait">
+      <video controls preload="none" playsinline poster="/media/aivideos/marriagewishes.jpg" src="/media/aivideos/marriagewishes.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">💐 Wedding</span>
+        <strong>Wedding Wishes Video</strong>
+        <span>A congratulations clip to send the couple on their big day</span>
+        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+wedding+wishes+video" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+    <div class="vcard portrait">
+      <video controls preload="none" playsinline poster="/media/aivideos/birthdaysong.jpg" src="/media/aivideos/birthdaysong.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">🎂 Birthday</span>
+        <strong>Animated Birthday Song</strong>
+        <span>Cake, candles &amp; a song — with the birthday person's name</span>
+        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+animated+birthday+song+video" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+    <div class="vcard portrait">
+      <video controls preload="none" playsinline poster="/media/aivideos/birthdaymessage.jpg" src="/media/aivideos/birthdaymessage.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">🎈 Birthday</span>
+        <strong>Birthday Message Video</strong>
+        <span>A personal birthday wish, animated and ready to share</span>
+        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+birthday+message+video" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+    <div class="vcard portrait">
+      <video controls preload="none" playsinline poster="/media/aivideos/restinpeace.jpg" src="/media/aivideos/restinpeace.mp4"></video>
+      <div class="vcap">
+        <span class="vtag">🕊️ Tribute</span>
+        <strong>In Loving Memory</strong>
+        <span>A gentle remembrance video with their photo, lamps &amp; flowers</span>
+        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+remembrance+video" target="_blank" rel="noopener">📲 Get a video like this</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h3 class="sec-h">🖥️ Widescreen · 16:9</h3>
+  <p class="sec-sub">For playing on a laptop, a TV at the venue, or YouTube</p>
   <div class="vgrid">
 
     <div class="vcard">
@@ -116,57 +178,11 @@
       </div>
     </div>
 
-    <!-- ── Reels-format animated clips ── -->
 
-    <div class="vcard portrait">
-      <video controls preload="none" playsinline poster="/media/aivideos/marriageinvitation.jpg" src="/media/aivideos/marriageinvitation.mp4"></video>
-      <div class="vcap">
-        <span class="vtag">💍 Wedding</span>
-        <strong>Animated Wedding Invite</strong>
-        <span>Reels format for WhatsApp status &amp; Instagram — your names, date &amp; venue</span>
-        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+animated+wedding+invitation+video" target="_blank" rel="noopener">📲 Get a video like this</a>
-      </div>
-    </div>
 
-    <div class="vcard portrait">
-      <video controls preload="none" playsinline poster="/media/aivideos/marriagewishes.jpg" src="/media/aivideos/marriagewishes.mp4"></video>
-      <div class="vcap">
-        <span class="vtag">💐 Wedding</span>
-        <strong>Wedding Wishes Video</strong>
-        <span>A congratulations clip to send the couple on their big day</span>
-        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+wedding+wishes+video" target="_blank" rel="noopener">📲 Get a video like this</a>
-      </div>
-    </div>
 
-    <div class="vcard portrait">
-      <video controls preload="none" playsinline poster="/media/aivideos/birthdaysong.jpg" src="/media/aivideos/birthdaysong.mp4"></video>
-      <div class="vcap">
-        <span class="vtag">🎂 Birthday</span>
-        <strong>Animated Birthday Song</strong>
-        <span>Cake, candles &amp; a song — with the birthday person's name</span>
-        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+an+animated+birthday+song+video" target="_blank" rel="noopener">📲 Get a video like this</a>
-      </div>
-    </div>
 
-    <div class="vcard portrait">
-      <video controls preload="none" playsinline poster="/media/aivideos/birthdaymessage.jpg" src="/media/aivideos/birthdaymessage.mp4"></video>
-      <div class="vcap">
-        <span class="vtag">🎈 Birthday</span>
-        <strong>Birthday Message Video</strong>
-        <span>A personal birthday wish, animated and ready to share</span>
-        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+birthday+message+video" target="_blank" rel="noopener">📲 Get a video like this</a>
-      </div>
-    </div>
 
-    <div class="vcard portrait">
-      <video controls preload="none" playsinline poster="/media/aivideos/restinpeace.jpg" src="/media/aivideos/restinpeace.mp4"></video>
-      <div class="vcap">
-        <span class="vtag">🕊️ Tribute</span>
-        <strong>In Loving Memory</strong>
-        <span>A gentle remembrance video with their photo, lamps &amp; flowers</span>
-        <a class="vwa" href="https://wa.me/919945411489?text=Hi%2C+I+want+a+remembrance+video" target="_blank" rel="noopener">📲 Get a video like this</a>
-      </div>
-    </div>
 
   </div>
 
