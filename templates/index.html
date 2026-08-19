@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#F5F6FB;--card:#fff;--ink:#131A33;--muted:#5A6180;--green:#2A3B8F;--gold:#E8871E;--line:#D3D8EC;--shadow:0 10px 30px rgba(0,0,0,.10)}
+  :root{--bg:#F1F4FB;--card:#fff;--ink:#131A33;--muted:#5A6180;--green:#2A3B8F;--gold:#E8871E;--line:#D3D8EC;--shadow:0 10px 30px rgba(0,0,0,.10)}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
@@ -56,11 +56,11 @@
   /* wrapper holds the sticky + the edge fades; the bar itself scrolls inside it */
   .tab-wrap{position:sticky;top:0;z-index:60;margin:.2rem 0 1.2rem}
   .tab-wrap::before,.tab-wrap::after{content:"";position:absolute;top:0;bottom:0;width:40px;pointer-events:none;z-index:2;opacity:0;transition:opacity .2s}
-  .tab-wrap::before{left:0;background:linear-gradient(to right,rgba(245,246,251,.98),rgba(245,246,251,0))}
-  .tab-wrap::after{right:0;background:linear-gradient(to left,rgba(245,246,251,.98),rgba(245,246,251,0))}
+  .tab-wrap::before{left:0;background:linear-gradient(to right,rgba(241,244,251,.98),rgba(241,244,251,0))}
+  .tab-wrap::after{right:0;background:linear-gradient(to left,rgba(241,244,251,.98),rgba(241,244,251,0))}
   .tab-wrap.can-l::before{opacity:1}
   .tab-wrap.can-r::after{opacity:1}
-  .tab-bar{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .2rem;background:rgba(245,246,251,.9);backdrop-filter:blur(12px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab-bar{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem .2rem;background:rgba(241,244,251,.9);backdrop-filter:blur(12px);-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .tab-bar::-webkit-scrollbar{display:none}
   /* if every tab fits, centre them and drop the scroll affordance entirely */
   @media (min-width:1100px){.tab-bar{justify-content:center;flex-wrap:wrap}.tab-wrap::before,.tab-wrap::after{display:none}}
