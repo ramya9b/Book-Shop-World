@@ -1023,7 +1023,12 @@ body.shop-view #homePage { display:none !important }
 .svc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
 .svc-icon{font-size:1.6rem;margin-bottom:.55rem;display:block}
 /* Digital services: coloured icon tiles so nine cards are scannable */
-#servicesSection .svc-icon{width:44px;height:44px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.6rem;background:var(--tile,linear-gradient(135deg,#94A3B8,#475569));box-shadow:0 6px 14px var(--tile-glow,rgba(71,85,105,.28))}
+#servicesSection .svc-icon{width:44px;height:44px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.6rem;
+  /* gloss is layered under the emoji: a top sheen, a soft floor, then the tint */
+  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.10) 46%,rgba(0,0,0,.05) 47%,rgba(0,0,0,.10) 100%),var(--tile,linear-gradient(135deg,#94A3B8,#475569));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 2px rgba(0,0,0,.12),0 6px 14px var(--tile-glow,rgba(71,85,105,.28));
+  transition:transform .2s,box-shadow .2s}
+#servicesSection .svc-card:hover .svc-icon{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 2px rgba(0,0,0,.12),0 10px 20px var(--tile-glow,rgba(71,85,105,.28))}
 #servicesSection .svc-card{position:relative}
 .svc-badge{position:absolute;top:.7rem;right:.7rem;font-size:.6rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#fff;background:var(--gold);border-radius:20px;padding:.18rem .5rem;box-shadow:0 4px 10px rgba(232,135,30,.35)}
 .tl-teal{--tile:linear-gradient(135deg,#2DD4BF,#0E7490);--tile-glow:rgba(14,116,144,.3)}
