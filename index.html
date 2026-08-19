@@ -7135,16 +7135,28 @@ function svlbkLoadWaClicks(days){
     var d = new Date(Date.now() - i * 86400000);
     keys.push(d.toISOString().slice(0,10));
   }
-  Promise.all(keys.map(function(k){
-    return fbDatabase.ref('waClicks/' + k).once('value')
+  /* two shapes: waClicks/<day>/<label> is a running count (home page, uses a
+     transaction); waTaps/<day>/<label>/<id> is one entry per tap (sample pages,
+     REST only). Sum both. */
+  function grab(path){
+    return fbDatabase.ref(path).once('value')
            .then(function(s){ return s.val() || {}; })
            .catch(function(){ return {}; });
+  }
+  Promise.all(keys.map(function(k){
+    return Promise.all([grab('waClicks/' + k), grab('waTaps/' + k)]);
   })).then(function(daysData){
     var totals = {}, grand = 0;
-    daysData.forEach(function(obj){
-      Object.keys(obj).forEach(function(lbl){
-        totals[lbl] = (totals[lbl] || 0) + obj[lbl];
-        grand += obj[lbl];
+    daysData.forEach(function(pair){
+      var counted = pair[0], entries = pair[1];
+      Object.keys(counted).forEach(function(lbl){
+        totals[lbl] = (totals[lbl] || 0) + counted[lbl];
+        grand += counted[lbl];
+      });
+      Object.keys(entries).forEach(function(lbl){
+        var n = Object.keys(entries[lbl] || {}).length;
+        totals[lbl] = (totals[lbl] || 0) + n;
+        grand += n;
       });
     });
     var rows = Object.keys(totals).map(function(l){ return [l, totals[l]]; })

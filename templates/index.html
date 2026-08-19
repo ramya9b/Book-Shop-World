@@ -775,5 +775,29 @@
 })();
 </script>
 
+<script>
+/* WhatsApp tap counter — one PUT per tap, keepalive so it survives the tab switch.
+   Never blocks the link: no await, errors swallowed. */
+(function(){
+  var DB = 'https://svlb-shop-default-rtdb.asia-southeast1.firebasedatabase.app';
+  function label(a){
+    var card = a.closest('.vcard,.scard,.bcard,.dcard,.card');
+    var t = card && card.querySelector('.vcap strong,strong,.bmeta strong,.dcap strong');
+    var s = (t && t.textContent) || document.title.split('—')[0] || 'sample page';
+    return s.replace(/[.#$/\[\]]/g,' ').replace(/\s+/g,' ').trim().slice(0,48) || 'sample page';
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="wa.me/"]');
+    if(!a) return;
+    try{
+      var day = new Date().toISOString().slice(0,10);
+      var id  = Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+      fetch(DB + '/waTaps/' + day + '/' + encodeURIComponent(label(a)) + '/' + id + '.json',
+            { method:'PUT', body:'1', keepalive:true }).catch(function(){});
+    }catch(err){}
+  }, true);
+})();
+</script>
+
 </body>
 </html>

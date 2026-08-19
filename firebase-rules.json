@@ -25,6 +25,16 @@
           ".write": "newData.isNumber() && (!data.exists() ? newData.val() === 1 : newData.val() === data.val() + 1)"
         }
       }
+    },
+    "waTaps": {
+      "$day": {
+        ".read": "auth !== null && auth.token.email === 'srrgkenterprises@gmail.com'",
+        "$label": {
+          "$entry": {
+            ".write": "!data.exists() && newData.val() === 1"
+          }
+        }
+      }
     }
   }
 }
