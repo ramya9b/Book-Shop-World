@@ -7089,6 +7089,81 @@ function svlbkCountView(tries){
 }
 svlbkCountView();
 
+/* ── WhatsApp button taps ──────────────────────────────────────────────
+   One delegated listener, so the 41 wa.me links need no markup changes and
+   any link added later is counted automatically. Writes are increment-only
+   (see firebase-rules.json) and fire-and-forget — the chat opens either way. */
+function svlbkWaLabel(a){
+  var card = a.closest('.svc-card,.song-card,.video-card,.sample-card,.faq-item');
+  var t = card && card.querySelector('.svc-name,.song-title,.video-title,.sample-title,.faq-q');
+  var label = t ? t.textContent : '';
+  if(!label){                                     /* section CTAs, header, hero, footer */
+    var SECTIONS = {
+      songSamples:'AI Songs — section CTA', videoSamples:'Videos — section CTA',
+      bookSamples:'Story Books — section CTA', resumeSamples:'Resumes — section CTA',
+      servicesSection:'Digital services — section CTA'
+    };
+    var sec = a.closest('section[id]');
+    label = (sec && SECTIONS[sec.id]) || (sec && sec.id) ||
+            (a.textContent || '').trim() || 'other';
+  }
+  return label.replace(/[.#$/\[\]]/g,' ')         /* characters Firebase keys reject */
+              .replace(/\s+/g,' ').trim().slice(0,48) || 'other';
+}
+
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('a[href*="wa.me/"]');
+  if(!a) return;
+  try{
+    if(!window.fbDatabase) return;
+    var day = new Date().toISOString().slice(0,10);
+    fbDatabase.ref('waClicks/' + day + '/' + svlbkWaLabel(a))
+              .transaction(function(c){ return (c || 0) + 1; });
+  }catch(err){ /* never block the click */ }
+}, true);
+
+/* ── owner report ── */
+function svlbkLoadWaClicks(days){
+  var box = document.getElementById('svlbkWaList');
+  var totalEl = document.getElementById('svlbkWaTotal');
+  if(!box) return;
+  box.innerHTML = '<span class="svlbk-count">Loading…</span>';
+  if(!window.fbDatabase){ box.innerHTML = '<span class="svlbk-count">Not connected.</span>'; return; }
+
+  var keys = [];
+  for(var i = 0; i < (days || 1); i++){
+    var d = new Date(Date.now() - i * 86400000);
+    keys.push(d.toISOString().slice(0,10));
+  }
+  Promise.all(keys.map(function(k){
+    return fbDatabase.ref('waClicks/' + k).once('value')
+           .then(function(s){ return s.val() || {}; })
+           .catch(function(){ return {}; });
+  })).then(function(daysData){
+    var totals = {}, grand = 0;
+    daysData.forEach(function(obj){
+      Object.keys(obj).forEach(function(lbl){
+        totals[lbl] = (totals[lbl] || 0) + obj[lbl];
+        grand += obj[lbl];
+      });
+    });
+    var rows = Object.keys(totals).map(function(l){ return [l, totals[l]]; })
+                     .sort(function(a,b){ return b[1] - a[1]; });
+    totalEl.textContent = grand + (grand === 1 ? ' tap' : ' taps');
+    if(!rows.length){
+      box.innerHTML = '<span class="svlbk-count">No taps recorded in this period.</span>';
+      return;
+    }
+    var max = rows[0][1];
+    box.innerHTML = rows.map(function(r){
+      var pct = Math.max(6, Math.round(r[1] / max * 100));
+      return '<div class="svlbk-wa-row"><span class="lbl">' + r[0] +
+             '</span><span class="bar"><i style="width:' + pct + '%"></i></span>' +
+             '<span class="n">' + r[1] + '</span></div>';
+    }).join('');
+  });
+}
+
 /* ── Live Google rating + review count (from /api/google-reviews). Shows the
       badge only when real data loads — otherwise it stays hidden (no fake). ── */
 (function(){
@@ -7224,6 +7299,13 @@ window.addEventListener('DOMContentLoaded', function(){
 .svlbk-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:.9rem}
 .svlbk-whoami{font-size:.85rem;color:var(--muted)}
 .svlbk-block{border-top:1px solid var(--border,#D3D8EC);margin-top:1.1rem;padding-top:.5rem}
+/* WhatsApp click report (owner only) */
+.svlbk-walist{display:flex;flex-direction:column;gap:.3rem;margin-top:.5rem}
+.svlbk-wa-row{display:flex;align-items:center;gap:.6rem;font-size:.85rem}
+.svlbk-wa-row .lbl{flex:0 0 auto;min-width:38%;font-weight:600;color:var(--text)}
+.svlbk-wa-row .bar{flex:1;height:8px;border-radius:8px;background:rgba(42,59,143,.10);overflow:hidden}
+.svlbk-wa-row .bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#5B6BD6,#2A3B8F)}
+.svlbk-wa-row .n{flex:0 0 auto;font-weight:800;color:var(--saffron);min-width:2ch;text-align:right}
 .svlbk-block h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin:.4rem 0}
 .svlbk-count{font-size:.85rem;color:var(--muted);font-weight:600}
 .svlbk-msg{display:none;margin:.55rem 0 0;padding:.55rem .75rem;border-radius:9px;font-size:.86rem;font-weight:600}
@@ -7404,6 +7486,17 @@ window.addEventListener('DOMContentLoaded', function(){
       </section>
 
       <!-- catalog -->
+      <!-- WhatsApp button taps -->
+      <section class="svlbk-block">
+        <div class="svlbk-row"><h3>WhatsApp clicks</h3><span class="svlbk-count-badge" id="svlbkWaTotal">—</span></div>
+        <div class="svlbk-row" style="justify-content:flex-start;gap:.4rem">
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkLoadWaClicks(1)">Today</button>
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkLoadWaClicks(7)">Last 7 days</button>
+          <button class="svlbk-btn-ghost" type="button" onclick="svlbkLoadWaClicks(30)">30 days</button>
+        </div>
+        <div id="svlbkWaList" class="svlbk-walist" aria-live="polite"><span class="svlbk-count">Loading…</span></div>
+      </section>
+
       <section class="svlbk-block">
         <div class="svlbk-row"><h3>Catalog</h3><span class="svlbk-count-badge" id="svlbkCount">0 items</span></div>
         <div id="svlbkCatMsg" class="svlbk-msg" role="status" aria-live="polite"></div>
@@ -7667,6 +7760,7 @@ function svlbkShowPanel(user){
   svlbkEl('svlbkWho').textContent = 'Signed in as ' + user.email;
   svlbkFillStatus(liveStatusData || {});
   svlbkLoadCatalog();
+  svlbkLoadWaClicks(7);
 }
 
 /* ── Shop sign ── */
